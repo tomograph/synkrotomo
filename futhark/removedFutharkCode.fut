@@ -3,6 +3,20 @@
 --                  (mat_shp : [num_rows]i32) : [num_elms]f32 =
 --
 --   let inds =
+
+let transposeSparseFlatMat [num_elms]
+                            (mat_vals : [num_elms](i32,f32))
+                            (flag : [num_elms]i32)
+                            (num_cols : i32) : [num_elms](i32,f32) =
+  let (cs, vs) = unzip mat_vals
+  let rs = scan (+) 0 flag
+  let mat = zip3 cs rs vs
+  let transposed = map (\i -> (filter (\(c, r, v) -> c == i) mat)) iota num_cols
+  let flattrans = flatten transposed
+  let (cs, rs, vs) = unzip3 flattrans
+  in zip rs vs
+
+
 let test m:[]i32 : []i32 = transp(m)
 let transposeFlatMatNested [num_elms] [num_rows]
                       (mat_val : [num_elms](i32,f32))
