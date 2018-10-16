@@ -4,7 +4,8 @@ import pylab
 import time
 import sys
 from spMVmult import spMVmult
-from scipy.sparse import csr_matrix
+import paralleltomo as systemmatrix
+
 
 
 def test_astra_algorithm(name, phantom, proj_geom, vol_geom, iterations):
@@ -89,31 +90,32 @@ def hollow_cube_phantom(size):
     cube[33:size-31,33:size-31,33:size-31] = 0
     return cube
 
-def test_futhark_fp(phantom, proj_geom, vol_geom):
-    # Create projection data
-    proj_id, proj_data = astra.create_sino3d_gpu(phantom, proj_geom, vol_geom)
+def test_futhark_fp(phantom, size, angles):
+    # Create system matrix
+    # Instantiate an instance of the library object
+    A = systemmatrix.line_paralleltomo((size/2,size), (size/2,size), angles=angles, thresh=1e-8, angle_labels=False)
 
-    #convert system matrix to scipy sparse matrix
-    A = csr_matrix(proj_data)
     #convert to correct format for futhark sparse matrix vector mult
     column_indexes = A.indices
-    data = A.data
+    data = A.data.astype(np.float32)
     shape = A.getnnz(1)
-    size = phantom.shape[1]
-    vector = phantom.reshape((size*size*size, 1))
+    vector = phantom.reshape((size,size**2)).astype(np.float32)
 
-    spMVmult = spMVmult()
+    res = np.zeros((size,size*len(angles)))
+    foward_projection = spMVmult()
     start = time.time()
-    res = spMVmult.main(column_indexes, data, shape, vector)
+    for i in range(0,size-1):
+        res[i] = foward_projection.main(column_indexes, data, shape, vector[i]).get()
     end = time.time()
 
     elapsed = (end - start)*1000
     print("The futhark fp: took %d milliseconds" % (elapsed))
 
-    return res.reshape((size,size,size)), elapsed
+    return res.reshape((size,len(angles),size)), elapsed
 
 def main(argv):
     size = 16
+    iterations = 1
     vol_geom = astra.create_vol_geom(size, size, size)
 
     angles = np.linspace(0, np.pi, 20,False)
@@ -133,8 +135,8 @@ def main(argv):
     pylab.imsave("fp_astra.png",fp_astra[size/2,:,:])
 
     #Test fut functions
-    fp_fut, elapsed = test_futhark_fp(phantom=cube, proj_geom=proj_geom, vol_geom=vol_geom)
-    pylab.imsave("fp_fut.png",fp_fut[size/2,:,:])
+    fp_fut, elapsed = test_futhark_fp(phantom=cube, size = size, angles = angles)
+    pylab.imsave("fp_fut.png",fp_fut[:,:,size/2])
 
 
 
