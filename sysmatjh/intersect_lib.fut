@@ -46,14 +46,18 @@ module Intersections = {
     let horizontal = theta == 90f32
     let vertical   = theta == 0f32
     let slope    = tan (deg2rad(theta + 90f32))
+    --distance to move in y direction in each step
     let y_offset = delta / f32.cos(deg2rad(90f32 - theta))
 
     let A = replicate (t32(g*2f32-1f32)) (-1f32, -1)
+    -- center of grid
     let center = (g / 2f32, g / 2f32)
 
     let b = if horizontal then center.2 - 1f32 else center.2 - slope * center.1
 
-    let entry_point = if vertical then ((center.1 + i * delta) , g) else entryPoint slope (i * y_offset + b) g
+    -- if a vertical line then the entry point of a ray is the point at y = top of grid x = center.1 + i * delta + delta/2
+    -- always even number of rays
+    let entry_point = if vertical then ((center.1 + i * delta + delta/2) , g) else entryPoint slope (i * y_offset + y_offset/2 + b) g
 
     let y_step_dir = if slope < 0f32 then -1f32 else 1f32
     let anchorX = f32.floor(entry_point.1) + 1f32
