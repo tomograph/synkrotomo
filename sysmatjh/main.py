@@ -10,7 +10,7 @@ grid_size     = 6
 delta         = 1.0
 line_count    = 0
 scan_start    = 89
-scan_end      = 92   
+scan_end      = 92
 scan_step     = 1.0
 
 # Define the scanning angles
@@ -18,7 +18,7 @@ scan_step     = 1.0
 result = lib_hook.main(grid_size, delta, line_count, scan_start, scan_end, scan_step)
 # print(np.shape(result))
 #print(np.round(result[0], 5))
-print(result[1])
+print(result[])
 # for i in range(len(result)):
 #   print (result[i])
   # s = int(np.sqrt(len(result[i])))
@@ -65,7 +65,6 @@ print(result[1])
 #   # plt.clf()
 
 
-# ## Hadarmard ## Ill-posed / well-posed 
+# ## Hadarmard ## Ill-posed / well-posed
 # ## Inverse problem / direct problem
 # ## Filtered back-projection
-

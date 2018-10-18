@@ -19,6 +19,6 @@ entry main
   let numOfAngles = t32( (scan_end - scan_start) / scan_step )
   let angles = map (\i -> scan_start + r32(i) * scan_step) (iota numOfAngles)
   in unzip_d3 (map ( \angle ->
-      map (lengths grid_size angle delta) (-line_count...line_count)
+      map (lengths grid_size angle delta) (-line_count...line_count-1)
     ) angles)
   -- Compute lengths of lines in grid
