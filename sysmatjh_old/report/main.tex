@@ -1,0 +1,42 @@
+\input{template/preample.tex}
+\usepackage[square,numbers]{natbib}
+
+\title{
+    \vspace{5cm}
+    \Huge{\textsc{Bachelor's project}}
+    \linebreak
+    \Large{Fast Line-grid Intersection Calculations Using Futhark}
+}
+\author{Datalogisk Institut, Københavns Universitet (DIKU)}
+
+\begin{document}
+
+\input{template/frontpage.tex}
+\onehalfspacing
+\input{./sections/abstract.tex}
+
+\newpage
+\singlespacing
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\onehalfspacing
+\setcounter{page}{1}
+\input{./sections/purpose.tex}
+\input{./sections/background.tex}
+\input{./sections/motivation.tex}
+\input{./sections/model.tex}
+\input{./sections/implementation.tex}
+\input{./sections/mem_problem.tex}
+\input{./sections/correctness.tex}
+\input{./sections/benchmarking.tex}\label{sec:bench}
+\input{./sections/further_work.tex}\newpage
+\input{./sections/conclusion.tex}
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+\newpage
+\input{./sections/appendix.tex}
+
+\end{document}
