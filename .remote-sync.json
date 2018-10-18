@@ -1,0 +1,21 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "ssh-diku-apl.science.ku.dk",
+  "port": "22",
+  "target": "/home/zgb585/beatingastra",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "zgb585",
+  "password": "hatteFjer94",
+  "watch": [
+    "/**"
+  ],
+  "transport": "scp"
+}

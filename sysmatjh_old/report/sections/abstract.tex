@@ -1,0 +1,8 @@
+\thispagestyle{empty}
+\section*{Abstract}
+The purpose of this project is to examine the possibility of using graphics processing units to accelerate the calculation of line-grid intersections, for use in tomographic reconstruction, specifically the Algebraic Reconstruction Technique (ART). After explaining the scientific context in which the project exists, and the limitations imposed by targeting GPU architecture, we develop an algorithm suitable for implementation on GPUs.
+The algorithm is implemented in the Futhark programming language, a high level GPU language providing many of the same advantages as regular high level languages, most notably ease-of-use and portability. Testing the GPU solution against a CPU equivalent, we find that the GPU significantly outperforms the CPU, scales better with the size of the problem, and most importantly, is fast enough that on-the-fly calculations become feasible. Tested against a reference solution, using typical input values, our algorithm only uses 0.03 seconds to reach the correct result, outperforming the reference solution by a factor of 300. By reading pre-calculated results from a Solid State Drive (SSD), we find that on-the-fly GPU calculations are roughly 10 times faster. We conclude that GPUs and the Futhark programming language are well-suited for calculating line-grid intersections, as needed in tomographic reconstruction, and propose that the development of a full Futhark ART-libray would be an interesting topic for future projects. 
+
+% \iffalse
+% https://users.ece.cmu.edu/~koopman/essays/abstract.html
+% \fi

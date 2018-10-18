@@ -1,0 +1,15 @@
+\section{Conclusion}
+The purpose of this project was to establish the suitability of the Futhark programming language in speeding up the  calculation of line-grid intersection-lengths, as used in computerized tomographic reconstruction. Towards this goal, we investigated the scientific context in which the lengths are used, most notably the Algebraic Reconstruction Technique, an iterative solver of the reconstruction problem.
+
+The advantages and limitations of the Futhark language were examined in order to establish best-practices for writing efficient GPU code. We identified three main concerns: avoiding branching logic, avoiding irregular arrays and avoiding the need for sorting arrays. With these lessons in hand, a Futhark algorithm was developed for solving the line-grid intersection-length problem.
+
+Testing our algorithm against a reference CPU solution implemented in Python, we found that the Futhark implementation outperformed the Python solution by a factor of $300$, when testing with common parameters for grid- and detector values. The Futhark code required only $0.03$ seconds, while the Python code required 9 seconds, making the Futhark code suitable for on-the-fly calculation.
+
+Testing the Futhark GPU code against the same Futhark code compiled in C, we found that the GPU implementation was consistently faster than CPU version, but that the gap was significantly smaller than against the Python code. Nonetheless, the results were heartening, with the runtime of the GPU code growing much slower than the CPU code. The GPU code stayed below $100$ms in all test scenarios, while the CPU code approached $1$ second. We noted, that there are costs involved with transferring the data back from the GPU and into main memory, but this could be circumvented by performing the ART calculations on the GPU as well, a topic left for future endeavors.
+
+Comparing against reading precalculated results from a solid state drive, we found it to be faster to recalculate the results on the GPU, once the problem was of a sufficient size.
+
+All in all, we conclude that the suitability of Futhark as a tool in tomographic reconstruction has been established, and consider the development of a Futhark library for tomographic reconstruction to be a natural subject for future work. 
+
+
+

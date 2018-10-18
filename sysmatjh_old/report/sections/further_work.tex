@@ -1,0 +1,42 @@
+\section{Bottlenecks and Further Work}\label{sec:futwork}
+The three most apparent bottlenecks are as follows:
+\begin{enumerate}
+    \item The line lengths are calculated using the square root, which is a an expensive operation.
+    \item The calculated $A$ matrix needs to be transferred to main memory, before ART can be applied. 
+    \item The algorithm requires \textit{a lot} of VRAM.
+\end{enumerate}
+To overcome these bottlenecks, we suggest the modifications presented in the following sections, but leave them as topics for future projects.
+
+\subsection{Digital Difference Analyzer}
+An alternative approach to calculating the line lengths within each pixel, is known as a \textit{Digital Difference Analyzer}\cite[p.~63-65]{FCT}. In a DDA, it is utilized that whenever a line passes through a pixel's opposing edges, this line segment has a constant length that only depends on the dimensions of the pixel and the slope of the line. 
+This means, that this length would only need to be calculated once for such pixels. Let us call this $\lambda$.
+Alternatively, when the line enters and exits two pixel edges that form a corner, then the lengths of the line segment must be some fraction of $\lambda$, and DDA provides a simple mathematics for this case, that only relies on multiplication, subtraction and $\cos$. Determining if a line segment will enter and exit such edges is done by maintaining a control variable $X$, which is added or subtracted two after each line segment is processed. In theory, the GPU should be able perform $\cos$-based calculations faster than the square root calculations we have employed, but modern GPU often have hardware support for square roots, amortizing the cost of the calculation, so there is no guarantee that using $\cos$ is faster than using square roots\cite{SUPERCOMPUTING}.
+
+\subsection{Implement ART in Futhark}
+To avoid the cost of transferring the relatively large $A$ matrix to main memory, ideally the ART calculations would also be performed on the GPU. 
+\begin{equation}
+    \frac{1}{2} ~ || \mathbf{Ax} - \mathbf{y} ||^{2} = \sum_{i=1}^K \frac{1}{2} ~ || \mathbf{A}_i\mathbf{x} - \mathbf{y}_i ||^{2}\tag{\eqref{eq:leastsqaures} revisited}
+\end{equation}
+Recalling expression \eqref{eq:leastsqaures}, we see that parallelization of the least squares ART method requires Futhark implementations of matrix-vector multiplication, vector-vector subtraction, vector length computation and more. Parallelization of these operations seem within the realm of possibility, and preliminary implementations can be found in the appendix. These implementations have not been adapted to the type of sparse matrices we employ, so they would have to be modified. We suspect, that implementing ART in Futhark will significantly speed up the total ART calculation, due to the high parallelizability of the matrix- and vector operations of expression \eqref{eq:leastsqaures}. 
+
+\subsection{Compressed Row Matrices}
+\label{sec:CRS}
+As mentioned in section \ref{sec:mem_problem} on memory usage, an alternative to our compression method would be beneficial. This alternative is called \emph{Compressed Row Sparse Matrices} (CRS).
+The reason CRS should be a good fit is that it is well suited for matrix-vector multiplication, which is performed a lot in ART\cite{SCIPY_CRS}. 
+
+Note that the following description of CRS is based on \cite{CRS_slide}. 
+Given a square matrix $A$ of with row and column size $n$ we construct 3 vectors in total to compress $A$. These are:
+\begin{itemize}
+    \item\texttt{values}: this vector contains all the non-negative values of $A$ in the order you would encounter them if you were to traverse $A$ row-wise left to right.
+    \item\texttt{col\_indicies}: This vector stores the column index in $A$ of each element in $values$. 
+    We have that if $\texttt{values}[x] = A_{i,~j}$ then $\texttt{col\_indicies}[x] = j$.
+    \item\texttt{row\_pointers}: Here the indices of \texttt{values} where a new row in $A$ is started is stored. We have that if $\texttt{values}[x] = A_{i, j}$ then $\texttt{row\_pointers}[i] \leq x < \texttt{row\_pointers}[i+1]$. This vector is the name-sake of CRS in a sense. All the column indices are retained but the row indices are collapsed.  
+\end{itemize}
+Now let us assess the worst-case memory usage of CRS. Rather obviously we note that both \texttt{values} and \texttt{col\_indicies} will have their size equal to the amount of non-negative values.  Let us call this number $nnz$. \texttt{row\_pointers} should at most have $n$ elements, which will be the case if there is at least one non-negative element in every row. The total worst-case memory usage of a CRS matrix is therefore $2 \cdot nnz + n$. In our specific case we know that a line intersects at most $2 \cdot gridsize - 1$ pixels, so we have that $nnz = 2 \cdot gridsize - 1$ and $n = gridsize$. This means that using CRS, instead of having the result size be given by $gridsize^2$, we can now have:
+$$\text{result size} = 4 \cdot gridsize - 2 + gridsize$$
+Using CRS in our example yields a result size for each line of 
+$$(4 \cdot 3000 - 2 + 3000) \cdot 32~\text{bits} = 479.936~\text{bits} = 0.0599~\text{megabytes}$$
+This is an improvement from the previous 72 megabytes of $\sim 120,000 \%$. The total memory usage is now
+$$0.0599~\text{megabytes} \cdot 2000^2 = 239,600~\text{megabytes} = 239.6 ~\text{gigabytes}$$  
+
+We see that the CRS method yields only slightly better results to our own method in terms of memory usage. The main benefit of faster multiplications would be had when ART is implemented in Futhark as well. 

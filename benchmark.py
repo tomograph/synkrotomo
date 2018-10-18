@@ -6,8 +6,6 @@ import sys
 from spMVmult import spMVmult
 import paralleltomo as systemmatrix
 
-
-
 def test_astra_algorithm(name, phantom, proj_geom, vol_geom, iterations):
     # Create projection data
     proj_id, proj_data = astra.create_sino3d_gpu(phantom, proj_geom, vol_geom)

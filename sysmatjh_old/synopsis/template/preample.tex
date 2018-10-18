@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={6.5in, 9in}]{geometry}
+\usepackage{amsmath} % flere matematikkommandoer
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{MnSymbol}
+\usepackage{ dsfont } %matematik
+\usepackage[utf8]{inputenc} % æøå
+\usepackage[T1]{fontenc} % mere æøå
+\usepackage[english]{babel} % orddeling
+\usepackage{verbatim} % så man kan skrive ren tekst
+\usepackage[all]{xy}
+\usepackage{graphicx}
+\usepackage[urlcolor=cyan]{hyperref}
+\usepackage{epstopdf} % Package for including eps images
+\usepackage{eso-pic} % AddToShipoutPicture
+\usepackage{fancyhdr} % make fancy sides
+\usepackage{listings} %for code listings
+\usepackage{tcolorbox}
+
+\tcbuselibrary{theorems}
+\usepackage{fancyvrb}
+\usepackage{upquote}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{tikz} %draw graphs
+\usepackage{svg}
+\usetikzlibrary{arrows.meta} %define styles in graph
+
+\usepackage[tocflat]{tocstyle}
+\usetocstyle{standard}
+
+
+% Redefinition of ToC command to get centered heading
+\makeatletter
+\renewcommand\tableofcontents{%
+  \null\hfill\textbf{\Large\contentsname}\hfill\null\par
+  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+  \@starttoc{toc}%
+}
+\makeatother
+
+\tcbuselibrary{listings}
+\definecolor{redstrings}{rgb}{1,0.6,0.6}
+\definecolor{bluekeywords}{rgb}{0.1,0.65,1}
+\definecolor{greencomments}{rgb}{0.1,0.7,0.1}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{greybg}{RGB}{246,247,248}
+\definecolor{codeblue}{RGB}{15,126,227}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{darkgray}{rgb}{0.2,0.2,0.2}
+\definecolor{numbercolor}{rgb}{0.75, 1, 0.75}
+\definecolor{color1}{RGB}{244,243,224}
+
+\newtcolorbox{betterlisting}[3][] {
+	colframe   =    codegray,
+	colback    =    greybg,
+	coltitle   =    greybg,
+	title      =    #3,
+	#1,
+}
+
+\newtcolorbox{simplebox}{
+	colback		 =		greybg,
+	colframe   =    codegray,
+	left       =    5mm,
+	right	     =    0mm,
+	bottom     =    0mm,
+	boxsep		 =    0mm,
+	leftrule	 =    0mm,
+	rightrule	 =    0.3mm,
+	toprule 	 =    0mm,
+	bottomrule =    0.3mm,
+}
+
+\lstdefinestyle{custom}{
+    commentstyle			=		\color{codegreen},
+    keywordstyle			=		\color{codeblue},
+    numberstyle				=		\tiny\color{turqusnumbers},
+    stringstyle				=		\color{redstrings},
+    basicstyle				=		\footnotesize\ttfamily,
+    breakatwhitespace	=		false,
+    breaklines				=		true,
+    captionpos				=		b,
+    numbers						=   left,
+    numbersep					=   5pt,
+    showspaces				=   false,
+    showstringspaces	=   false,
+    showtabs					=		false,
+    tabsize						=		2,
+		aboveskip         =   0pt,
+}
+
+
+\lstset{style=custom, lineskip=2pt, language=SQL}
+\newcommand{\me}{\mathrm{e}} %declare eulers; number as a symbol
+\let\oldemptyset\emptyset %fix emptyset symbol
+\let\emptyset\varnothing %fix emptyset symbol
+\setlength{\parindent}{0pt}% Makes \noindent the standard
+\newenvironment{bottom}{\par\vspace*{\fill}}{\clearpage} %Building new enviorment for flushing to bottom of
+
+\setcounter{secnumdepth}{0} %Only number upper sections
+\setcounter{tocdepth}{5}
