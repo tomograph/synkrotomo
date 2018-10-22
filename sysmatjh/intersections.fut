@@ -7,18 +7,54 @@ let unzip_d3 (xs: [][][](f32,i32)): ([][][]f32,[][][]i32) =
      |> map unzip
      |> unzip
 
+ let unzip_d2 (xs: [][](f32,i32)): ([][]f32,[][]i32) =
+   xs |> map unzip
+      |> unzip
 
-entry main
-  (grid_size:  i32)
-  (delta:      f32)
-  (line_count: i32)
-  (scan_start: f32)
-  (scan_end:   f32)
-  (scan_step:  f32)
-  : ([][][]f32,[][][]i32) =
-  let numOfAngles = t32( (scan_end - scan_start) / scan_step )
-  let angles = map (\i -> scan_start + r32(i) * scan_step) (iota numOfAngles)
-  in unzip_d3 (map ( \angle ->
-      map (lengths grid_size angle delta) (-line_count...line_count-1)
-    ) angles)
+--entry main
+--  (grid_size:  i32)
+--  (delta:      f32)
+--  (line_count: i32)
+--  (scan_start: f32)
+--  (scan_end:   f32)
+--  (scan_step:  f32)
+--  : ([][][]f32,[][][]i32) =
+--  let numOfAngles = t32( (scan_end - scan_start) / scan_step )
+--  let angles = map (\i -> scan_start + r32(i) * scan_step) (iota numOfAngles)
+--  in unzip_d3 (map ( \angle ->
+--      map (lengths grid_size angle delta) (-line_count...line_count-1)
+--    ) angles)
   -- Compute lengths of lines in grid
+
+  entry main
+    -- list of the angles of the projections given in degrees
+    (angles:  []f32)
+    -- list of the rays per angle,
+    --given in x-component for a coordinate system
+    --overlaying the image with the center at the center of the image.
+    (rays:    []f32)
+    -- assuming a square picture this is imagesize/2. More formally the absolute
+    -- value of the x or y coordinate on the border of the picture. If the image is notes
+    -- square, we can easily make it so by adding 0 pixels around the edges to make it fit the model.
+        (gridsize: i32)
+    : ([][]f32,[][]i32) =
+      let halfsize = r32(gridsize)/2
+      let entrypoints = convert2entry angles rays halfsize
+      in unzip_d2(map ( \(p,s) -> (lengths gridsize s.1 s.2 p)) entrypoints)
+
+
+--- TESTING
+--    entry main
+      -- list of the angles of the projections given in degrees
+--      (angles:  []f32)
+      -- list of the rays per angle,
+      --given in x-component for a coordinate system
+      --overlaying the image with the center at the center of the image.
+--      (rays:    []f32)
+      -- assuming a square picture this is imagesize/2. More formally the absolute
+      -- value of the x or y coordinate on the border of the picture. If the image is notes
+      -- square, we can easily make it so by adding 0 pixels around the edges to make it fit the model.
+--      (gridsize: i32)
+--      : ([]f32,[]f32) =
+--        let halfsize = r32(gridsize)/2
+--        in unzip(convert2entry angles rays halfsize)

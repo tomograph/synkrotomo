@@ -1,18 +1,37 @@
 module Intersections = {
   type point  = ( f32, f32 )
-
-  -- Doesn't futhark have tan already?
-  let tan (a: f32): f32 = f32.sin(a) / f32.cos(a)
-
   -- Degrees to radians converter
   let deg2rad(deg: f32): f32 = (f32.pi / 180f32) * deg
 
+  -- find x given y
+  let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+    if cost == 0 then ray else (ray-y*sint)/cost
+
+  -- find y given x
+  let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+    if sint == 0 then ray else (ray-x*cost)/sint
+
+  -- entry point from sin/cos
+  let entryPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : point =
+    let p_left = ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint)
+    let p_bottom = (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval))
+    let p_top = (find_x maxval ray cost sint, maxval)
+    in if f32.abs(p_left.2) < maxval then p_left else if p_bottom.1 < p_top.1 then p_bottom else p_top
+
+  -- convertion to sin/cos arrays of array of degrees
+  let convert2sincos (angles: []f32) : []point =
+    map (\t -> (f32.sin(deg2rad(t)),f32.cos(deg2rad(t)))) angles
+
+  --convert to entry points !!!SHOULD ALSO return cost sint
+  let convert2entry (angles: []f32) (rays: []f32) (maxval: f32): [] (point, point) =
+    let sincos = convert2sincos angles
+    let anglesrays = flatten(map (\t -> map(\r -> (t.1,t.2,r)) rays) sincos)
+      -- zip sint cost rays where sint cost gets replicated and flattened to match size of rays
+    --let anglesrays = zip3 (flatten (replicate sizerays sint)) (flatten (replicate sizerays cost)) (flatten (replicate sizeangles rays))
+    in map(\(s,c,r) -> ((entryPoint s c r maxval), (c,s))) anglesrays
+
   let distance ((x1, y1) : point) ((x2, y2) : point): f32 =
     f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
-
-  -- let fleil (flag : f32) (num : f32) : f32 =
-  --   if flag < 0f32 then f32.ceil num else f32.floor num
-
 
   -- Check whether a point is within the grid.
   let isInGrid (g : f32) (y_step_dir : f32) ((x, y) : point) : bool =
@@ -22,42 +41,20 @@ module Intersections = {
       else (0f32 <= y && y < g)
     )
 
-  -- Calculate x from y and vice versa
-  let calcXfromY (y : f32 ) (s : f32) (b : f32) : f32 = (y - b) / s
-  let calcYfromX (x : f32 ) (s : f32) (b : f32) : f32 = s * x + b
-
-  -- Calculate entry points
-  let entryPoint (s : f32) (b : f32) (g : f32) : point =
-    if 0f32 <= b && b <= g then (0f32, b)
-    else
-      let p_bottom = (calcXfromY g s b, g)
-      let p_top    = (calcXfromY 0f32 s b, 0f32)
-      in if p_bottom.1 < p_top.1 then p_bottom else p_top
-
   let lengths
     (grid_size: i32)
-    (theta:     f32)
-    (delta:     f32)
-    (line_num:  i32): [](f32, i32) =
+    (cost: f32)
+    (sint: f32)
+    (entry_point: point): [](f32, i32) =
 
-    let g = r32(grid_size)
-    let i = r32(line_num)
+    let horizontal = cost == 0
+    let vertical = f32.abs(cost) == 1
 
-    let horizontal = theta == 90f32
-    let vertical   = theta == 0f32
-    let slope    = tan (deg2rad(theta + 90f32))
-    --distance to move in y direction in each step
-    let y_offset = delta / f32.cos(deg2rad(90f32 - theta))
+    let slope = cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
 
-    let A = replicate (t32(g*2f32-1f32)) (-1f32, -1)
-    -- center of grid
-    let center = (g / 2f32, g / 2f32)
+    let size = r32(grid_size)
 
-    let b = if horizontal then center.2 - 1f32 else center.2 - slope * center.1
-
-    -- if a vertical line then the entry point of a ray is the point at y = top of grid x = center.1 + i * delta + delta/2
-    -- always even number of rays
-    let entry_point = if vertical then ((center.1 + i * delta + delta/2) , g) else entryPoint slope (i * y_offset + y_offset/2 + b) g
+    let A = replicate (t32(size*2f32-1f32)) (-1f32, -1)
 
     let y_step_dir = if slope < 0f32 then -1f32 else 1f32
     let anchorX = f32.floor(entry_point.1) + 1f32
@@ -67,20 +64,22 @@ module Intersections = {
 
     let (A, _, _, _, _) =
       loop (A, focusPoint, anchorX, anchorY, write_index) = (A, entry_point, anchorX, anchorY, 0)
-      while ( isInGrid g y_step_dir focusPoint ) do
-        let p_anchor_x = ( anchorX,  calcYfromX anchorX slope (b + y_offset * i))
-        let p_anchor_y = if vertical then  (entry_point.1, anchorY) else ( calcXfromY anchorY slope (b + y_offset * i), anchorY)
+      while ( f32.abs(focusPoint.1) <= size/2.0 && f32.abs(focusPoint.2) <= size/2.0 ) do
+        let dy = (anchorX-focusPoint.1)*slope
+        let dx = (anchorY-focusPoint.2)*(1/slope)
+        let p_anchor_x = (anchorX, focusPoint.2+dy)
+        let p_anchor_y = (focusPoint.1+dx, anchorY)
 
         let dist_p_x = distance focusPoint p_anchor_x
         let dist_p_y = distance focusPoint p_anchor_y
 
-        let y_floor = f32.floor(focusPoint.2)
+        let y_floor = f32.floor(size/2+focusPoint.2)
         let y_comp =
           if (y_step_dir == -1f32 && focusPoint.2 - y_floor == 0f32)
           then focusPoint.2 - 1f32
           else y_floor
 
-        let index = t32( f32.floor(focusPoint.1) + g * y_comp)
+        let index = t32(f32.floor(size/2.0+focusPoint.1)+size*y_comp)
 
         in
           if horizontal then
