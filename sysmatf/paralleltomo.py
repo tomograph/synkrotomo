@@ -65,10 +65,6 @@ def line_paralleltomo(angles, rays, size, thresh=1e-8, angle_labels=False):
     # row counter, for debugging purposes
     row = -1
 
-    print(angles)
-    print(S)
-
-
     # loop over all angles
     for i in xrange(len(angles)):
         theta = angles[i]

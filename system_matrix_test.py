@@ -31,7 +31,7 @@ def radonmatrixjh(angles, rays, size):
     data = np.array(data)
     indices = np.array(indices)
     indptr = np.array(indptr)
-    return sp.csr_matrix((data, indices, indptr), shape=(32,16))
+    return sp.csr_matrix((data, indices, indptr), shape=(len(rays)*len(angles),size**2))
 
 def test(size, angles):
     #Francois version - naive non-parallel
