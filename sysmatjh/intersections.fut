@@ -33,28 +33,9 @@ let unzip_d3 (xs: [][][](f32,i32)): ([][][]f32,[][][]i32) =
     --given in x-component for a coordinate system
     --overlaying the image with the center at the center of the image.
     (rays:    []f32)
-    -- assuming a square picture this is imagesize/2. More formally the absolute
-    -- value of the x or y coordinate on the border of the picture. If the image is notes
-    -- square, we can easily make it so by adding 0 pixels around the edges to make it fit the model.
-        (gridsize: i32)
+    -- size of image assuming square
+    (gridsize: i32)
     : ([][]f32,[][]i32) =
       let halfsize = r32(gridsize)/2
       let entrypoints = convert2entry angles rays halfsize
       in unzip_d2(map ( \(p,s) -> (lengths gridsize s.1 s.2 p)) entrypoints)
-
-
---- TESTING
---    entry main
-      -- list of the angles of the projections given in degrees
---      (angles:  []f32)
-      -- list of the rays per angle,
-      --given in x-component for a coordinate system
-      --overlaying the image with the center at the center of the image.
---      (rays:    []f32)
-      -- assuming a square picture this is imagesize/2. More formally the absolute
-      -- value of the x or y coordinate on the border of the picture. If the image is notes
-      -- square, we can easily make it so by adding 0 pixels around the edges to make it fit the model.
---      (gridsize: i32)
---      : ([]f32,[]f32) =
---        let halfsize = r32(gridsize)/2
---        in unzip(convert2entry angles rays halfsize)

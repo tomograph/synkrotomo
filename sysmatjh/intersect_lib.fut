@@ -16,7 +16,7 @@ module Intersections = {
     let p_left = ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint)
     let p_bottom = (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval))
     let p_top = (find_x maxval ray cost sint, maxval)
-    in if f32.abs(p_left.2) < maxval then p_left else if p_bottom.1 < p_top.1 then p_bottom else p_top
+    in if f32.abs(p_left.2) <= maxval && sint != 0 then p_left else if p_bottom.1 <= p_top.1 then p_bottom else p_top
 
   -- convertion to sin/cos arrays of array of degrees
   let convert2sincos (angles: []f32) : []point =
@@ -28,23 +28,23 @@ module Intersections = {
     let anglesrays = flatten(map (\t -> map(\r -> (t.1,t.2,r)) rays) sincos)
       -- zip sint cost rays where sint cost gets replicated and flattened to match size of rays
     --let anglesrays = zip3 (flatten (replicate sizerays sint)) (flatten (replicate sizerays cost)) (flatten (replicate sizeangles rays))
-    in map(\(s,c,r) -> ((entryPoint s c r maxval), (c,s))) anglesrays
+    in map(\(s,c,r) -> ((entryPoint s c r maxval), (s,c))) anglesrays
 
   let distance ((x1, y1) : point) ((x2, y2) : point): f32 =
     f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
 
   -- Check whether a point is within the grid.
-  let isInGrid (g : f32) (y_step_dir : f32) ((x, y) : point) : bool =
-    x >= 0f32 && x < g && (
+  let isInGrid (halfsize : f32) (y_step_dir : f32) ((x, y) : point) : bool =
+    x >= -1f32*halfsize && x < halfsize && (
       if y_step_dir == -1f32
-      then (0f32 < y && y <= g)
-      else (0f32 <= y && y < g)
+      then (-1f32*halfsize < y && y <= halfsize)
+      else (-1f32*halfsize <= y && y < halfsize)
     )
 
   let lengths
     (grid_size: i32)
-    (cost: f32)
     (sint: f32)
+    (cost: f32)
     (entry_point: point): [](f32, i32) =
 
     let horizontal = cost == 0
@@ -53,6 +53,7 @@ module Intersections = {
     let slope = cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
 
     let size = r32(grid_size)
+    let halfsize = size/2.0f32
 
     let A = replicate (t32(size*2f32-1f32)) (-1f32, -1)
 
@@ -64,29 +65,34 @@ module Intersections = {
 
     let (A, _, _, _, _) =
       loop (A, focusPoint, anchorX, anchorY, write_index) = (A, entry_point, anchorX, anchorY, 0)
-      while ( f32.abs(focusPoint.1) <= size/2.0 && f32.abs(focusPoint.2) <= size/2.0 ) do
-        let dy = (anchorX-focusPoint.1)*slope
-        let dx = (anchorY-focusPoint.2)*(1/slope)
+      while ( isInGrid halfsize y_step_dir focusPoint ) do
+        --compute index of pixel in array by computing x component and y component if
+        --center was at bottom left corner (add halfsize), and add them multiplying y_comp by size
+        let y_floor = f32.floor(halfsize+focusPoint.2)
+        let y_comp =
+          if (y_step_dir == -1f32 && focusPoint.2 - f32.floor(focusPoint.2) == 0f32)
+          then y_floor - 1f32
+          else y_floor
+        let x_comp= f32.floor(halfsize+focusPoint.1)
+        let v = x_comp+size*y_comp
+        --ONE GREATER WHY?
+        let index = t32(v)
+
+        --compute the distances using the difference travelled along an axis to the next whole number and the slope or inverse slope
+        let dy = if vertical then 1f32 else if horizontal then 0f32 else (anchorX-focusPoint.1)*slope
+        let dx = if vertical then 0f32 else if horizontal then 1f32 else (anchorY-focusPoint.2)*(1/slope)
         let p_anchor_x = (anchorX, focusPoint.2+dy)
         let p_anchor_y = (focusPoint.1+dx, anchorY)
 
         let dist_p_x = distance focusPoint p_anchor_x
         let dist_p_y = distance focusPoint p_anchor_y
 
-        let y_floor = f32.floor(size/2+focusPoint.2)
-        let y_comp =
-          if (y_step_dir == -1f32 && focusPoint.2 - y_floor == 0f32)
-          then focusPoint.2 - 1f32
-          else y_floor
-
-        let index = t32(f32.floor(size/2.0+focusPoint.1)+size*y_comp)
-
         in
           if horizontal then
             unsafe let A[write_index] = (dist_p_x, index)
             in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
           else if vertical then
-            unsafe let A[write_index] = (dist_p_y, index)
+            unsafe let A[write_index] = (dist_p_x, index)
             in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
           else
           if (f32.abs(dist_p_x - dist_p_y) > 0.000000001f32)
