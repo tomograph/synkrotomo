@@ -74,11 +74,10 @@ module Intersections = {
           then y_floor - 1f32
           else y_floor
         let x_comp= f32.floor(halfsize+focusPoint.1)
-        let v = x_comp+size*y_comp
-        --ONE GREATER WHY?
-        let index = t32(v)
+        let index = t32(x_comp+size*y_comp)
 
-        --compute the distances using the difference travelled along an axis to the next whole number and the slope or inverse slope
+        --compute the distances using the difference travelled along an axis to the
+        --next whole number and the slope or inverse slope
         let dy = if vertical then 1f32 else if horizontal then 0f32 else (anchorX-focusPoint.1)*slope
         let dx = if vertical then 0f32 else if horizontal then 1f32 else (anchorY-focusPoint.2)*(1/slope)
         let p_anchor_x = (anchorX, focusPoint.2+dy)
@@ -92,7 +91,7 @@ module Intersections = {
             unsafe let A[write_index] = (dist_p_x, index)
             in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
           else if vertical then
-            unsafe let A[write_index] = (dist_p_x, index)
+            unsafe let A[write_index] = (dist_p_y, index)
             in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
           else
           if (f32.abs(dist_p_x - dist_p_y) > 0.000000001f32)

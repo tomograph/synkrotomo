@@ -38,4 +38,4 @@ let unzip_d3 (xs: [][][](f32,i32)): ([][][]f32,[][][]i32) =
     : ([][]f32,[][]i32) =
       let halfsize = r32(gridsize)/2
       let entrypoints = convert2entry angles rays halfsize
-      in unzip_d2(map ( \(p,s) -> (lengths gridsize s.1 s.2 p)) entrypoints)
+      in unzip_d2(map (\(p,s) -> (lengths gridsize s.1 s.2 p)) entrypoints)
