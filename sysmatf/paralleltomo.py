@@ -75,8 +75,7 @@ def line_paralleltomo(angles, rays, size, thresh=1e-8, angle_labels=False):
         for s in S:
             row += 1
             if i > 30:
-                print(s)
-                print(ct)
+                print("Exited because i is greater than 30")
                 exit()
             # rays that match top or right boundary of the grid are ignored
             if ((abs(ct) < thresh) and (abs(s - ghe) < thresh)) or \
