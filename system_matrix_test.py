@@ -17,7 +17,6 @@ def radonmatrixjh(angles, rays, size):
     A_2 = sysmatjh.main(angles.astype(np.float32), rays.astype(np.float32), size)
     end = time.time()
     elapsed = (end - start)*1000
-    print("The elapsed time of the new intersections %d. ms" % (elapsed))
 
     lnz = 0  # number of nonzero elements
     indptr = [0]  # list used to store matrix nonzeros row entries
@@ -25,24 +24,22 @@ def radonmatrixjh(angles, rays, size):
     data = []  # the same but for the actual data
     #run through angles, rays
     for i in range(0, A_2[0].shape[0]):
-        #run through rays
+        #run through values
         for j in range(0, A_2[0].shape[1]):
-            #run through values
-            for k in range(0, A_2[0].shape[2]):
                 #if non zero value
-                if A_2[1][i][j][k] != -1:
-                    lnz = lnz +1;
-                    indices.append(A_2[1][i][j][k].get())
-                    data.append(A_2[0][i][j][k].get())
-            indptr.append(lnz)
+            if A_2[1][i][j] != -1:
+                lnz = lnz +1;
+                indices.append(A_2[1][i][j].get())
+                data.append(A_2[0][i][j].get())
+        indptr.append(lnz)
 
     # "standard" compressed sparse row matrix construction
     data = np.array(data)
     indices = np.array(indices)
     indptr = np.array(indptr)
-    return sp.csr_matrix((data, indices, indptr), shape=(len(rays)*len(angles),size**2))
+    return sp.csr_matrix((data, indices, indptr), shape=(len(rays)*len(angles),size**2)), elapsed
 
-def test(size, angles):
+def testvalid(size, angles):
     #Francois version - naive non-parallel
     #
     #evenly distributed rays through center of each pixel...
@@ -54,10 +51,7 @@ def test(size, angles):
     end = time.time()
     elapsed1 = (end - start)*1000
 
-    start = time.time()
-    A_2 = radonmatrixjh(angles, rays, size)
-    end = time.time()
-    elapsed2 = (end - start)*1000
+    A_2, elapsed2 = radonmatrixjh(angles, rays, size)
 
     difference = (A_1 - A_2)
     mse = (difference.dot(difference.transpose())).mean(axis=None)
@@ -98,9 +92,12 @@ def timeintersections():
 
 
 def main(argv):
-    #test(4, np.linspace(0,180, 8, endpoint=False))
+    #we are assuming numlines = size
+    #but this should be easily generalizable since all we give are direction/entrypoints.
+    #do not run this with large sizes, as sparse matrix conversion is slow.
+    testvalid(4, np.linspace(0,180, 8, endpoint=False))
     #timeentrypoints(512, np.linspace(0,180, 30, endpoint=False))
-    timeintersections()
+    #timeintersections()
 
 
 if __name__ == '__main__':
