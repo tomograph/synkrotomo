@@ -10,6 +10,7 @@ import numpy as np
 import time
 import sys
 
+#Distance driven algorithm?
 def radonmatrixas(angles, rays, size):
     sysmatas = algorithm.algorithm()
 
@@ -20,6 +21,7 @@ def radonmatrixas(angles, rays, size):
     print(A[0].get())
     return sp.csr_matrix((np.array(A[2].get()), np.array(A[1].get()), np.array(A[0].get())), shape=(len(rays)*len(angles),size**2)), elapsed
 
+#Incremental siddon?
 def radonmatrixjh(angles, rays, size):
     #Jakob and Herluf version - parallel per ray
     sysmatjh = intersections.intersections()
