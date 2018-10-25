@@ -124,7 +124,7 @@ entry inParts(detectorPositions: []f64, angles: []f64,
 		 ([]i32, []i32, []f64) =
 		 let anglesPrRound = length(angles)/parts in
 		 -- alloker på forhånd med replicate og brug in place opdateringer
-		 let result = ([]i32, []i32, []f64) in
+		 let result = ([], [], []) in
 		 let (_, result, _) =
 			 loop (i, (rowsRes, colsRes, distsRes), rowOffset) = (0, result, 0) for i < parts do
 			    let numRows = length(detectorPositions)*(anglesPrRound*(i+1)-anglesPrRound-1)
