@@ -18,7 +18,7 @@ from PyCTUtils import *
 
 
 
-def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8, angle_labels=False):
+def line_paralleltomo(angles, rays, size, thresh=1e-8, angle_labels=False):
     # type: (tuple, tuple, numpy.ndarray, float) -> scipy.sparse.csr_matrix
     """
     Construct the projection matrix (discrete Radon transform) for
@@ -44,17 +44,16 @@ def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8,
     """
 
     # first extract detector parameters, build detector grid
-    dhe, dn = detector
-    S = np.linspace(-dhe, dhe, num=dn)
+    S = rays
 
     # extract grid parameters and build grid
-    ghe, gn = grid
+    ghe, gn = size/2, size
     x, hg = np.linspace(-ghe, ghe, gn + 1, retstep=True)
     y = np.linspace(-ghe, ghe, gn + 1)
     N = len(x) - 1
 
     # objects used to build the sparse matrix
-    lA = len(angles) * dn  # number of rows
+    lA = len(angles) * len(S)  # number of rows
 
     cA = N ** 2  # number of columns
 
@@ -66,8 +65,6 @@ def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8,
     # row counter, for debugging purposes
     row = -1
 
-
-
     # loop over all angles
     for i in xrange(len(angles)):
         theta = angles[i]
@@ -78,8 +75,7 @@ def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8,
         for s in S:
             row += 1
             if i > 30:
-                print(s)
-                print(ct)
+                print("Exited because i is greater than 30")
                 exit()
             # rays that match top or right boundary of the grid are ignored
             if ((abs(ct) < thresh) and (abs(s - ghe) < thresh)) or \
@@ -94,7 +90,7 @@ def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8,
                 ty = (y - s * st) / ct
                 xty = -ty * st + s * ct
 
-            
+
 
             # collect all the intersection point and then
             # prune to get only points inside the grid. They
@@ -292,4 +288,3 @@ def line_paralleltomo(detector, grid, angles=np.arange(0.0, 180.0), thresh=1e-8,
 #     plt.show()
 #     """
 #     print lpt_complexity(detector, grid, angles)
-
