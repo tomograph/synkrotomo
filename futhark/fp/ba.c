@@ -94,20 +94,6 @@ cl_mem futhark_values_raw_f32_2d(struct futhark_context *ctx,
                                  struct futhark_f32_2d *arr);
 int64_t *futhark_shape_f32_2d(struct futhark_context *ctx,
                               struct futhark_f32_2d *arr);
-struct i32_2d ;
-struct futhark_i32_2d *futhark_new_i32_2d(struct futhark_context *ctx,
-                                          int32_t *data, int dim0, int dim1);
-struct futhark_i32_2d *futhark_new_raw_i32_2d(struct futhark_context *ctx,
-                                              cl_mem data, int offset, int dim0,
-                                              int dim1);
-int futhark_free_i32_2d(struct futhark_context *ctx,
-                        struct futhark_i32_2d *arr);
-int futhark_values_i32_2d(struct futhark_context *ctx,
-                          struct futhark_i32_2d *arr, int32_t *data);
-cl_mem futhark_values_raw_i32_2d(struct futhark_context *ctx,
-                                 struct futhark_i32_2d *arr);
-int64_t *futhark_shape_i32_2d(struct futhark_context *ctx,
-                              struct futhark_i32_2d *arr);
 
 /*
  * Opaque values
@@ -119,12 +105,10 @@ int64_t *futhark_shape_i32_2d(struct futhark_context *ctx,
 */
 
 int futhark_entry_main(struct futhark_context *ctx,
-                       struct futhark_f32_2d **out0,
-                       struct futhark_i32_2d **out1, const
+                       struct futhark_f32_2d **out0, const
                        struct futhark_f32_1d *in0, const
-                       struct futhark_f32_1d *in1, const int32_t in2, const
-                       struct futhark_f32_1d *in3, const
-                       struct futhark_f32_1d *in4, const int32_t in5);
+                       struct futhark_f32_1d *in1, const
+                       struct futhark_f32_1d *in2, const int32_t in3);
 
 /*
  * Miscellaneous
@@ -1133,82 +1117,61 @@ static void futrts_cli_entry_main(struct futhark_context *ctx)
 {
     int64_t t_start, t_end;
     int time_runs;
-    struct futhark_f32_1d *read_value_9187;
-    int64_t read_shape_9188[1];
-    float *read_arr_9189 = NULL;
+    struct futhark_f32_1d *read_value_9981;
+    int64_t read_shape_9982[1];
+    float *read_arr_9983 = NULL;
     
     errno = 0;
-    if (read_array(&f32_info, (void **) &read_arr_9189, read_shape_9188, 1) !=
+    if (read_array(&f32_info, (void **) &read_arr_9983, read_shape_9982, 1) !=
         0)
         panic(1, "Cannot read input #%d of type %s%s (errno: %s).\n", 0, "[]",
               f32_info.type_name, strerror(errno));
     
-    struct futhark_f32_1d *read_value_9190;
-    int64_t read_shape_9191[1];
-    float *read_arr_9192 = NULL;
+    struct futhark_f32_1d *read_value_9984;
+    int64_t read_shape_9985[1];
+    float *read_arr_9986 = NULL;
     
     errno = 0;
-    if (read_array(&f32_info, (void **) &read_arr_9192, read_shape_9191, 1) !=
+    if (read_array(&f32_info, (void **) &read_arr_9986, read_shape_9985, 1) !=
         0)
         panic(1, "Cannot read input #%d of type %s%s (errno: %s).\n", 1, "[]",
               f32_info.type_name, strerror(errno));
     
-    int32_t read_value_9193;
-    
-    if (read_scalar(&i32_info, &read_value_9193) != 0)
-        panic(1, "Error when reading input #%d of type %s (errno: %s).\n", 2,
-              i32_info.type_name, strerror(errno));
-    
-    struct futhark_f32_1d *read_value_9194;
-    int64_t read_shape_9195[1];
-    float *read_arr_9196 = NULL;
+    struct futhark_f32_1d *read_value_9987;
+    int64_t read_shape_9988[1];
+    float *read_arr_9989 = NULL;
     
     errno = 0;
-    if (read_array(&f32_info, (void **) &read_arr_9196, read_shape_9195, 1) !=
+    if (read_array(&f32_info, (void **) &read_arr_9989, read_shape_9988, 1) !=
         0)
-        panic(1, "Cannot read input #%d of type %s%s (errno: %s).\n", 3, "[]",
+        panic(1, "Cannot read input #%d of type %s%s (errno: %s).\n", 2, "[]",
               f32_info.type_name, strerror(errno));
     
-    struct futhark_f32_1d *read_value_9197;
-    int64_t read_shape_9198[1];
-    float *read_arr_9199 = NULL;
+    int32_t read_value_9990;
     
-    errno = 0;
-    if (read_array(&f32_info, (void **) &read_arr_9199, read_shape_9198, 1) !=
-        0)
-        panic(1, "Cannot read input #%d of type %s%s (errno: %s).\n", 4, "[]",
-              f32_info.type_name, strerror(errno));
-    
-    int32_t read_value_9200;
-    
-    if (read_scalar(&i32_info, &read_value_9200) != 0)
-        panic(1, "Error when reading input #%d of type %s (errno: %s).\n", 5,
+    if (read_scalar(&i32_info, &read_value_9990) != 0)
+        panic(1, "Error when reading input #%d of type %s (errno: %s).\n", 3,
               i32_info.type_name, strerror(errno));
     
-    struct futhark_f32_2d *result_9201;
-    struct futhark_i32_2d *result_9202;
+    struct futhark_f32_2d *result_9991;
     
     if (perform_warmup) {
         time_runs = 0;
         
         int r;
         
-        assert((read_value_9187 = futhark_new_f32_1d(ctx, read_arr_9189,
-                                                     read_shape_9188[0])) != 0);
-        assert((read_value_9190 = futhark_new_f32_1d(ctx, read_arr_9192,
-                                                     read_shape_9191[0])) != 0);
-        ;
-        assert((read_value_9194 = futhark_new_f32_1d(ctx, read_arr_9196,
-                                                     read_shape_9195[0])) != 0);
-        assert((read_value_9197 = futhark_new_f32_1d(ctx, read_arr_9199,
-                                                     read_shape_9198[0])) != 0);
+        assert((read_value_9981 = futhark_new_f32_1d(ctx, read_arr_9983,
+                                                     read_shape_9982[0])) != 0);
+        assert((read_value_9984 = futhark_new_f32_1d(ctx, read_arr_9986,
+                                                     read_shape_9985[0])) != 0);
+        assert((read_value_9987 = futhark_new_f32_1d(ctx, read_arr_9989,
+                                                     read_shape_9988[0])) != 0);
         ;
         assert(futhark_context_sync(ctx) == 0);
         t_start = get_wall_time();
-        r = futhark_entry_main(ctx, &result_9201, &result_9202, read_value_9187,
-                               read_value_9190, read_value_9193,
-                               read_value_9194, read_value_9197,
-                               read_value_9200);
+        r = futhark_entry_main(ctx, &result_9991, read_value_9981,
+                               read_value_9984, read_value_9987,
+                               read_value_9990);
         if (r != 0)
             panic(1, "%s", futhark_context_get_error(ctx));
         assert(futhark_context_sync(ctx) == 0);
@@ -1218,36 +1181,29 @@ static void futrts_cli_entry_main(struct futhark_context *ctx)
         
         if (time_runs && runtime_file != NULL)
             fprintf(runtime_file, "%lld\n", (long long) elapsed_usec);
-        assert(futhark_free_f32_1d(ctx, read_value_9187) == 0);
-        assert(futhark_free_f32_1d(ctx, read_value_9190) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9981) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9984) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9987) == 0);
         ;
-        assert(futhark_free_f32_1d(ctx, read_value_9194) == 0);
-        assert(futhark_free_f32_1d(ctx, read_value_9197) == 0);
-        ;
-        assert(futhark_free_f32_2d(ctx, result_9201) == 0);
-        assert(futhark_free_i32_2d(ctx, result_9202) == 0);
+        assert(futhark_free_f32_2d(ctx, result_9991) == 0);
     }
     time_runs = 1;
     /* Proper run. */
     for (int run = 0; run < num_runs; run++) {
         int r;
         
-        assert((read_value_9187 = futhark_new_f32_1d(ctx, read_arr_9189,
-                                                     read_shape_9188[0])) != 0);
-        assert((read_value_9190 = futhark_new_f32_1d(ctx, read_arr_9192,
-                                                     read_shape_9191[0])) != 0);
-        ;
-        assert((read_value_9194 = futhark_new_f32_1d(ctx, read_arr_9196,
-                                                     read_shape_9195[0])) != 0);
-        assert((read_value_9197 = futhark_new_f32_1d(ctx, read_arr_9199,
-                                                     read_shape_9198[0])) != 0);
+        assert((read_value_9981 = futhark_new_f32_1d(ctx, read_arr_9983,
+                                                     read_shape_9982[0])) != 0);
+        assert((read_value_9984 = futhark_new_f32_1d(ctx, read_arr_9986,
+                                                     read_shape_9985[0])) != 0);
+        assert((read_value_9987 = futhark_new_f32_1d(ctx, read_arr_9989,
+                                                     read_shape_9988[0])) != 0);
         ;
         assert(futhark_context_sync(ctx) == 0);
         t_start = get_wall_time();
-        r = futhark_entry_main(ctx, &result_9201, &result_9202, read_value_9187,
-                               read_value_9190, read_value_9193,
-                               read_value_9194, read_value_9197,
-                               read_value_9200);
+        r = futhark_entry_main(ctx, &result_9991, read_value_9981,
+                               read_value_9984, read_value_9987,
+                               read_value_9990);
         if (r != 0)
             panic(1, "%s", futhark_context_get_error(ctx));
         assert(futhark_context_sync(ctx) == 0);
@@ -1257,49 +1213,31 @@ static void futrts_cli_entry_main(struct futhark_context *ctx)
         
         if (time_runs && runtime_file != NULL)
             fprintf(runtime_file, "%lld\n", (long long) elapsed_usec);
-        assert(futhark_free_f32_1d(ctx, read_value_9187) == 0);
-        assert(futhark_free_f32_1d(ctx, read_value_9190) == 0);
-        ;
-        assert(futhark_free_f32_1d(ctx, read_value_9194) == 0);
-        assert(futhark_free_f32_1d(ctx, read_value_9197) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9981) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9984) == 0);
+        assert(futhark_free_f32_1d(ctx, read_value_9987) == 0);
         ;
         if (run < num_runs - 1) {
-            assert(futhark_free_f32_2d(ctx, result_9201) == 0);
-            assert(futhark_free_i32_2d(ctx, result_9202) == 0);
+            assert(futhark_free_f32_2d(ctx, result_9991) == 0);
         }
     }
-    free(read_arr_9189);
-    free(read_arr_9192);
-    ;
-    free(read_arr_9196);
-    free(read_arr_9199);
+    free(read_arr_9983);
+    free(read_arr_9986);
+    free(read_arr_9989);
     ;
     {
         float *arr = calloc(sizeof(float), futhark_shape_f32_2d(ctx,
-                                                                result_9201)[0] *
-                            futhark_shape_f32_2d(ctx, result_9201)[1]);
+                                                                result_9991)[0] *
+                            futhark_shape_f32_2d(ctx, result_9991)[1]);
         
         assert(arr != NULL);
-        assert(futhark_values_f32_2d(ctx, result_9201, arr) == 0);
+        assert(futhark_values_f32_2d(ctx, result_9991, arr) == 0);
         write_array(stdout, binary_output, &f32_info, arr,
-                    futhark_shape_f32_2d(ctx, result_9201), 2);
+                    futhark_shape_f32_2d(ctx, result_9991), 2);
         free(arr);
     }
     printf("\n");
-    {
-        int32_t *arr = calloc(sizeof(int32_t), futhark_shape_i32_2d(ctx,
-                                                                    result_9202)[0] *
-                              futhark_shape_i32_2d(ctx, result_9202)[1]);
-        
-        assert(arr != NULL);
-        assert(futhark_values_i32_2d(ctx, result_9202, arr) == 0);
-        write_array(stdout, binary_output, &i32_info, arr,
-                    futhark_shape_i32_2d(ctx, result_9202), 2);
-        free(arr);
-    }
-    printf("\n");
-    assert(futhark_free_f32_2d(ctx, result_9201) == 0);
-    assert(futhark_free_i32_2d(ctx, result_9202) == 0);
+    assert(futhark_free_f32_2d(ctx, result_9991) == 0);
 }
 typedef void entry_point_fun(struct futhark_context *);
 struct entry_point_entry {
@@ -2274,32 +2212,33 @@ const char *opencl_program[] =
             "8_t and8(uint8_t x, uint8_t y)\n{\n    return x & y;\n}\nstatic inline uint16_t and16(uint16_t x, uint16_t y)\n{\n    return x & y;\n}\nstatic inline uint32_t and32(uint32_t x, uint32_t y)\n{\n    return x & y;\n}\nstatic inline uint64_t and64(uint64_t x, uint64_t y)\n{\n    return x & y;\n}\nstatic inline uint8_t or8(uint8_t x, uint8_t y)\n{\n    return x | y;\n}\nstatic inline uint16_t or16(uint16_t x, uint16_t y)\n{\n    return x | y;\n}\nstatic inline uint32_t or32(uint32_t x, uint32_t y)\n{\n    return x | y;\n}\nstatic inline uint64_t or64(uint64_t x, uint64_t y)\n{\n    return x | y;\n}\nstatic inline uint8_t xor8(uint8_t x, uint8_t y)\n{\n    return x ^ y;\n}\nstatic inline uint16_t xor16(uint16_t x, uint16_t y)\n{\n    return x ^ y;\n}\nstatic inline uint32_t xor32(uint32_t x, uint32_t y)\n{\n    return x ^ y;\n}\nstatic inline uint64_t xor64(uint64_t x, uint64_t y)\n{\n    return x ^ y;\n}\nstatic inline char ult8(uint8_t x, uint8_t y)\n{\n    return x < y;\n}\nstatic inline char ult16(uint16_t x, uint16_t y)\n{\n    return x < y;\n}\nstatic inline char ult32(uint32_t x, uint32_t y)\n{\n    return x < y;\n}\nstatic inline char ult64(uint64_t x, uint64_t y)\n{\n    return x < y;\n}\nstatic inline char ule8(uint8_t x, uint8_t y)\n{\n    return x <= y;\n}\nstatic inline char ule16(uint16_t x, uint16_t y)\n{\n    return x <= y;\n}\nstatic inline char ule32(uint32_t x, uint32_t y)\n{\n    return x <= y;\n}\nstatic inline char ule64(uint64_t x, uint64_t y)\n{\n    return x <= y;\n}\nstatic inline char slt8(int8_t x, int8_t y)\n{\n    return x < y;\n}\nstatic inline char slt16(int16_t x, int16_t y)\n{\n    return x < y;\n}\nstatic inline char slt32(int32_t x, int32_t y)\n{\n    return x < y;\n}\nstatic inline char slt64(int64_t x, int64_t y)\n{\n    return x < y;\n}\nstatic inline char sle8(int8_t x, int8_t y)\n{\n    return x <= y;\n}\nstatic inline char sle16(int16_t x, int16_t y)\n{\n    return x <= y;\n}\nstatic inline char sle32(int32_t x, int32_t y)\n{\n    return x <= y;\n}\nstatic inline char sle64(int64_t x, int64_t y)\n{\n    return x <= y;\n}\nstatic inline int8",
             "_t pow8(int8_t x, int8_t y)\n{\n    int8_t res = 1, rem = y;\n    \n    while (rem != 0) {\n        if (rem & 1)\n            res *= x;\n        rem >>= 1;\n        x *= x;\n    }\n    return res;\n}\nstatic inline int16_t pow16(int16_t x, int16_t y)\n{\n    int16_t res = 1, rem = y;\n    \n    while (rem != 0) {\n        if (rem & 1)\n            res *= x;\n        rem >>= 1;\n        x *= x;\n    }\n    return res;\n}\nstatic inline int32_t pow32(int32_t x, int32_t y)\n{\n    int32_t res = 1, rem = y;\n    \n    while (rem != 0) {\n        if (rem & 1)\n            res *= x;\n        rem >>= 1;\n        x *= x;\n    }\n    return res;\n}\nstatic inline int64_t pow64(int64_t x, int64_t y)\n{\n    int64_t res = 1, rem = y;\n    \n    while (rem != 0) {\n        if (rem & 1)\n            res *= x;\n        rem >>= 1;\n        x *= x;\n    }\n    return res;\n}\nstatic inline int8_t sext_i8_i8(int8_t x)\n{\n    return x;\n}\nstatic inline int16_t sext_i8_i16(int8_t x)\n{\n    return x;\n}\nstatic inline int32_t sext_i8_i32(int8_t x)\n{\n    return x;\n}\nstatic inline int64_t sext_i8_i64(int8_t x)\n{\n    return x;\n}\nstatic inline int8_t sext_i16_i8(int16_t x)\n{\n    return x;\n}\nstatic inline int16_t sext_i16_i16(int16_t x)\n{\n    return x;\n}\nstatic inline int32_t sext_i16_i32(int16_t x)\n{\n    return x;\n}\nstatic inline int64_t sext_i16_i64(int16_t x)\n{\n    return x;\n}\nstatic inline int8_t sext_i32_i8(int32_t x)\n{\n    return x;\n}\nstatic inline int16_t sext_i32_i16(int32_t x)\n{\n    return x;\n}\nstatic inline int32_t sext_i32_i32(int32_t x)\n{\n    return x;\n}\nstatic inline int64_t sext_i32_i64(int32_t x)\n{\n    return x;\n}\nstatic inline int8_t sext_i64_i8(int64_t x)\n{\n    return x;\n}\nstatic inline int16_t sext_i64_i16(int64_t x)\n{\n    return x;\n}\nstatic inline int32_t sext_i64_i32(int64_t x)\n{\n    return x;\n}\nstatic inline int64_t sext_i64_i64(int64_t x)\n{\n    return x;\n}\nstatic inline uint8_t zext_i8_i8(uint8_t x)\n{\n    return x;\n}\nstatic inline uint16_t zext_i8_i16(uint8_t x)\n{\n    return x;\n}\nstatic inline uint32_t zext_i8_i32(uint8_",
             "t x)\n{\n    return x;\n}\nstatic inline uint64_t zext_i8_i64(uint8_t x)\n{\n    return x;\n}\nstatic inline uint8_t zext_i16_i8(uint16_t x)\n{\n    return x;\n}\nstatic inline uint16_t zext_i16_i16(uint16_t x)\n{\n    return x;\n}\nstatic inline uint32_t zext_i16_i32(uint16_t x)\n{\n    return x;\n}\nstatic inline uint64_t zext_i16_i64(uint16_t x)\n{\n    return x;\n}\nstatic inline uint8_t zext_i32_i8(uint32_t x)\n{\n    return x;\n}\nstatic inline uint16_t zext_i32_i16(uint32_t x)\n{\n    return x;\n}\nstatic inline uint32_t zext_i32_i32(uint32_t x)\n{\n    return x;\n}\nstatic inline uint64_t zext_i32_i64(uint32_t x)\n{\n    return x;\n}\nstatic inline uint8_t zext_i64_i8(uint64_t x)\n{\n    return x;\n}\nstatic inline uint16_t zext_i64_i16(uint64_t x)\n{\n    return x;\n}\nstatic inline uint32_t zext_i64_i32(uint64_t x)\n{\n    return x;\n}\nstatic inline uint64_t zext_i64_i64(uint64_t x)\n{\n    return x;\n}\nstatic inline float fdiv32(float x, float y)\n{\n    return x / y;\n}\nstatic inline float fadd32(float x, float y)\n{\n    return x + y;\n}\nstatic inline float fsub32(float x, float y)\n{\n    return x - y;\n}\nstatic inline float fmul32(float x, float y)\n{\n    return x * y;\n}\nstatic inline float fmin32(float x, float y)\n{\n    return x < y ? x : y;\n}\nstatic inline float fmax32(float x, float y)\n{\n    return x < y ? y : x;\n}\nstatic inline float fpow32(float x, float y)\n{\n    return pow(x, y);\n}\nstatic inline char cmplt32(float x, float y)\n{\n    return x < y;\n}\nstatic inline char cmple32(float x, float y)\n{\n    return x <= y;\n}\nstatic inline float sitofp_i8_f32(int8_t x)\n{\n    return x;\n}\nstatic inline float sitofp_i16_f32(int16_t x)\n{\n    return x;\n}\nstatic inline float sitofp_i32_f32(int32_t x)\n{\n    return x;\n}\nstatic inline float sitofp_i64_f32(int64_t x)\n{\n    return x;\n}\nstatic inline float uitofp_i8_f32(uint8_t x)\n{\n    return x;\n}\nstatic inline float uitofp_i16_f32(uint16_t x)\n{\n    return x;\n}\nstatic inline float uitofp_i32_f32(uint32_t x)\n{\n    return x;\n}\nstatic inline float uitofp_i64_f32(uint64_t x)\n{\n    ret",
-            "urn x;\n}\nstatic inline int8_t fptosi_f32_i8(float x)\n{\n    return x;\n}\nstatic inline int16_t fptosi_f32_i16(float x)\n{\n    return x;\n}\nstatic inline int32_t fptosi_f32_i32(float x)\n{\n    return x;\n}\nstatic inline int64_t fptosi_f32_i64(float x)\n{\n    return x;\n}\nstatic inline uint8_t fptoui_f32_i8(float x)\n{\n    return x;\n}\nstatic inline uint16_t fptoui_f32_i16(float x)\n{\n    return x;\n}\nstatic inline uint32_t fptoui_f32_i32(float x)\n{\n    return x;\n}\nstatic inline uint64_t fptoui_f32_i64(float x)\n{\n    return x;\n}\nstatic inline float futrts_log32(float x)\n{\n    return log(x);\n}\nstatic inline float futrts_log2_32(float x)\n{\n    return log2(x);\n}\nstatic inline float futrts_log10_32(float x)\n{\n    return log10(x);\n}\nstatic inline float futrts_sqrt32(float x)\n{\n    return sqrt(x);\n}\nstatic inline float futrts_exp32(float x)\n{\n    return exp(x);\n}\nstatic inline float futrts_cos32(float x)\n{\n    return cos(x);\n}\nstatic inline float futrts_sin32(float x)\n{\n    return sin(x);\n}\nstatic inline float futrts_tan32(float x)\n{\n    return tan(x);\n}\nstatic inline float futrts_acos32(float x)\n{\n    return acos(x);\n}\nstatic inline float futrts_asin32(float x)\n{\n    return asin(x);\n}\nstatic inline float futrts_atan32(float x)\n{\n    return atan(x);\n}\nstatic inline float futrts_atan2_32(float x, float y)\n{\n    return atan2(x, y);\n}\nstatic inline float futrts_round32(float x)\n{\n    return rint(x);\n}\nstatic inline char futrts_isnan32(float x)\n{\n    return isnan(x);\n}\nstatic inline char futrts_isinf32(float x)\n{\n    return isinf(x);\n}\nstatic inline int32_t futrts_to_bits32(float x)\n{\n    union {\n        float f;\n        int32_t t;\n    } p;\n    \n    p.f = x;\n    return p.t;\n}\nstatic inline float futrts_from_bits32(int32_t x)\n{\n    union {\n        int32_t f;\n        float t;\n    } p;\n    \n    p.f = x;\n    return p.t;\n}\n#define group_sizze_8700 (group_size_8699)\n__kernel void fut_kernel_map_transpose_f32(__global float *odata,\n                                           uint odata_offset, __g",
+            "urn x;\n}\nstatic inline int8_t fptosi_f32_i8(float x)\n{\n    return x;\n}\nstatic inline int16_t fptosi_f32_i16(float x)\n{\n    return x;\n}\nstatic inline int32_t fptosi_f32_i32(float x)\n{\n    return x;\n}\nstatic inline int64_t fptosi_f32_i64(float x)\n{\n    return x;\n}\nstatic inline uint8_t fptoui_f32_i8(float x)\n{\n    return x;\n}\nstatic inline uint16_t fptoui_f32_i16(float x)\n{\n    return x;\n}\nstatic inline uint32_t fptoui_f32_i32(float x)\n{\n    return x;\n}\nstatic inline uint64_t fptoui_f32_i64(float x)\n{\n    return x;\n}\nstatic inline float futrts_log32(float x)\n{\n    return log(x);\n}\nstatic inline float futrts_log2_32(float x)\n{\n    return log2(x);\n}\nstatic inline float futrts_log10_32(float x)\n{\n    return log10(x);\n}\nstatic inline float futrts_sqrt32(float x)\n{\n    return sqrt(x);\n}\nstatic inline float futrts_exp32(float x)\n{\n    return exp(x);\n}\nstatic inline float futrts_cos32(float x)\n{\n    return cos(x);\n}\nstatic inline float futrts_sin32(float x)\n{\n    return sin(x);\n}\nstatic inline float futrts_tan32(float x)\n{\n    return tan(x);\n}\nstatic inline float futrts_acos32(float x)\n{\n    return acos(x);\n}\nstatic inline float futrts_asin32(float x)\n{\n    return asin(x);\n}\nstatic inline float futrts_atan32(float x)\n{\n    return atan(x);\n}\nstatic inline float futrts_atan2_32(float x, float y)\n{\n    return atan2(x, y);\n}\nstatic inline float futrts_round32(float x)\n{\n    return rint(x);\n}\nstatic inline char futrts_isnan32(float x)\n{\n    return isnan(x);\n}\nstatic inline char futrts_isinf32(float x)\n{\n    return isinf(x);\n}\nstatic inline int32_t futrts_to_bits32(float x)\n{\n    union {\n        float f;\n        int32_t t;\n    } p;\n    \n    p.f = x;\n    return p.t;\n}\nstatic inline float futrts_from_bits32(int32_t x)\n{\n    union {\n        int32_t f;\n        float t;\n    } p;\n    \n    p.f = x;\n    return p.t;\n}\n#define group_sizze_9488 (group_size_9487)\n__kernel void fut_kernel_map_transpose_f32(__global float *odata,\n                                           uint odata_offset, __g",
             "lobal\n                                           float *idata, uint idata_offset,\n                                           uint width, uint height,\n                                           uint input_size, uint output_size,\n                                           __local float *block)\n{\n    uint x_index;\n    uint y_index;\n    uint our_array_offset;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(float);\n    idata += idata_offset / sizeof(float);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_global_id(0);\n    y_index = get_global_id(1);\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(0);\n    y_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(1);\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_i32(__global int32_t *odata,\n                                           uint odata_offset, __global\n                                           int32_t *idata, uint idata_offset,\n                                           uint width, uint height,\n                                           uint input_size, uint output_size,\n                                           __local int32_t *block)\n{\n    uint x_index;\n    uint y_index;\n    ui",
             "nt our_array_offset;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(int32_t);\n    idata += idata_offset / sizeof(int32_t);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_global_id(0);\n    y_index = get_global_id(1);\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(0);\n    y_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(1);\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_lowheight_f32(__global float *odata,\n                                                     uint odata_offset, __global\n                                                     float *idata,\n                                                     uint idata_offset,\n                                                     uint width, uint height,\n                                                     uint input_size,\n                                                     uint output_size,\n                                                     uint mulx, __local\n                                                     float *block)\n{\n    uint x_index;\n    uint y_index;\n    uint our_array_offset;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata",
             "_offset / sizeof(float);\n    idata += idata_offset / sizeof(float);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_group_id(0) * FUT_BLOCK_DIM * mulx + get_local_id(0) +\n        get_local_id(1) % mulx * FUT_BLOCK_DIM;\n    y_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(1) / mulx;\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(0) / mulx;\n    y_index = get_group_id(0) * FUT_BLOCK_DIM * mulx + get_local_id(1) +\n        get_local_id(0) % mulx * FUT_BLOCK_DIM;\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_lowheight_i32(__global int32_t *odata,\n                                                     uint odata_offset, __global\n                                                     int32_t *idata,\n                                                     uint idata_offset,\n                                                     uint width, uint height,\n                                                     uint input_size,\n                                                     uint output_size,\n                                                     uint mulx, __local\n                                                     int32_t *block)\n{\n    uint x_index;\n    uint y_index;\n    uint our_array_offset;\n   ",
             " \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(int32_t);\n    idata += idata_offset / sizeof(int32_t);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_group_id(0) * FUT_BLOCK_DIM * mulx + get_local_id(0) +\n        get_local_id(1) % mulx * FUT_BLOCK_DIM;\n    y_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(1) / mulx;\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM + get_local_id(0) / mulx;\n    y_index = get_group_id(0) * FUT_BLOCK_DIM * mulx + get_local_id(1) +\n        get_local_id(0) % mulx * FUT_BLOCK_DIM;\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_lowwidth_f32(__global float *odata,\n                                                    uint odata_offset, __global\n                                                    float *idata,\n                                                    uint idata_offset,\n                                                    uint width, uint height,\n                                                    uint input_size,\n                                                    uint output_size, uint muly,\n                                                    __local float *block)\n{\n    uint x_index;\n    uint y_index;\n    uint",
             " our_array_offset;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(float);\n    idata += idata_offset / sizeof(float);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(0) / muly;\n    y_index = get_group_id(1) * FUT_BLOCK_DIM * muly + get_local_id(1) +\n        get_local_id(0) % muly * FUT_BLOCK_DIM;\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM * muly + get_local_id(0) +\n        get_local_id(1) % muly * FUT_BLOCK_DIM;\n    y_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(1) / muly;\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_lowwidth_i32(__global int32_t *odata,\n                                                    uint odata_offset, __global\n                                                    int32_t *idata,\n                                                    uint idata_offset,\n                                                    uint width, uint height,\n                                                    uint input_size,\n                                                    uint output_size, uint muly,\n                                                    __local int32_t *block)\n{\n    uint x_index;\n  ",
             "  uint y_index;\n    uint our_array_offset;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(int32_t);\n    idata += idata_offset / sizeof(int32_t);\n    // Adjust the input and output arrays for the third dimension.\n    our_array_offset = get_global_id(2) * width * height;\n    odata += our_array_offset;\n    idata += our_array_offset;\n    // read the matrix tile into shared memory\n    x_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(0) / muly;\n    y_index = get_group_id(1) * FUT_BLOCK_DIM * muly + get_local_id(1) +\n        get_local_id(0) % muly * FUT_BLOCK_DIM;\n    \n    uint index_in = y_index * width + x_index;\n    \n    if ((x_index < width && y_index < height) && index_in < input_size)\n        block[get_local_id(1) * (FUT_BLOCK_DIM + 1) + get_local_id(0)] =\n            idata[index_in];\n    barrier(CLK_LOCAL_MEM_FENCE);\n    // Scatter the transposed matrix tile to global memory.\n    x_index = get_group_id(1) * FUT_BLOCK_DIM * muly + get_local_id(0) +\n        get_local_id(1) % muly * FUT_BLOCK_DIM;\n    y_index = get_group_id(0) * FUT_BLOCK_DIM + get_local_id(1) / muly;\n    \n    uint index_out = y_index * height + x_index;\n    \n    if ((x_index < height && y_index < width) && index_out < output_size)\n        odata[index_out] = block[get_local_id(0) * (FUT_BLOCK_DIM + 1) +\n                                 get_local_id(1)];\n}\n__kernel void fut_kernel_map_transpose_small_f32(__global float *odata,\n                                                 uint odata_offset, __global\n                                                 float *idata,\n                                                 uint idata_offset,\n                                                 uint num_arrays, uint width,\n                                                 uint height, uint input_size,\n                                                 uint output_size)\n{\n    uint our_array_offset = get_global_id(0) / (height * width) * (height *\n           ",
-            "                                                        width);\n    uint x_index = get_global_id(0) % (height * width) / height;\n    uint y_index = get_global_id(0) % height;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(float);\n    idata += idata_offset / sizeof(float);\n    // Adjust the input and output arrays.\n    odata += our_array_offset;\n    idata += our_array_offset;\n    \n    uint index_in = y_index * width + x_index;\n    uint index_out = x_index * height + y_index;\n    \n    if (get_global_id(0) < input_size)\n        odata[index_out] = idata[index_in];\n}\n__kernel void fut_kernel_map_transpose_small_i32(__global int32_t *odata,\n                                                 uint odata_offset, __global\n                                                 int32_t *idata,\n                                                 uint idata_offset,\n                                                 uint num_arrays, uint width,\n                                                 uint height, uint input_size,\n                                                 uint output_size)\n{\n    uint our_array_offset = get_global_id(0) / (height * width) * (height *\n                                                                   width);\n    uint x_index = get_global_id(0) % (height * width) / height;\n    uint y_index = get_global_id(0) % height;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(int32_t);\n    idata += idata_offset / sizeof(int32_t);\n    // Adjust the input and output arrays.\n    odata += our_array_offset;\n    idata += our_array_offset;\n    \n    uint index_in = y_index * width + x_index;\n    uint index_out = x_index * height + y_index;\n    \n    if (get_global_id(0) < input_size)\n        odata[index_out] = idata[index_in];\n}\n__kernel void map_kernel_8655(int32_t sizze_8380, int32_t sizze_8381, __global\n                              unsigned char *mem_9006, __global\n  ",
-            "                            unsigned char *mem_9014)\n{\n    int32_t wave_sizze_9091;\n    int32_t group_sizze_9092;\n    bool thread_active_9093;\n    int32_t gtid_8646;\n    int32_t gtid_8647;\n    int32_t global_tid_8655;\n    int32_t local_tid_8656;\n    int32_t group_id_8657;\n    \n    global_tid_8655 = get_global_id(0);\n    local_tid_8656 = get_local_id(0);\n    group_sizze_9092 = get_local_size(0);\n    wave_sizze_9091 = LOCKSTEP_WIDTH;\n    group_id_8657 = get_group_id(0);\n    gtid_8646 = squot32(global_tid_8655, sizze_8381);\n    gtid_8647 = global_tid_8655 - squot32(global_tid_8655, sizze_8381) *\n        sizze_8381;\n    thread_active_9093 = slt32(gtid_8646, sizze_8380) && slt32(gtid_8647,\n                                                               sizze_8381);\n    \n    float res_8658;\n    \n    if (thread_active_9093) {\n        res_8658 = *(__global float *) &mem_9006[gtid_8646 * 4];\n    }\n    if (thread_active_9093) {\n        *(__global float *) &mem_9014[(gtid_8646 * sizze_8381 + gtid_8647) *\n                                      4] = res_8658;\n    }\n}\n__kernel void map_kernel_8671(int32_t sizze_8380, int32_t sizze_8381, __global\n                              unsigned char *mem_9003, __global\n                              unsigned char *mem_9010)\n{\n    int32_t wave_sizze_9088;\n    int32_t group_sizze_9089;\n    bool thread_active_9090;\n    int32_t gtid_8662;\n    int32_t gtid_8663;\n    int32_t global_tid_8671;\n    int32_t local_tid_8672;\n    int32_t group_id_8673;\n    \n    global_tid_8671 = get_global_id(0);\n    local_tid_8672 = get_local_id(0);\n    group_sizze_9089 = get_local_size(0);\n    wave_sizze_9088 = LOCKSTEP_WIDTH;\n    group_id_8673 = get_group_id(0);\n    gtid_8662 = squot32(global_tid_8671, sizze_8381);\n    gtid_8663 = global_tid_8671 - squot32(global_tid_8671, sizze_8381) *\n        sizze_8381;\n    thread_active_9090 = slt32(gtid_8662, sizze_8380) && slt32(gtid_8663,\n                                                               sizze_8381);\n    \n    float r",
-            "es_8674;\n    \n    if (thread_active_9090) {\n        res_8674 = *(__global float *) &mem_9003[gtid_8662 * 4];\n    }\n    if (thread_active_9090) {\n        *(__global float *) &mem_9010[(gtid_8662 * sizze_8381 + gtid_8663) *\n                                      4] = res_8674;\n    }\n}\n__kernel void map_kernel_8683(int32_t sizze_8380, __global\n                              unsigned char *angles_mem_8998, __global\n                              unsigned char *mem_9003, __global\n                              unsigned char *mem_9006)\n{\n    int32_t wave_sizze_9085;\n    int32_t group_sizze_9086;\n    bool thread_active_9087;\n    int32_t gtid_8676;\n    int32_t global_tid_8683;\n    int32_t local_tid_8684;\n    int32_t group_id_8685;\n    \n    global_tid_8683 = get_global_id(0);\n    local_tid_8684 = get_local_id(0);\n    group_sizze_9086 = get_local_size(0);\n    wave_sizze_9085 = LOCKSTEP_WIDTH;\n    group_id_8685 = get_group_id(0);\n    gtid_8676 = global_tid_8683;\n    thread_active_9087 = slt32(gtid_8676, sizze_8380);\n    \n    float x_8686;\n    float res_8687;\n    float res_8688;\n    float res_8689;\n    \n    if (thread_active_9087) {\n        x_8686 = *(__global float *) &angles_mem_8998[gtid_8676 * 4];\n        res_8687 = 1.7453292e-2F * x_8686;\n        res_8688 = futrts_sin32(res_8687);\n        res_8689 = futrts_cos32(res_8687);\n    }\n    if (thread_active_9087) {\n        *(__global float *) &mem_9003[gtid_8676 * 4] = res_8688;\n    }\n    if (thread_active_9087) {\n        *(__global float *) &mem_9006[gtid_8676 * 4] = res_8689;\n    }\n}\n__kernel void map_kernel_8705(float res_8388, float res_8389, float res_8399,\n                              int32_t res_8402, int32_t nesting_sizze_8664,\n                              __global unsigned char *mem_9016, __global\n                              unsigned char *mem_9019, __global\n                              unsigned char *mem_9022, __global\n                              unsigned char *mem_9024, __global\n                              unsigne",
-            "d char *mem_9027, __global\n                              unsigned char *mem_9030, __global\n                              unsigned char *mem_9033, __global\n                              unsigned char *mem_9055, __global\n                              unsigned char *mem_9059)\n{\n    int32_t wave_sizze_9097;\n    int32_t group_sizze_9098;\n    bool thread_active_9099;\n    int32_t gtid_8698;\n    int32_t global_tid_8705;\n    int32_t local_tid_8706;\n    int32_t group_id_8707;\n    \n    global_tid_8705 = get_global_id(0);\n    local_tid_8706 = get_local_id(0);\n    group_sizze_9098 = get_local_size(0);\n    wave_sizze_9097 = LOCKSTEP_WIDTH;\n    group_id_8707 = get_group_id(0);\n    gtid_8698 = global_tid_8705;\n    thread_active_9099 = slt32(gtid_8698, nesting_sizze_8664);\n    \n    bool cond_8708;\n    float res_8709;\n    float res_8710;\n    bool res_8711;\n    float res_8712;\n    bool cond_8715;\n    float res_8716;\n    int32_t res_8717;\n    float res_8718;\n    bool res_8719;\n    float res_8720;\n    float res_8727;\n    float res_8728;\n    bool cond_8751;\n    bool res_8752;\n    bool x_8753;\n    bool cond_8754;\n    bool res_8755;\n    bool x_8756;\n    bool cond_8757;\n    bool res_8758;\n    bool x_8759;\n    bool x_8760;\n    bool x_8761;\n    bool y_8762;\n    bool res_8763;\n    bool x_8764;\n    float y_8765;\n    bool res_8766;\n    float res_8769;\n    float res_8770;\n    float res_8771;\n    float res_8772;\n    int32_t res_8773;\n    \n    if (thread_active_9099) {\n        cond_8708 = *(__global bool *) &mem_9016[gtid_8698];\n        res_8709 = *(__global float *) &mem_9019[gtid_8698 * 4];\n        res_8710 = *(__global float *) &mem_9022[gtid_8698 * 4];\n        res_8711 = *(__global bool *) &mem_9024[gtid_8698];\n        res_8712 = *(__global float *) &mem_9027[gtid_8698 * 4];\n        for (int32_t i_9100 = 0; i_9100 < res_8402; i_9100++) {\n            *(__global float *) &mem_9030[(group_id_8707 * (res_8402 *\n                                                            group_sizze_8700) +\n        ",
-            "                                   i_9100 * group_sizze_8700 +\n                                           local_tid_8706) * 4] = -1.0F;\n        }\n        for (int32_t i_9101 = 0; i_9101 < res_8402; i_9101++) {\n            *(__global int32_t *) &mem_9033[(group_id_8707 * (res_8402 *\n                                                              group_sizze_8700) +\n                                             i_9101 * group_sizze_8700 +\n                                             local_tid_8706) * 4] = -1;\n        }\n        cond_8715 = res_8712 < 0.0F;\n        if (cond_8715) {\n            res_8716 = -1.0F;\n        } else {\n            res_8716 = 1.0F;\n        }\n        res_8717 = fptosi_f32_i32(res_8709);\n        res_8718 = sitofp_i32_f32(res_8717);\n        res_8719 = 0.0F <= res_8709;\n        if (res_8719) {\n            bool res_8721;\n            float res_8722;\n            \n            res_8721 = res_8718 < res_8709;\n            if (res_8721) {\n                res_8722 = res_8718;\n            } else {\n                res_8722 = res_8709;\n            }\n            res_8720 = res_8722;\n        } else {\n            bool res_8723;\n            float res_8724;\n            \n            res_8723 = res_8709 < res_8718;\n            if (res_8723) {\n                int32_t res_8725;\n                float res_8726;\n                \n                res_8725 = res_8717 - 1;\n                res_8726 = sitofp_i32_f32(res_8725);\n                res_8724 = res_8726;\n            } else {\n                res_8724 = res_8709;\n            }\n            res_8720 = res_8724;\n        }\n        res_8727 = 1.0F + res_8720;\n        if (cond_8715) {\n            int32_t res_8729;\n            float res_8730;\n            bool res_8731;\n            float res_8732;\n            float res_8739;\n            \n            res_8729 = fptosi_f32_i32(res_8710);\n            res_8730 = sitofp_i32_f32(res_8729);\n            res_8731 = 0.0F <= res_8710;\n            if (res_8731) {\n                bool res_8733;\n",
-            "                float res_8734;\n                \n                res_8733 = res_8730 < res_8710;\n                if (res_8733) {\n                    int32_t res_8735;\n                    float res_8736;\n                    \n                    res_8735 = 1 + res_8729;\n                    res_8736 = sitofp_i32_f32(res_8735);\n                    res_8734 = res_8736;\n                } else {\n                    res_8734 = res_8710;\n                }\n                res_8732 = res_8734;\n            } else {\n                bool res_8737;\n                float res_8738;\n                \n                res_8737 = res_8710 < res_8730;\n                if (res_8737) {\n                    res_8738 = res_8730;\n                } else {\n                    res_8738 = res_8710;\n                }\n                res_8732 = res_8738;\n            }\n            res_8739 = res_8732 - 1.0F;\n            res_8728 = res_8739;\n        } else {\n            int32_t res_8740;\n            float res_8741;\n            bool res_8742;\n            float res_8743;\n            float res_8750;\n            \n            res_8740 = fptosi_f32_i32(res_8710);\n            res_8741 = sitofp_i32_f32(res_8740);\n            res_8742 = 0.0F <= res_8710;\n            if (res_8742) {\n                bool res_8744;\n                float res_8745;\n                \n                res_8744 = res_8741 < res_8710;\n                if (res_8744) {\n                    res_8745 = res_8741;\n                } else {\n                    res_8745 = res_8710;\n                }\n                res_8743 = res_8745;\n            } else {\n                bool res_8746;\n                float res_8747;\n                \n                res_8746 = res_8710 < res_8741;\n                if (res_8746) {\n                    int32_t res_8748;\n                    float res_8749;\n                    \n                    res_8748 = res_8740 - 1;\n                    res_8749 = sitofp_i32_f32(res_8748);\n                    res_8747 = res_8749;\n   ",
-            "             } else {\n                    res_8747 = res_8710;\n                }\n                res_8743 = res_8747;\n            }\n            res_8750 = 1.0F + res_8743;\n            res_8728 = res_8750;\n        }\n        cond_8751 = res_8399 <= res_8709;\n        res_8752 = res_8709 < res_8389;\n        x_8753 = cond_8751 && res_8752;\n        cond_8754 = res_8399 < res_8710;\n        res_8755 = res_8710 <= res_8389;\n        x_8756 = cond_8754 && res_8755;\n        cond_8757 = res_8399 <= res_8710;\n        res_8758 = res_8710 < res_8389;\n        x_8759 = cond_8757 && res_8758;\n        x_8760 = cond_8715 && x_8756;\n        x_8761 = !cond_8715;\n        y_8762 = x_8759 && x_8761;\n        res_8763 = x_8760 || y_8762;\n        x_8764 = x_8753 && res_8763;\n        y_8765 = 1.0F / res_8712;\n        \n        bool loop_while_8774;\n        float focusPoint_8777;\n        float focusPoint_8778;\n        float anchorX_8779;\n        float anchorY_8780;\n        int32_t write_index_8781;\n        \n        loop_while_8774 = x_8764;\n        focusPoint_8777 = res_8709;\n        focusPoint_8778 = res_8710;\n        anchorX_8779 = res_8727;\n        anchorY_8780 = res_8728;\n        write_index_8781 = 0;\n        while (loop_while_8774) {\n            float arg_8782 = res_8389 + focusPoint_8778;\n            int32_t res_8783 = fptosi_f32_i32(arg_8782);\n            float res_8784 = sitofp_i32_f32(res_8783);\n            bool res_8785 = 0.0F <= arg_8782;\n            float res_8786;\n            \n            if (res_8785) {\n                bool res_8787;\n                float res_8788;\n                \n                res_8787 = res_8784 < arg_8782;\n                if (res_8787) {\n                    res_8788 = res_8784;\n                } else {\n                    res_8788 = arg_8782;\n                }\n                res_8786 = res_8788;\n            } else {\n                bool res_8789;\n                float res_8790;\n                \n                res_8789 = arg_8782 < res_8784;\n                if",
-            " (res_8789) {\n                    int32_t res_8791;\n                    float res_8792;\n                    \n                    res_8791 = res_8783 - 1;\n                    res_8792 = sitofp_i32_f32(res_8791);\n                    res_8790 = res_8792;\n                } else {\n                    res_8790 = arg_8782;\n                }\n                res_8786 = res_8790;\n            }\n            \n            int32_t res_8793 = fptosi_f32_i32(focusPoint_8778);\n            float res_8794 = sitofp_i32_f32(res_8793);\n            bool res_8795 = 0.0F <= focusPoint_8778;\n            float res_8796;\n            \n            if (res_8795) {\n                bool res_8797;\n                float res_8798;\n                \n                res_8797 = res_8794 < focusPoint_8778;\n                if (res_8797) {\n                    res_8798 = res_8794;\n                } else {\n                    res_8798 = focusPoint_8778;\n                }\n                res_8796 = res_8798;\n            } else {\n                bool res_8799;\n                float res_8800;\n                \n                res_8799 = focusPoint_8778 < res_8794;\n                if (res_8799) {\n                    int32_t res_8801;\n                    float res_8802;\n                    \n                    res_8801 = res_8793 - 1;\n                    res_8802 = sitofp_i32_f32(res_8801);\n                    res_8800 = res_8802;\n                } else {\n                    res_8800 = focusPoint_8778;\n                }\n                res_8796 = res_8800;\n            }\n            \n            float x_8803 = focusPoint_8778 - res_8796;\n            bool res_8804 = x_8803 == 0.0F;\n            bool x_8805 = cond_8715 && res_8804;\n            float res_8806;\n            \n            if (x_8805) {\n                float res_8807 = res_8786 - 1.0F;\n                \n                res_8806 = res_8807;\n            } else {\n                res_8806 = res_8786;\n            }\n            \n            float arg_8808 = res_8389 ",
-            "+ focusPoint_8777;\n            int32_t res_8809 = fptosi_f32_i32(arg_8808);\n            float res_8810 = sitofp_i32_f32(res_8809);\n            bool res_8811 = 0.0F <= arg_8808;\n            float res_8812;\n            \n            if (res_8811) {\n                bool res_8813;\n                float res_8814;\n                \n                res_8813 = res_8810 < arg_8808;\n                if (res_8813) {\n                    res_8814 = res_8810;\n                } else {\n                    res_8814 = arg_8808;\n                }\n                res_8812 = res_8814;\n            } else {\n                bool res_8815;\n                float res_8816;\n                \n                res_8815 = arg_8808 < res_8810;\n                if (res_8815) {\n                    int32_t res_8817;\n                    float res_8818;\n                    \n                    res_8817 = res_8809 - 1;\n                    res_8818 = sitofp_i32_f32(res_8817);\n                    res_8816 = res_8818;\n                } else {\n                    res_8816 = arg_8808;\n                }\n                res_8812 = res_8816;\n            }\n            \n            float y_8819 = res_8388 * res_8806;\n            float arg_8820 = res_8812 + y_8819;\n            int32_t res_8821 = fptosi_f32_i32(arg_8820);\n            float res_8822;\n            \n            if (res_8711) {\n                res_8822 = 1.0F;\n            } else {\n                float res_8823;\n                \n                if (cond_8708) {\n                    res_8823 = 0.0F;\n                } else {\n                    float x_8824;\n                    float res_8825;\n                    \n                    x_8824 = anchorX_8779 - focusPoint_8777;\n                    res_8825 = res_8712 * x_8824;\n                    res_8823 = res_8825;\n                }\n                res_8822 = res_8823;\n            }\n            \n            float res_8826;\n            \n            if (res_8711) {\n                res_8826 = 0.0F;\n            } else",
-            " {\n                float res_8827;\n                \n                if (cond_8708) {\n                    res_8827 = 1.0F;\n                } else {\n                    float x_8828;\n                    float res_8829;\n                    \n                    x_8828 = anchorY_8780 - focusPoint_8778;\n                    res_8829 = y_8765 * x_8828;\n                    res_8827 = res_8829;\n                }\n                res_8826 = res_8827;\n            }\n            \n            float res_8830 = focusPoint_8778 + res_8822;\n            float res_8831 = focusPoint_8777 + res_8826;\n            float x_8832 = anchorX_8779 - focusPoint_8777;\n            float x_8833 = fpow32(x_8832, 2.0F);\n            float x_8834 = res_8830 - focusPoint_8778;\n            float y_8835 = fpow32(x_8834, 2.0F);\n            float arg_8836 = x_8833 + y_8835;\n            float res_8837;\n            \n            res_8837 = futrts_sqrt32(arg_8836);\n            \n            float x_8838 = res_8831 - focusPoint_8777;\n            float x_8839 = fpow32(x_8838, 2.0F);\n            float x_8840 = anchorY_8780 - focusPoint_8778;\n            float y_8841 = fpow32(x_8840, 2.0F);\n            float arg_8842 = x_8839 + y_8841;\n            float res_8843;\n            \n            res_8843 = futrts_sqrt32(arg_8842);\n            \n            float res_8846;\n            float res_8847;\n            float res_8848;\n            float res_8849;\n            int32_t res_8850;\n            \n            if (cond_8708) {\n                float res_8853;\n                int32_t res_8854;\n                \n                *(__global float *) &mem_9030[(group_id_8707 * (res_8402 *\n                                                                group_sizze_8700) +\n                                               write_index_8781 *\n                                               group_sizze_8700 +\n                                               local_tid_8706) * 4] = res_8837;\n                *(__global int32_t *) &mem_9033[(group_id_",
-            "8707 * (res_8402 *\n                                                                  group_sizze_8700) +\n                                                 write_index_8781 *\n                                                 group_sizze_8700 +\n                                                 local_tid_8706) * 4] =\n                    res_8821;\n                res_8853 = 1.0F + anchorX_8779;\n                res_8854 = 1 + write_index_8781;\n                res_8846 = anchorX_8779;\n                res_8847 = res_8830;\n                res_8848 = res_8853;\n                res_8849 = anchorY_8780;\n                res_8850 = res_8854;\n            } else {\n                float res_8857;\n                float res_8858;\n                float res_8859;\n                float res_8860;\n                int32_t res_8861;\n                \n                if (res_8711) {\n                    float res_8864;\n                    int32_t res_8865;\n                    \n                    *(__global float *) &mem_9030[(group_id_8707 * (res_8402 *\n                                                                    group_sizze_8700) +\n                                                   write_index_8781 *\n                                                   group_sizze_8700 +\n                                                   local_tid_8706) * 4] =\n                        res_8843;\n                    *(__global int32_t *) &mem_9033[(group_id_8707 * (res_8402 *\n                                                                      group_sizze_8700) +\n                                                     write_index_8781 *\n                                                     group_sizze_8700 +\n                                                     local_tid_8706) * 4] =\n                        res_8821;\n                    res_8864 = res_8716 + anchorY_8780;\n                    res_8865 = 1 + write_index_8781;\n                    res_8857 = res_8831;\n                    res_8858 = anchorY_8780;\n     ",
-            "               res_8859 = anchorX_8779;\n                    res_8860 = res_8864;\n                    res_8861 = res_8865;\n                } else {\n                    float arg_8866;\n                    float res_8867;\n                    bool cond_8868;\n                    float res_8871;\n                    float res_8872;\n                    float res_8873;\n                    float res_8874;\n                    int32_t res_8875;\n                    \n                    arg_8866 = res_8837 - res_8843;\n                    res_8867 = (float) fabs(arg_8866);\n                    cond_8868 = 1.0e-9F < res_8867;\n                    if (cond_8868) {\n                        bool cond_8876;\n                        float res_8877;\n                        float res_8878;\n                        float res_8881;\n                        float res_8882;\n                        int32_t res_8883;\n                        \n                        cond_8876 = res_8837 < res_8843;\n                        if (cond_8876) {\n                            res_8877 = anchorX_8779;\n                        } else {\n                            res_8877 = res_8831;\n                        }\n                        if (cond_8876) {\n                            res_8878 = res_8830;\n                        } else {\n                            res_8878 = anchorY_8780;\n                        }\n                        if (cond_8876) {\n                            float res_8886;\n                            int32_t res_8887;\n                            \n                            *(__global float *) &mem_9030[(group_id_8707 *\n                                                           (res_8402 *\n                                                            group_sizze_8700) +\n                                                           write_index_8781 *\n                                                           group_sizze_8700 +\n                                                           local_tid_8706) *",
-            "\n                                                          4] = res_8837;\n                            *(__global int32_t *) &mem_9033[(group_id_8707 *\n                                                             (res_8402 *\n                                                              group_sizze_8700) +\n                                                             write_index_8781 *\n                                                             group_sizze_8700 +\n                                                             local_tid_8706) *\n                                                            4] = res_8821;\n                            res_8886 = 1.0F + anchorX_8779;\n                            res_8887 = 1 + write_index_8781;\n                            res_8881 = res_8886;\n                            res_8882 = anchorY_8780;\n                            res_8883 = res_8887;\n                        } else {\n                            float res_8890;\n                            int32_t res_8891;\n                            \n                            *(__global float *) &mem_9030[(group_id_8707 *\n                                                           (res_8402 *\n                                                            group_sizze_8700) +\n                                                           write_index_8781 *\n                                                           group_sizze_8700 +\n                                                           local_tid_8706) *\n                                                          4] = res_8843;\n                            *(__global int32_t *) &mem_9033[(group_id_8707 *\n                                                             (res_8402 *\n                                                              group_sizze_8700) +\n                                                             write_index_8781 *\n                                                             group_sizze_8700 +\n                                ",
-            "                             local_tid_8706) *\n                                                            4] = res_8821;\n                            res_8890 = res_8716 + anchorY_8780;\n                            res_8891 = 1 + write_index_8781;\n                            res_8881 = anchorX_8779;\n                            res_8882 = res_8890;\n                            res_8883 = res_8891;\n                        }\n                        res_8871 = res_8877;\n                        res_8872 = res_8878;\n                        res_8873 = res_8881;\n                        res_8874 = res_8882;\n                        res_8875 = res_8883;\n                    } else {\n                        float res_8894;\n                        float res_8895;\n                        int32_t res_8896;\n                        \n                        *(__global float *) &mem_9030[(group_id_8707 *\n                                                       (res_8402 *\n                                                        group_sizze_8700) +\n                                                       write_index_8781 *\n                                                       group_sizze_8700 +\n                                                       local_tid_8706) * 4] =\n                            res_8837;\n                        *(__global int32_t *) &mem_9033[(group_id_8707 *\n                                                         (res_8402 *\n                                                          group_sizze_8700) +\n                                                         write_index_8781 *\n                                                         group_sizze_8700 +\n                                                         local_tid_8706) * 4] =\n                            res_8821;\n                        res_8894 = 1.0F + anchorX_8779;\n                        res_8895 = res_8716 + anchorY_8780;\n                        res_8896 = 1 + write_index_8781;\n                        res_8871 =",
-            " anchorX_8779;\n                        res_8872 = res_8830;\n                        res_8873 = res_8894;\n                        res_8874 = res_8895;\n                        res_8875 = res_8896;\n                    }\n                    res_8857 = res_8871;\n                    res_8858 = res_8872;\n                    res_8859 = res_8873;\n                    res_8860 = res_8874;\n                    res_8861 = res_8875;\n                }\n                res_8846 = res_8857;\n                res_8847 = res_8858;\n                res_8848 = res_8859;\n                res_8849 = res_8860;\n                res_8850 = res_8861;\n            }\n            \n            bool cond_8897 = res_8399 <= res_8846;\n            bool res_8898 = res_8846 < res_8389;\n            bool x_8899 = cond_8897 && res_8898;\n            bool cond_8900 = res_8399 < res_8847;\n            bool res_8901 = res_8847 <= res_8389;\n            bool x_8902 = cond_8900 && res_8901;\n            bool cond_8903 = res_8399 <= res_8847;\n            bool res_8904 = res_8847 < res_8389;\n            bool x_8905 = cond_8903 && res_8904;\n            bool x_8906 = cond_8715 && x_8902;\n            bool y_8907 = x_8761 && x_8905;\n            bool res_8908 = x_8906 || y_8907;\n            bool x_8909 = x_8899 && res_8908;\n            bool loop_while_tmp_9102 = x_8909;\n            float focusPoint_tmp_9105 = res_8846;\n            float focusPoint_tmp_9106 = res_8847;\n            float anchorX_tmp_9107 = res_8848;\n            float anchorY_tmp_9108 = res_8849;\n            int32_t write_index_tmp_9109;\n            \n            write_index_tmp_9109 = res_8850;\n            loop_while_8774 = loop_while_tmp_9102;\n            focusPoint_8777 = focusPoint_tmp_9105;\n            focusPoint_8778 = focusPoint_tmp_9106;\n            anchorX_8779 = anchorX_tmp_9107;\n            anchorY_8780 = anchorY_tmp_9108;\n            write_index_8781 = write_index_tmp_9109;\n        }\n        res_8766 = loop_while_8774;\n        res_8769 = focusPoint_8777;",
-            "\n        res_8770 = focusPoint_8778;\n        res_8771 = anchorX_8779;\n        res_8772 = anchorY_8780;\n        res_8773 = write_index_8781;\n    }\n    if (thread_active_9099) {\n        for (int32_t i_9110 = 0; i_9110 < res_8402; i_9110++) {\n            *(__global float *) &mem_9055[(i_9110 * nesting_sizze_8664 +\n                                           gtid_8698) * 4] = *(__global\n                                                               float *) &mem_9030[(group_id_8707 *\n                                                                                   (res_8402 *\n                                                                                    group_sizze_8700) +\n                                                                                   i_9110 *\n                                                                                   group_sizze_8700 +\n                                                                                   local_tid_8706) *\n                                                                                  4];\n        }\n    }\n    if (thread_active_9099) {\n        for (int32_t i_9111 = 0; i_9111 < res_8402; i_9111++) {\n            *(__global int32_t *) &mem_9059[(i_9111 * nesting_sizze_8664 +\n                                             gtid_8698) * 4] = *(__global\n                                                                 int32_t *) &mem_9033[(group_id_8707 *\n                                                                                       (res_8402 *\n                                                                                        group_sizze_8700) +\n                                                                                       i_9111 *\n                                                                                       group_sizze_8700 +\n                                                                                       local_tid_8706) *\n                                                            ",
-            "                          4];\n        }\n    }\n}\n__kernel void map_kernel_8944(int32_t sizze_8381, float res_8389,\n                              float res_8399, int32_t nesting_sizze_8664,\n                              __global unsigned char *rays_mem_9000, __global\n                              unsigned char *mem_9010, __global\n                              unsigned char *mem_9014, __global\n                              unsigned char *mem_9016, __global\n                              unsigned char *mem_9019, __global\n                              unsigned char *mem_9022, __global\n                              unsigned char *mem_9024, __global\n                              unsigned char *mem_9027)\n{\n    int32_t wave_sizze_9094;\n    int32_t group_sizze_9095;\n    bool thread_active_9096;\n    int32_t gtid_8937;\n    int32_t global_tid_8944;\n    int32_t local_tid_8945;\n    int32_t group_id_8946;\n    \n    global_tid_8944 = get_global_id(0);\n    local_tid_8945 = get_local_id(0);\n    group_sizze_9095 = get_local_size(0);\n    wave_sizze_9094 = LOCKSTEP_WIDTH;\n    group_id_8946 = get_group_id(0);\n    gtid_8937 = global_tid_8944;\n    thread_active_9096 = slt32(gtid_8937, nesting_sizze_8664);\n    \n    int32_t new_index_8977;\n    int32_t binop_y_8979;\n    int32_t new_index_8980;\n    float copy_p_8947;\n    float copy_p_8948;\n    float x_8949;\n    bool cond_8950;\n    float res_8951;\n    bool cond_8955;\n    float res_8956;\n    float res_8960;\n    float res_8964;\n    bool cond_8965;\n    bool res_8966;\n    bool x_8967;\n    float res_8968;\n    float res_8969;\n    float res_8973;\n    bool res_8974;\n    float y_8975;\n    float res_8976;\n    \n    if (thread_active_9096) {\n        new_index_8977 = squot32(gtid_8937, sizze_8381);\n        binop_y_8979 = sizze_8381 * new_index_8977;\n        new_index_8980 = gtid_8937 - binop_y_8979;\n        copy_p_8947 = *(__global float *) &mem_9010[(new_index_8977 *\n                                                     sizze_8381 +\n                           ",
-            "                          new_index_8980) * 4];\n        copy_p_8948 = *(__global float *) &mem_9014[(new_index_8977 *\n                                                     sizze_8381 +\n                                                     new_index_8980) * 4];\n        x_8949 = *(__global float *) &rays_mem_9000[new_index_8980 * 4];\n        cond_8950 = copy_p_8947 == 0.0F;\n        if (cond_8950) {\n            res_8951 = x_8949;\n        } else {\n            float y_8952;\n            float x_8953;\n            float res_8954;\n            \n            y_8952 = res_8399 * copy_p_8948;\n            x_8953 = x_8949 - y_8952;\n            res_8954 = x_8953 / copy_p_8947;\n            res_8951 = res_8954;\n        }\n        cond_8955 = copy_p_8948 == 0.0F;\n        if (cond_8955) {\n            res_8956 = x_8949;\n        } else {\n            float y_8957;\n            float x_8958;\n            float res_8959;\n            \n            y_8957 = res_8399 * copy_p_8947;\n            x_8958 = x_8949 - y_8957;\n            res_8959 = x_8958 / copy_p_8948;\n            res_8956 = res_8959;\n        }\n        if (cond_8955) {\n            res_8960 = x_8949;\n        } else {\n            float y_8961;\n            float x_8962;\n            float res_8963;\n            \n            y_8961 = res_8389 * copy_p_8947;\n            x_8962 = x_8949 - y_8961;\n            res_8963 = x_8962 / copy_p_8948;\n            res_8960 = res_8963;\n        }\n        res_8964 = (float) fabs(res_8951);\n        cond_8965 = res_8964 <= res_8389;\n        res_8966 = !cond_8950;\n        x_8967 = cond_8965 && res_8966;\n        if (x_8967) {\n            res_8968 = res_8399;\n            res_8969 = res_8951;\n        } else {\n            bool cond_8970;\n            float res_8971;\n            float res_8972;\n            \n            cond_8970 = res_8956 <= res_8960;\n            if (cond_8970) {\n                res_8971 = res_8956;\n            } else {\n                res_8971 = res_8960;\n            }\n            if (cond_8970) {\n    ",
-            "            res_8972 = res_8399;\n            } else {\n                res_8972 = res_8389;\n            }\n            res_8968 = res_8971;\n            res_8969 = res_8972;\n        }\n        res_8973 = (float) fabs(copy_p_8948);\n        res_8974 = res_8973 == 1.0F;\n        y_8975 = 0.0F - copy_p_8947;\n        res_8976 = copy_p_8948 / y_8975;\n    }\n    if (thread_active_9096) {\n        *(__global bool *) &mem_9016[gtid_8937] = cond_8955;\n    }\n    if (thread_active_9096) {\n        *(__global float *) &mem_9019[gtid_8937 * 4] = res_8968;\n    }\n    if (thread_active_9096) {\n        *(__global float *) &mem_9022[gtid_8937 * 4] = res_8969;\n    }\n    if (thread_active_9096) {\n        *(__global bool *) &mem_9024[gtid_8937] = res_8974;\n    }\n    if (thread_active_9096) {\n        *(__global float *) &mem_9027[gtid_8937 * 4] = res_8976;\n    }\n}\n",
+            "                                                        width);\n    uint x_index = get_global_id(0) % (height * width) / height;\n    uint y_index = get_global_id(0) % height;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(float);\n    idata += idata_offset / sizeof(float);\n    // Adjust the input and output arrays.\n    odata += our_array_offset;\n    idata += our_array_offset;\n    \n    uint index_in = y_index * width + x_index;\n    uint index_out = x_index * height + y_index;\n    \n    if (get_global_id(0) < input_size)\n        odata[index_out] = idata[index_in];\n}\n__kernel void fut_kernel_map_transpose_small_i32(__global int32_t *odata,\n                                                 uint odata_offset, __global\n                                                 int32_t *idata,\n                                                 uint idata_offset,\n                                                 uint num_arrays, uint width,\n                                                 uint height, uint input_size,\n                                                 uint output_size)\n{\n    uint our_array_offset = get_global_id(0) / (height * width) * (height *\n                                                                   width);\n    uint x_index = get_global_id(0) % (height * width) / height;\n    uint y_index = get_global_id(0) % height;\n    \n    // Adjust the input and output arrays with the basic offset.\n    odata += odata_offset / sizeof(int32_t);\n    idata += idata_offset / sizeof(int32_t);\n    // Adjust the input and output arrays.\n    odata += our_array_offset;\n    idata += our_array_offset;\n    \n    uint index_in = y_index * width + x_index;\n    uint index_out = x_index * height + y_index;\n    \n    if (get_global_id(0) < input_size)\n        odata[index_out] = idata[index_in];\n}\n__kernel void map_kernel_9398(int32_t sizze_9096, int32_t sizze_9097, __global\n                              unsigned char *mem_9796, __global\n  ",
+            "                            unsigned char *mem_9804)\n{\n    int32_t wave_sizze_9880;\n    int32_t group_sizze_9881;\n    bool thread_active_9882;\n    int32_t gtid_9389;\n    int32_t gtid_9390;\n    int32_t global_tid_9398;\n    int32_t local_tid_9399;\n    int32_t group_id_9400;\n    \n    global_tid_9398 = get_global_id(0);\n    local_tid_9399 = get_local_id(0);\n    group_sizze_9881 = get_local_size(0);\n    wave_sizze_9880 = LOCKSTEP_WIDTH;\n    group_id_9400 = get_group_id(0);\n    gtid_9389 = squot32(global_tid_9398, sizze_9097);\n    gtid_9390 = global_tid_9398 - squot32(global_tid_9398, sizze_9097) *\n        sizze_9097;\n    thread_active_9882 = slt32(gtid_9389, sizze_9096) && slt32(gtid_9390,\n                                                               sizze_9097);\n    \n    float res_9401;\n    \n    if (thread_active_9882) {\n        res_9401 = *(__global float *) &mem_9796[gtid_9389 * 4];\n    }\n    if (thread_active_9882) {\n        *(__global float *) &mem_9804[(gtid_9389 * sizze_9097 + gtid_9390) *\n                                      4] = res_9401;\n    }\n}\n__kernel void map_kernel_9414(int32_t sizze_9096, int32_t sizze_9097, __global\n                              unsigned char *mem_9793, __global\n                              unsigned char *mem_9800)\n{\n    int32_t wave_sizze_9877;\n    int32_t group_sizze_9878;\n    bool thread_active_9879;\n    int32_t gtid_9405;\n    int32_t gtid_9406;\n    int32_t global_tid_9414;\n    int32_t local_tid_9415;\n    int32_t group_id_9416;\n    \n    global_tid_9414 = get_global_id(0);\n    local_tid_9415 = get_local_id(0);\n    group_sizze_9878 = get_local_size(0);\n    wave_sizze_9877 = LOCKSTEP_WIDTH;\n    group_id_9416 = get_group_id(0);\n    gtid_9405 = squot32(global_tid_9414, sizze_9097);\n    gtid_9406 = global_tid_9414 - squot32(global_tid_9414, sizze_9097) *\n        sizze_9097;\n    thread_active_9879 = slt32(gtid_9405, sizze_9096) && slt32(gtid_9406,\n                                                               sizze_9097);\n    \n    float r",
+            "es_9417;\n    \n    if (thread_active_9879) {\n        res_9417 = *(__global float *) &mem_9793[gtid_9405 * 4];\n    }\n    if (thread_active_9879) {\n        *(__global float *) &mem_9800[(gtid_9405 * sizze_9097 + gtid_9406) *\n                                      4] = res_9417;\n    }\n}\n__kernel void map_kernel_9426(int32_t sizze_9096, __global\n                              unsigned char *angles_mem_9788, __global\n                              unsigned char *mem_9793, __global\n                              unsigned char *mem_9796)\n{\n    int32_t wave_sizze_9874;\n    int32_t group_sizze_9875;\n    bool thread_active_9876;\n    int32_t gtid_9419;\n    int32_t global_tid_9426;\n    int32_t local_tid_9427;\n    int32_t group_id_9428;\n    \n    global_tid_9426 = get_global_id(0);\n    local_tid_9427 = get_local_id(0);\n    group_sizze_9875 = get_local_size(0);\n    wave_sizze_9874 = LOCKSTEP_WIDTH;\n    group_id_9428 = get_group_id(0);\n    gtid_9419 = global_tid_9426;\n    thread_active_9876 = slt32(gtid_9419, sizze_9096);\n    \n    float x_9429;\n    float res_9430;\n    float res_9431;\n    float res_9432;\n    \n    if (thread_active_9876) {\n        x_9429 = *(__global float *) &angles_mem_9788[gtid_9419 * 4];\n        res_9430 = 1.7453292e-2F * x_9429;\n        res_9431 = futrts_sin32(res_9430);\n        res_9432 = futrts_cos32(res_9430);\n    }\n    if (thread_active_9876) {\n        *(__global float *) &mem_9793[gtid_9419 * 4] = res_9431;\n    }\n    if (thread_active_9876) {\n        *(__global float *) &mem_9796[gtid_9419 * 4] = res_9432;\n    }\n}\n__kernel void map_kernel_9453(int32_t res_9116, int32_t res_9125,\n                              int32_t arg_9126, int32_t nesting_sizze_9407,\n                              __global unsigned char *vect_mem_9786, __global\n                              unsigned char *mem_9853, __global\n                              unsigned char *mem_9857, __global\n                              unsigned char *mem_9861)\n{\n    int32_t wave_sizze_9901;\n    int32_t group_sizz",
+            "e_9902;\n    bool thread_active_9903;\n    int32_t gtid_9444;\n    int32_t gtid_9445;\n    int32_t global_tid_9453;\n    int32_t local_tid_9454;\n    int32_t group_id_9455;\n    \n    global_tid_9453 = get_global_id(0);\n    local_tid_9454 = get_local_id(0);\n    group_sizze_9902 = get_local_size(0);\n    wave_sizze_9901 = LOCKSTEP_WIDTH;\n    group_id_9455 = get_group_id(0);\n    gtid_9444 = squot32(global_tid_9453, res_9116);\n    gtid_9445 = global_tid_9453 - squot32(global_tid_9453, res_9116) * res_9116;\n    thread_active_9903 = slt32(gtid_9444, nesting_sizze_9407) &&\n        slt32(gtid_9445, res_9116);\n    \n    float x_9456;\n    int32_t x_9457;\n    bool cond_9458;\n    float res_9459;\n    \n    if (thread_active_9903) {\n        x_9456 = *(__global float *) &mem_9853[(gtid_9444 * res_9116 +\n                                                gtid_9445) * 4];\n        x_9457 = *(__global int32_t *) &mem_9857[(gtid_9444 * res_9116 +\n                                                  gtid_9445) * 4];\n        cond_9458 = x_9457 == -1;\n        \n        float x_9462 = 0.0F;\n        \n        for (int32_t chunk_offset_9461 = 0; chunk_offset_9461 < arg_9126;\n             chunk_offset_9461++) {\n            float res_9471;\n            \n            if (cond_9458) {\n                res_9471 = 0.0F;\n            } else {\n                int32_t x_9472;\n                int32_t i_9473;\n                float y_9474;\n                float res_9475;\n                \n                x_9472 = res_9125 * chunk_offset_9461;\n                i_9473 = x_9457 + x_9472;\n                y_9474 = *(__global float *) &vect_mem_9786[i_9473 * 4];\n                res_9475 = x_9456 * y_9474;\n                res_9471 = res_9475;\n            }\n            \n            float res_9477 = x_9462 + res_9471;\n            float x_tmp_9904 = res_9477;\n            \n            x_9462 = x_tmp_9904;\n        }\n        res_9459 = x_9462;\n    }\n    if (thread_active_9903) {\n        *(__global float *) &mem_9861[(gtid_9444 * res_9116 +",
+            " gtid_9445) * 4] =\n            res_9459;\n    }\n}\n__kernel void map_kernel_9493(float res_9102, float res_9103, float res_9113,\n                              int32_t res_9116, int32_t nesting_sizze_9407,\n                              __global unsigned char *mem_9806, __global\n                              unsigned char *mem_9809, __global\n                              unsigned char *mem_9812, __global\n                              unsigned char *mem_9814, __global\n                              unsigned char *mem_9817, __global\n                              unsigned char *mem_9820, __global\n                              unsigned char *mem_9823, __global\n                              unsigned char *mem_9845, __global\n                              unsigned char *mem_9849)\n{\n    int32_t wave_sizze_9886;\n    int32_t group_sizze_9887;\n    bool thread_active_9888;\n    int32_t gtid_9486;\n    int32_t global_tid_9493;\n    int32_t local_tid_9494;\n    int32_t group_id_9495;\n    \n    global_tid_9493 = get_global_id(0);\n    local_tid_9494 = get_local_id(0);\n    group_sizze_9887 = get_local_size(0);\n    wave_sizze_9886 = LOCKSTEP_WIDTH;\n    group_id_9495 = get_group_id(0);\n    gtid_9486 = global_tid_9493;\n    thread_active_9888 = slt32(gtid_9486, nesting_sizze_9407);\n    \n    bool cond_9496;\n    float res_9497;\n    float res_9498;\n    bool res_9499;\n    float res_9500;\n    bool cond_9503;\n    float res_9504;\n    int32_t res_9505;\n    float res_9506;\n    bool res_9507;\n    float res_9508;\n    float res_9515;\n    float res_9516;\n    bool cond_9539;\n    bool res_9540;\n    bool x_9541;\n    bool cond_9542;\n    bool res_9543;\n    bool x_9544;\n    bool cond_9545;\n    bool res_9546;\n    bool x_9547;\n    bool x_9548;\n    bool x_9549;\n    bool y_9550;\n    bool res_9551;\n    bool x_9552;\n    float y_9553;\n    bool res_9554;\n    float res_9557;\n    float res_9558;\n    float res_9559;\n    float res_9560;\n    int32_t res_9561;\n    \n    if (thread_active_9888) {\n        cond_9496 = *(__global boo",
+            "l *) &mem_9806[gtid_9486];\n        res_9497 = *(__global float *) &mem_9809[gtid_9486 * 4];\n        res_9498 = *(__global float *) &mem_9812[gtid_9486 * 4];\n        res_9499 = *(__global bool *) &mem_9814[gtid_9486];\n        res_9500 = *(__global float *) &mem_9817[gtid_9486 * 4];\n        for (int32_t i_9889 = 0; i_9889 < res_9116; i_9889++) {\n            *(__global float *) &mem_9820[(group_id_9495 * (res_9116 *\n                                                            group_sizze_9488) +\n                                           i_9889 * group_sizze_9488 +\n                                           local_tid_9494) * 4] = -1.0F;\n        }\n        for (int32_t i_9890 = 0; i_9890 < res_9116; i_9890++) {\n            *(__global int32_t *) &mem_9823[(group_id_9495 * (res_9116 *\n                                                              group_sizze_9488) +\n                                             i_9890 * group_sizze_9488 +\n                                             local_tid_9494) * 4] = -1;\n        }\n        cond_9503 = res_9500 < 0.0F;\n        if (cond_9503) {\n            res_9504 = -1.0F;\n        } else {\n            res_9504 = 1.0F;\n        }\n        res_9505 = fptosi_f32_i32(res_9497);\n        res_9506 = sitofp_i32_f32(res_9505);\n        res_9507 = 0.0F <= res_9497;\n        if (res_9507) {\n            bool res_9509;\n            float res_9510;\n            \n            res_9509 = res_9506 < res_9497;\n            if (res_9509) {\n                res_9510 = res_9506;\n            } else {\n                res_9510 = res_9497;\n            }\n            res_9508 = res_9510;\n        } else {\n            bool res_9511;\n            float res_9512;\n            \n            res_9511 = res_9497 < res_9506;\n            if (res_9511) {\n                int32_t res_9513;\n                float res_9514;\n                \n                res_9513 = res_9505 - 1;\n                res_9514 = sitofp_i32_f32(res_9513);\n                res_9512 = res_9514;\n            } else {\n  ",
+            "              res_9512 = res_9497;\n            }\n            res_9508 = res_9512;\n        }\n        res_9515 = 1.0F + res_9508;\n        if (cond_9503) {\n            int32_t res_9517;\n            float res_9518;\n            bool res_9519;\n            float res_9520;\n            float res_9527;\n            \n            res_9517 = fptosi_f32_i32(res_9498);\n            res_9518 = sitofp_i32_f32(res_9517);\n            res_9519 = 0.0F <= res_9498;\n            if (res_9519) {\n                bool res_9521;\n                float res_9522;\n                \n                res_9521 = res_9518 < res_9498;\n                if (res_9521) {\n                    int32_t res_9523;\n                    float res_9524;\n                    \n                    res_9523 = 1 + res_9517;\n                    res_9524 = sitofp_i32_f32(res_9523);\n                    res_9522 = res_9524;\n                } else {\n                    res_9522 = res_9498;\n                }\n                res_9520 = res_9522;\n            } else {\n                bool res_9525;\n                float res_9526;\n                \n                res_9525 = res_9498 < res_9518;\n                if (res_9525) {\n                    res_9526 = res_9518;\n                } else {\n                    res_9526 = res_9498;\n                }\n                res_9520 = res_9526;\n            }\n            res_9527 = res_9520 - 1.0F;\n            res_9516 = res_9527;\n        } else {\n            int32_t res_9528;\n            float res_9529;\n            bool res_9530;\n            float res_9531;\n            float res_9538;\n            \n            res_9528 = fptosi_f32_i32(res_9498);\n            res_9529 = sitofp_i32_f32(res_9528);\n            res_9530 = 0.0F <= res_9498;\n            if (res_9530) {\n                bool res_9532;\n                float res_9533;\n                \n                res_9532 = res_9529 < res_9498;\n                if (res_9532) {\n                    res_9533 = res_9529;\n                } else {\n             ",
+            "       res_9533 = res_9498;\n                }\n                res_9531 = res_9533;\n            } else {\n                bool res_9534;\n                float res_9535;\n                \n                res_9534 = res_9498 < res_9529;\n                if (res_9534) {\n                    int32_t res_9536;\n                    float res_9537;\n                    \n                    res_9536 = res_9528 - 1;\n                    res_9537 = sitofp_i32_f32(res_9536);\n                    res_9535 = res_9537;\n                } else {\n                    res_9535 = res_9498;\n                }\n                res_9531 = res_9535;\n            }\n            res_9538 = 1.0F + res_9531;\n            res_9516 = res_9538;\n        }\n        cond_9539 = res_9113 <= res_9497;\n        res_9540 = res_9497 < res_9103;\n        x_9541 = cond_9539 && res_9540;\n        cond_9542 = res_9113 < res_9498;\n        res_9543 = res_9498 <= res_9103;\n        x_9544 = cond_9542 && res_9543;\n        cond_9545 = res_9113 <= res_9498;\n        res_9546 = res_9498 < res_9103;\n        x_9547 = cond_9545 && res_9546;\n        x_9548 = cond_9503 && x_9544;\n        x_9549 = !cond_9503;\n        y_9550 = x_9547 && x_9549;\n        res_9551 = x_9548 || y_9550;\n        x_9552 = x_9541 && res_9551;\n        y_9553 = 1.0F / res_9500;\n        \n        bool loop_while_9562;\n        float focusPoint_9565;\n        float focusPoint_9566;\n        float anchorX_9567;\n        float anchorY_9568;\n        int32_t write_index_9569;\n        \n        loop_while_9562 = x_9552;\n        focusPoint_9565 = res_9497;\n        focusPoint_9566 = res_9498;\n        anchorX_9567 = res_9515;\n        anchorY_9568 = res_9516;\n        write_index_9569 = 0;\n        while (loop_while_9562) {\n            float arg_9570 = res_9103 + focusPoint_9566;\n            int32_t res_9571 = fptosi_f32_i32(arg_9570);\n            float res_9572 = sitofp_i32_f32(res_9571);\n            bool res_9573 = 0.0F <= arg_9570;\n            float res_9574;\n            \n            ",
+            "if (res_9573) {\n                bool res_9575;\n                float res_9576;\n                \n                res_9575 = res_9572 < arg_9570;\n                if (res_9575) {\n                    res_9576 = res_9572;\n                } else {\n                    res_9576 = arg_9570;\n                }\n                res_9574 = res_9576;\n            } else {\n                bool res_9577;\n                float res_9578;\n                \n                res_9577 = arg_9570 < res_9572;\n                if (res_9577) {\n                    int32_t res_9579;\n                    float res_9580;\n                    \n                    res_9579 = res_9571 - 1;\n                    res_9580 = sitofp_i32_f32(res_9579);\n                    res_9578 = res_9580;\n                } else {\n                    res_9578 = arg_9570;\n                }\n                res_9574 = res_9578;\n            }\n            \n            int32_t res_9581 = fptosi_f32_i32(focusPoint_9566);\n            float res_9582 = sitofp_i32_f32(res_9581);\n            bool res_9583 = 0.0F <= focusPoint_9566;\n            float res_9584;\n            \n            if (res_9583) {\n                bool res_9585;\n                float res_9586;\n                \n                res_9585 = res_9582 < focusPoint_9566;\n                if (res_9585) {\n                    res_9586 = res_9582;\n                } else {\n                    res_9586 = focusPoint_9566;\n                }\n                res_9584 = res_9586;\n            } else {\n                bool res_9587;\n                float res_9588;\n                \n                res_9587 = focusPoint_9566 < res_9582;\n                if (res_9587) {\n                    int32_t res_9589;\n                    float res_9590;\n                    \n                    res_9589 = res_9581 - 1;\n                    res_9590 = sitofp_i32_f32(res_9589);\n                    res_9588 = res_9590;\n                } else {\n                    res_9588 = focusPoint_9566;\n                }\n ",
+            "               res_9584 = res_9588;\n            }\n            \n            float x_9591 = focusPoint_9566 - res_9584;\n            bool res_9592 = x_9591 == 0.0F;\n            bool x_9593 = cond_9503 && res_9592;\n            float res_9594;\n            \n            if (x_9593) {\n                float res_9595 = res_9574 - 1.0F;\n                \n                res_9594 = res_9595;\n            } else {\n                res_9594 = res_9574;\n            }\n            \n            float arg_9596 = res_9103 + focusPoint_9565;\n            int32_t res_9597 = fptosi_f32_i32(arg_9596);\n            float res_9598 = sitofp_i32_f32(res_9597);\n            bool res_9599 = 0.0F <= arg_9596;\n            float res_9600;\n            \n            if (res_9599) {\n                bool res_9601;\n                float res_9602;\n                \n                res_9601 = res_9598 < arg_9596;\n                if (res_9601) {\n                    res_9602 = res_9598;\n                } else {\n                    res_9602 = arg_9596;\n                }\n                res_9600 = res_9602;\n            } else {\n                bool res_9603;\n                float res_9604;\n                \n                res_9603 = arg_9596 < res_9598;\n                if (res_9603) {\n                    int32_t res_9605;\n                    float res_9606;\n                    \n                    res_9605 = res_9597 - 1;\n                    res_9606 = sitofp_i32_f32(res_9605);\n                    res_9604 = res_9606;\n                } else {\n                    res_9604 = arg_9596;\n                }\n                res_9600 = res_9604;\n            }\n            \n            float y_9607 = res_9102 * res_9594;\n            float arg_9608 = res_9600 + y_9607;\n            int32_t res_9609 = fptosi_f32_i32(arg_9608);\n            float res_9610;\n            \n            if (res_9499) {\n                res_9610 = 1.0F;\n            } else {\n                float res_9611;\n                \n                if (cond_9496) {\n  ",
+            "                  res_9611 = 0.0F;\n                } else {\n                    float x_9612;\n                    float res_9613;\n                    \n                    x_9612 = anchorX_9567 - focusPoint_9565;\n                    res_9613 = res_9500 * x_9612;\n                    res_9611 = res_9613;\n                }\n                res_9610 = res_9611;\n            }\n            \n            float res_9614;\n            \n            if (res_9499) {\n                res_9614 = 0.0F;\n            } else {\n                float res_9615;\n                \n                if (cond_9496) {\n                    res_9615 = 1.0F;\n                } else {\n                    float x_9616;\n                    float res_9617;\n                    \n                    x_9616 = anchorY_9568 - focusPoint_9566;\n                    res_9617 = y_9553 * x_9616;\n                    res_9615 = res_9617;\n                }\n                res_9614 = res_9615;\n            }\n            \n            float res_9618 = focusPoint_9566 + res_9610;\n            float res_9619 = focusPoint_9565 + res_9614;\n            float x_9620 = anchorX_9567 - focusPoint_9565;\n            float x_9621 = fpow32(x_9620, 2.0F);\n            float x_9622 = res_9618 - focusPoint_9566;\n            float y_9623 = fpow32(x_9622, 2.0F);\n            float arg_9624 = x_9621 + y_9623;\n            float res_9625;\n            \n            res_9625 = futrts_sqrt32(arg_9624);\n            \n            float x_9626 = res_9619 - focusPoint_9565;\n            float x_9627 = fpow32(x_9626, 2.0F);\n            float x_9628 = anchorY_9568 - focusPoint_9566;\n            float y_9629 = fpow32(x_9628, 2.0F);\n            float arg_9630 = x_9627 + y_9629;\n            float res_9631;\n            \n            res_9631 = futrts_sqrt32(arg_9630);\n            \n            float res_9634;\n            float res_9635;\n            float res_9636;\n            float res_9637;\n            int32_t res_9638;\n            \n            if (cond_9496) {\n       ",
+            "         float res_9641;\n                int32_t res_9642;\n                \n                *(__global float *) &mem_9820[(group_id_9495 * (res_9116 *\n                                                                group_sizze_9488) +\n                                               write_index_9569 *\n                                               group_sizze_9488 +\n                                               local_tid_9494) * 4] = res_9625;\n                *(__global int32_t *) &mem_9823[(group_id_9495 * (res_9116 *\n                                                                  group_sizze_9488) +\n                                                 write_index_9569 *\n                                                 group_sizze_9488 +\n                                                 local_tid_9494) * 4] =\n                    res_9609;\n                res_9641 = 1.0F + anchorX_9567;\n                res_9642 = 1 + write_index_9569;\n                res_9634 = anchorX_9567;\n                res_9635 = res_9618;\n                res_9636 = res_9641;\n                res_9637 = anchorY_9568;\n                res_9638 = res_9642;\n            } else {\n                float res_9645;\n                float res_9646;\n                float res_9647;\n                float res_9648;\n                int32_t res_9649;\n                \n                if (res_9499) {\n                    float res_9652;\n                    int32_t res_9653;\n                    \n                    *(__global float *) &mem_9820[(group_id_9495 * (res_9116 *\n                                                                    group_sizze_9488) +\n                                                   write_index_9569 *\n                                                   group_sizze_9488 +\n                                                   local_tid_9494) * 4] =\n                        res_9631;\n                    *(__global int32_t *) &mem_9823[(group_id_9495 * (res_9116 *\n                                       ",
+            "                               group_sizze_9488) +\n                                                     write_index_9569 *\n                                                     group_sizze_9488 +\n                                                     local_tid_9494) * 4] =\n                        res_9609;\n                    res_9652 = res_9504 + anchorY_9568;\n                    res_9653 = 1 + write_index_9569;\n                    res_9645 = res_9619;\n                    res_9646 = anchorY_9568;\n                    res_9647 = anchorX_9567;\n                    res_9648 = res_9652;\n                    res_9649 = res_9653;\n                } else {\n                    float arg_9654;\n                    float res_9655;\n                    bool cond_9656;\n                    float res_9659;\n                    float res_9660;\n                    float res_9661;\n                    float res_9662;\n                    int32_t res_9663;\n                    \n                    arg_9654 = res_9625 - res_9631;\n                    res_9655 = (float) fabs(arg_9654);\n                    cond_9656 = 1.0e-9F < res_9655;\n                    if (cond_9656) {\n                        bool cond_9664;\n                        float res_9665;\n                        float res_9666;\n                        float res_9669;\n                        float res_9670;\n                        int32_t res_9671;\n                        \n                        cond_9664 = res_9625 < res_9631;\n                        if (cond_9664) {\n                            res_9665 = anchorX_9567;\n                        } else {\n                            res_9665 = res_9619;\n                        }\n                        if (cond_9664) {\n                            res_9666 = res_9618;\n                        } else {\n                            res_9666 = anchorY_9568;\n                        }\n                        if (cond_9664) {\n                            float res_9674;\n                            ",
+            "int32_t res_9675;\n                            \n                            *(__global float *) &mem_9820[(group_id_9495 *\n                                                           (res_9116 *\n                                                            group_sizze_9488) +\n                                                           write_index_9569 *\n                                                           group_sizze_9488 +\n                                                           local_tid_9494) *\n                                                          4] = res_9625;\n                            *(__global int32_t *) &mem_9823[(group_id_9495 *\n                                                             (res_9116 *\n                                                              group_sizze_9488) +\n                                                             write_index_9569 *\n                                                             group_sizze_9488 +\n                                                             local_tid_9494) *\n                                                            4] = res_9609;\n                            res_9674 = 1.0F + anchorX_9567;\n                            res_9675 = 1 + write_index_9569;\n                            res_9669 = res_9674;\n                            res_9670 = anchorY_9568;\n                            res_9671 = res_9675;\n                        } else {\n                            float res_9678;\n                            int32_t res_9679;\n                            \n                            *(__global float *) &mem_9820[(group_id_9495 *\n                                                           (res_9116 *\n                                                            group_sizze_9488) +\n                                                           write_index_9569 *\n                                                           group_sizze_9488 +\n                                                           local_tid_",
+            "9494) *\n                                                          4] = res_9631;\n                            *(__global int32_t *) &mem_9823[(group_id_9495 *\n                                                             (res_9116 *\n                                                              group_sizze_9488) +\n                                                             write_index_9569 *\n                                                             group_sizze_9488 +\n                                                             local_tid_9494) *\n                                                            4] = res_9609;\n                            res_9678 = res_9504 + anchorY_9568;\n                            res_9679 = 1 + write_index_9569;\n                            res_9669 = anchorX_9567;\n                            res_9670 = res_9678;\n                            res_9671 = res_9679;\n                        }\n                        res_9659 = res_9665;\n                        res_9660 = res_9666;\n                        res_9661 = res_9669;\n                        res_9662 = res_9670;\n                        res_9663 = res_9671;\n                    } else {\n                        float res_9682;\n                        float res_9683;\n                        int32_t res_9684;\n                        \n                        *(__global float *) &mem_9820[(group_id_9495 *\n                                                       (res_9116 *\n                                                        group_sizze_9488) +\n                                                       write_index_9569 *\n                                                       group_sizze_9488 +\n                                                       local_tid_9494) * 4] =\n                            res_9625;\n                        *(__global int32_t *) &mem_9823[(group_id_9495 *\n                                                         (res_9116 *\n                                                  ",
+            "        group_sizze_9488) +\n                                                         write_index_9569 *\n                                                         group_sizze_9488 +\n                                                         local_tid_9494) * 4] =\n                            res_9609;\n                        res_9682 = 1.0F + anchorX_9567;\n                        res_9683 = res_9504 + anchorY_9568;\n                        res_9684 = 1 + write_index_9569;\n                        res_9659 = anchorX_9567;\n                        res_9660 = res_9618;\n                        res_9661 = res_9682;\n                        res_9662 = res_9683;\n                        res_9663 = res_9684;\n                    }\n                    res_9645 = res_9659;\n                    res_9646 = res_9660;\n                    res_9647 = res_9661;\n                    res_9648 = res_9662;\n                    res_9649 = res_9663;\n                }\n                res_9634 = res_9645;\n                res_9635 = res_9646;\n                res_9636 = res_9647;\n                res_9637 = res_9648;\n                res_9638 = res_9649;\n            }\n            \n            bool cond_9685 = res_9113 <= res_9634;\n            bool res_9686 = res_9634 < res_9103;\n            bool x_9687 = cond_9685 && res_9686;\n            bool cond_9688 = res_9113 < res_9635;\n            bool res_9689 = res_9635 <= res_9103;\n            bool x_9690 = cond_9688 && res_9689;\n            bool cond_9691 = res_9113 <= res_9635;\n            bool res_9692 = res_9635 < res_9103;\n            bool x_9693 = cond_9691 && res_9692;\n            bool x_9694 = cond_9503 && x_9690;\n            bool y_9695 = x_9549 && x_9693;\n            bool res_9696 = x_9694 || y_9695;\n            bool x_9697 = x_9687 && res_9696;\n            bool loop_while_tmp_9891 = x_9697;\n            float focusPoint_tmp_9894 = res_9634;\n            float focusPoint_tmp_9895 = res_9635;\n            float anchorX_tmp_9896 = res_9636;\n            float a",
+            "nchorY_tmp_9897 = res_9637;\n            int32_t write_index_tmp_9898;\n            \n            write_index_tmp_9898 = res_9638;\n            loop_while_9562 = loop_while_tmp_9891;\n            focusPoint_9565 = focusPoint_tmp_9894;\n            focusPoint_9566 = focusPoint_tmp_9895;\n            anchorX_9567 = anchorX_tmp_9896;\n            anchorY_9568 = anchorY_tmp_9897;\n            write_index_9569 = write_index_tmp_9898;\n        }\n        res_9554 = loop_while_9562;\n        res_9557 = focusPoint_9565;\n        res_9558 = focusPoint_9566;\n        res_9559 = anchorX_9567;\n        res_9560 = anchorY_9568;\n        res_9561 = write_index_9569;\n    }\n    if (thread_active_9888) {\n        for (int32_t i_9899 = 0; i_9899 < res_9116; i_9899++) {\n            *(__global float *) &mem_9845[(i_9899 * nesting_sizze_9407 +\n                                           gtid_9486) * 4] = *(__global\n                                                               float *) &mem_9820[(group_id_9495 *\n                                                                                   (res_9116 *\n                                                                                    group_sizze_9488) +\n                                                                                   i_9899 *\n                                                                                   group_sizze_9488 +\n                                                                                   local_tid_9494) *\n                                                                                  4];\n        }\n    }\n    if (thread_active_9888) {\n        for (int32_t i_9900 = 0; i_9900 < res_9116; i_9900++) {\n            *(__global int32_t *) &mem_9849[(i_9900 * nesting_sizze_9407 +\n                                             gtid_9486) * 4] = *(__global\n                                                                 int32_t *) &mem_9823[(group_id_9495 *\n                                                                     ",
+            "                  (res_9116 *\n                                                                                        group_sizze_9488) +\n                                                                                       i_9900 *\n                                                                                       group_sizze_9488 +\n                                                                                       local_tid_9494) *\n                                                                                      4];\n        }\n    }\n}\n__kernel void map_kernel_9732(int32_t sizze_9097, float res_9103,\n                              float res_9113, int32_t nesting_sizze_9407,\n                              __global unsigned char *rays_mem_9790, __global\n                              unsigned char *mem_9800, __global\n                              unsigned char *mem_9804, __global\n                              unsigned char *mem_9806, __global\n                              unsigned char *mem_9809, __global\n                              unsigned char *mem_9812, __global\n                              unsigned char *mem_9814, __global\n                              unsigned char *mem_9817)\n{\n    int32_t wave_sizze_9883;\n    int32_t group_sizze_9884;\n    bool thread_active_9885;\n    int32_t gtid_9725;\n    int32_t global_tid_9732;\n    int32_t local_tid_9733;\n    int32_t group_id_9734;\n    \n    global_tid_9732 = get_global_id(0);\n    local_tid_9733 = get_local_id(0);\n    group_sizze_9884 = get_local_size(0);\n    wave_sizze_9883 = LOCKSTEP_WIDTH;\n    group_id_9734 = get_group_id(0);\n    gtid_9725 = global_tid_9732;\n    thread_active_9885 = slt32(gtid_9725, nesting_sizze_9407);\n    \n    int32_t new_index_9765;\n    int32_t binop_y_9767;\n    int32_t new_index_9768;\n    float copy_p_9735;\n    float copy_p_9736;\n    float x_9737;\n    bool cond_9738;\n    float res_9739;\n    bool cond_9743;\n    float res_9744;\n    float res_9748;\n    float res_9752;\n    bool cond_9753;\n    bo",
+            "ol res_9754;\n    bool x_9755;\n    float res_9756;\n    float res_9757;\n    float res_9761;\n    bool res_9762;\n    float y_9763;\n    float res_9764;\n    \n    if (thread_active_9885) {\n        new_index_9765 = squot32(gtid_9725, sizze_9097);\n        binop_y_9767 = sizze_9097 * new_index_9765;\n        new_index_9768 = gtid_9725 - binop_y_9767;\n        copy_p_9735 = *(__global float *) &mem_9800[(new_index_9765 *\n                                                     sizze_9097 +\n                                                     new_index_9768) * 4];\n        copy_p_9736 = *(__global float *) &mem_9804[(new_index_9765 *\n                                                     sizze_9097 +\n                                                     new_index_9768) * 4];\n        x_9737 = *(__global float *) &rays_mem_9790[new_index_9768 * 4];\n        cond_9738 = copy_p_9735 == 0.0F;\n        if (cond_9738) {\n            res_9739 = x_9737;\n        } else {\n            float y_9740;\n            float x_9741;\n            float res_9742;\n            \n            y_9740 = res_9113 * copy_p_9736;\n            x_9741 = x_9737 - y_9740;\n            res_9742 = x_9741 / copy_p_9735;\n            res_9739 = res_9742;\n        }\n        cond_9743 = copy_p_9736 == 0.0F;\n        if (cond_9743) {\n            res_9744 = x_9737;\n        } else {\n            float y_9745;\n            float x_9746;\n            float res_9747;\n            \n            y_9745 = res_9113 * copy_p_9735;\n            x_9746 = x_9737 - y_9745;\n            res_9747 = x_9746 / copy_p_9736;\n            res_9744 = res_9747;\n        }\n        if (cond_9743) {\n            res_9748 = x_9737;\n        } else {\n            float y_9749;\n            float x_9750;\n            float res_9751;\n            \n            y_9749 = res_9103 * copy_p_9735;\n            x_9750 = x_9737 - y_9749;\n            res_9751 = x_9750 / copy_p_9736;\n            res_9748 = res_9751;\n        }\n        res_9752 = (float) fabs(res_9739);\n        cond_9753 = res_975",
+            "2 <= res_9103;\n        res_9754 = !cond_9738;\n        x_9755 = cond_9753 && res_9754;\n        if (x_9755) {\n            res_9756 = res_9113;\n            res_9757 = res_9739;\n        } else {\n            bool cond_9758;\n            float res_9759;\n            float res_9760;\n            \n            cond_9758 = res_9744 <= res_9748;\n            if (cond_9758) {\n                res_9759 = res_9744;\n            } else {\n                res_9759 = res_9748;\n            }\n            if (cond_9758) {\n                res_9760 = res_9113;\n            } else {\n                res_9760 = res_9103;\n            }\n            res_9756 = res_9759;\n            res_9757 = res_9760;\n        }\n        res_9761 = (float) fabs(copy_p_9736);\n        res_9762 = res_9761 == 1.0F;\n        y_9763 = 0.0F - copy_p_9735;\n        res_9764 = copy_p_9736 / y_9763;\n    }\n    if (thread_active_9885) {\n        *(__global bool *) &mem_9806[gtid_9725] = cond_9743;\n    }\n    if (thread_active_9885) {\n        *(__global float *) &mem_9809[gtid_9725 * 4] = res_9756;\n    }\n    if (thread_active_9885) {\n        *(__global float *) &mem_9812[gtid_9725 * 4] = res_9757;\n    }\n    if (thread_active_9885) {\n        *(__global bool *) &mem_9814[gtid_9725] = res_9762;\n    }\n    if (thread_active_9885) {\n        *(__global float *) &mem_9817[gtid_9725 * 4] = res_9764;\n    }\n}\n",
             NULL};
 struct memblock_device {
     int *references;
@@ -2319,16 +2258,16 @@ struct memblock {
     int64_t size;
     const char *desc;
 } ;
-static const char *size_names[] = {"group_size_8649", "group_size_8665",
-                                   "group_size_8677", "group_size_8699",
-                                   "group_size_8938"};
+static const char *size_names[] = {"group_size_9392", "group_size_9408",
+                                   "group_size_9420", "group_size_9447",
+                                   "group_size_9487", "group_size_9726"};
 static const char *size_classes[] = {"group_size", "group_size", "group_size",
-                                     "group_size", "group_size"};
+                                     "group_size", "group_size", "group_size"};
 static const char *size_entry_points[] = {"main", "main", "main", "main",
-                                          "main"};
+                                          "main", "main"};
 int futhark_get_num_sizes(void)
 {
-    return 5;
+    return 6;
 }
 const char *futhark_get_size_name(int i)
 {
@@ -2343,15 +2282,16 @@ const char *futhark_get_size_entry(int i)
     return size_entry_points[i];
 }
 struct sizes {
-    size_t group_sizze_8649;
-    size_t group_sizze_8665;
-    size_t group_sizze_8677;
-    size_t group_sizze_8699;
-    size_t group_sizze_8938;
+    size_t group_sizze_9392;
+    size_t group_sizze_9408;
+    size_t group_sizze_9420;
+    size_t group_sizze_9447;
+    size_t group_sizze_9487;
+    size_t group_sizze_9726;
 } ;
 struct futhark_context_config {
     struct opencl_config opencl;
-    size_t sizes[5];
+    size_t sizes[6];
 } ;
 struct futhark_context_config *futhark_context_config_new(void)
 {
@@ -2365,7 +2305,8 @@ struct futhark_context_config *futhark_context_config_new(void)
     cfg->sizes[2] = 0;
     cfg->sizes[3] = 0;
     cfg->sizes[4] = 0;
-    opencl_config_init(&cfg->opencl, 5, size_names, cfg->sizes, size_classes,
+    cfg->sizes[5] = 0;
+    opencl_config_init(&cfg->opencl, 6, size_names, cfg->sizes, size_classes,
                        size_entry_points);
     cfg->opencl.transpose_block_dim = 16;
     return cfg;
@@ -2429,7 +2370,7 @@ void futhark_context_config_set_default_threshold(struct futhark_context_config 
 int futhark_context_config_set_size(struct futhark_context_config *cfg, const
                                     char *size_name, size_t size_value)
 {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         if (strcmp(size_name, size_names[i]) == 0) {
             cfg->sizes[i] = size_value;
             return 0;
@@ -2475,21 +2416,24 @@ struct futhark_context {
     cl_kernel fut_kernel_map_transpose_small_i32;
     int fut_kernel_map_transpose_small_i32_total_runtime;
     int fut_kernel_map_transpose_small_i32_runs;
-    cl_kernel map_kernel_8655;
-    int map_kernel_8655_total_runtime;
-    int map_kernel_8655_runs;
-    cl_kernel map_kernel_8671;
-    int map_kernel_8671_total_runtime;
-    int map_kernel_8671_runs;
-    cl_kernel map_kernel_8683;
-    int map_kernel_8683_total_runtime;
-    int map_kernel_8683_runs;
-    cl_kernel map_kernel_8705;
-    int map_kernel_8705_total_runtime;
-    int map_kernel_8705_runs;
-    cl_kernel map_kernel_8944;
-    int map_kernel_8944_total_runtime;
-    int map_kernel_8944_runs;
+    cl_kernel map_kernel_9398;
+    int map_kernel_9398_total_runtime;
+    int map_kernel_9398_runs;
+    cl_kernel map_kernel_9414;
+    int map_kernel_9414_total_runtime;
+    int map_kernel_9414_runs;
+    cl_kernel map_kernel_9426;
+    int map_kernel_9426_total_runtime;
+    int map_kernel_9426_runs;
+    cl_kernel map_kernel_9453;
+    int map_kernel_9453_total_runtime;
+    int map_kernel_9453_runs;
+    cl_kernel map_kernel_9493;
+    int map_kernel_9493_total_runtime;
+    int map_kernel_9493_runs;
+    cl_kernel map_kernel_9732;
+    int map_kernel_9732_total_runtime;
+    int map_kernel_9732_runs;
     struct opencl_context opencl;
     struct sizes sizes;
 } ;
@@ -2570,16 +2514,18 @@ static void init_context_early(struct futhark_context_config *cfg,
     ctx->fut_kernel_map_transpose_small_f32_runs = 0;
     ctx->fut_kernel_map_transpose_small_i32_total_runtime = 0;
     ctx->fut_kernel_map_transpose_small_i32_runs = 0;
-    ctx->map_kernel_8655_total_runtime = 0;
-    ctx->map_kernel_8655_runs = 0;
-    ctx->map_kernel_8671_total_runtime = 0;
-    ctx->map_kernel_8671_runs = 0;
-    ctx->map_kernel_8683_total_runtime = 0;
-    ctx->map_kernel_8683_runs = 0;
-    ctx->map_kernel_8705_total_runtime = 0;
-    ctx->map_kernel_8705_runs = 0;
-    ctx->map_kernel_8944_total_runtime = 0;
-    ctx->map_kernel_8944_runs = 0;
+    ctx->map_kernel_9398_total_runtime = 0;
+    ctx->map_kernel_9398_runs = 0;
+    ctx->map_kernel_9414_total_runtime = 0;
+    ctx->map_kernel_9414_runs = 0;
+    ctx->map_kernel_9426_total_runtime = 0;
+    ctx->map_kernel_9426_runs = 0;
+    ctx->map_kernel_9453_total_runtime = 0;
+    ctx->map_kernel_9453_runs = 0;
+    ctx->map_kernel_9493_total_runtime = 0;
+    ctx->map_kernel_9493_runs = 0;
+    ctx->map_kernel_9732_total_runtime = 0;
+    ctx->map_kernel_9732_runs = 0;
 }
 static int init_context_late(struct futhark_context_config *cfg,
                              struct futhark_context *ctx, cl_program prog)
@@ -2659,40 +2605,47 @@ static int init_context_late(struct futhark_context_config *cfg,
                     "fut_kernel_map_transpose_small_i32");
     }
     {
-        ctx->map_kernel_8655 = clCreateKernel(prog, "map_kernel_8655", &error);
+        ctx->map_kernel_9398 = clCreateKernel(prog, "map_kernel_9398", &error);
         assert(error == 0);
         if (ctx->debugging)
-            fprintf(stderr, "Created kernel %s.\n", "map_kernel_8655");
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9398");
     }
     {
-        ctx->map_kernel_8671 = clCreateKernel(prog, "map_kernel_8671", &error);
+        ctx->map_kernel_9414 = clCreateKernel(prog, "map_kernel_9414", &error);
         assert(error == 0);
         if (ctx->debugging)
-            fprintf(stderr, "Created kernel %s.\n", "map_kernel_8671");
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9414");
     }
     {
-        ctx->map_kernel_8683 = clCreateKernel(prog, "map_kernel_8683", &error);
+        ctx->map_kernel_9426 = clCreateKernel(prog, "map_kernel_9426", &error);
         assert(error == 0);
         if (ctx->debugging)
-            fprintf(stderr, "Created kernel %s.\n", "map_kernel_8683");
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9426");
     }
     {
-        ctx->map_kernel_8705 = clCreateKernel(prog, "map_kernel_8705", &error);
+        ctx->map_kernel_9453 = clCreateKernel(prog, "map_kernel_9453", &error);
         assert(error == 0);
         if (ctx->debugging)
-            fprintf(stderr, "Created kernel %s.\n", "map_kernel_8705");
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9453");
     }
     {
-        ctx->map_kernel_8944 = clCreateKernel(prog, "map_kernel_8944", &error);
+        ctx->map_kernel_9493 = clCreateKernel(prog, "map_kernel_9493", &error);
         assert(error == 0);
         if (ctx->debugging)
-            fprintf(stderr, "Created kernel %s.\n", "map_kernel_8944");
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9493");
     }
-    ctx->sizes.group_sizze_8649 = cfg->sizes[0];
-    ctx->sizes.group_sizze_8665 = cfg->sizes[1];
-    ctx->sizes.group_sizze_8677 = cfg->sizes[2];
-    ctx->sizes.group_sizze_8699 = cfg->sizes[3];
-    ctx->sizes.group_sizze_8938 = cfg->sizes[4];
+    {
+        ctx->map_kernel_9732 = clCreateKernel(prog, "map_kernel_9732", &error);
+        assert(error == 0);
+        if (ctx->debugging)
+            fprintf(stderr, "Created kernel %s.\n", "map_kernel_9732");
+    }
+    ctx->sizes.group_sizze_9392 = cfg->sizes[0];
+    ctx->sizes.group_sizze_9408 = cfg->sizes[1];
+    ctx->sizes.group_sizze_9420 = cfg->sizes[2];
+    ctx->sizes.group_sizze_9447 = cfg->sizes[3];
+    ctx->sizes.group_sizze_9487 = cfg->sizes[4];
+    ctx->sizes.group_sizze_9726 = cfg->sizes[5];
     return 0;
 }
 struct futhark_context *futhark_context_new(struct futhark_context_config *cfg)
@@ -3036,50 +2989,59 @@ void futhark_debugging_report(struct futhark_context *ctx)
             ctx->fut_kernel_map_transpose_small_i32_total_runtime;
         ctx->total_runs += ctx->fut_kernel_map_transpose_small_i32_runs;
         fprintf(stderr,
-                "Kernel map_kernel_8655                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
-                ctx->map_kernel_8655_runs,
-                (long) ctx->map_kernel_8655_total_runtime /
-                (ctx->map_kernel_8655_runs !=
-                 0 ? ctx->map_kernel_8655_runs : 1),
-                (long) ctx->map_kernel_8655_total_runtime);
-        ctx->total_runtime += ctx->map_kernel_8655_total_runtime;
-        ctx->total_runs += ctx->map_kernel_8655_runs;
+                "Kernel map_kernel_9398                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9398_runs,
+                (long) ctx->map_kernel_9398_total_runtime /
+                (ctx->map_kernel_9398_runs !=
+                 0 ? ctx->map_kernel_9398_runs : 1),
+                (long) ctx->map_kernel_9398_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9398_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9398_runs;
         fprintf(stderr,
-                "Kernel map_kernel_8671                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
-                ctx->map_kernel_8671_runs,
-                (long) ctx->map_kernel_8671_total_runtime /
-                (ctx->map_kernel_8671_runs !=
-                 0 ? ctx->map_kernel_8671_runs : 1),
-                (long) ctx->map_kernel_8671_total_runtime);
-        ctx->total_runtime += ctx->map_kernel_8671_total_runtime;
-        ctx->total_runs += ctx->map_kernel_8671_runs;
+                "Kernel map_kernel_9414                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9414_runs,
+                (long) ctx->map_kernel_9414_total_runtime /
+                (ctx->map_kernel_9414_runs !=
+                 0 ? ctx->map_kernel_9414_runs : 1),
+                (long) ctx->map_kernel_9414_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9414_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9414_runs;
         fprintf(stderr,
-                "Kernel map_kernel_8683                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
-                ctx->map_kernel_8683_runs,
-                (long) ctx->map_kernel_8683_total_runtime /
-                (ctx->map_kernel_8683_runs !=
-                 0 ? ctx->map_kernel_8683_runs : 1),
-                (long) ctx->map_kernel_8683_total_runtime);
-        ctx->total_runtime += ctx->map_kernel_8683_total_runtime;
-        ctx->total_runs += ctx->map_kernel_8683_runs;
+                "Kernel map_kernel_9426                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9426_runs,
+                (long) ctx->map_kernel_9426_total_runtime /
+                (ctx->map_kernel_9426_runs !=
+                 0 ? ctx->map_kernel_9426_runs : 1),
+                (long) ctx->map_kernel_9426_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9426_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9426_runs;
         fprintf(stderr,
-                "Kernel map_kernel_8705                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
-                ctx->map_kernel_8705_runs,
-                (long) ctx->map_kernel_8705_total_runtime /
-                (ctx->map_kernel_8705_runs !=
-                 0 ? ctx->map_kernel_8705_runs : 1),
-                (long) ctx->map_kernel_8705_total_runtime);
-        ctx->total_runtime += ctx->map_kernel_8705_total_runtime;
-        ctx->total_runs += ctx->map_kernel_8705_runs;
+                "Kernel map_kernel_9453                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9453_runs,
+                (long) ctx->map_kernel_9453_total_runtime /
+                (ctx->map_kernel_9453_runs !=
+                 0 ? ctx->map_kernel_9453_runs : 1),
+                (long) ctx->map_kernel_9453_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9453_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9453_runs;
         fprintf(stderr,
-                "Kernel map_kernel_8944                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
-                ctx->map_kernel_8944_runs,
-                (long) ctx->map_kernel_8944_total_runtime /
-                (ctx->map_kernel_8944_runs !=
-                 0 ? ctx->map_kernel_8944_runs : 1),
-                (long) ctx->map_kernel_8944_total_runtime);
-        ctx->total_runtime += ctx->map_kernel_8944_total_runtime;
-        ctx->total_runs += ctx->map_kernel_8944_runs;
+                "Kernel map_kernel_9493                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9493_runs,
+                (long) ctx->map_kernel_9493_total_runtime /
+                (ctx->map_kernel_9493_runs !=
+                 0 ? ctx->map_kernel_9493_runs : 1),
+                (long) ctx->map_kernel_9493_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9493_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9493_runs;
+        fprintf(stderr,
+                "Kernel map_kernel_9732                        executed %6d times, with average runtime: %6ldus\tand total runtime: %6ldus\n",
+                ctx->map_kernel_9732_runs,
+                (long) ctx->map_kernel_9732_total_runtime /
+                (ctx->map_kernel_9732_runs !=
+                 0 ? ctx->map_kernel_9732_runs : 1),
+                (long) ctx->map_kernel_9732_total_runtime);
+        ctx->total_runtime += ctx->map_kernel_9732_total_runtime;
+        ctx->total_runs += ctx->map_kernel_9732_runs;
         if (ctx->debugging)
             fprintf(stderr, "Ran %d kernels with cumulative runtime: %6ldus\n",
                     ctx->total_runs, ctx->total_runtime);
@@ -3104,25 +3066,18 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                            int32_t in_elems_7,
                                            int32_t out_elems_8);
 static int futrts_main(struct futhark_context *ctx,
-                       int64_t *out_out_memsizze_9152,
-                       struct memblock_device *out_mem_p_9153,
-                       int32_t *out_out_arrsizze_9154,
-                       int32_t *out_out_arrsizze_9155,
-                       int64_t *out_out_memsizze_9156,
-                       struct memblock_device *out_mem_p_9157,
-                       int32_t *out_out_arrsizze_9158,
-                       int32_t *out_out_arrsizze_9159,
-                       int64_t matRow_mem_sizze_8993,
-                       struct memblock_device matRow_mem_8994,
-                       int64_t vect_mem_sizze_8995,
-                       struct memblock_device vect_mem_8996,
-                       int64_t angles_mem_sizze_8997,
-                       struct memblock_device angles_mem_8998,
-                       int64_t rays_mem_sizze_8999,
-                       struct memblock_device rays_mem_9000, int32_t sizze_8378,
-                       int32_t sizze_8379, int32_t sizze_8380,
-                       int32_t sizze_8381, int32_t num_cols_8384,
-                       int32_t gridsizze_8387);
+                       int64_t *out_out_memsizze_9945,
+                       struct memblock_device *out_mem_p_9946,
+                       int32_t *out_out_arrsizze_9947,
+                       int32_t *out_out_arrsizze_9948,
+                       int64_t vect_mem_sizze_9785,
+                       struct memblock_device vect_mem_9786,
+                       int64_t angles_mem_sizze_9787,
+                       struct memblock_device angles_mem_9788,
+                       int64_t rays_mem_sizze_9789,
+                       struct memblock_device rays_mem_9790, int32_t sizze_9095,
+                       int32_t sizze_9096, int32_t sizze_9097,
+                       int32_t gridsizze_9101);
 static inline int8_t add8(int8_t x, int8_t y)
 {
     return x + y;
@@ -4129,7 +4084,7 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                 if (1 * (x_elems_5 + srem32(16 - srem32(x_elems_5, 16), 16)) *
                     (new_height_10 + srem32(16 - srem32(new_height_10, 16),
                                             16)) * num_arrays_4 != 0) {
-                    const size_t global_work_sizze_9112[3] = {x_elems_5 +
+                    const size_t global_work_sizze_9905[3] = {x_elems_5 +
                                                               srem32(16 -
                                                                      srem32(x_elems_5,
                                                                             16),
@@ -4140,45 +4095,45 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                                                             16),
                                                                      16),
                                                               num_arrays_4};
-                    const size_t local_work_sizze_9116[3] = {16, 16, 1};
-                    int64_t time_start_9113 = 0, time_end_9114 = 0;
+                    const size_t local_work_sizze_9909[3] = {16, 16, 1};
+                    int64_t time_start_9906 = 0, time_end_9907 = 0;
                     
                     if (ctx->debugging) {
                         fprintf(stderr, "Launching %s with global work size [",
                                 "fut_kernel_map_transpose_lowwidth_f32");
-                        fprintf(stderr, "%zu", global_work_sizze_9112[0]);
+                        fprintf(stderr, "%zu", global_work_sizze_9905[0]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", global_work_sizze_9112[1]);
+                        fprintf(stderr, "%zu", global_work_sizze_9905[1]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", global_work_sizze_9112[2]);
+                        fprintf(stderr, "%zu", global_work_sizze_9905[2]);
                         fprintf(stderr, "] and local work size [");
-                        fprintf(stderr, "%zu", local_work_sizze_9116[0]);
+                        fprintf(stderr, "%zu", local_work_sizze_9909[0]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", local_work_sizze_9116[1]);
+                        fprintf(stderr, "%zu", local_work_sizze_9909[1]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", local_work_sizze_9116[2]);
+                        fprintf(stderr, "%zu", local_work_sizze_9909[2]);
                         fprintf(stderr, "].\n");
-                        time_start_9113 = get_wall_time();
+                        time_start_9906 = get_wall_time();
                     }
                     OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                     ctx->fut_kernel_map_transpose_lowwidth_f32,
                                                                     3, NULL,
-                                                                    global_work_sizze_9112,
-                                                                    local_work_sizze_9116,
+                                                                    global_work_sizze_9905,
+                                                                    local_work_sizze_9909,
                                                                     0, NULL,
                                                                     NULL));
                     if (ctx->debugging) {
                         OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                        time_end_9114 = get_wall_time();
+                        time_end_9907 = get_wall_time();
                         
-                        long time_diff_9115 = time_end_9114 - time_start_9113;
+                        long time_diff_9908 = time_end_9907 - time_start_9906;
                         
                         ctx->fut_kernel_map_transpose_lowwidth_f32_total_runtime +=
-                            time_diff_9115;
+                            time_diff_9908;
                         ctx->fut_kernel_map_transpose_lowwidth_f32_runs++;
                         fprintf(stderr, "kernel %s runtime: %ldus\n",
                                 "fut_kernel_map_transpose_lowwidth_f32",
-                                time_diff_9115);
+                                time_diff_9908);
                     }
                 }
             } else {
@@ -4230,7 +4185,7 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                                                16), 16)) *
                         (y_elems_6 + srem32(16 - srem32(y_elems_6, 16), 16)) *
                         num_arrays_4 != 0) {
-                        const size_t global_work_sizze_9117[3] = {new_width_12 +
+                        const size_t global_work_sizze_9910[3] = {new_width_12 +
                                                                   srem32(16 -
                                                                          srem32(new_width_12,
                                                                                 16),
@@ -4241,47 +4196,47 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                                                                 16),
                                                                          16),
                                                                   num_arrays_4};
-                        const size_t local_work_sizze_9121[3] = {16, 16, 1};
-                        int64_t time_start_9118 = 0, time_end_9119 = 0;
+                        const size_t local_work_sizze_9914[3] = {16, 16, 1};
+                        int64_t time_start_9911 = 0, time_end_9912 = 0;
                         
                         if (ctx->debugging) {
                             fprintf(stderr,
                                     "Launching %s with global work size [",
                                     "fut_kernel_map_transpose_lowheight_f32");
-                            fprintf(stderr, "%zu", global_work_sizze_9117[0]);
+                            fprintf(stderr, "%zu", global_work_sizze_9910[0]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", global_work_sizze_9117[1]);
+                            fprintf(stderr, "%zu", global_work_sizze_9910[1]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", global_work_sizze_9117[2]);
+                            fprintf(stderr, "%zu", global_work_sizze_9910[2]);
                             fprintf(stderr, "] and local work size [");
-                            fprintf(stderr, "%zu", local_work_sizze_9121[0]);
+                            fprintf(stderr, "%zu", local_work_sizze_9914[0]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", local_work_sizze_9121[1]);
+                            fprintf(stderr, "%zu", local_work_sizze_9914[1]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", local_work_sizze_9121[2]);
+                            fprintf(stderr, "%zu", local_work_sizze_9914[2]);
                             fprintf(stderr, "].\n");
-                            time_start_9118 = get_wall_time();
+                            time_start_9911 = get_wall_time();
                         }
                         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                         ctx->fut_kernel_map_transpose_lowheight_f32,
                                                                         3, NULL,
-                                                                        global_work_sizze_9117,
-                                                                        local_work_sizze_9121,
+                                                                        global_work_sizze_9910,
+                                                                        local_work_sizze_9914,
                                                                         0, NULL,
                                                                         NULL));
                         if (ctx->debugging) {
                             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                            time_end_9119 = get_wall_time();
+                            time_end_9912 = get_wall_time();
                             
-                            long time_diff_9120 = time_end_9119 -
-                                 time_start_9118;
+                            long time_diff_9913 = time_end_9912 -
+                                 time_start_9911;
                             
                             ctx->fut_kernel_map_transpose_lowheight_f32_total_runtime +=
-                                time_diff_9120;
+                                time_diff_9913;
                             ctx->fut_kernel_map_transpose_lowheight_f32_runs++;
                             fprintf(stderr, "kernel %s runtime: %ldus\n",
                                     "fut_kernel_map_transpose_lowheight_f32",
-                                    time_diff_9120);
+                                    time_diff_9913);
                         }
                     }
                 } else {
@@ -4328,49 +4283,49 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                  srem32(256 - srem32(num_arrays_4 * x_elems_5 *
                                                      y_elems_6, 256), 256)) !=
                             0) {
-                            const size_t global_work_sizze_9122[1] =
+                            const size_t global_work_sizze_9915[1] =
                                          {num_arrays_4 * x_elems_5 * y_elems_6 +
                                          srem32(256 - srem32(num_arrays_4 *
                                                              x_elems_5 *
                                                              y_elems_6, 256),
                                                 256)};
-                            const size_t local_work_sizze_9126[1] = {256};
-                            int64_t time_start_9123 = 0, time_end_9124 = 0;
+                            const size_t local_work_sizze_9919[1] = {256};
+                            int64_t time_start_9916 = 0, time_end_9917 = 0;
                             
                             if (ctx->debugging) {
                                 fprintf(stderr,
                                         "Launching %s with global work size [",
                                         "fut_kernel_map_transpose_small_f32");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9122[0]);
+                                        global_work_sizze_9915[0]);
                                 fprintf(stderr, "] and local work size [");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9126[0]);
+                                        local_work_sizze_9919[0]);
                                 fprintf(stderr, "].\n");
-                                time_start_9123 = get_wall_time();
+                                time_start_9916 = get_wall_time();
                             }
                             OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                             ctx->fut_kernel_map_transpose_small_f32,
                                                                             1,
                                                                             NULL,
-                                                                            global_work_sizze_9122,
-                                                                            local_work_sizze_9126,
+                                                                            global_work_sizze_9915,
+                                                                            local_work_sizze_9919,
                                                                             0,
                                                                             NULL,
                                                                             NULL));
                             if (ctx->debugging) {
                                 OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                                time_end_9124 = get_wall_time();
+                                time_end_9917 = get_wall_time();
                                 
-                                long time_diff_9125 = time_end_9124 -
-                                     time_start_9123;
+                                long time_diff_9918 = time_end_9917 -
+                                     time_start_9916;
                                 
                                 ctx->fut_kernel_map_transpose_small_f32_total_runtime +=
-                                    time_diff_9125;
+                                    time_diff_9918;
                                 ctx->fut_kernel_map_transpose_small_f32_runs++;
                                 fprintf(stderr, "kernel %s runtime: %ldus\n",
                                         "fut_kernel_map_transpose_small_f32",
-                                        time_diff_9125);
+                                        time_diff_9918);
                             }
                         }
                     } else {
@@ -4417,7 +4372,7 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                                                           16),
                                                                    16)) *
                             num_arrays_4 != 0) {
-                            const size_t global_work_sizze_9127[3] =
+                            const size_t global_work_sizze_9920[3] =
                                          {x_elems_5 + srem32(16 -
                                                              srem32(x_elems_5,
                                                                     16), 16),
@@ -4425,55 +4380,55 @@ static int futrts_map_transpose_opencl_f32(struct futhark_context *ctx,
                                                              srem32(y_elems_6,
                                                                     16), 16),
                                           num_arrays_4};
-                            const size_t local_work_sizze_9131[3] = {16, 16, 1};
-                            int64_t time_start_9128 = 0, time_end_9129 = 0;
+                            const size_t local_work_sizze_9924[3] = {16, 16, 1};
+                            int64_t time_start_9921 = 0, time_end_9922 = 0;
                             
                             if (ctx->debugging) {
                                 fprintf(stderr,
                                         "Launching %s with global work size [",
                                         "fut_kernel_map_transpose_f32");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9127[0]);
+                                        global_work_sizze_9920[0]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9127[1]);
+                                        global_work_sizze_9920[1]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9127[2]);
+                                        global_work_sizze_9920[2]);
                                 fprintf(stderr, "] and local work size [");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9131[0]);
+                                        local_work_sizze_9924[0]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9131[1]);
+                                        local_work_sizze_9924[1]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9131[2]);
+                                        local_work_sizze_9924[2]);
                                 fprintf(stderr, "].\n");
-                                time_start_9128 = get_wall_time();
+                                time_start_9921 = get_wall_time();
                             }
                             OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                             ctx->fut_kernel_map_transpose_f32,
                                                                             3,
                                                                             NULL,
-                                                                            global_work_sizze_9127,
-                                                                            local_work_sizze_9131,
+                                                                            global_work_sizze_9920,
+                                                                            local_work_sizze_9924,
                                                                             0,
                                                                             NULL,
                                                                             NULL));
                             if (ctx->debugging) {
                                 OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                                time_end_9129 = get_wall_time();
+                                time_end_9922 = get_wall_time();
                                 
-                                long time_diff_9130 = time_end_9129 -
-                                     time_start_9128;
+                                long time_diff_9923 = time_end_9922 -
+                                     time_start_9921;
                                 
                                 ctx->fut_kernel_map_transpose_f32_total_runtime +=
-                                    time_diff_9130;
+                                    time_diff_9923;
                                 ctx->fut_kernel_map_transpose_f32_runs++;
                                 fprintf(stderr, "kernel %s runtime: %ldus\n",
                                         "fut_kernel_map_transpose_f32",
-                                        time_diff_9130);
+                                        time_diff_9923);
                             }
                         }
                     }
@@ -4549,7 +4504,7 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                 if (1 * (x_elems_5 + srem32(16 - srem32(x_elems_5, 16), 16)) *
                     (new_height_10 + srem32(16 - srem32(new_height_10, 16),
                                             16)) * num_arrays_4 != 0) {
-                    const size_t global_work_sizze_9132[3] = {x_elems_5 +
+                    const size_t global_work_sizze_9925[3] = {x_elems_5 +
                                                               srem32(16 -
                                                                      srem32(x_elems_5,
                                                                             16),
@@ -4560,45 +4515,45 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                                                             16),
                                                                      16),
                                                               num_arrays_4};
-                    const size_t local_work_sizze_9136[3] = {16, 16, 1};
-                    int64_t time_start_9133 = 0, time_end_9134 = 0;
+                    const size_t local_work_sizze_9929[3] = {16, 16, 1};
+                    int64_t time_start_9926 = 0, time_end_9927 = 0;
                     
                     if (ctx->debugging) {
                         fprintf(stderr, "Launching %s with global work size [",
                                 "fut_kernel_map_transpose_lowwidth_i32");
-                        fprintf(stderr, "%zu", global_work_sizze_9132[0]);
+                        fprintf(stderr, "%zu", global_work_sizze_9925[0]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", global_work_sizze_9132[1]);
+                        fprintf(stderr, "%zu", global_work_sizze_9925[1]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", global_work_sizze_9132[2]);
+                        fprintf(stderr, "%zu", global_work_sizze_9925[2]);
                         fprintf(stderr, "] and local work size [");
-                        fprintf(stderr, "%zu", local_work_sizze_9136[0]);
+                        fprintf(stderr, "%zu", local_work_sizze_9929[0]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", local_work_sizze_9136[1]);
+                        fprintf(stderr, "%zu", local_work_sizze_9929[1]);
                         fprintf(stderr, ", ");
-                        fprintf(stderr, "%zu", local_work_sizze_9136[2]);
+                        fprintf(stderr, "%zu", local_work_sizze_9929[2]);
                         fprintf(stderr, "].\n");
-                        time_start_9133 = get_wall_time();
+                        time_start_9926 = get_wall_time();
                     }
                     OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                     ctx->fut_kernel_map_transpose_lowwidth_i32,
                                                                     3, NULL,
-                                                                    global_work_sizze_9132,
-                                                                    local_work_sizze_9136,
+                                                                    global_work_sizze_9925,
+                                                                    local_work_sizze_9929,
                                                                     0, NULL,
                                                                     NULL));
                     if (ctx->debugging) {
                         OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                        time_end_9134 = get_wall_time();
+                        time_end_9927 = get_wall_time();
                         
-                        long time_diff_9135 = time_end_9134 - time_start_9133;
+                        long time_diff_9928 = time_end_9927 - time_start_9926;
                         
                         ctx->fut_kernel_map_transpose_lowwidth_i32_total_runtime +=
-                            time_diff_9135;
+                            time_diff_9928;
                         ctx->fut_kernel_map_transpose_lowwidth_i32_runs++;
                         fprintf(stderr, "kernel %s runtime: %ldus\n",
                                 "fut_kernel_map_transpose_lowwidth_i32",
-                                time_diff_9135);
+                                time_diff_9928);
                     }
                 }
             } else {
@@ -4650,7 +4605,7 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                                                16), 16)) *
                         (y_elems_6 + srem32(16 - srem32(y_elems_6, 16), 16)) *
                         num_arrays_4 != 0) {
-                        const size_t global_work_sizze_9137[3] = {new_width_12 +
+                        const size_t global_work_sizze_9930[3] = {new_width_12 +
                                                                   srem32(16 -
                                                                          srem32(new_width_12,
                                                                                 16),
@@ -4661,47 +4616,47 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                                                                 16),
                                                                          16),
                                                                   num_arrays_4};
-                        const size_t local_work_sizze_9141[3] = {16, 16, 1};
-                        int64_t time_start_9138 = 0, time_end_9139 = 0;
+                        const size_t local_work_sizze_9934[3] = {16, 16, 1};
+                        int64_t time_start_9931 = 0, time_end_9932 = 0;
                         
                         if (ctx->debugging) {
                             fprintf(stderr,
                                     "Launching %s with global work size [",
                                     "fut_kernel_map_transpose_lowheight_i32");
-                            fprintf(stderr, "%zu", global_work_sizze_9137[0]);
+                            fprintf(stderr, "%zu", global_work_sizze_9930[0]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", global_work_sizze_9137[1]);
+                            fprintf(stderr, "%zu", global_work_sizze_9930[1]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", global_work_sizze_9137[2]);
+                            fprintf(stderr, "%zu", global_work_sizze_9930[2]);
                             fprintf(stderr, "] and local work size [");
-                            fprintf(stderr, "%zu", local_work_sizze_9141[0]);
+                            fprintf(stderr, "%zu", local_work_sizze_9934[0]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", local_work_sizze_9141[1]);
+                            fprintf(stderr, "%zu", local_work_sizze_9934[1]);
                             fprintf(stderr, ", ");
-                            fprintf(stderr, "%zu", local_work_sizze_9141[2]);
+                            fprintf(stderr, "%zu", local_work_sizze_9934[2]);
                             fprintf(stderr, "].\n");
-                            time_start_9138 = get_wall_time();
+                            time_start_9931 = get_wall_time();
                         }
                         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                         ctx->fut_kernel_map_transpose_lowheight_i32,
                                                                         3, NULL,
-                                                                        global_work_sizze_9137,
-                                                                        local_work_sizze_9141,
+                                                                        global_work_sizze_9930,
+                                                                        local_work_sizze_9934,
                                                                         0, NULL,
                                                                         NULL));
                         if (ctx->debugging) {
                             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                            time_end_9139 = get_wall_time();
+                            time_end_9932 = get_wall_time();
                             
-                            long time_diff_9140 = time_end_9139 -
-                                 time_start_9138;
+                            long time_diff_9933 = time_end_9932 -
+                                 time_start_9931;
                             
                             ctx->fut_kernel_map_transpose_lowheight_i32_total_runtime +=
-                                time_diff_9140;
+                                time_diff_9933;
                             ctx->fut_kernel_map_transpose_lowheight_i32_runs++;
                             fprintf(stderr, "kernel %s runtime: %ldus\n",
                                     "fut_kernel_map_transpose_lowheight_i32",
-                                    time_diff_9140);
+                                    time_diff_9933);
                         }
                     }
                 } else {
@@ -4748,49 +4703,49 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                  srem32(256 - srem32(num_arrays_4 * x_elems_5 *
                                                      y_elems_6, 256), 256)) !=
                             0) {
-                            const size_t global_work_sizze_9142[1] =
+                            const size_t global_work_sizze_9935[1] =
                                          {num_arrays_4 * x_elems_5 * y_elems_6 +
                                          srem32(256 - srem32(num_arrays_4 *
                                                              x_elems_5 *
                                                              y_elems_6, 256),
                                                 256)};
-                            const size_t local_work_sizze_9146[1] = {256};
-                            int64_t time_start_9143 = 0, time_end_9144 = 0;
+                            const size_t local_work_sizze_9939[1] = {256};
+                            int64_t time_start_9936 = 0, time_end_9937 = 0;
                             
                             if (ctx->debugging) {
                                 fprintf(stderr,
                                         "Launching %s with global work size [",
                                         "fut_kernel_map_transpose_small_i32");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9142[0]);
+                                        global_work_sizze_9935[0]);
                                 fprintf(stderr, "] and local work size [");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9146[0]);
+                                        local_work_sizze_9939[0]);
                                 fprintf(stderr, "].\n");
-                                time_start_9143 = get_wall_time();
+                                time_start_9936 = get_wall_time();
                             }
                             OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                             ctx->fut_kernel_map_transpose_small_i32,
                                                                             1,
                                                                             NULL,
-                                                                            global_work_sizze_9142,
-                                                                            local_work_sizze_9146,
+                                                                            global_work_sizze_9935,
+                                                                            local_work_sizze_9939,
                                                                             0,
                                                                             NULL,
                                                                             NULL));
                             if (ctx->debugging) {
                                 OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                                time_end_9144 = get_wall_time();
+                                time_end_9937 = get_wall_time();
                                 
-                                long time_diff_9145 = time_end_9144 -
-                                     time_start_9143;
+                                long time_diff_9938 = time_end_9937 -
+                                     time_start_9936;
                                 
                                 ctx->fut_kernel_map_transpose_small_i32_total_runtime +=
-                                    time_diff_9145;
+                                    time_diff_9938;
                                 ctx->fut_kernel_map_transpose_small_i32_runs++;
                                 fprintf(stderr, "kernel %s runtime: %ldus\n",
                                         "fut_kernel_map_transpose_small_i32",
-                                        time_diff_9145);
+                                        time_diff_9938);
                             }
                         }
                     } else {
@@ -4837,7 +4792,7 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                                                           16),
                                                                    16)) *
                             num_arrays_4 != 0) {
-                            const size_t global_work_sizze_9147[3] =
+                            const size_t global_work_sizze_9940[3] =
                                          {x_elems_5 + srem32(16 -
                                                              srem32(x_elems_5,
                                                                     16), 16),
@@ -4845,55 +4800,55 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
                                                              srem32(y_elems_6,
                                                                     16), 16),
                                           num_arrays_4};
-                            const size_t local_work_sizze_9151[3] = {16, 16, 1};
-                            int64_t time_start_9148 = 0, time_end_9149 = 0;
+                            const size_t local_work_sizze_9944[3] = {16, 16, 1};
+                            int64_t time_start_9941 = 0, time_end_9942 = 0;
                             
                             if (ctx->debugging) {
                                 fprintf(stderr,
                                         "Launching %s with global work size [",
                                         "fut_kernel_map_transpose_i32");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9147[0]);
+                                        global_work_sizze_9940[0]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9147[1]);
+                                        global_work_sizze_9940[1]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        global_work_sizze_9147[2]);
+                                        global_work_sizze_9940[2]);
                                 fprintf(stderr, "] and local work size [");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9151[0]);
+                                        local_work_sizze_9944[0]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9151[1]);
+                                        local_work_sizze_9944[1]);
                                 fprintf(stderr, ", ");
                                 fprintf(stderr, "%zu",
-                                        local_work_sizze_9151[2]);
+                                        local_work_sizze_9944[2]);
                                 fprintf(stderr, "].\n");
-                                time_start_9148 = get_wall_time();
+                                time_start_9941 = get_wall_time();
                             }
                             OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
                                                                             ctx->fut_kernel_map_transpose_i32,
                                                                             3,
                                                                             NULL,
-                                                                            global_work_sizze_9147,
-                                                                            local_work_sizze_9151,
+                                                                            global_work_sizze_9940,
+                                                                            local_work_sizze_9944,
                                                                             0,
                                                                             NULL,
                                                                             NULL));
                             if (ctx->debugging) {
                                 OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-                                time_end_9149 = get_wall_time();
+                                time_end_9942 = get_wall_time();
                                 
-                                long time_diff_9150 = time_end_9149 -
-                                     time_start_9148;
+                                long time_diff_9943 = time_end_9942 -
+                                     time_start_9941;
                                 
                                 ctx->fut_kernel_map_transpose_i32_total_runtime +=
-                                    time_diff_9150;
+                                    time_diff_9943;
                                 ctx->fut_kernel_map_transpose_i32_runs++;
                                 fprintf(stderr, "kernel %s runtime: %ldus\n",
                                         "fut_kernel_map_transpose_i32",
-                                        time_diff_9150);
+                                        time_diff_9943);
                             }
                         }
                     }
@@ -4904,649 +4859,640 @@ static int futrts_map_transpose_opencl_i32(struct futhark_context *ctx,
     return 0;
 }
 static int futrts_main(struct futhark_context *ctx,
-                       int64_t *out_out_memsizze_9152,
-                       struct memblock_device *out_mem_p_9153,
-                       int32_t *out_out_arrsizze_9154,
-                       int32_t *out_out_arrsizze_9155,
-                       int64_t *out_out_memsizze_9156,
-                       struct memblock_device *out_mem_p_9157,
-                       int32_t *out_out_arrsizze_9158,
-                       int32_t *out_out_arrsizze_9159,
-                       int64_t matRow_mem_sizze_8993,
-                       struct memblock_device matRow_mem_8994,
-                       int64_t vect_mem_sizze_8995,
-                       struct memblock_device vect_mem_8996,
-                       int64_t angles_mem_sizze_8997,
-                       struct memblock_device angles_mem_8998,
-                       int64_t rays_mem_sizze_8999,
-                       struct memblock_device rays_mem_9000, int32_t sizze_8378,
-                       int32_t sizze_8379, int32_t sizze_8380,
-                       int32_t sizze_8381, int32_t num_cols_8384,
-                       int32_t gridsizze_8387)
+                       int64_t *out_out_memsizze_9945,
+                       struct memblock_device *out_mem_p_9946,
+                       int32_t *out_out_arrsizze_9947,
+                       int32_t *out_out_arrsizze_9948,
+                       int64_t vect_mem_sizze_9785,
+                       struct memblock_device vect_mem_9786,
+                       int64_t angles_mem_sizze_9787,
+                       struct memblock_device angles_mem_9788,
+                       int64_t rays_mem_sizze_9789,
+                       struct memblock_device rays_mem_9790, int32_t sizze_9095,
+                       int32_t sizze_9096, int32_t sizze_9097,
+                       int32_t gridsizze_9101)
 {
-    int64_t out_memsizze_9078;
-    struct memblock_device out_mem_9077;
+    int64_t out_memsizze_9871;
+    struct memblock_device out_mem_9870;
     
-    out_mem_9077.references = NULL;
+    out_mem_9870.references = NULL;
     
-    int32_t out_arrsizze_9079;
-    int32_t out_arrsizze_9080;
-    int64_t out_memsizze_9082;
-    struct memblock_device out_mem_9081;
+    int32_t out_arrsizze_9872;
+    int32_t out_arrsizze_9873;
+    float res_9102 = sitofp_i32_f32(gridsizze_9101);
+    float res_9103 = res_9102 / 2.0F;
+    int32_t group_sizze_9421;
     
-    out_mem_9081.references = NULL;
+    group_sizze_9421 = ctx->sizes.group_sizze_9420;
     
-    int32_t out_arrsizze_9083;
-    int32_t out_arrsizze_9084;
-    float res_8388 = sitofp_i32_f32(gridsizze_8387);
-    float res_8389 = res_8388 / 2.0F;
-    int32_t group_sizze_8678;
+    int32_t y_9422 = group_sizze_9421 - 1;
+    int32_t x_9423 = sizze_9096 + y_9422;
+    int32_t num_groups_9424 = squot32(x_9423, group_sizze_9421);
+    int32_t num_threads_9425 = group_sizze_9421 * num_groups_9424;
+    int64_t binop_x_9792 = sext_i32_i64(sizze_9096);
+    int64_t bytes_9791 = 4 * binop_x_9792;
+    struct memblock_device mem_9793;
     
-    group_sizze_8678 = ctx->sizes.group_sizze_8677;
-    
-    int32_t y_8679 = group_sizze_8678 - 1;
-    int32_t x_8680 = sizze_8380 + y_8679;
-    int32_t num_groups_8681 = squot32(x_8680, group_sizze_8678);
-    int32_t num_threads_8682 = group_sizze_8678 * num_groups_8681;
-    int64_t binop_x_9002 = sext_i32_i64(sizze_8380);
-    int64_t bytes_9001 = 4 * binop_x_9002;
-    struct memblock_device mem_9003;
-    
-    mem_9003.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9003, bytes_9001, "mem_9003"))
+    mem_9793.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9793, bytes_9791, "mem_9793"))
         return 1;
     
-    struct memblock_device mem_9006;
+    struct memblock_device mem_9796;
     
-    mem_9006.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9006, bytes_9001, "mem_9006"))
+    mem_9796.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9796, bytes_9791, "mem_9796"))
         return 1;
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8683, 0,
-                                            sizeof(sizze_8380), &sizze_8380));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8683, 1,
-                                            sizeof(angles_mem_8998.mem),
-                                            &angles_mem_8998.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8683, 2,
-                                            sizeof(mem_9003.mem),
-                                            &mem_9003.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8683, 3,
-                                            sizeof(mem_9006.mem),
-                                            &mem_9006.mem));
-    if (1 * (num_groups_8681 * group_sizze_8678) != 0) {
-        const size_t global_work_sizze_9160[1] = {num_groups_8681 *
-                     group_sizze_8678};
-        const size_t local_work_sizze_9164[1] = {group_sizze_8678};
-        int64_t time_start_9161 = 0, time_end_9162 = 0;
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9426, 0,
+                                            sizeof(sizze_9096), &sizze_9096));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9426, 1,
+                                            sizeof(angles_mem_9788.mem),
+                                            &angles_mem_9788.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9426, 2,
+                                            sizeof(mem_9793.mem),
+                                            &mem_9793.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9426, 3,
+                                            sizeof(mem_9796.mem),
+                                            &mem_9796.mem));
+    if (1 * (num_groups_9424 * group_sizze_9421) != 0) {
+        const size_t global_work_sizze_9949[1] = {num_groups_9424 *
+                     group_sizze_9421};
+        const size_t local_work_sizze_9953[1] = {group_sizze_9421};
+        int64_t time_start_9950 = 0, time_end_9951 = 0;
         
         if (ctx->debugging) {
             fprintf(stderr, "Launching %s with global work size [",
-                    "map_kernel_8683");
-            fprintf(stderr, "%zu", global_work_sizze_9160[0]);
+                    "map_kernel_9426");
+            fprintf(stderr, "%zu", global_work_sizze_9949[0]);
             fprintf(stderr, "] and local work size [");
-            fprintf(stderr, "%zu", local_work_sizze_9164[0]);
+            fprintf(stderr, "%zu", local_work_sizze_9953[0]);
             fprintf(stderr, "].\n");
-            time_start_9161 = get_wall_time();
+            time_start_9950 = get_wall_time();
         }
         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
-                                                        ctx->map_kernel_8683, 1,
+                                                        ctx->map_kernel_9426, 1,
                                                         NULL,
-                                                        global_work_sizze_9160,
-                                                        local_work_sizze_9164,
+                                                        global_work_sizze_9949,
+                                                        local_work_sizze_9953,
                                                         0, NULL, NULL));
         if (ctx->debugging) {
             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-            time_end_9162 = get_wall_time();
+            time_end_9951 = get_wall_time();
             
-            long time_diff_9163 = time_end_9162 - time_start_9161;
+            long time_diff_9952 = time_end_9951 - time_start_9950;
             
-            ctx->map_kernel_8683_total_runtime += time_diff_9163;
-            ctx->map_kernel_8683_runs++;
-            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_8683",
-                    time_diff_9163);
+            ctx->map_kernel_9426_total_runtime += time_diff_9952;
+            ctx->map_kernel_9426_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9426",
+                    time_diff_9952);
         }
     }
     
-    int32_t nesting_sizze_8664 = sizze_8380 * sizze_8381;
-    int32_t group_sizze_8666;
+    int32_t nesting_sizze_9407 = sizze_9096 * sizze_9097;
+    int32_t group_sizze_9409;
     
-    group_sizze_8666 = ctx->sizes.group_sizze_8665;
+    group_sizze_9409 = ctx->sizes.group_sizze_9408;
     
-    int32_t y_8667 = group_sizze_8666 - 1;
-    int32_t x_8668 = nesting_sizze_8664 + y_8667;
-    int32_t num_groups_8669 = squot32(x_8668, group_sizze_8666);
-    int32_t num_threads_8670 = group_sizze_8666 * num_groups_8669;
-    int64_t binop_x_9009 = sext_i32_i64(nesting_sizze_8664);
-    int64_t bytes_9007 = 4 * binop_x_9009;
-    struct memblock_device mem_9010;
+    int32_t y_9410 = group_sizze_9409 - 1;
+    int32_t x_9411 = nesting_sizze_9407 + y_9410;
+    int32_t num_groups_9412 = squot32(x_9411, group_sizze_9409);
+    int32_t num_threads_9413 = group_sizze_9409 * num_groups_9412;
+    int64_t binop_x_9799 = sext_i32_i64(nesting_sizze_9407);
+    int64_t bytes_9797 = 4 * binop_x_9799;
+    struct memblock_device mem_9800;
     
-    mem_9010.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9010, bytes_9007, "mem_9010"))
+    mem_9800.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9800, bytes_9797, "mem_9800"))
         return 1;
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8671, 0,
-                                            sizeof(sizze_8380), &sizze_8380));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8671, 1,
-                                            sizeof(sizze_8381), &sizze_8381));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8671, 2,
-                                            sizeof(mem_9003.mem),
-                                            &mem_9003.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8671, 3,
-                                            sizeof(mem_9010.mem),
-                                            &mem_9010.mem));
-    if (1 * (num_groups_8669 * group_sizze_8666) != 0) {
-        const size_t global_work_sizze_9165[1] = {num_groups_8669 *
-                     group_sizze_8666};
-        const size_t local_work_sizze_9169[1] = {group_sizze_8666};
-        int64_t time_start_9166 = 0, time_end_9167 = 0;
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9414, 0,
+                                            sizeof(sizze_9096), &sizze_9096));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9414, 1,
+                                            sizeof(sizze_9097), &sizze_9097));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9414, 2,
+                                            sizeof(mem_9793.mem),
+                                            &mem_9793.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9414, 3,
+                                            sizeof(mem_9800.mem),
+                                            &mem_9800.mem));
+    if (1 * (num_groups_9412 * group_sizze_9409) != 0) {
+        const size_t global_work_sizze_9954[1] = {num_groups_9412 *
+                     group_sizze_9409};
+        const size_t local_work_sizze_9958[1] = {group_sizze_9409};
+        int64_t time_start_9955 = 0, time_end_9956 = 0;
         
         if (ctx->debugging) {
             fprintf(stderr, "Launching %s with global work size [",
-                    "map_kernel_8671");
-            fprintf(stderr, "%zu", global_work_sizze_9165[0]);
+                    "map_kernel_9414");
+            fprintf(stderr, "%zu", global_work_sizze_9954[0]);
             fprintf(stderr, "] and local work size [");
-            fprintf(stderr, "%zu", local_work_sizze_9169[0]);
+            fprintf(stderr, "%zu", local_work_sizze_9958[0]);
             fprintf(stderr, "].\n");
-            time_start_9166 = get_wall_time();
+            time_start_9955 = get_wall_time();
         }
         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
-                                                        ctx->map_kernel_8671, 1,
+                                                        ctx->map_kernel_9414, 1,
                                                         NULL,
-                                                        global_work_sizze_9165,
-                                                        local_work_sizze_9169,
+                                                        global_work_sizze_9954,
+                                                        local_work_sizze_9958,
                                                         0, NULL, NULL));
         if (ctx->debugging) {
             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-            time_end_9167 = get_wall_time();
+            time_end_9956 = get_wall_time();
             
-            long time_diff_9168 = time_end_9167 - time_start_9166;
+            long time_diff_9957 = time_end_9956 - time_start_9955;
             
-            ctx->map_kernel_8671_total_runtime += time_diff_9168;
-            ctx->map_kernel_8671_runs++;
-            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_8671",
-                    time_diff_9168);
+            ctx->map_kernel_9414_total_runtime += time_diff_9957;
+            ctx->map_kernel_9414_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9414",
+                    time_diff_9957);
         }
     }
-    if (memblock_unref_device(ctx, &mem_9003, "mem_9003") != 0)
+    if (memblock_unref_device(ctx, &mem_9793, "mem_9793") != 0)
         return 1;
     
-    int32_t group_sizze_8650;
+    int32_t group_sizze_9393;
     
-    group_sizze_8650 = ctx->sizes.group_sizze_8649;
+    group_sizze_9393 = ctx->sizes.group_sizze_9392;
     
-    int32_t y_8651 = group_sizze_8650 - 1;
-    int32_t x_8652 = y_8651 + nesting_sizze_8664;
-    int32_t num_groups_8653 = squot32(x_8652, group_sizze_8650);
-    int32_t num_threads_8654 = group_sizze_8650 * num_groups_8653;
-    struct memblock_device mem_9014;
+    int32_t y_9394 = group_sizze_9393 - 1;
+    int32_t x_9395 = y_9394 + nesting_sizze_9407;
+    int32_t num_groups_9396 = squot32(x_9395, group_sizze_9393);
+    int32_t num_threads_9397 = group_sizze_9393 * num_groups_9396;
+    struct memblock_device mem_9804;
     
-    mem_9014.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9014, bytes_9007, "mem_9014"))
+    mem_9804.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9804, bytes_9797, "mem_9804"))
         return 1;
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8655, 0,
-                                            sizeof(sizze_8380), &sizze_8380));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8655, 1,
-                                            sizeof(sizze_8381), &sizze_8381));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8655, 2,
-                                            sizeof(mem_9006.mem),
-                                            &mem_9006.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8655, 3,
-                                            sizeof(mem_9014.mem),
-                                            &mem_9014.mem));
-    if (1 * (num_groups_8653 * group_sizze_8650) != 0) {
-        const size_t global_work_sizze_9170[1] = {num_groups_8653 *
-                     group_sizze_8650};
-        const size_t local_work_sizze_9174[1] = {group_sizze_8650};
-        int64_t time_start_9171 = 0, time_end_9172 = 0;
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9398, 0,
+                                            sizeof(sizze_9096), &sizze_9096));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9398, 1,
+                                            sizeof(sizze_9097), &sizze_9097));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9398, 2,
+                                            sizeof(mem_9796.mem),
+                                            &mem_9796.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9398, 3,
+                                            sizeof(mem_9804.mem),
+                                            &mem_9804.mem));
+    if (1 * (num_groups_9396 * group_sizze_9393) != 0) {
+        const size_t global_work_sizze_9959[1] = {num_groups_9396 *
+                     group_sizze_9393};
+        const size_t local_work_sizze_9963[1] = {group_sizze_9393};
+        int64_t time_start_9960 = 0, time_end_9961 = 0;
         
         if (ctx->debugging) {
             fprintf(stderr, "Launching %s with global work size [",
-                    "map_kernel_8655");
-            fprintf(stderr, "%zu", global_work_sizze_9170[0]);
+                    "map_kernel_9398");
+            fprintf(stderr, "%zu", global_work_sizze_9959[0]);
             fprintf(stderr, "] and local work size [");
-            fprintf(stderr, "%zu", local_work_sizze_9174[0]);
+            fprintf(stderr, "%zu", local_work_sizze_9963[0]);
             fprintf(stderr, "].\n");
-            time_start_9171 = get_wall_time();
+            time_start_9960 = get_wall_time();
         }
         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
-                                                        ctx->map_kernel_8655, 1,
+                                                        ctx->map_kernel_9398, 1,
                                                         NULL,
-                                                        global_work_sizze_9170,
-                                                        local_work_sizze_9174,
+                                                        global_work_sizze_9959,
+                                                        local_work_sizze_9963,
                                                         0, NULL, NULL));
         if (ctx->debugging) {
             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-            time_end_9172 = get_wall_time();
+            time_end_9961 = get_wall_time();
             
-            long time_diff_9173 = time_end_9172 - time_start_9171;
+            long time_diff_9962 = time_end_9961 - time_start_9960;
             
-            ctx->map_kernel_8655_total_runtime += time_diff_9173;
-            ctx->map_kernel_8655_runs++;
-            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_8655",
-                    time_diff_9173);
+            ctx->map_kernel_9398_total_runtime += time_diff_9962;
+            ctx->map_kernel_9398_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9398",
+                    time_diff_9962);
         }
     }
-    if (memblock_unref_device(ctx, &mem_9006, "mem_9006") != 0)
+    if (memblock_unref_device(ctx, &mem_9796, "mem_9796") != 0)
         return 1;
     
-    float res_8399 = 0.0F - res_8389;
-    float x_8400 = 2.0F * res_8388;
-    float arg_8401 = x_8400 - 1.0F;
-    int32_t res_8402 = fptosi_f32_i32(arg_8401);
-    int32_t group_sizze_8939;
+    float res_9113 = 0.0F - res_9103;
+    float x_9114 = 2.0F * res_9102;
+    float arg_9115 = x_9114 - 1.0F;
+    int32_t res_9116 = fptosi_f32_i32(arg_9115);
+    int32_t res_9125 = gridsizze_9101 * gridsizze_9101;
+    int32_t arg_9126 = sdiv32(sizze_9095, res_9125);
+    bool bounds_invalid_upwards_9127 = slt32(arg_9126, 0);
+    bool eq_x_zz_9130 = 0 == arg_9126;
+    bool not_p_9131 = !bounds_invalid_upwards_9127;
+    bool p_and_eq_x_y_9132 = eq_x_zz_9130 && not_p_9131;
+    bool dim_zzero_9133 = bounds_invalid_upwards_9127 || p_and_eq_x_y_9132;
+    bool both_empty_9134 = eq_x_zz_9130 && dim_zzero_9133;
+    bool eq_x_y_9135 = arg_9126 == 0;
+    bool p_and_eq_x_y_9136 = bounds_invalid_upwards_9127 && eq_x_y_9135;
+    bool dim_match_9137 = not_p_9131 || p_and_eq_x_y_9136;
+    bool empty_or_match_9138 = both_empty_9134 || dim_match_9137;
+    bool empty_or_match_cert_9139;
     
-    group_sizze_8939 = ctx->sizes.group_sizze_8938;
+    if (!empty_or_match_9138) {
+        ctx->error = msgprintf("Error at %s:\n%s%s%s%d%s%s\n",
+                               "ba.fut:27:1-37:48 -> ba.fut:37:6-37:48 -> sirtLIB.fut:30:5-41:14 -> sirtLIB.fut:33:7-40:11 -> sirtLIB.fut:39:12-39:40 -> /futlib/array.fut:61:1-62:12",
+                               "Function return value does not match shape of type ",
+                               "*", "[", arg_9126, "]", "intrinsics.i32");
+        if (memblock_unref_device(ctx, &mem_9804, "mem_9804") != 0)
+            return 1;
+        if (memblock_unref_device(ctx, &mem_9800, "mem_9800") != 0)
+            return 1;
+        if (memblock_unref_device(ctx, &mem_9796, "mem_9796") != 0)
+            return 1;
+        if (memblock_unref_device(ctx, &mem_9793, "mem_9793") != 0)
+            return 1;
+        if (memblock_unref_device(ctx, &out_mem_9870, "out_mem_9870") != 0)
+            return 1;
+        return 1;
+    }
     
-    int32_t y_8940 = group_sizze_8939 - 1;
-    int32_t x_8941 = nesting_sizze_8664 + y_8940;
-    int32_t num_groups_8942 = squot32(x_8941, group_sizze_8939);
-    int32_t num_threads_8943 = group_sizze_8939 * num_groups_8942;
-    struct memblock_device mem_9016;
+    int32_t group_sizze_9727;
     
-    mem_9016.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9016, binop_x_9009, "mem_9016"))
+    group_sizze_9727 = ctx->sizes.group_sizze_9726;
+    
+    int32_t y_9728 = group_sizze_9727 - 1;
+    int32_t x_9729 = nesting_sizze_9407 + y_9728;
+    int32_t num_groups_9730 = squot32(x_9729, group_sizze_9727);
+    int32_t num_threads_9731 = group_sizze_9727 * num_groups_9730;
+    struct memblock_device mem_9806;
+    
+    mem_9806.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9806, binop_x_9799, "mem_9806"))
         return 1;
     
-    struct memblock_device mem_9019;
+    struct memblock_device mem_9809;
     
-    mem_9019.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9019, bytes_9007, "mem_9019"))
+    mem_9809.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9809, bytes_9797, "mem_9809"))
         return 1;
     
-    struct memblock_device mem_9022;
+    struct memblock_device mem_9812;
     
-    mem_9022.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9022, bytes_9007, "mem_9022"))
+    mem_9812.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9812, bytes_9797, "mem_9812"))
         return 1;
     
-    struct memblock_device mem_9024;
+    struct memblock_device mem_9814;
     
-    mem_9024.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9024, binop_x_9009, "mem_9024"))
+    mem_9814.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9814, binop_x_9799, "mem_9814"))
         return 1;
     
-    struct memblock_device mem_9027;
+    struct memblock_device mem_9817;
     
-    mem_9027.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9027, bytes_9007, "mem_9027"))
+    mem_9817.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9817, bytes_9797, "mem_9817"))
         return 1;
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 0,
-                                            sizeof(sizze_8381), &sizze_8381));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 1,
-                                            sizeof(res_8389), &res_8389));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 2,
-                                            sizeof(res_8399), &res_8399));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 3,
-                                            sizeof(nesting_sizze_8664),
-                                            &nesting_sizze_8664));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 4,
-                                            sizeof(rays_mem_9000.mem),
-                                            &rays_mem_9000.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 5,
-                                            sizeof(mem_9010.mem),
-                                            &mem_9010.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 6,
-                                            sizeof(mem_9014.mem),
-                                            &mem_9014.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 7,
-                                            sizeof(mem_9016.mem),
-                                            &mem_9016.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 8,
-                                            sizeof(mem_9019.mem),
-                                            &mem_9019.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 9,
-                                            sizeof(mem_9022.mem),
-                                            &mem_9022.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 10,
-                                            sizeof(mem_9024.mem),
-                                            &mem_9024.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8944, 11,
-                                            sizeof(mem_9027.mem),
-                                            &mem_9027.mem));
-    if (1 * (num_groups_8942 * group_sizze_8939) != 0) {
-        const size_t global_work_sizze_9175[1] = {num_groups_8942 *
-                     group_sizze_8939};
-        const size_t local_work_sizze_9179[1] = {group_sizze_8939};
-        int64_t time_start_9176 = 0, time_end_9177 = 0;
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 0,
+                                            sizeof(sizze_9097), &sizze_9097));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 1,
+                                            sizeof(res_9103), &res_9103));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 2,
+                                            sizeof(res_9113), &res_9113));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 3,
+                                            sizeof(nesting_sizze_9407),
+                                            &nesting_sizze_9407));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 4,
+                                            sizeof(rays_mem_9790.mem),
+                                            &rays_mem_9790.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 5,
+                                            sizeof(mem_9800.mem),
+                                            &mem_9800.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 6,
+                                            sizeof(mem_9804.mem),
+                                            &mem_9804.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 7,
+                                            sizeof(mem_9806.mem),
+                                            &mem_9806.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 8,
+                                            sizeof(mem_9809.mem),
+                                            &mem_9809.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 9,
+                                            sizeof(mem_9812.mem),
+                                            &mem_9812.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 10,
+                                            sizeof(mem_9814.mem),
+                                            &mem_9814.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9732, 11,
+                                            sizeof(mem_9817.mem),
+                                            &mem_9817.mem));
+    if (1 * (num_groups_9730 * group_sizze_9727) != 0) {
+        const size_t global_work_sizze_9964[1] = {num_groups_9730 *
+                     group_sizze_9727};
+        const size_t local_work_sizze_9968[1] = {group_sizze_9727};
+        int64_t time_start_9965 = 0, time_end_9966 = 0;
         
         if (ctx->debugging) {
             fprintf(stderr, "Launching %s with global work size [",
-                    "map_kernel_8944");
-            fprintf(stderr, "%zu", global_work_sizze_9175[0]);
+                    "map_kernel_9732");
+            fprintf(stderr, "%zu", global_work_sizze_9964[0]);
             fprintf(stderr, "] and local work size [");
-            fprintf(stderr, "%zu", local_work_sizze_9179[0]);
+            fprintf(stderr, "%zu", local_work_sizze_9968[0]);
             fprintf(stderr, "].\n");
-            time_start_9176 = get_wall_time();
+            time_start_9965 = get_wall_time();
         }
         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
-                                                        ctx->map_kernel_8944, 1,
+                                                        ctx->map_kernel_9732, 1,
                                                         NULL,
-                                                        global_work_sizze_9175,
-                                                        local_work_sizze_9179,
+                                                        global_work_sizze_9964,
+                                                        local_work_sizze_9968,
                                                         0, NULL, NULL));
         if (ctx->debugging) {
             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-            time_end_9177 = get_wall_time();
+            time_end_9966 = get_wall_time();
             
-            long time_diff_9178 = time_end_9177 - time_start_9176;
+            long time_diff_9967 = time_end_9966 - time_start_9965;
             
-            ctx->map_kernel_8944_total_runtime += time_diff_9178;
-            ctx->map_kernel_8944_runs++;
-            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_8944",
-                    time_diff_9178);
+            ctx->map_kernel_9732_total_runtime += time_diff_9967;
+            ctx->map_kernel_9732_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9732",
+                    time_diff_9967);
         }
     }
-    if (memblock_unref_device(ctx, &mem_9010, "mem_9010") != 0)
+    if (memblock_unref_device(ctx, &mem_9800, "mem_9800") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9014, "mem_9014") != 0)
-        return 1;
-    
-    int32_t group_sizze_8700;
-    
-    group_sizze_8700 = ctx->sizes.group_sizze_8699;
-    
-    int32_t y_8701 = group_sizze_8700 - 1;
-    int32_t x_8702 = nesting_sizze_8664 + y_8701;
-    int32_t num_groups_8703 = squot32(x_8702, group_sizze_8700);
-    int32_t num_threads_8704 = group_sizze_8700 * num_groups_8703;
-    int32_t convop_x_9053 = res_8402 * nesting_sizze_8664;
-    int64_t binop_x_9054 = sext_i32_i64(convop_x_9053);
-    int64_t bytes_9052 = 4 * binop_x_9054;
-    struct memblock_device mem_9055;
-    
-    mem_9055.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9055, bytes_9052, "mem_9055"))
+    if (memblock_unref_device(ctx, &mem_9804, "mem_9804") != 0)
         return 1;
     
-    struct memblock_device mem_9059;
+    int32_t group_sizze_9488;
     
-    mem_9059.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9059, bytes_9052, "mem_9059"))
+    group_sizze_9488 = ctx->sizes.group_sizze_9487;
+    
+    int32_t y_9489 = group_sizze_9488 - 1;
+    int32_t x_9490 = nesting_sizze_9407 + y_9489;
+    int32_t num_groups_9491 = squot32(x_9490, group_sizze_9488);
+    int32_t num_threads_9492 = group_sizze_9488 * num_groups_9491;
+    int32_t convop_x_9843 = res_9116 * nesting_sizze_9407;
+    int64_t binop_x_9844 = sext_i32_i64(convop_x_9843);
+    int64_t bytes_9842 = 4 * binop_x_9844;
+    struct memblock_device mem_9845;
+    
+    mem_9845.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9845, bytes_9842, "mem_9845"))
         return 1;
     
-    int64_t binop_x_9029 = sext_i32_i64(res_8402);
-    int64_t bytes_9028 = 4 * binop_x_9029;
-    int64_t num_threads64_9074 = sext_i32_i64(num_threads_8704);
-    int64_t total_sizze_9075 = bytes_9028 * num_threads64_9074;
-    struct memblock_device mem_9030;
+    struct memblock_device mem_9849;
     
-    mem_9030.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9030, total_sizze_9075, "mem_9030"))
+    mem_9849.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9849, bytes_9842, "mem_9849"))
         return 1;
     
-    int64_t total_sizze_9076 = bytes_9028 * num_threads64_9074;
-    struct memblock_device mem_9033;
+    int64_t binop_x_9819 = sext_i32_i64(res_9116);
+    int64_t bytes_9818 = 4 * binop_x_9819;
+    int64_t num_threads64_9866 = sext_i32_i64(num_threads_9492);
+    int64_t total_sizze_9867 = bytes_9818 * num_threads64_9866;
+    struct memblock_device mem_9820;
     
-    mem_9033.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9033, total_sizze_9076, "mem_9033"))
+    mem_9820.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9820, total_sizze_9867, "mem_9820"))
         return 1;
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 0,
-                                            sizeof(res_8388), &res_8388));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 1,
-                                            sizeof(res_8389), &res_8389));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 2,
-                                            sizeof(res_8399), &res_8399));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 3,
-                                            sizeof(res_8402), &res_8402));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 4,
-                                            sizeof(nesting_sizze_8664),
-                                            &nesting_sizze_8664));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 5,
-                                            sizeof(mem_9016.mem),
-                                            &mem_9016.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 6,
-                                            sizeof(mem_9019.mem),
-                                            &mem_9019.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 7,
-                                            sizeof(mem_9022.mem),
-                                            &mem_9022.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 8,
-                                            sizeof(mem_9024.mem),
-                                            &mem_9024.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 9,
-                                            sizeof(mem_9027.mem),
-                                            &mem_9027.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 10,
-                                            sizeof(mem_9030.mem),
-                                            &mem_9030.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 11,
-                                            sizeof(mem_9033.mem),
-                                            &mem_9033.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 12,
-                                            sizeof(mem_9055.mem),
-                                            &mem_9055.mem));
-    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_8705, 13,
-                                            sizeof(mem_9059.mem),
-                                            &mem_9059.mem));
-    if (1 * (num_groups_8703 * group_sizze_8700) != 0) {
-        const size_t global_work_sizze_9180[1] = {num_groups_8703 *
-                     group_sizze_8700};
-        const size_t local_work_sizze_9184[1] = {group_sizze_8700};
-        int64_t time_start_9181 = 0, time_end_9182 = 0;
+    
+    int64_t total_sizze_9868 = bytes_9818 * num_threads64_9866;
+    struct memblock_device mem_9823;
+    
+    mem_9823.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9823, total_sizze_9868, "mem_9823"))
+        return 1;
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 0,
+                                            sizeof(res_9102), &res_9102));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 1,
+                                            sizeof(res_9103), &res_9103));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 2,
+                                            sizeof(res_9113), &res_9113));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 3,
+                                            sizeof(res_9116), &res_9116));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 4,
+                                            sizeof(nesting_sizze_9407),
+                                            &nesting_sizze_9407));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 5,
+                                            sizeof(mem_9806.mem),
+                                            &mem_9806.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 6,
+                                            sizeof(mem_9809.mem),
+                                            &mem_9809.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 7,
+                                            sizeof(mem_9812.mem),
+                                            &mem_9812.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 8,
+                                            sizeof(mem_9814.mem),
+                                            &mem_9814.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 9,
+                                            sizeof(mem_9817.mem),
+                                            &mem_9817.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 10,
+                                            sizeof(mem_9820.mem),
+                                            &mem_9820.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 11,
+                                            sizeof(mem_9823.mem),
+                                            &mem_9823.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 12,
+                                            sizeof(mem_9845.mem),
+                                            &mem_9845.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9493, 13,
+                                            sizeof(mem_9849.mem),
+                                            &mem_9849.mem));
+    if (1 * (num_groups_9491 * group_sizze_9488) != 0) {
+        const size_t global_work_sizze_9969[1] = {num_groups_9491 *
+                     group_sizze_9488};
+        const size_t local_work_sizze_9973[1] = {group_sizze_9488};
+        int64_t time_start_9970 = 0, time_end_9971 = 0;
         
         if (ctx->debugging) {
             fprintf(stderr, "Launching %s with global work size [",
-                    "map_kernel_8705");
-            fprintf(stderr, "%zu", global_work_sizze_9180[0]);
+                    "map_kernel_9493");
+            fprintf(stderr, "%zu", global_work_sizze_9969[0]);
             fprintf(stderr, "] and local work size [");
-            fprintf(stderr, "%zu", local_work_sizze_9184[0]);
+            fprintf(stderr, "%zu", local_work_sizze_9973[0]);
             fprintf(stderr, "].\n");
-            time_start_9181 = get_wall_time();
+            time_start_9970 = get_wall_time();
         }
         OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
-                                                        ctx->map_kernel_8705, 1,
+                                                        ctx->map_kernel_9493, 1,
                                                         NULL,
-                                                        global_work_sizze_9180,
-                                                        local_work_sizze_9184,
+                                                        global_work_sizze_9969,
+                                                        local_work_sizze_9973,
                                                         0, NULL, NULL));
         if (ctx->debugging) {
             OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-            time_end_9182 = get_wall_time();
+            time_end_9971 = get_wall_time();
             
-            long time_diff_9183 = time_end_9182 - time_start_9181;
+            long time_diff_9972 = time_end_9971 - time_start_9970;
             
-            ctx->map_kernel_8705_total_runtime += time_diff_9183;
-            ctx->map_kernel_8705_runs++;
-            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_8705",
-                    time_diff_9183);
+            ctx->map_kernel_9493_total_runtime += time_diff_9972;
+            ctx->map_kernel_9493_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9493",
+                    time_diff_9972);
         }
     }
-    if (memblock_unref_device(ctx, &mem_9016, "mem_9016") != 0)
+    if (memblock_unref_device(ctx, &mem_9806, "mem_9806") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9019, "mem_9019") != 0)
+    if (memblock_unref_device(ctx, &mem_9809, "mem_9809") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9022, "mem_9022") != 0)
+    if (memblock_unref_device(ctx, &mem_9812, "mem_9812") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9024, "mem_9024") != 0)
+    if (memblock_unref_device(ctx, &mem_9814, "mem_9814") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9027, "mem_9027") != 0)
+    if (memblock_unref_device(ctx, &mem_9817, "mem_9817") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9030, "mem_9030") != 0)
+    if (memblock_unref_device(ctx, &mem_9820, "mem_9820") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9033, "mem_9033") != 0)
-        return 1;
-    
-    struct memblock_device mem_9063;
-    
-    mem_9063.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9063, bytes_9052, "mem_9063"))
+    if (memblock_unref_device(ctx, &mem_9823, "mem_9823") != 0)
         return 1;
     
-    int call_ret_9185 = futrts_map_transpose_opencl_f32(ctx, mem_9063, 0,
-                                                        mem_9055, 0, 1,
-                                                        nesting_sizze_8664,
-                                                        res_8402,
-                                                        nesting_sizze_8664 *
-                                                        res_8402,
-                                                        nesting_sizze_8664 *
-                                                        res_8402);
+    int32_t group_sizze_9448;
     
-    assert(call_ret_9185 == 0);
-    if (memblock_unref_device(ctx, &mem_9055, "mem_9055") != 0)
-        return 1;
+    group_sizze_9448 = ctx->sizes.group_sizze_9447;
     
-    struct memblock_device mem_9068;
+    int32_t y_9449 = group_sizze_9448 - 1;
+    int32_t x_9450 = y_9449 + convop_x_9843;
+    int32_t num_groups_9451 = squot32(x_9450, group_sizze_9448);
+    int32_t num_threads_9452 = group_sizze_9448 * num_groups_9451;
+    struct memblock_device mem_9853;
     
-    mem_9068.references = NULL;
-    if (memblock_alloc_device(ctx, &mem_9068, bytes_9052, "mem_9068"))
+    mem_9853.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9853, bytes_9842, "mem_9853"))
         return 1;
     
-    int call_ret_9186 = futrts_map_transpose_opencl_i32(ctx, mem_9068, 0,
-                                                        mem_9059, 0, 1,
-                                                        nesting_sizze_8664,
-                                                        res_8402,
-                                                        nesting_sizze_8664 *
-                                                        res_8402,
-                                                        nesting_sizze_8664 *
-                                                        res_8402);
+    int call_ret_9974 = futrts_map_transpose_opencl_f32(ctx, mem_9853, 0,
+                                                        mem_9845, 0, 1,
+                                                        nesting_sizze_9407,
+                                                        res_9116,
+                                                        nesting_sizze_9407 *
+                                                        res_9116,
+                                                        nesting_sizze_9407 *
+                                                        res_9116);
     
-    assert(call_ret_9186 == 0);
-    if (memblock_unref_device(ctx, &mem_9059, "mem_9059") != 0)
+    assert(call_ret_9974 == 0);
+    if (memblock_unref_device(ctx, &mem_9845, "mem_9845") != 0)
         return 1;
-    out_arrsizze_9079 = nesting_sizze_8664;
-    out_arrsizze_9080 = res_8402;
-    out_arrsizze_9083 = nesting_sizze_8664;
-    out_arrsizze_9084 = res_8402;
-    out_memsizze_9078 = bytes_9052;
-    if (memblock_set_device(ctx, &out_mem_9077, &mem_9063, "mem_9063") != 0)
+    
+    struct memblock_device mem_9857;
+    
+    mem_9857.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9857, bytes_9842, "mem_9857"))
         return 1;
-    out_memsizze_9082 = bytes_9052;
-    if (memblock_set_device(ctx, &out_mem_9081, &mem_9068, "mem_9068") != 0)
+    
+    int call_ret_9975 = futrts_map_transpose_opencl_i32(ctx, mem_9857, 0,
+                                                        mem_9849, 0, 1,
+                                                        nesting_sizze_9407,
+                                                        res_9116,
+                                                        nesting_sizze_9407 *
+                                                        res_9116,
+                                                        nesting_sizze_9407 *
+                                                        res_9116);
+    
+    assert(call_ret_9975 == 0);
+    if (memblock_unref_device(ctx, &mem_9849, "mem_9849") != 0)
         return 1;
-    *out_out_memsizze_9152 = out_memsizze_9078;
-    (*out_mem_p_9153).references = NULL;
-    if (memblock_set_device(ctx, &*out_mem_p_9153, &out_mem_9077,
-                            "out_mem_9077") != 0)
+    
+    struct memblock_device mem_9861;
+    
+    mem_9861.references = NULL;
+    if (memblock_alloc_device(ctx, &mem_9861, bytes_9842, "mem_9861"))
         return 1;
-    *out_out_arrsizze_9154 = out_arrsizze_9079;
-    *out_out_arrsizze_9155 = out_arrsizze_9080;
-    *out_out_memsizze_9156 = out_memsizze_9082;
-    (*out_mem_p_9157).references = NULL;
-    if (memblock_set_device(ctx, &*out_mem_p_9157, &out_mem_9081,
-                            "out_mem_9081") != 0)
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 0,
+                                            sizeof(res_9116), &res_9116));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 1,
+                                            sizeof(res_9125), &res_9125));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 2,
+                                            sizeof(arg_9126), &arg_9126));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 3,
+                                            sizeof(nesting_sizze_9407),
+                                            &nesting_sizze_9407));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 4,
+                                            sizeof(vect_mem_9786.mem),
+                                            &vect_mem_9786.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 5,
+                                            sizeof(mem_9853.mem),
+                                            &mem_9853.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 6,
+                                            sizeof(mem_9857.mem),
+                                            &mem_9857.mem));
+    OPENCL_SUCCEED_OR_RETURN(clSetKernelArg(ctx->map_kernel_9453, 7,
+                                            sizeof(mem_9861.mem),
+                                            &mem_9861.mem));
+    if (1 * (num_groups_9451 * group_sizze_9448) != 0) {
+        const size_t global_work_sizze_9976[1] = {num_groups_9451 *
+                     group_sizze_9448};
+        const size_t local_work_sizze_9980[1] = {group_sizze_9448};
+        int64_t time_start_9977 = 0, time_end_9978 = 0;
+        
+        if (ctx->debugging) {
+            fprintf(stderr, "Launching %s with global work size [",
+                    "map_kernel_9453");
+            fprintf(stderr, "%zu", global_work_sizze_9976[0]);
+            fprintf(stderr, "] and local work size [");
+            fprintf(stderr, "%zu", local_work_sizze_9980[0]);
+            fprintf(stderr, "].\n");
+            time_start_9977 = get_wall_time();
+        }
+        OPENCL_SUCCEED_OR_RETURN(clEnqueueNDRangeKernel(ctx->opencl.queue,
+                                                        ctx->map_kernel_9453, 1,
+                                                        NULL,
+                                                        global_work_sizze_9976,
+                                                        local_work_sizze_9980,
+                                                        0, NULL, NULL));
+        if (ctx->debugging) {
+            OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
+            time_end_9978 = get_wall_time();
+            
+            long time_diff_9979 = time_end_9978 - time_start_9977;
+            
+            ctx->map_kernel_9453_total_runtime += time_diff_9979;
+            ctx->map_kernel_9453_runs++;
+            fprintf(stderr, "kernel %s runtime: %ldus\n", "map_kernel_9453",
+                    time_diff_9979);
+        }
+    }
+    if (memblock_unref_device(ctx, &mem_9853, "mem_9853") != 0)
         return 1;
-    *out_out_arrsizze_9158 = out_arrsizze_9083;
-    *out_out_arrsizze_9159 = out_arrsizze_9084;
-    if (memblock_unref_device(ctx, &mem_9068, "mem_9068") != 0)
+    if (memblock_unref_device(ctx, &mem_9857, "mem_9857") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9063, "mem_9063") != 0)
+    out_arrsizze_9872 = nesting_sizze_9407;
+    out_arrsizze_9873 = res_9116;
+    out_memsizze_9871 = bytes_9842;
+    if (memblock_set_device(ctx, &out_mem_9870, &mem_9861, "mem_9861") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9033, "mem_9033") != 0)
+    *out_out_memsizze_9945 = out_memsizze_9871;
+    (*out_mem_p_9946).references = NULL;
+    if (memblock_set_device(ctx, &*out_mem_p_9946, &out_mem_9870,
+                            "out_mem_9870") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9030, "mem_9030") != 0)
+    *out_out_arrsizze_9947 = out_arrsizze_9872;
+    *out_out_arrsizze_9948 = out_arrsizze_9873;
+    if (memblock_unref_device(ctx, &mem_9861, "mem_9861") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9059, "mem_9059") != 0)
+    if (memblock_unref_device(ctx, &mem_9857, "mem_9857") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9055, "mem_9055") != 0)
+    if (memblock_unref_device(ctx, &mem_9853, "mem_9853") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9027, "mem_9027") != 0)
+    if (memblock_unref_device(ctx, &mem_9823, "mem_9823") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9024, "mem_9024") != 0)
+    if (memblock_unref_device(ctx, &mem_9820, "mem_9820") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9022, "mem_9022") != 0)
+    if (memblock_unref_device(ctx, &mem_9849, "mem_9849") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9019, "mem_9019") != 0)
+    if (memblock_unref_device(ctx, &mem_9845, "mem_9845") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9016, "mem_9016") != 0)
+    if (memblock_unref_device(ctx, &mem_9817, "mem_9817") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9014, "mem_9014") != 0)
+    if (memblock_unref_device(ctx, &mem_9814, "mem_9814") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9010, "mem_9010") != 0)
+    if (memblock_unref_device(ctx, &mem_9812, "mem_9812") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9006, "mem_9006") != 0)
+    if (memblock_unref_device(ctx, &mem_9809, "mem_9809") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &mem_9003, "mem_9003") != 0)
+    if (memblock_unref_device(ctx, &mem_9806, "mem_9806") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &out_mem_9081, "out_mem_9081") != 0)
+    if (memblock_unref_device(ctx, &mem_9804, "mem_9804") != 0)
         return 1;
-    if (memblock_unref_device(ctx, &out_mem_9077, "out_mem_9077") != 0)
+    if (memblock_unref_device(ctx, &mem_9800, "mem_9800") != 0)
+        return 1;
+    if (memblock_unref_device(ctx, &mem_9796, "mem_9796") != 0)
+        return 1;
+    if (memblock_unref_device(ctx, &mem_9793, "mem_9793") != 0)
+        return 1;
+    if (memblock_unref_device(ctx, &out_mem_9870, "out_mem_9870") != 0)
         return 1;
     return 0;
-}
-struct futhark_i32_2d {
-    struct memblock_device mem;
-    int64_t shape[2];
-} ;
-struct futhark_i32_2d *futhark_new_i32_2d(struct futhark_context *ctx,
-                                          int32_t *data, int dim0, int dim1)
-{
-    struct futhark_i32_2d *arr = malloc(sizeof(struct futhark_i32_2d));
-    
-    if (arr == NULL)
-        return NULL;
-    lock_lock(&ctx->lock);
-    arr->mem.references = NULL;
-    if (memblock_alloc_device(ctx, &arr->mem, dim0 * dim1 * sizeof(int32_t),
-                              "arr->mem"))
-        return 1;
-    arr->shape[0] = dim0;
-    arr->shape[1] = dim1;
-    if (dim0 * dim1 * sizeof(int32_t) > 0)
-        OPENCL_SUCCEED_OR_RETURN(clEnqueueWriteBuffer(ctx->opencl.queue,
-                                                      arr->mem.mem, CL_TRUE, 0,
-                                                      dim0 * dim1 *
-                                                      sizeof(int32_t), data + 0,
-                                                      0, NULL, NULL));
-    lock_unlock(&ctx->lock);
-    return arr;
-}
-struct futhark_i32_2d *futhark_new_raw_i32_2d(struct futhark_context *ctx,
-                                              cl_mem data, int offset, int dim0,
-                                              int dim1)
-{
-    struct futhark_i32_2d *arr = malloc(sizeof(struct futhark_i32_2d));
-    
-    if (arr == NULL)
-        return NULL;
-    lock_lock(&ctx->lock);
-    arr->mem.references = NULL;
-    if (memblock_alloc_device(ctx, &arr->mem, dim0 * dim1 * sizeof(int32_t),
-                              "arr->mem"))
-        return 1;
-    arr->shape[0] = dim0;
-    arr->shape[1] = dim1;
-    if (dim0 * dim1 * sizeof(int32_t) > 0) {
-        OPENCL_SUCCEED_OR_RETURN(clEnqueueCopyBuffer(ctx->opencl.queue, data,
-                                                     arr->mem.mem, offset, 0,
-                                                     dim0 * dim1 *
-                                                     sizeof(int32_t), 0, NULL,
-                                                     NULL));
-        if (ctx->debugging)
-            OPENCL_SUCCEED_FATAL(clFinish(ctx->opencl.queue));
-    }
-    lock_unlock(&ctx->lock);
-    return arr;
-}
-int futhark_free_i32_2d(struct futhark_context *ctx, struct futhark_i32_2d *arr)
-{
-    lock_lock(&ctx->lock);
-    if (memblock_unref_device(ctx, &arr->mem, "arr->mem") != 0)
-        return 1;
-    lock_unlock(&ctx->lock);
-    free(arr);
-    return 0;
-}
-int futhark_values_i32_2d(struct futhark_context *ctx,
-                          struct futhark_i32_2d *arr, int32_t *data)
-{
-    lock_lock(&ctx->lock);
-    if (arr->shape[0] * arr->shape[1] * sizeof(int32_t) > 0)
-        OPENCL_SUCCEED_OR_RETURN(clEnqueueReadBuffer(ctx->opencl.queue,
-                                                     arr->mem.mem, CL_TRUE, 0,
-                                                     arr->shape[0] *
-                                                     arr->shape[1] *
-                                                     sizeof(int32_t), data + 0,
-                                                     0, NULL, NULL));
-    lock_unlock(&ctx->lock);
-    return 0;
-}
-cl_mem futhark_values_raw_i32_2d(struct futhark_context *ctx,
-                                 struct futhark_i32_2d *arr)
-{
-    return arr->mem.mem;
-}
-int64_t *futhark_shape_i32_2d(struct futhark_context *ctx,
-                              struct futhark_i32_2d *arr)
-{
-    return arr->shape;
 }
 struct futhark_f32_2d {
     struct memblock_device mem;
@@ -5715,89 +5661,62 @@ int64_t *futhark_shape_f32_1d(struct futhark_context *ctx,
     return arr->shape;
 }
 int futhark_entry_main(struct futhark_context *ctx,
-                       struct futhark_f32_2d **out0,
-                       struct futhark_i32_2d **out1, const
+                       struct futhark_f32_2d **out0, const
                        struct futhark_f32_1d *in0, const
-                       struct futhark_f32_1d *in1, const int32_t in2, const
-                       struct futhark_f32_1d *in3, const
-                       struct futhark_f32_1d *in4, const int32_t in5)
+                       struct futhark_f32_1d *in1, const
+                       struct futhark_f32_1d *in2, const int32_t in3)
 {
-    int64_t matRow_mem_sizze_8993;
-    struct memblock_device matRow_mem_8994;
+    int64_t vect_mem_sizze_9785;
+    struct memblock_device vect_mem_9786;
     
-    matRow_mem_8994.references = NULL;
+    vect_mem_9786.references = NULL;
     
-    int64_t vect_mem_sizze_8995;
-    struct memblock_device vect_mem_8996;
+    int64_t angles_mem_sizze_9787;
+    struct memblock_device angles_mem_9788;
     
-    vect_mem_8996.references = NULL;
+    angles_mem_9788.references = NULL;
     
-    int64_t angles_mem_sizze_8997;
-    struct memblock_device angles_mem_8998;
+    int64_t rays_mem_sizze_9789;
+    struct memblock_device rays_mem_9790;
     
-    angles_mem_8998.references = NULL;
+    rays_mem_9790.references = NULL;
     
-    int64_t rays_mem_sizze_8999;
-    struct memblock_device rays_mem_9000;
+    int32_t sizze_9095;
+    int32_t sizze_9096;
+    int32_t sizze_9097;
+    int32_t gridsizze_9101;
+    int64_t out_memsizze_9871;
+    struct memblock_device out_mem_9870;
     
-    rays_mem_9000.references = NULL;
+    out_mem_9870.references = NULL;
     
-    int32_t sizze_8378;
-    int32_t sizze_8379;
-    int32_t sizze_8380;
-    int32_t sizze_8381;
-    int32_t num_cols_8384;
-    int32_t gridsizze_8387;
-    int64_t out_memsizze_9078;
-    struct memblock_device out_mem_9077;
-    
-    out_mem_9077.references = NULL;
-    
-    int32_t out_arrsizze_9079;
-    int32_t out_arrsizze_9080;
-    int64_t out_memsizze_9082;
-    struct memblock_device out_mem_9081;
-    
-    out_mem_9081.references = NULL;
-    
-    int32_t out_arrsizze_9083;
-    int32_t out_arrsizze_9084;
+    int32_t out_arrsizze_9872;
+    int32_t out_arrsizze_9873;
     
     lock_lock(&ctx->lock);
-    matRow_mem_8994 = in0->mem;
-    matRow_mem_sizze_8993 = in0->mem.size;
-    sizze_8378 = in0->shape[0];
-    vect_mem_8996 = in1->mem;
-    vect_mem_sizze_8995 = in1->mem.size;
-    sizze_8379 = in1->shape[0];
-    num_cols_8384 = in2;
-    angles_mem_8998 = in3->mem;
-    angles_mem_sizze_8997 = in3->mem.size;
-    sizze_8380 = in3->shape[0];
-    rays_mem_9000 = in4->mem;
-    rays_mem_sizze_8999 = in4->mem.size;
-    sizze_8381 = in4->shape[0];
-    gridsizze_8387 = in5;
+    vect_mem_9786 = in0->mem;
+    vect_mem_sizze_9785 = in0->mem.size;
+    sizze_9095 = in0->shape[0];
+    angles_mem_9788 = in1->mem;
+    angles_mem_sizze_9787 = in1->mem.size;
+    sizze_9096 = in1->shape[0];
+    rays_mem_9790 = in2->mem;
+    rays_mem_sizze_9789 = in2->mem.size;
+    sizze_9097 = in2->shape[0];
+    gridsizze_9101 = in3;
     
-    int ret = futrts_main(ctx, &out_memsizze_9078, &out_mem_9077,
-                          &out_arrsizze_9079, &out_arrsizze_9080,
-                          &out_memsizze_9082, &out_mem_9081, &out_arrsizze_9083,
-                          &out_arrsizze_9084, matRow_mem_sizze_8993,
-                          matRow_mem_8994, vect_mem_sizze_8995, vect_mem_8996,
-                          angles_mem_sizze_8997, angles_mem_8998,
-                          rays_mem_sizze_8999, rays_mem_9000, sizze_8378,
-                          sizze_8379, sizze_8380, sizze_8381, num_cols_8384,
-                          gridsizze_8387);
+    int ret = futrts_main(ctx, &out_memsizze_9871, &out_mem_9870,
+                          &out_arrsizze_9872, &out_arrsizze_9873,
+                          vect_mem_sizze_9785, vect_mem_9786,
+                          angles_mem_sizze_9787, angles_mem_9788,
+                          rays_mem_sizze_9789, rays_mem_9790, sizze_9095,
+                          sizze_9096, sizze_9097, gridsizze_9101);
     
     if (ret == 0) {
         assert((*out0 = malloc(sizeof(struct futhark_f32_2d))) != NULL);
-        (*out0)->mem = out_mem_9077;
-        (*out0)->shape[0] = out_arrsizze_9079;
-        (*out0)->shape[1] = out_arrsizze_9080;
-        assert((*out1 = malloc(sizeof(struct futhark_i32_2d))) != NULL);
-        (*out1)->mem = out_mem_9081;
-        (*out1)->shape[0] = out_arrsizze_9083;
-        (*out1)->shape[1] = out_arrsizze_9084;
+        (*out0)->mem = out_mem_9870;
+        (*out0)->shape[0] = out_arrsizze_9872;
+        (*out0)->shape[1] = out_arrsizze_9873;
     }
     lock_unlock(&ctx->lock);
     return ret;
