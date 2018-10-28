@@ -1,0 +1,30 @@
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage[english, danish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[Latin1]{inputenc}
+\usepackage{a4wide}
+\usepackage{lipsum}
+\usepackage{csquotes}
+\usepackage{scrextend}
+\usepackage{graphicx}
+\usepackage{standalone}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{amssymb,bm,amsmath} 
+\lstset{%
+   breaklines=true,
+   breakatwhitespace=false,
+   basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+}
+\newcommand{\todo}[1]{\marginpar{\raggedright #1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\mat}[1]{\ensuremath{\boldsymbol{#1}}}
+\usepackage{tkz-euclide}
+\usetikzlibrary{quotes,angles}
+\newcommand{\inputTikZ}[2]{%  
+     \scalebox{#1}{\input{#2}}  
+}

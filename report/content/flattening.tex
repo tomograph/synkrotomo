@@ -1,0 +1,4 @@
+\section{Flattening}
+Exploiting nested parallelism, as in the code sketched in the previous section, is difficult on GPU since the hardware is organized on one or two parallel levels that allow threads to comminucate via shared scratchpad memory. \todo{elaborate}\\
+One way to get around this problem is to use a flattening transformation. The problem with this is that it will require even more memory usage, and may prevent opportunities for locality optimizations \todo{relate to our problem}.
+\todo{make graphs displaying run times and memory usage of flattened versions vs. looped versions. Insert pseudocode of flattened versions}

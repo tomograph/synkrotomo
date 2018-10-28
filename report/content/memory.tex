@@ -1,0 +1,35 @@
+\section{Problem size}
+One of the main problems when parallelizing the algorithm is that the amount of data in real applications is huge. Images from synchrotrons are generated with detectors of sizes up to $4000\times4000$. To accurately generate 3D reconstructions it has been proven that approximately $\frac{\pi\cdot N}{2}$ vieweing angles are needed, where $N$ is the size of the detector in one direction \todo{insert citation for the number of angles needed}. To reconstruct an object \\
+We will benchmark the algorithms by using sizes $N$ ranging from $128$ to $4096$ and use $\frac{\pi\cdot N}{2}$ \todo{ceil of angles} angles and $N$ lines for each of these sizes.\\
+To solve the large problems it is not possible to store the whole system matrix on the GPU\todo{write about how much memory is on normal GPU and how much the matrix would use}, therefore part of solving the problem also involves computing the system matrix as we go along. For this we used the code from a bachelor project. \todo{elaborate on this - how did they solve it}. We had two different implementations which we compared, and we decided to use \todo{fill out which one we used and why. Maybe with a graph showing the performance of the two, vs. francois version. and some thoughts on why one is faster than the other}\\
+A looped version of the forward projection with system matrix cut in $steps$ chunks looks like this:
+\begin{figure}[h]
+\begin{lstlisting}[frame=single]
+for step = 0; step < steps; step++
+	A = getRays(raysperstep)
+	for ray = 0; ray < raysperstep; row++
+		acc = 0.0
+		for p = 0; p<numpixels; p++
+			acc+= A[ray][p]*image[p]
+		FP[step*raysperstep+ray] = acc
+\end{lstlisting}
+  \caption{A looped version of the forward projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+\end{figure}
+
+A looped version of the backprojections looks like this:
+A looped version of the forward projection with system matrix cut in chunks looks like this:
+\begin{figure}[h]
+\begin{lstlisting}[frame=single]
+for step = 0; step < steps; step++
+  A = getRays(raysperstep)
+  AT = A.transpose()
+  for p = 0; p<numpixels; p++
+      acc = 0.0
+      for ray = 0; ray<raysperstep; ray++
+			   acc+= AT[p][ray]*sinogram[ray]
+      BP[p] += acc
+\end{lstlisting}
+  \caption{A looped version of the forward projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+\end{figure}
+
+\todo{Insert futhark implementations of nested version of FP and BP and the time it takes to run. Note which loops are parallel and why. Do work depth analysis of these algorithms. Make graphs displaying memory usage. Write something about why BP is slower than FP, what can we do about it?}
