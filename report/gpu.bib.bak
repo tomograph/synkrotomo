@@ -1,0 +1,16 @@
+% Encoding: UTF-8
+
+@InProceedings{6024036,
+  author    = {Z. Xue and L. Zhang and J. Pan},
+  title     = {A new algorithm for calculating the radiological path in CT image reconstruction},
+  booktitle = {Proceedings of 2011 International Conference on Electronic Mechanical Engineering and Information Technology},
+  year      = {2011},
+  volume    = {9},
+  pages     = {4527-4530},
+  month     = {Aug},
+  abstract  = {In this paper an algorithm is presented for calculating the radiological path in CT image reconstruction. Based on the coordinate component of the intersections the lengths of the voxels intersected with this ray are rapidly calculated. Meanwhile, after determining the index of the first voxel intersected with the ray, the indices of the remaining voxels intersected with this ray can be successively determined in terms of the incremental of the coordinate component between the adjacent intersections. By so doing shortens the time consumed in calculating the radiological path. The simulation results show that this algorithm is feasible and effective. Compared with the Siddon algorithm, it results in an about 4 times speedup in the calculation of the radiological path.},
+  doi       = {10.1109/EMEIT.2011.6024036},
+  keywords  = {computerised tomography;image reconstruction;radiological path calculation;CT image reconstruction;intersection coordinate component;voxel length;Siddon algorithm;Indexes;Arrays;Image reconstruction;Computed tomography;Algorithm design and analysis;Mathematical model;Equations;CT;incremental of coordinate component;index;length;radiological path},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
