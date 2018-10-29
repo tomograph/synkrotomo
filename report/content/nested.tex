@@ -1,0 +1,32 @@
+\section{Nested parallel version}
+A first approach was to do a nested parallel version of forward and back projection using on the fly (OTF) computation of the system matrix.\\
+A looped version of the forward projection with the system matrix cut in $steps$ chunks looks like this:
+\begin{figure}[h]
+\begin{lstlisting}[frame=single]
+for step = 0; step < steps; step++
+	A = getRays(raysperstep)
+	for ray = 0; ray < raysperstep; row++
+		acc = 0.0
+		for p = 0; p<numpixels; p++
+			acc+= A[ray][p]*image[p]
+		FP[step*raysperstep+ray] = acc
+\end{lstlisting}
+  \caption{A looped version of the forward projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+\end{figure}
+
+A looped version of the backprojections looks like this:
+\begin{figure}[h]
+\begin{lstlisting}[frame=single]
+for step = 0; step < steps; step++
+	A = getRays(raysperstep)
+	AT = A.transpose()
+	for p = 0; p<numpixels; p++
+		acc = 0.0
+		for ray = 0; ray<raysperstep; ray++
+			acc+= AT[p][ray]*sinogram[ray]
+		BP[p] += acc
+\end{lstlisting}
+  \caption{A looped version of the back projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+\end{figure}
+
+\todo{Insert futhark implementations of nested version of FP and BP and the time it takes to run. Note which loops are parallel and why. Do work depth analysis of these algorithms. Make graphs displaying memory usage. Write something about why BP is slower than FP, what can we do about it?}
