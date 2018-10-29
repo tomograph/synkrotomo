@@ -1,4 +1,4 @@
--- == 
+-- ==
 -- input@../benchmarks/testinput
 -- input@../benchmarks/testinput_500_0
 -- input@../benchmarks/testinput_750_0
@@ -26,8 +26,8 @@
 -- input@../benchmarks/testinput_1750_45
 -- input@../benchmarks/testinput_2000_45
 module M = import "algorithm"
-
-let main(detectorPositions: []f64, angles: []f64, 
+--this is a main function
+let main(detectorPositions: []f64, angles: []f64,
 		 gridHalfWidth: f64, delta: f64, rowOffset: i32, inMode: i16, numRows: i32) :
 		 (([]i32, []i32, []f64)) =
 		 M.main(detectorPositions, angles, gridHalfWidth, delta, rowOffset, inMode, numRows)
