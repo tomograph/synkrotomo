@@ -1,6 +1,6 @@
 \section{Introduction}
 Computed tomography is the inverse problem of reconstructing an image or volume from its x-ray projections. The x-ray source spins around the object to be analyzed and sends x-rays that hit a detector on the oposite side. The detector shows how much of each x-ray was attenuated when passing through the volume. In this report we will focus on a type of algebraic reconstruction algorithm called the Simulataneous Iterative Reconstruction Algorithm (SIRT) and investigate how we may use the high level data-parallel language Futhark for implememting a fast version of this algorithm. The reason for chosing this algorithm is that it provides good reconstruction quality under non-optimal circumstances, but unfortunately has very poor performance and therefore is rarely used in practice \todo{give a citation for benefits and bad stuff of SIRT}.\\
-In algebraic reconstruction we solve the problem as a linear system of equations. The main idea is that the process can be modelled as a linear transformation by discretizng the object to be reconstructed into $N$ pixels.First we place a coordinate system with origo at the center of the object to be reconstructed and denote by $\vec{\theta}$ the vector of angles between the positions of the source and origo. For each angles several x-rays are cast from the source. We denote by the vector $\vec{\rho}$ the signed distances from each line to origo. The data produced by the process is called the sinogram. Then the sinogram values $p_i$ for each $(\theta_k,\rho_l)$  are a weighted sum of the attenuations at each pixel $f_j$ that the $(\theta_k,\rho_l)$ ray passes through:
+In algebraic reconstruction we solve the problem as a linear system of equations. The main idea is that the process can be modelled as a linear transformation by discretizng the object to be reconstructed into $N$ pixels. First we place a coordinate system with origo at the center of the object to be reconstructed and denote by $\vec{\theta}$ the vector of angles between the positions of the source and origo. For each angle several x-rays are cast from the source. We denote by the vector $\vec{\rho}$ the signed distances from each line to origo. The data produced by the process is called the sinogram. Then the sinogram values $p_i$ for each $(\theta_k,\rho_l)$  are a weighted sum of the attenuations at each pixel $f_j$ that the $(\theta_k,\rho_l)$ ray passes through:
 
 \begin{align}
 \sum_{j=1}^N a_{ij}f_j=p_i
@@ -21,16 +21,15 @@ Writing all the projections as a column vector $\vec{p}$ and the attenuation val
 \end{align}
 
 These systems of equations may easily be solved under the right circumstances, where $M = N$. However this is rarely the case. In most real cases $M > N$, i.e. the number of projections is larger than the number of pixels to be reconstructed and the size of the matrix is very large - more about this in the next section.\\
-
 However, the algebraic reconstruction methods also have some advantages. Since the model closely relates to the real world scenario the weightings can be refactored to take irregularities in the setup, such as differences in beam energies or irregular geometries and missing data into account. Furthermore these methods generally give better image quality than analytic methods when the data is sparse.\\
 
-A system like this is typically solved by minimizing some norm:
+A linear system like this is typically solved by minimizing some norm:
 
 \begin{align}
 \norm{\mat{A}\vec{f}-\vec{p}}
 \end{align}
 
-An example is the SIRT algorithm. The action of the matrix $\mat{A}$ is called the \emph{forward projection}, and the matrix itself is called the \emph{system matrix}. Each row of $\mat{A}$ represents the coefficients of the equation for one ray. The transpose $\mat{A}^{T}$ is called the backprojections, and can be vizualized as smearing the projection values across the reconstruction. The idea behind the SIRT algorithm is to forward project the current reconstruction, then subtract this from the original projection data and do a weighted backprojection resulting in a correction factor which can be added to the current reconstruction. The update equeation is:
+An example is the SIRT algorithm. The action of the matrix $\mat{A}$ is called the \emph{forward projection}, and the matrix itself is called the \emph{system matrix},\emph{projection matrix} or \emph{radon matrix}. Each row of $\mat{A}$ represents the coefficients of the equation for one ray. The action of the transposed projection matrix $\mat{A}^{T}$ on the sinogram vector is called the \emph{backprojection}, and can be vizualized as smearing the projection values across the reconstruction in the direction of the ray, or equivalently summing up the contrubitions of each ray for a given pixel. The idea behind the SIRT algorithm is to forward project the current reconstruction, then subtract this from the original projection data and do a weighted backprojection resulting in a correction factor which can be added to the current reconstruction. The update equeation is:
 
 \begin{align}
 \vec{f}^{n} = \vec{f}^{(n-1)}+\mat{C}\mat{A}^{T}\mat{R}(\vec{p}-\mat{A}\vec{f}^{(n-1)}),
@@ -52,5 +51,5 @@ where $\norm{\vec{x}}_{\mat{R}} = \vec{x}^T\mat{R}\vec{x}$.
 \label{fig:sirt}
 \end{figure}
 
-The backprojection and foward projection operations are standard operations in many iterative algebraic reconstruction methods and are the bottle necks of the algorithms \todo{insert citation here or just do runtime analysis of the different parts!}. Therefore, our main focus has been on optimizing these operations, and then combining these to the SIRT algorithm.\\
-Different beam geometries exist, such as parallel beams, fan beams and cone beams. The geometry must be considered when constructing the system matrix. However as this study is intended for applications with synchrotron data only parallel beam geometries will be considered. Furthermore, we will only consider reconstructions of 2D imaged.\\
+The backprojection and foward projection operations are standard operations in many iterative algebraic reconstruction methods and are the bottle necks of the algorithms~\cite{footprints2010}. Therefore, our main focus has been on optimizing these operations, and then combining these to the SIRT algorithm.\\
+Different beam geometries exist, such as parallel beams, fan beams and cone beams. The geometry must be considered when constructing the system matrix. However as this study is intended for applications with synchrotron data only parallel beam geometries will be considered. Furthermore, we will only consider reconstructions of 2D images, since this is simply a pre-study and it makes the problem conceptually easier to follow.\\
