@@ -1,3 +1,5 @@
+-- ==
+-- input@../test
 import "projection_lib"
 open Projection
 
