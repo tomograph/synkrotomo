@@ -1,4 +1,4 @@
-import "intersect_lib"
+import "intersect_lib_map"
 open Intersections
 
 module Projection = {
