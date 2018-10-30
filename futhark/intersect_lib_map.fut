@@ -63,11 +63,22 @@ module Intersections = {
       let p_anchor_y = (focusPoint.1+dx, anchorY)
       in if p_anchor_x.1 < p_anchor_y.1 then p_anchor_x else p_anchor_y
 
+  let getFocusPoints (entryPoint: point) slope vertical halfsize y_step_dir =
+    -- let w = 0
+    let A = replicate (t32(2f32*halfsize*2f32-1f32)) (-1f32, -1f32)
+    let (A, _, _) =
+      loop (A, focusPoint, write_index) = (A, entryPoint, 0)
+      while ( isInGrid halfsize y_step_dir focusPoint ) do
+        let nextpoint = (nextpointonline slope vertical focusPoint)
+        in unsafe let A[write_index] = nextpoint
+        in (A, nextpoint, write_index+1)
+    in A
+
   let lengths
      (grid_size: i32)
      (sint: f32)
      (cost: f32)
-     (focusPoint: point): [](f32, i32) =
+     (entryPoint: point): [](f32, i32) =
 
      let vertical = f32.abs(cost) == 1
      let slope =  cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
@@ -79,15 +90,16 @@ module Intersections = {
      let y_step_dir = if slope < 0f32 then -1f32 else 1f32
      -- let focuspoints = replicate arraysize (-1f32,-1f32)
      -- unsafe
-     let focuspoints = [focusPoint]
-     let mf = map(\fp ->
-          let nextpoint = nextpointonline slope vertical fp
-          let focuspoints = focuspoints++[nextpoint]
-          let test = map(\(x, y) -> trace (x+0.0, y+0.0)) focuspoints
-          let ind = if (isInGrid halfsize y_step_dir fp) then -1 else index fp halfsize y_step_dir
-          let dist = distance fp nextpoint
+     let focuspoints = (getFocusPoints entryPoint slope vertical halfsize y_step_dir)
+     let mf = map(\i ->
+          -- let nextpoint = nextpointonline slope vertical fp
+          -- let focuspoints = focuspoints++[nextpoint]
+          -- let test = map(\(x, y) -> trace (x+0.0, y+0.0)) focuspoints
+          let ind = if (isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
+          let dist = (unsafe (distance focuspoints[i] focuspoints[i+1]))
           in (dist,ind)
-      ) focuspoints
+      ) (iota (length focuspoints))
       in mf
+
     -- in [entry_point.1, entry_point.2, anchorX, anchorY ]
 }
