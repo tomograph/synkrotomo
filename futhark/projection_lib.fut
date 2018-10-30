@@ -75,7 +75,7 @@ module Projection = {
                let dp = unzip_d2 matrix
                let flagsforindexes = map(\r -> map(\p -> if p == -1 then 0 else 1)r)dp.2
                in map(\f -> reduce (+) 0 f)flagsforindexes
-               
+
      -- helper function to determine if we entered new segment of consecutive numbers in an array.
      let isnewsegment (i: i32) (arr: []i32) : bool =
                          i!=0 && (unsafe arr[i]) != (unsafe arr[i-1])
