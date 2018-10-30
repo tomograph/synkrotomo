@@ -2,3 +2,5 @@
 *.actual
 *.expected
 .remote-sync.json
+
+sysmatas/
