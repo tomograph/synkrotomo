@@ -41,71 +41,49 @@ module Intersections = {
       else (-1f32*halfsize <= y && y < halfsize)
     )
 
+  let index (focusPoint: point) (halfsize: f32) (y_step_dir): i32 =
+      let y_floor = f32.floor(halfsize+focusPoint.2)
+      let y_comp =
+        if (y_step_dir == -1f32 && focusPoint.2 - f32.floor(focusPoint.2) == 0f32)
+        then y_floor - 1f32
+        else y_floor
+      let x_comp= f32.floor(halfsize+focusPoint.1)
+      in t32(x_comp+(halfsize*2)*y_comp)
+
+  -- let nextpointonline (vertical: bool) (horizontal: bool) (anchorX: point) (anchorY: point) (slope: f32) (focusPoint: point): point or array of points and lengths
+  let nextpointonline (slope: f32) (vertical: bool) (focusPoint: point): point =
+      let y_step_dir = if slope < 0f32 then -1f32 else 1f32
+      let anchorX = if vertical then focusPoint.1 else f32.floor(focusPoint.1) + 1f32
+      let anchorY = if slope == 0 then focusPoint.2 else if y_step_dir == -1f32
+             then f32.ceil(focusPoint.2) - 1f32
+             else f32.floor(focusPoint.2) + 1f32
+      let dy = if slope == 1 then 1f32 else if slope == 0 then 0f32 else (anchorX-focusPoint.1)*slope
+      let dx = if slope == 1 then 0f32 else if slope == 0 then 1f32 else (anchorY-focusPoint.2)*(1/slope)
+      let p_anchor_x = (anchorX, focusPoint.2+dy)
+      let p_anchor_y = (focusPoint.1+dx, anchorY)
+      in if p_anchor_x.1 < p_anchor_y.1 then p_anchor_x else p_anchor_y
+
   let lengths
-    (grid_size: i32)
-    (sint: f32)
-    (cost: f32)
-    (entry_point: point): [](f32, i32) =
+     (grid_size: i32)
+     (sint: f32)
+     (cost: f32)
+     (focusPoint: point): [](f32, i32) =
 
-    let horizontal = cost == 0
-    let vertical = f32.abs(cost) == 1
+     let vertical = f32.abs(cost) == 1
+     let slope =  cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
 
-    let slope = cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
+     let size = r32(grid_size)
+     let halfsize = size/2.0f32
 
-    let size = r32(grid_size)
-    let halfsize = size/2.0f32
+     let arraysize = t32(size*2f32-1f32)
+     let y_step_dir = if slope < 0f32 then -1f32 else 1f32
 
-    let A = replicate (t32(size*2f32-1f32)) (-1f32, -1)
-
-    let y_step_dir = if slope < 0f32 then -1f32 else 1f32
-    let anchorX = f32.floor(entry_point.1) + 1f32
-    let anchorY = if y_step_dir == -1f32
-      then f32.ceil(entry_point.2) - 1f32
-      else f32.floor(entry_point.2) + 1f32
-
-    let (A, _, _, _, _) =
-      loop (A, focusPoint, anchorX, anchorY, write_index) = (A, entry_point, anchorX, anchorY, 0)
-      while ( isInGrid halfsize y_step_dir focusPoint ) do
-        --compute index of pixel in array by computing x component and y component if
-        --center was at bottom left corner (add halfsize), and add them multiplying y_comp by size
-        let y_floor = f32.floor(halfsize+focusPoint.2)
-        let y_comp =
-          if (y_step_dir == -1f32 && focusPoint.2 - f32.floor(focusPoint.2) == 0f32)
-          then y_floor - 1f32
-          else y_floor
-        let x_comp= f32.floor(halfsize+focusPoint.1)
-        let index = t32(x_comp+size*y_comp)
-
-        --compute the distances using the difference travelled along an axis to the
-        --next whole number and the slope or inverse slope
-        let dy = if vertical then 1f32 else if horizontal then 0f32 else (anchorX-focusPoint.1)*slope
-        let dx = if vertical then 0f32 else if horizontal then 1f32 else (anchorY-focusPoint.2)*(1/slope)
-        let p_anchor_x = (anchorX, focusPoint.2+dy)
-        let p_anchor_y = (focusPoint.1+dx, anchorY)
-
-        let dist_p_x = distance focusPoint p_anchor_x
-        let dist_p_y = distance focusPoint p_anchor_y
-
-        in
-          if horizontal then
-            unsafe let A[write_index] = (dist_p_x, index)
-            in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
-          else if vertical then
-            unsafe let A[write_index] = (dist_p_y, index)
-            in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
-          else
-          if (f32.abs(dist_p_x - dist_p_y) > 0.000000001f32)
-          then
-            if ( dist_p_x < dist_p_y )
-            then
-              unsafe let A[write_index] = (dist_p_x, index)
-              in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
-            else
-              unsafe let A[write_index] = (dist_p_y, index)
-              in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
-          else
-              unsafe let A[write_index] = (dist_p_x, index)
-              in (A, p_anchor_x, anchorX + 1f32, anchorY + y_step_dir, write_index+1)
-    in A
+     in map(\i ->
+          let nextpoint = nextpointonline slope vertical focusPoint
+          let ind = if (isInGrid halfsize y_step_dir focusPoint) then -1 else index focusPoint halfsize y_step_dir
+          let dist = distance focusPoint nextpoint
+          let focusPoint = nextpoint
+          in (dist,ind)
+      )(iota arraysize)
     -- in [entry_point.1, entry_point.2, anchorX, anchorY ]
 }

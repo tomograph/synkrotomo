@@ -158,20 +158,22 @@ def futhark_BP(cfg):
 #Time algorithms, and plot the results
 ###############################################################################
 def main(argv):
-    sizes = [128,256]#,512,1024,2048,4096]
-
-    configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
-    pickle.dump(configs, open("configs.p", "wb"))
-    #configs = pickle.load(open("configs.p", "rb"))
-    BPs = [astra_BP, futhark_BP]
-    FPs = [astra_FP, futhark_FP]
-
-    figBP, axBP, resultsBP = plot_times(BPs, configs)
-    pickle.dump(resultsBP, open("resultsBP.p", "wb"))
-    figBP.savefig("BPplot.png")
-    figFP, axFP, resultsFP = plot_times(FPs, configs)
-    pickle.dump(resultsFP, open("resultsFP.p", "wb"))
-    figFP.savefig("FPplot.png")
+    #sizes = [128,256]#,512,1024,2048,4096]
+    size = 128
+    config = Config(size)
+    pylab.imsave("sinogramtest.png", futhark_FP(config).get().reshape((len(config.angles),len(config.rays))))
+    # configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
+    # pickle.dump(configs, open("configs.p", "wb"))
+    # #configs = pickle.load(open("configs.p", "rb"))
+    # BPs = [astra_BP, futhark_BP]
+    # FPs = [astra_FP, futhark_FP]
+    #
+    # figBP, axBP, resultsBP = plot_times(BPs, configs)
+    # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
+    # figBP.savefig("BPplot.png")
+    # figFP, axFP, resultsFP = plot_times(FPs, configs)
+    # pickle.dump(resultsFP, open("resultsFP.p", "wb"))
+    # figFP.savefig("FPplot.png")
 
 
 
