@@ -150,9 +150,9 @@ def futhark_FP(cfg):
     # proj = forwardprojection.forwardprojection()
     # A = proj.main(, cfg.angles, cfg.phantom.flatten().astype(np.float32)).get()
     # np.set_printoptions(threshold=np.nan)
-    np.savetxt("test4.txt", cfg.rays, newline='f32,')
-    np.savetxt("test5.txt", cfg.angles, newline='f32,')
-    np.savetxt("test3.txt", cfg.phantom.flatten().astype(np.float32), newline='f32,')
+    np.savetxt("rays.txt", cfg.rays, newline='f32,')
+    np.savetxt("angles.txt", cfg.angles, newline='f32,')
+    np.savetxt("phantom.txt", cfg.phantom.flatten().astype(np.float32), newline='f32,')
     # print(cfg.rays)
     # print(cfg.angles)
     # np.print(cfg.phantom.flatten().astype(np.float32))
@@ -166,24 +166,12 @@ def futhark_BP(cfg):
 #Time algorithms, and plot the results
 ###############################################################################
 def main(argv):
-    sizes = [128,256]#,512,1024,2048,4096]
 
-    configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
-    # pickle.dump(configs, open("configs.p", "wb"))
-    #configs = pickle.load(open("configs.p", "rb"))
-    # BPs = [astra_BP, futhark_BP]
-    # FPs = [astra_FP, futhark_FP]
-    #
-    # figBP, axBP, resultsBP = plot_times(BPs, configs)
-    # print(resultsBP)
-    # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
-    # figBP.savefig("BPplot.png")
-    # figFP, axFP, resultsFP = plot_times(FPs, configs)
-    # print(resultsFP)
-    # pickle.dump(resultsFP, open("resultsFP.p", "wb"))
-    # figFP.savefig("FPplot.png")
-
-    futhark_FP(configs[0]), (len(configs[0].angles), len(configs[0].rays))
+    size = 4
+    config = Config(size)
+    config.angles = np.linspace(45, 135, 5, False).astype(np.float32)
+    config.rays = np.linspace((-(1.0)*(size-1)/2.0), (size-1)/2.0, size).astype(np.float32)
+    futhark_FP(config) 
     # pylab.imsave("nestedFP.png", test)
 
     # test2 = np.reshape(futhark_BP(configs[0]).get(), configs[0].phantom.shape )
