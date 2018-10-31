@@ -36,9 +36,9 @@ def sinogram(image, theta):
     return sinogram.astype(np.float32)
 
 
-def futhark_FP_doubleparallel(rays, angles, size, phantom):
-    proj = mette.mette()
-    return proj.main(rays, angles, size, phantom.flatten().astype(np.float32))
+# def futhark_FP_doubleparallel(rays, angles, size, phantom):
+#     proj = mette.mette()
+#     return proj.main(rays, angles, size, phantom.flatten().astype(np.float32))
 
 ###############################################################################
 #Time algorithms, and plot the results
@@ -47,11 +47,15 @@ def main(argv):
 
     size = 64
     phantom = get_phantom(size)
-    rays = get_rays(size)
-    angles = np.linspace(45,135,50,False).astype(np.float32)
+    rays = get_rays(1)
+    angles = np.linspace(0,90,2,True).astype(np.float32)
     singram = sinogram(phantom,angles)
-    pylab.imsave("sinogramtest_fut_par.png", futhark_FP_doubleparallel(angles, rays, size, phantom.flatten().astype(np.float32)).get().reshape((len(angles),len(rays))))
-    pylab.imsave("sinogramtest_compare.png", singram.reshape((len(angles),len(rays))))
+    proj = mette.mette()
+    result = proj.main(angles, rays, size)
+    print(result[1])
+    print(result[0])
+    # pylab.imsave("sinogramtest_fut_par.png", futhark_FP_doubleparallel(angles, rays, size, phantom.flatten().astype(np.float32)).get().reshape((len(angles),len(rays))))
+    # pylab.imsave("sinogramtest_compare.png", singram.reshape((len(angles),len(rays))))
 
 
 
