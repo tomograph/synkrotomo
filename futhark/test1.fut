@@ -10,7 +10,7 @@ let unzip_d2 (xs: [][](f32,i32)): ([][]f32,[][]i32) =
 
 let forwardprojection (rays : []f32)
                                (angles : []f32)
-                               (voxels : []f32) =
+                               (voxels : []f32):([][]f32,[][]i32) =
     let gridsize = t32(f32.sqrt(r32((length voxels))))
     let halfsize = r32(gridsize)/2
     let entrypoints = convert2entry angles rays halfsize
