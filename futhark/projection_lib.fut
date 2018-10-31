@@ -69,6 +69,11 @@ module Projection = {
                let mat_inds = map (\i -> i-1) shp_scn
                in map (\i -> unsafe sums[i]) mat_inds
 
+      let notSparseMatMult [num_rows] [num_cols]
+                            (mat_vals : [num_rows][num_cols](f32,i32))
+                            (vect : []f32) : [num_rows]f32 =
+           map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind]) ) row ) mat_vals
+
      -- gets the shape of a matrix - i.e number of entries pr. row when mat is in the format [[(d,i),(d,i)...]] where d is data
      -- and i is column index and -1 means no data
      let getshp (matrix: [][](f32,i32)) : []i32 =
