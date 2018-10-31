@@ -1,0 +1,3 @@
+./forwardprojection -D < ../test > /dev/null
+futhark --gpu forwardprojection.fut > test6
+./forwardprojection --dump tmp.cl
