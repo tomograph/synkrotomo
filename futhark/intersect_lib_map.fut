@@ -48,7 +48,7 @@ module Intersections = {
         then y_floor - 1f32
         else y_floor
       let x_comp= f32.floor(halfsize+focusPoint.1)
-      in t32(x_comp+(halfsize*2)*y_comp)
+      in t32(x_comp+(halfsize*2f32)*y_comp)
 
   -- let nextpointonline (vertical: bool) (horizontal: bool) (anchorX: point) (anchorY: point) (slope: f32) (focusPoint: point): point or array of points and lengths
   let nextpointonline (slope: f32) (vertical: bool) (focusPoint: point): point =
@@ -65,12 +65,12 @@ module Intersections = {
 
   let getFocusPoints (entryPoint: point) slope vertical halfsize y_step_dir =
     -- let w = 0
-    let A = replicate (t32(2f32*halfsize*2f32-1f32)) (-1f32, -1f32)
+    let A = replicate (t32(2f32*halfsize*2f32-1f32)) (f32.lowest, f32.lowest)
     let (A, _, _) =
       loop (A, focusPoint, write_index) = (A, entryPoint, 0)
       while ( isInGrid halfsize y_step_dir focusPoint ) do
         let nextpoint = (nextpointonline slope vertical focusPoint)
-        in unsafe let A[write_index] = nextpoint
+        in unsafe let A[write_index] = focusPoint
         in (A, nextpoint, write_index+1)
     in A
 
@@ -81,25 +81,17 @@ module Intersections = {
      (entryPoint: point): [](f32, i32) =
 
      let vertical = f32.abs(cost) == 1
-     let slope =  cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
+     let slope =  cost/(-sint)
 
      let size = r32(grid_size)
      let halfsize = size/2.0f32
 
-     -- let arraysize = t32(size*2f32-1f32)
      let y_step_dir = if slope < 0f32 then -1f32 else 1f32
-     -- let focuspoints = replicate arraysize (-1f32,-1f32)
-     -- unsafe
      let focuspoints = (getFocusPoints entryPoint slope vertical halfsize y_step_dir)
      let mf = map(\i ->
-          -- let nextpoint = nextpointonline slope vertical fp
-          -- let focuspoints = focuspoints++[nextpoint]
-          -- let test = map(\(x, y) -> trace (x+0.0, y+0.0)) focuspoints
           let ind = if !(isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
           let dist = (unsafe (distance focuspoints[i] focuspoints[i+1]))
-          in (dist,ind)
+          in (dist, ind)
       ) (iota (length focuspoints))
       in mf
-
-    -- in [entry_point.1, entry_point.2, anchorX, anchorY ]
 }
