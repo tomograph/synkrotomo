@@ -1,5 +1,4 @@
-import "intersect_lib_map"
-open Intersections
+import "projectionmatrix_jh"
 
 module Projection = {
 
@@ -113,10 +112,17 @@ module Projection = {
                let gridsize = t32(f32.sqrt(r32((length voxels))))
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
-               let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints
-               let shp = getshp intersections
-               let shp_scn = scan (+) 0 shp
-               let values_tmp = flatten(map(\r -> map(\(d,p)->(p,d))r)intersections)
-               let values = filter (\x -> x.1 != -1) values_tmp
-               in spMatVctMult values shp_scn voxels
+               let totalLen = (length entrypoints)
+               let stepSize = 32
+               -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
+               let runLen = (totalLen/stepSize)
+               let testmat = [0f32]
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let partmatrix = map (\s -> unsafe (lengths gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
+                       let partresult = notSparseMatMult partmatrix voxels
+                       in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+               in (tail testmat)
 }
