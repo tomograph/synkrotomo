@@ -1,18 +1,27 @@
 \section{Nested parallel version}
 A first approach was to do a nested parallel version of forward and back projection using on the fly (OTF) computation of the system matrix.\\
 A looped version of the forward projection with the system matrix cut in $steps$ chunks looks like this:
+
 \begin{figure}[h]
 \begin{lstlisting}[frame=single]
-for step = 0; step < steps; step++
+for step = 0; step < steps; step++ //stripmined
 	A = getRays(raysperstep)
-	for ray = 0; ray < raysperstep; row++
+	for ray = 0; ray < raysperstep; row++ //essentially for each row
 		acc = 0.0
-		for p = 0; p<numpixels; p++
+		for p = 0; p<numpixels; p++ //for each column
 			acc+= A[ray][p]*image[p]
 		FP[step*raysperstep+ray] = acc
 \end{lstlisting}
-  \caption{A looped version of the forward projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+  \caption{A looped version of the forward projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}
+this can be written in futhark like pseudo code as;
+\begin{lstlisting}
+map (\rays ->
+	let A = getRays(raysperstep)
+	map (\row -> reduce (+) 0 <| map ( \i -> row[i]*vector[i] ) (iota (length row)) ) A
+	) steps
+\end{lstlisting}
+
 
 A looped version of the backprojections looks like this:
 \begin{figure}[h]
@@ -24,9 +33,18 @@ for step = 0; step < steps; step++
 		acc = 0.0
 		for ray = 0; ray<raysperstep; ray++
 			acc+= AT[p][ray]*sinogram[ray]
-		BP[p] += acc
+		BP[p] += acc --remember
 \end{lstlisting}
-  \caption{A looped version of the back projection, where the rowsperstep should be the largest number possible such that the computations fit in the memory. $step*rowsperstep$ should equal the total number of rows.}
+  \caption{A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}
+this can be written in futhark like pseudo code as;
+\begin{lstlisting}
+map (\rays ->
+	let A = getRays(raysperstep)
+	let AT = transpose A
+	map (\row -> reduce (+) 0 <| map (\i -> row[i]*sinogram[i]) (iota raysperstep) ) AT
+	) steps
+\end{lstlisting}
+
 
 \todo{Insert futhark implementations of nested version of FP and BP and the time it takes to run. Note which loops are parallel and why. Do work depth analysis of these algorithms. Make graphs displaying memory usage. Write something about why BP is slower than FP, what can we do about it?}
