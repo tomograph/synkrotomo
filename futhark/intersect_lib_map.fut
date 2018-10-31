@@ -86,7 +86,7 @@ module Intersections = {
      let size = r32(grid_size)
      let halfsize = size/2.0f32
 
-     let arraysize = t32(size*2f32-1f32)
+     -- let arraysize = t32(size*2f32-1f32)
      let y_step_dir = if slope < 0f32 then -1f32 else 1f32
      -- let focuspoints = replicate arraysize (-1f32,-1f32)
      -- unsafe
@@ -95,7 +95,7 @@ module Intersections = {
           -- let nextpoint = nextpointonline slope vertical fp
           -- let focuspoints = focuspoints++[nextpoint]
           -- let test = map(\(x, y) -> trace (x+0.0, y+0.0)) focuspoints
-          let ind = if (isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
+          let ind = if !(isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
           let dist = (unsafe (distance focuspoints[i] focuspoints[i+1]))
           in (dist,ind)
       ) (iota (length focuspoints))
