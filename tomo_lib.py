@@ -1,15 +1,16 @@
-import pylab
 import math
 from skimage.transform import rotate
 from skimage.draw import random_shapes
 import numpy as np
+import scipy.io
+import scipy.misc
 
 def get_angles(size, degrees=True):
     num_angles = math.ceil(size*math.pi/2)
     if degrees:
-        return np.linspace(45, 135, num_angles, False)
+        return np.linspace(0, 180, num_angles, False)
     else:
-        return np.linspace((np.pi/4),(3*np.pi/4), num_angles,False)
+        return np.linspace(0,(np.pi), num_angles,False)
 
 def sinogram(image, theta):
     sinogram = np.zeros((len(theta), max(image.shape)))
@@ -23,7 +24,12 @@ def get_rays(size):
     return np.linspace((-(1.0)*startvalue), startvalue, size).astype(np.float32)
 
 def savesinogram(filename, data, numrays, numangles):
-    pylab.imsave(filename, data.reshape((numangles,numrays)))
+    max = np.amax(data)
+    scipy.misc.toimage(data.reshape((numangles,numrays)), cmin=0, cmax=max).save(filename)
+
+def savebackprojection(filename, data, size):
+    max = np.amax(data)
+    scipy.misc.toimage(data.reshape((size,size)), cmin=0, cmax=max).save(filename)
 
 def get_phantom(size):
     return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]
