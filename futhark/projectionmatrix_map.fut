@@ -3,7 +3,7 @@
 -- input@../data/matrixinputf32rad128
 -- input@../data/matrixinputf32rad256
 -- input@../data/matrixinputf32rad512
--- input@../data/matrixinputf32rad1028
+-- input@../data/matrixinputf32rad1024
 -- input@../data/matrixinputf32rad2048
 -- input@../data/matrixinputf32rad4096
 import "matrix_lib"
