@@ -1,5 +1,78 @@
 import "line_lib"
 open Lines
+-- ==
+-- compiled input {
+--    -2f32
+--    -0.5f32
+--    2f32
+--    0.5f32
+--    0i32
+--    4i32
+-- }
+-- output {
+--   [1.030776f32,-1f32]
+--   [10i32, -1i32]
+-- }
+-- compiled input {
+--    -1f32
+--    2f32
+--    2f32
+--    0f32
+--    0i32
+--    4i32
+-- }
+-- output {
+--   [0.600925f32,0.600925f32]
+--   [14i32,10i32]
+-- }
+-- compiled input {
+--    -0.5f32
+--    2f32
+--    0.5f32
+--    -2f32
+--    0i32
+--    4i32
+-- }
+-- output {
+--   [1.030776f32,-1f32]
+--   [6i32, -1i32]
+-- }
+-- compiled input {
+--    -0.5f32
+--    2f32
+--    0.5f32
+--    -2f32
+--    -2i32
+--    4i32
+-- }
+-- output {
+--   [1.030776f32,-1f32]
+--   [13i32, -1i32]
+-- }
+-- compiled input {
+--    -0.5f32
+--    2f32
+--    0.5f32
+--    -2f32
+--    1i32
+--    4i32
+-- }
+-- output {
+--   [1.030776f32,-1f32]
+--   [2i32, -1i32]
+-- }
+-- compiled input {
+--    0f32
+--    -2f32
+--    2f32
+--    1f32
+--    -1i32
+--    4i32
+-- }
+-- output {
+--   [1.80277563773f32,-1f32]
+--   [11i32, -1i32]
+-- }
 
 module Matrix =
 {
@@ -12,9 +85,10 @@ module Matrix =
           let Nhalf = N/2
           -- handle all lines as slope < 1 reverse the others
           let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let reverse = slope > 1
-          let k = if reverse then 1/slope else slope
-          let gridentry = if reverse then (ent.2,ent.1) else ent
+          let reverse = f32.abs(slope) > 1
+          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
+          let k = if reverse then (-1/slope) else slope
+
           --- calculate stuff
           let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
           let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
@@ -29,8 +103,9 @@ module Matrix =
           let lymin = yminfact*baselength
           let lyplus = yplusfact*baselength
           let iindex = i+Nhalf
-          let pixmin = if reverse then iindex*N+Ypixmin else iindex+Ypixmin*N
-          let pixplus = if reverse then iindex*N+Ypixplus else iindex+Ypixplus*N
+          -- index calculated wrong for reversed lines i think
+          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
+          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
           let min = if (pixmin >= 0 && pixmin < N ** 2) then
                (if Ypixmin == Ypixplus then (baselength,pixmin) else (lymin,pixmin))
                else (-1f32,-1i32)
@@ -182,3 +257,12 @@ module Matrix =
           let entrypoints = convert2entry angles rays halfsize
           in map (\(p,sc) -> (lengths_map gridsize sc.1 sc.2 p)) entrypoints
 }
+
+open Matrix
+let main  (x1:f32)
+          (y1: f32)
+          (x2: f32)
+          (y2: f32)
+          (i: i32)
+          (N: i32): ([]f32, []i32) =
+          unzip(calculate_weight (x1,y1) (x2,y2) i N)
