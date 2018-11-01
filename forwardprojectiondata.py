@@ -8,7 +8,7 @@ def main(argv):
     sizes = [64,128,256,512,1024,2048,4096]
     stepsizes = [32,64,128,256]
     for i in sizes:
-        for stepsize in sizes:
+        for stepsize in stepsizes:
             filename = "data//fpinputf32rad"+str(i)+"_"+str(stepsize)
             f = open(filename,"w+")
             angles = tomo_lib.get_angles(i, False)
