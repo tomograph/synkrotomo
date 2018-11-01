@@ -1,4 +1,5 @@
 echo "compiling"
+cd ..
 cd futhark
 
 futhark-pyopencl --library forwardprojection_jh.fut
