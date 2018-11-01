@@ -167,11 +167,13 @@ module Matrix =
 
           let y_step_dir = if slope < 0f32 then -1f32 else 1f32
           let focuspoints = (getFocusPoints entryPoint slope vertical halfsize y_step_dir)
+          --for all focuspoints, save index and distance
           let mf = map(\i ->
                let ind = if !(isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
+               --If the next point is in the grid calc dist, otherwise don't, however, if next doesn't exist, out of bounds?
                let dist = if isInGrid halfsize y_step_dir focuspoints[i+1] then (unsafe (distance focuspoints[i] focuspoints[i+1])) else 0.0f32
                in (dist, ind)
-           ) (iota (length focuspoints))
+           ) (iota ((length focuspoints)-1))
            in mf
 
      let weights_map   (angles: []f32)
