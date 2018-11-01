@@ -27,5 +27,9 @@ def savesinogram(filename, data, numrays, numangles):
     max = np.amax(data)
     scipy.misc.toimage(data.reshape((numangles,numrays)), cmin=0, cmax=max).save(filename)
 
+def savebackprojection(filename, data, size):
+    max = np.amax(data)
+    scipy.misc.toimage(data.reshape((size,size)), cmin=0, cmax=max).save(filename)
+
 def get_phantom(size):
     return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]
