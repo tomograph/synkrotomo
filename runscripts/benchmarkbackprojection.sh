@@ -11,10 +11,10 @@ futhark-opencl backprojection_map.fut
 futhark-opencl backprojection_semiflat.fut
 echo "running benchmarks memory"
 
-./backprojection_jh -D < ../data/bpinputf32rad256_32 1> /dev/null 2> ../output/backprojection_jh
-./backprojection_doubleparallel -D < ../data/bpinputf32rad256_32 1> /dev/null 2> ../output/backprojection_doubleparallel
-./backprojection_map -D < ../data/bpinputf32rad256_32 1> /dev/null 2> ../output/backprojection_map
-./backprojection_semiflat -D < ../data/bpinputf32rad256_32 1> /dev/null 2> ../output/backprojection_semiflat
+./backprojection_jh -D < ../data/bpinputf32rad256_64 1> /dev/null 2> ../output/backprojection_jh
+./backprojection_doubleparallel -D < ../data/bpinputf32rad256_64 1> /dev/null 2> ../output/backprojection_doubleparallel
+./backprojection_map -D < ../data/bpinputf32rad256_64 1> /dev/null 2> ../output/backprojection_map
+./backprojection_semiflat -D < ../data/bpinputf32rad256_64 1> /dev/null 2> ../output/backprojection_semiflat
 
 echo "running benchmarks"
 futhark-bench --runs=10 --skip-compilation backprojection_jh.fut > ../output/backprojection_jh_benchmark

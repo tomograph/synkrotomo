@@ -15,8 +15,8 @@ echo "running benchmarks memory"
 ./forwardprojection_jh -D < ../data/fpinputf32rad256_64 1> /dev/null 2> ../output/forwardprojection_jh
 ./forwardprojection_doubleparallel -D < ../data/fpinputf32rad256_64 1> /dev/null 2>../output/forwardprojection_doubleparallel
 ./forwardprojection_map -D < ../data/fpinputf32rad256_64 1> /dev/null 2> ../output/forwardprojection_map
-./forwardprojection_semiflat -D < ../data/fpinputf32rad256_32 1> /dev/null 2> ../output/forwardprojection_semiflat
-./forwardprojection_dpintegrated -D < ../data/fpinputf32rad256_32 1> /dev/null 2> ../output/forwardprojection_dpintegrated
+./forwardprojection_semiflat -D < ../data/fpinputf32rad256_64 1> /dev/null 2> ../output/forwardprojection_semiflat
+./forwardprojection_dpintegrated -D < ../data/fpinputf32rad256_64 1> /dev/null 2> ../output/forwardprojection_dpintegrated
 echo "running benchmarks"
 
 futhark-bench --runs=1 --skip-compilation forwardprojection_jh.fut > ../output/forwardprojection_jh_benchmark
