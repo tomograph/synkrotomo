@@ -1,3 +1,4 @@
+import "futlib/array"
 import "matrix_lib"
 open Matrix
 
@@ -70,9 +71,14 @@ module Projection = {
                in map (\i -> unsafe sums[i]) mat_inds
 
       let notSparseMatMult [num_rows] [num_cols]
-                            (mat_vals : [num_rows][num_cols](f32,i32))
+                           (mat_vals : [num_rows][num_cols](f32,i32))
+                           (vect : []f32) : [num_rows]f32 =
+          map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind]) ) row ) mat_vals
+
+      let notSparseMatMult_back [num_rows] [num_cols]
+                            (mat_vals : [num_rows][num_cols]f32)
                             (vect : []f32) : [num_rows]f32 =
-           map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind]) ) row ) mat_vals
+          map (\row -> reduce (+) 0 <| map2 (*) row vect ) mat_vals
 
      -- gets the shape of a matrix - i.e number of entries pr. row when mat is in the format [[(d,i),(d,i)...]] where d is data
      -- and i is column index and -1 means no data
@@ -106,6 +112,39 @@ module Projection = {
                let shp_scn = filter (\p -> p != 0) shp_scn_tmp
                let values = map(\x-> (x.2,x.1))pixelsorted
                in spMatVctMult values shp_scn projections
+
+     let trans_test [m] [n]
+                    (matrix : [m][n](f32, i32)) : [n][m]f32 =
+               -- let full_inds = map (\rInd -> map (\i -> Lambda-function) (iota n) ) (iota m)
+               let rowInds = flatten(map (\rInd -> replicate n rInd) (iota m))
+               let (flatMatVals, flatMatcInds) = unzip(flatten(matrix))
+               let flatMat = (zip3 flatMatVals rowInds flatMatcInds)
+               let (vs, is) = unzip(map (\(v, row, col) -> if col != -1 then (v, (col*n + row)) else (0.0f32, -1) ) flatMat)
+               let transposed = scatter (replicate (length flatMat) 0.0f32) is vs
+               -- let transposed = scatter (replicate (length flatMat) (0.0f32, -1)) is vs
+               in (unflatten n m transposed)
+
+     let backprojection_map  (rays : []f32)
+                         (angles : []f32)
+                         (projections : []f32)
+                         (gridsize: i32)
+                         (stepSize : i32) : []f32=
+               let halfsize = r32(gridsize)/2
+               let entrypoints = convert2entry angles rays halfsize
+               let totalLen = (length entrypoints)
+               let runLen = (totalLen/stepSize)
+               let testmat = replicate (length projections) 0.0f32
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let partmatrix = map (\s -> unsafe (lengths_map gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
+                       let transmat = trans_test partmatrix
+                       let partresult = notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)]
+                       let result = map2 (+) output partresult
+                       in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+               in (tail testmat)
+
 
      let forwardprojection_doubleparallel [r][a][n] (angles : [a]f32)
                          (rays : [r]f32)
@@ -157,7 +196,6 @@ module Projection = {
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
                let totalLen = (length entrypoints)
-               -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
                let (testmat, _, _, _, _, _, _) =
