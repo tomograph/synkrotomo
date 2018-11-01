@@ -95,9 +95,12 @@ module Projection = {
      let backprojection_semiflat  (angles : []f32)
                          (rays : []f32)
                          (projections : []f32)
-                         (gridsize: i32) : []f32=
+                         (gridsize: i32)
+                         (stepSize : i32) :[]f32=
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
+               let totalLen = (length entrypoints)
+               let runLen = (totalLen/stepSize)
                -- result array
                let backmat = replicate (gridsize*gridsize) 0.0f32
                -- stripmined, sequential outer loop, mapped inner
@@ -228,7 +231,7 @@ module Projection = {
                           (stepSize : i32) : []f32 =
                let gridsize = t32(f32.sqrt(r32((length voxels))))
                let halfgridsize = gridsize/2
-               let entryexitpoints =  convert2entryexit angles rays r32(halfgridsize)
+               let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
                let totalLen =  (length entryexitpoints)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
@@ -314,46 +317,46 @@ module Projection = {
                           (voxels : [n]f32)
                           (stepSize : i32) : []f32 =
                let gridsize = t32(f32.sqrt(r32((length voxels))))
-               let halfsize = r32(gridsize)/2
-               let entrypoints = convert2entry angles rays halfsize
-               let totalLen = (length entrypoints)
+               let halfsize = gridsize/2
+               let entryexitpoints =  convert2entryexit angles rays (r32(halfsize))
+               let totalLen = (length entryexitpoints)
                -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
                let (testmat, _, _, _, _, _, _) =
-                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
                    while ( run < runLen ) do
                        let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
                        let partresult = map(\(ent,ext) -> (reduce (+) 0 (flatten(map (\i ->
                                  calculate_fp_val ent ext i gridsize voxels
-                            )((-halfgridsize)...(halfgridsize-1)))))) entryexitpoints[run*stepSize:run*stepSize+step]
-                       in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+                            )((-halfsize)...(halfsize-1)))))) entryexitpoints[run*stepSize:run*stepSize+step]
+                       in (output++partresult, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
                in (tail testmat)
 
 
-     let backprojection_integrated  (angles : []f32)
-                         (rays : []f32)
-                         (projections : []f32)
-                         (gridsize: i32)
-                         (stepSize : i32) : []f32=
-               let halfsize = r32(gridsize)/2
-               let entryexitpoints =  convert2entryexit angles rays halfsize
-               let totalLen = (length entryexitpoints)
-               let runLen = (totalLen/stepSize)
-               -- result array
-               let backmat = replicate (gridsize*gridsize) 0.0f32
-               -- stripmined, sequential outer loop, mapped inner
-               let (backmat, _, _, _, _, _, _) =
-                   loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
-                   while ( run < runLen ) do
-                       -- if the number of entrypoints doesn't line perfectly up with the stepsize
-                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
-                       let partresult = map(\j -> (flatten(map (\i ->
-                                calculate_bp_val (unsafe entryexitpoints[run*stepSize+j].1 entryexitpoints[run*stepSize+j].2 i gridsize projections[run*stepSize+j]
-                           )((-halfgridsize)...(halfgridsize-1))))) (iota step)
-                       -- add
-                       let result = (map2 (+) partresult output)
-                       in (result, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
-               in backmat
-               in
+     -- let backprojection_integrated  (angles : []f32)
+     --                     (rays : []f32)
+     --                     (projections : []f32)
+     --                     (gridsize: i32)
+     --                     (stepSize : i32) : []f32=
+     --           let halfsize = r32(gridsize)/2
+     --           let entryexitpoints =  convert2entryexit angles rays halfsize
+     --           let totalLen = (length entryexitpoints)
+     --           let runLen = (totalLen/stepSize)
+     --           -- result array
+     --           let backmat = replicate (gridsize*gridsize) 0.0f32
+     --           -- stripmined, sequential outer loop, mapped inner
+     --           let (backmat, _, _, _, _, _, _) =
+     --               loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+     --               while ( run < runLen ) do
+     --                   -- if the number of entrypoints doesn't line perfectly up with the stepsize
+     --                   let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+     --                   let partresult = map(\j -> (flatten(map (\i ->
+     --                            calculate_bp_val (unsafe entryexitpoints[run*stepSize+j].1 entryexitpoints[run*stepSize+j].2 i gridsize projections[run*stepSize+j]
+     --                       )((-halfgridsize)...(halfgridsize-1)))))) (iota step)
+     --                   -- add
+     --                   let result = (map2 (+) partresult output)
+     --                   in (result, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+     --           in backmat
+     --           in
 }
