@@ -129,10 +129,10 @@ module Matrix =
           let lymin = yminfact*baselength
           let lyplus = yplusfact*baselength
           let min = if (pixmin >= 0 && pixmin < N ** 2) then
-               (if Ypixmin == Ypixplus then baselength*pixels[pixmin] else lymin*pixels[pixmin])
+               (if Ypixmin == Ypixplus then (unsafe baselength*pixels[pixmin]) else (unsafe lymin*pixels[pixmin]))
                else 0
           let plus = if (pixplus >= 0 && pixplus < N ** 2) then
-               (if Ypixmin == Ypixplus then 0 else lyplus*pixels[pixmin])
+               (if Ypixmin == Ypixplus then 0 else (unsafe lyplus*pixels[pixmin]))
                else 0
           in [min,plus]
 

@@ -1,6 +1,8 @@
 from futhark import forwardprojection_doubleparallel
 from futhark import forwardprojection_jh
 from futhark import forwardprojection_map
+from futhark import forwardprojection_semiflat
+from futhark import forwardprojection_dpintegrated
 import numpy as np
 import tomo_lib
 import dataprint_lib
@@ -25,6 +27,14 @@ def main(argv):
     fp_map = forwardprojection_map.forwardprojection_map()
     map_result = fp_map.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), 32).get()
     tomo_lib.savesinogram("output//sinogram_map.png",map_result, numrays=len(rays), numangles=len(theta_rad))
+
+    fp_map = forwardprojection_semiflat.forwardprojection_semiflat()
+    map_result = fp_map.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), 32).get()
+    tomo_lib.savesinogram("output//sinogram_semiflat.png",map_result, numrays=len(rays), numangles=len(theta_rad))
+
+    fp_map = forwardprojection_dpintegrated.forwardprojection_dpintegrated()
+    map_result = fp_map.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), 32).get()
+    tomo_lib.savesinogram("output//sinogram_dpintegrated.png",map_result, numrays=len(rays), numangles=len(theta_rad))
 
 
 if __name__ == '__main__':
