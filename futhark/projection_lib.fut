@@ -352,11 +352,10 @@ module Projection = {
      --                   -- if the number of entrypoints doesn't line perfectly up with the stepsize
      --                   let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
      --                   let partresult = map(\j -> (flatten(map (\i ->
-     --                            calculate_bp_val (unsafe entryexitpoints[run*stepSize+j].1 entryexitpoints[run*stepSize+j].2 i gridsize projections[run*stepSize+j]
-     --                       )((-halfgridsize)...(halfgridsize-1)))))) (iota step)
+     --                            calculate_bp_val (unsafe entryexitpoints[run*stepSize+j].1) (unsafe entryexitpoints[run*stepSize+j].2) i gridsize projections[run*stepSize+j])
+     --                       ))((-halfgridsize)...(halfgridsize-1)))) (iota step)
      --                   -- add
      --                   let result = (map2 (+) partresult output)
      --                   in (result, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
      --           in backmat
-     --           in
 }

@@ -6,7 +6,7 @@ cd futhark
 futhark-pyopencl --library backprojection_jh.fut
 futhark-pyopencl --library backprojection_doubleparallel.fut
 futhark-pyopencl --library backprojection_map.fut
-echo "saving sinograms"
+echo "saving backprojections"
 
 cd ..
 python generatebackprojections.py
