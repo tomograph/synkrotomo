@@ -9,7 +9,7 @@ def get_angles(size, degrees=True):
     if degrees:
         return np.linspace(45, 135, num_angles, False)
     else:
-        return np.linspace(np.pi/4,3*np.pi/4, num_angles,False)
+        return np.linspace((np.pi/4),(3*np.pi/4), num_angles,False)
 
 def sinogram(image, theta):
     sinogram = np.zeros((len(theta), max(image.shape)))
