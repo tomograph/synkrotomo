@@ -17,14 +17,13 @@ def main(argv):
     dp_result = fp_doubleparallel.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), size).get()
     tomo_lib.savesinogram("output//sinogram_dp.png",dp_result, numrays=len(rays), numangles=len(theta_rad))
 
-    # fp_jh = forwardprojection_jh.forwardprojection_jh()
-    # jh_result = fp_jh.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), size).get()
-    # tomo_lib.savesinogram("output//sinogram_jh.png",jh_result, numrays=len(rays), numangles=len(theta_rad))
-    #
-    # fp_map = forwardprojection_map.forwardprojection_map()
-    # map_result = fp_map.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), size).get()
-    # tomo_lib.savesinogram("output//sinogram_map.png",map_result, numrays=len(rays), numangles=len(theta_rad))
+    fp_jh = forwardprojection_jh.forwardprojection_jh()
+    jh_result = fp_jh.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), size).get()
+    tomo_lib.savesinogram("output//sinogram_jh.png",jh_result, numrays=len(rays), numangles=len(theta_rad))
 
+    fp_map = forwardprojection_map.forwardprojection_map()
+    map_result = fp_map.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), size).get()
+    tomo_lib.savesinogram("output//sinogram_map.png",map_result, numrays=len(rays), numangles=len(theta_rad))
 
 
 if __name__ == '__main__':
