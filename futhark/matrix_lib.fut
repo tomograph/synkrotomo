@@ -1,5 +1,3 @@
-import "line_lib"
-open Lines
 -- ==
 -- compiled input {
 --    -2f32
@@ -66,14 +64,39 @@ open Lines
 --    -2f32
 --    2f32
 --    1f32
---    -1i32
+--    1i32
 --    4i32
 -- }
 -- output {
---   [1.80277563773f32,-1f32]
---   [11i32, -1i32]
+--   [1.20185042515f32,-1f32]
+--   [2i32, -1i32]
 -- }
-
+-- compiled input {
+--    0f32
+--    0f32
+--    2f32
+--    2f32
+--    1i32
+--    4i32
+-- }
+-- output {
+--   [1.41421356237f32,-1f32]
+--   [15i32, -1i32]
+-- }
+-- compiled input {
+--    -2f32
+--    2f32
+--    2f32
+--    -2f32
+--    1i32
+--    4i32
+-- }
+-- output {
+--   [-0f32,1.41421356237f32]
+--   [7i32, 3i32]
+-- }
+import "line_lib"
+open Lines
 module Matrix =
 {
      --- DOUBLE PARALLEL
@@ -94,8 +117,8 @@ module Matrix =
           let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
           let Ypixmin = t32(f32.floor(ymin))
           let Ypixplus = t32(f32.floor(yplus))
-          let baselength = f32.sqrt(1+k ** 2.0f32)
-          -- in [(t32(Ypixmin),baselength),(t32(Ypixplus),baselength)]
+          let baselength = f32.sqrt(1+k*k)
+          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
           let Ypixmax = i32.max Ypixmin Ypixplus
           let ydiff = yplus - ymin
           let yminfact = (r32(Ypixmax) - ymin)/ydiff
@@ -258,11 +281,11 @@ module Matrix =
           in map (\(p,sc) -> (lengths_map gridsize sc.1 sc.2 p)) entrypoints
 }
 
-open Matrix
-let main  (x1:f32)
-          (y1: f32)
-          (x2: f32)
-          (y2: f32)
-          (i: i32)
-          (N: i32): ([]f32, []i32) =
-          unzip(calculate_weight (x1,y1) (x2,y2) i N)
+-- open Matrix
+-- let main  (x1:f32)
+--           (y1: f32)
+--           (x2: f32)
+--           (y2: f32)
+--           (i: i32)
+--           (N: i32): ([]f32, []i32) =
+--           unzip(calculate_weight (x1,y1) (x2,y2) i N)
