@@ -99,6 +99,81 @@ import "line_lib"
 open Lines
 module Matrix =
 {
+     let calculate_fp_val(ent: point)
+               (ext: point)
+               (i: i32)
+               (N: i32)
+               (pixels: []f32) : []f32 =
+          let Nhalf = N/2
+          -- handle all lines as slope < 1 reverse the others
+          let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let reverse = f32.abs(slope) > 1
+          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
+          let k = if reverse then (-1/slope) else slope
+
+          --- calculate stuff
+          let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
+          let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
+          let Ypixmin = t32(f32.floor(ymin))
+          let Ypixplus = t32(f32.floor(yplus))
+          let baselength = f32.sqrt(1+k*k)
+          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
+          let Ypixmax = i32.max Ypixmin Ypixplus
+          let ydiff = yplus - ymin
+          let yminfact = (r32(Ypixmax) - ymin)/ydiff
+          let yplusfact = (yplus - r32(Ypixmax))/ydiff
+          let iindex = i+Nhalf
+          -- index calculated wrong for reversed lines i think
+          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
+          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
+          let lymin = yminfact*baselength
+          let lyplus = yplusfact*baselength
+          let min = if (pixmin >= 0 && pixmin < N ** 2) then
+               (if Ypixmin == Ypixplus then baselength*pixels[pixmin] else lymin*pixels[pixmin]
+               else 0
+          let plus = if (pixplus >= 0 && pixplus < N ** 2) then
+               (if Ypixmin == Ypixplus then 0 else lyplus*pixels[pixmin]
+               else 0
+          in [min,plus]
+
+     let calculate_bp_val(ent: point)
+               (ext: point)
+               (i: i32)
+               (N: i32)
+               (proj_val: f32) : []f32 =
+          let Nhalf = N/2
+          -- handle all lines as slope < 1 reverse the others
+          let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let reverse = f32.abs(slope) > 1
+          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
+          let k = if reverse then (-1/slope) else slope
+
+          --- calculate stuff
+          let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
+          let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
+          let Ypixmin = t32(f32.floor(ymin))
+          let Ypixplus = t32(f32.floor(yplus))
+          let baselength = f32.sqrt(1+k*k)
+          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
+          let Ypixmax = i32.max Ypixmin Ypixplus
+          let ydiff = yplus - ymin
+          let yminfact = (r32(Ypixmax) - ymin)/ydiff
+          let yplusfact = (yplus - r32(Ypixmax))/ydiff
+          let iindex = i+Nhalf
+          -- index calculated wrong for reversed lines i think
+          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
+          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
+          let lymin = yminfact*baselength
+          let lyplus = yplusfact*baselength
+          let min = if (pixmin >= 0 && pixmin < N ** 2) then
+               (if Ypixmin == Ypixplus then baselength*proj_val else lymin*proj_val
+               else 0
+          let plus = if (pixplus >= 0 && pixplus < N ** 2) then
+               (if Ypixmin == Ypixplus then 0 else lyplus*proj_val
+               else 0
+          in [min,plus]
+
+
      --- DOUBLE PARALLEL
      -- function which computes the weight of pixels in grid_column for ray with entry/exit p
      let calculate_weight(ent: point)
@@ -137,7 +212,7 @@ module Matrix =
                else (-1f32,-1i32)
           in [min,plus]
 
-     -- assuming flat lines and gridsize even
+     -- assuming  gridsize even
      let weights_doublepar(angles: []f32) (rays: []f32) (gridsize: i32): [][](f32,i32) =
           let halfgridsize = gridsize/2
           let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
