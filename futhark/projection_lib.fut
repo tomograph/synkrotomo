@@ -107,11 +107,11 @@ module Projection = {
                let values = map(\x-> (x.2,x.1))pixelsorted
                in spMatVctMult values shp_scn projections
 
-     let forwardprojection_doubleparallel [r][a][n] (angles : [a]f32)
+     let forwardprojection_doubleparallel [a][r][n] (angles : [a]f32)
                          (rays : [r]f32)
                           (voxels : [n]f32)
                           (stepSize : i32) : []f32 =
-               let matrix = weights_doublepar angles rays n
+               let matrix = weights_doublepar angles rays (t32(f32.sqrt(r32(n))))
                in notSparseMatMult matrix voxels
                -- let halfgridsize = n/2
                -- let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
