@@ -6,3 +6,4 @@
 *.pyc
 *.c
 sysmatas/
+data/*
