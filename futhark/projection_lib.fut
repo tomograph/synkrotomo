@@ -120,8 +120,8 @@ module Projection = {
                let padded = map (\row -> let (vals, inds) = (unzip row) in scatter (replicate rs 0.0f32) inds vals ) matrix
                in transpose padded
      -- backprojection nested map version.
-     let backprojection_map  (rays : []f32)
-                         (angles : []f32)
+     let backprojection_map  (angles : []f32)
+                         (rays : []f32)
                          (projections : []f32)
                          (gridsize: i32)
                          (stepSize : i32) : []f32=
@@ -148,8 +148,8 @@ module Projection = {
                        in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
                in backmat
 
-     let backprojection_jh  (rays : []f32)
-                         (angles : []f32)
+     let backprojection_jh (angles : []f32)
+                         (rays : []f32)
                          (projections : []f32)
                          (gridsize: i32)
                          (stepSize : i32) : []f32=
@@ -176,8 +176,8 @@ module Projection = {
                        in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
                in backmat
 
-     let backprojection_doubleparallel  (rays : []f32)
-                         (angles : []f32)
+     let backprojection_doubleparallel  (angles : []f32)
+                         (rays : []f32)
                          (projections : []f32)
                          (gridsize: i32)
                          (stepSize : i32) : []f32=
