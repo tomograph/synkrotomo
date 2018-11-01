@@ -6,7 +6,7 @@ from futhark import backprojection_jh
 from futhark import backprojection_doubleparallel
 
 def main(argv):
-    size = 64
+    size = 256
     theta_deg = tomo_lib.get_angles(size)
     theta_rad = tomo_lib.get_angles(size, degrees=False)
     rays = tomo_lib.get_rays(size)
