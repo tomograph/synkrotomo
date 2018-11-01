@@ -9,10 +9,10 @@ futhark-opencl projectionmatrix_doubleparallel.fut
 futhark-opencl projectionmatrix_map.fut
 echo "running benchmarks"
 
-./projectionmatrix_jh -D < ../data/matrixinputf32rad256 1> /dev/null 2> ../../output/matrix
-./projectionmatrix_doubleparallel -D < ../data/matrixinputf32rad256 1> /dev/null 2>>../../output/matrix
-./projectionmatrix_map -D < ../data/matrixinputf32rad256 1> /dev/null 2>> ../../output/matrix
+./projectionmatrix_jh -D < ../data/matrixinputf32rad256 1> /dev/null 2> ../output/projectionmatrix_jh
+./projectionmatrix_doubleparallel -D < ../data/matrixinputf32rad256 1> /dev/null 2>../output/projectionmatrix_doubleparallel
+./projectionmatrix_map -D < ../data/matrixinputf32rad256 1> /dev/null 2> ../output/projectionmatrix_map
 
-futhark-bench --runs=10 --skip-compilation projectionmatrix_jh.fut
-futhark-bench --runs=10 --skip-compilation projectionmatrix_doubleparallel.fut
-futhark-bench --runs=10 --skip-compilation projectionmatrix_map.fut
+futhark-bench --runs=10 --skip-compilation projectionmatrix_jh.fut > ../output/projectionmatrix_jh_benchmark
+futhark-bench --runs=10 --skip-compilation projectionmatrix_doubleparallel.fut > ../output/projectionmatrix_doubleparallel_benchmark
+futhark-bench --runs=10 --skip-compilation projectionmatrix_map.fut > ../output/projectionmatrix_map_benchmark
