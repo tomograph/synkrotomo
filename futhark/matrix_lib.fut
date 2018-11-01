@@ -170,7 +170,6 @@ module Matrix =
           --for all focuspoints, save index and distance
           let mf = map(\i ->
                let ind = if !(isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
-               --If the next point is in the grid calc dist, otherwise don't, however, if next doesn't exist, out of bounds?
                let dist = if isInGrid halfsize y_step_dir focuspoints[i+1] then (unsafe (distance focuspoints[i] focuspoints[i+1])) else 0.0f32
                in (dist, ind)
            ) (iota ((length focuspoints)-1))
