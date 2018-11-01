@@ -1,0 +1,10 @@
+Results for forwardprojection_jh.fut:
+dataset ../data/fpinputf32rad64_64:      37524.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_64:    246765.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_64:   1858834.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512_64:   forwardprojection_jh.fut failed with error code 1 and output:
+./forwardprojection_jh: forwardprojection_jh.c:2647: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
+dataset ../data/fpinputf32rad1024_64:  
