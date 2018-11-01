@@ -1,15 +1,14 @@
 import "line_lib"
 open Lines
 
-
--- function which computes the weight of pixels in grid_column for ray with entry/exit p
 module Matrix =
 {
      --- DOUBLE PARALLEL
+     -- function which computes the weight of pixels in grid_column for ray with entry/exit p
      let calculate_weight(ent: point)
-                         (ext: point)
-                         (i: i32)
-                         (N: i32) : [](f32,i32) =
+               (ext: point)
+               (i: i32)
+               (N: i32) : [](i32,f32) =
           let Nhalf = N/2
           -- handle all lines as slope < 1 reverse the others
           let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
