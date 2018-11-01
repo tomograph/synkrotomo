@@ -1,4 +1,5 @@
-import "projectionmatrix_jh"
+import "matrix_lib"
+open Matrix
 
 module Projection = {
 
@@ -106,14 +107,36 @@ module Projection = {
                let values = map(\x-> (x.2,x.1))pixelsorted
                in spMatVctMult values shp_scn projections
 
-     let forwardprojection (rays : []f32)
-                           (angles : []f32)
-                           (voxels : []f32) : []f32 =
+     let forwardprojection_doubleparallel [r][a][n] (angles : [a]f32)
+                         (rays : [r]f32)
+                          (voxels : [n]f32)
+                          (stepSize : i32) : []f32 =
+               let matrix = weights_doublepar angles rays n
+               in notSparseMatMult matrix voxels
+               -- let halfgridsize = n/2
+               -- let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+               -- let totalLen = r*a
+               -- let runLen = (totalLen/stepSize)
+               -- let testmat = [0f32]
+               -- let (testmat, _, _, _, _, _, _) =
+               --     loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (testmat, 0, runLen, stepSize, n, entryexitpoints, totalLen)
+               --     while ( run < runLen ) do
+               --         let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+               --         let partmatrix = map(\(ent,ext) -> (flatten(map (\i ->
+               --                   calculate_weight ent ext i gridsize
+               --              )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints[run*stepSize:run*stepSize+step]
+               --         let partresult = notSparseMatMult partmatrix voxels
+               --         in (output++partresult, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+               -- in (tail testmat)
+
+     let forwardprojection_jh [r][a][n] (angles : [a]f32)
+                         (rays : [r]f32)
+                          (voxels : [n]f32)
+                          (stepSize : i32) : []f32 =
                let gridsize = t32(f32.sqrt(r32((length voxels))))
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
                let totalLen = (length entrypoints)
-               let stepSize = 32
                -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
@@ -122,6 +145,26 @@ module Projection = {
                    while ( run < runLen ) do
                        let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
                        let partmatrix = map (\s -> unsafe (lengths gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
+                       let partresult = notSparseMatMult partmatrix voxels
+                       in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+               in (tail testmat)
+
+     let forwardprojection_map [r][a][n] (angles : [a]f32)
+                         (rays : [r]f32)
+                          (voxels : [n]f32)
+                          (stepSize : i32) : []f32 =
+               let gridsize = t32(f32.sqrt(r32((length voxels))))
+               let halfsize = r32(gridsize)/2
+               let entrypoints = convert2entry angles rays halfsize
+               let totalLen = (length entrypoints)
+               -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
+               let runLen = (totalLen/stepSize)
+               let testmat = [0f32]
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let partmatrix = map (\s -> unsafe (lengths_map gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
                        let partresult = notSparseMatMult partmatrix voxels
                        in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
                in (tail testmat)
