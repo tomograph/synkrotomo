@@ -75,6 +75,7 @@ module Projection = {
                            (vect : []f32) : [num_rows]f32 =
           map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind]) ) row ) mat_vals
 
+      -- not sparse, nested, matrix vector multiplication for backprojection, uses a padded version of the matrix
       let notSparseMatMult_back [num_rows] [num_cols]
                             (mat_vals : [num_rows][num_cols]f32)
                             (vect : []f32) : [num_rows]f32 =
@@ -112,18 +113,13 @@ module Projection = {
                let shp_scn = filter (\p -> p != 0) shp_scn_tmp
                let values = map(\x-> (x.2,x.1))pixelsorted
                in spMatVctMult values shp_scn projections
-
-     let trans_test [m] [n]
-                    (matrix : [m][n](f32, i32)) : [n][m]f32 =
-               -- let full_inds = map (\rInd -> map (\i -> Lambda-function) (iota n) ) (iota m)
-               let rowInds = flatten(map (\rInd -> replicate n rInd) (iota m))
-               let (flatMatVals, flatMatcInds) = unzip(flatten(matrix))
-               let flatMat = (zip3 flatMatVals rowInds flatMatcInds)
-               let (vs, is) = unzip(map (\(v, row, col) -> if col != -1 then (v, (col*n + row)) else (0.0f32, -1) ) flatMat)
-               let transposed = scatter (replicate (length flatMat) 0.0f32) is vs
-               -- let transposed = scatter (replicate (length flatMat) (0.0f32, -1)) is vs
-               in (unflatten n m transposed)
-
+     -- pads and transposes the matrix, nested, will perform better when tiling is improved in futhark
+     let trans_map [m] [n]
+                    (matrix : [m][n](f32, i32)) (gridsize: i32): [][]f32 =
+               let rs = gridsize*gridsize
+               let padded = map (\row -> let (vals, inds) = (unzip row) in scatter (replicate rs 0.0f32) inds vals ) matrix
+               in transpose padded
+     -- backprojection nested map version.
      let backprojection_map  (rays : []f32)
                          (angles : []f32)
                          (projections : []f32)
@@ -133,17 +129,24 @@ module Projection = {
                let entrypoints = convert2entry angles rays halfsize
                let totalLen = (length entrypoints)
                let runLen = (totalLen/stepSize)
-               let testmat = replicate (length projections) 0.0f32
-               let (testmat, _, _, _, _, _, _) =
-                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+               -- result array
+               let backmat = replicate (gridsize*gridsize) 0.0f32
+               -- stripmined, sequential outer loop, mapped inner
+               let (backmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
                    while ( run < runLen ) do
+                       -- if the number of entrypoints doesn't line perfectly up with the stepsize
                        let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       -- calc part of matrix, stepSize rows
                        let partmatrix = map (\s -> unsafe (lengths_map gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
-                       let transmat = trans_test partmatrix
-                       let partresult = notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)]
-                       let result = map2 (+) output partresult
+                       -- transpose
+                       let transmat = trans_map partmatrix gridsize
+                       -- mult
+                       let partresult = (notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)])
+                       -- add
+                       let result = (map2 (+) partresult output)
                        in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
-               in (tail testmat)
+               in backmat
 
 
      let forwardprojection_doubleparallel [r][a][n] (angles : [a]f32)
@@ -198,10 +201,13 @@ module Projection = {
                let totalLen = (length entrypoints)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
+               -- stripmined, sequential outer loop, mapped inner
                let (testmat, _, _, _, _, _, _) =
                    loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
                    while ( run < runLen ) do
+                       -- if the number of entrypoints doesn't line perfectly up with the stepsize
                        let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       -- calc part of matrix, stepSize rows
                        let partmatrix = map (\s -> unsafe (lengths_map gridsize (entrypoints[run*stepSize + s].2).1 (entrypoints[run*stepSize + s].2).2 entrypoints[run*stepSize + s].1 )) (iota step)
                        let partresult = notSparseMatMult partmatrix voxels
                        in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
