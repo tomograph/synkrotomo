@@ -169,7 +169,7 @@ module Matrix =
           let focuspoints = (getFocusPoints entryPoint slope vertical halfsize y_step_dir)
           let mf = map(\i ->
                let ind = if !(isInGrid halfsize y_step_dir focuspoints[i]) then -1 else index focuspoints[i] halfsize y_step_dir
-               let dist = (unsafe (distance focuspoints[i] focuspoints[i+1]))
+               let dist = if isInGrid halfsize y_step_dir focuspoints[i+1] then (unsafe (distance focuspoints[i] focuspoints[i+1])) else 0.0f32
                in (dist, ind)
            ) (iota (length focuspoints))
            in mf
