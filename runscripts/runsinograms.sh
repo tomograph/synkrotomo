@@ -1,3 +1,4 @@
+echo "runsinograms"
 echo "compiling"
 cd ..
 cd futhark

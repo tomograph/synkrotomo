@@ -1,3 +1,4 @@
+echo "runbackprojections"
 echo "compiling"
 cd ..
 cd futhark
