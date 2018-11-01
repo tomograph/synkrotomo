@@ -92,33 +92,50 @@ module Projection = {
      let isnewsegment (i: i32) (arr: []i32) : bool =
                          i!=0 && (unsafe arr[i]) != (unsafe arr[i-1])
 
-     let backprojection  (rays : []f32)
-                         (angles : []f32)
+     let backprojection_semiflat  (angles : []f32)
+                         (rays : []f32)
                          (projections : []f32)
-                         (gridsize: i32) : []f32=
+                         (gridsize: i32)
+                         (stepSize : i32) :[]f32=
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
-               let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints
-               --convert to triples (data,ray,pixel)
-               let triples_tmp = flatten(map(\i -> map(\v -> (v.1, i, v.2))(unsafe intersections[i])) (iota (length intersections)))
-               -- remove none values
-               let triples = filter (\x -> x.3 != -1) triples_tmp
-               -- sort by pixel indexes
-               let pixelsorted = rsort triples
-               -- slplit int three arrays in order to use pixels only for shp
-               let (data,rays,pixels) = unzip3 pixelsorted
-               let num_pixels = length pixels
-               -- contains sum of values where a row ends since columns will be rows.
-               let shp_scn_tmp = map (\i -> if (i == num_pixels || (isnewsegment i pixels)) then i else 0) (iota (num_pixels+1))
-               let shp_scn = filter (\p -> p != 0) shp_scn_tmp
-               let values = map(\x-> (x.2,x.1))pixelsorted
-               in spMatVctMult values shp_scn projections
+               let totalLen = (length entrypoints)
+               let runLen = (totalLen/stepSize)
+               -- result array
+               let backmat = replicate (gridsize*gridsize) 0.0f32
+               -- stripmined, sequential outer loop, mapped inner
+               let (backmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   while ( run < runLen ) do
+                       -- if the number of entrypoints doesn't line perfectly up with the stepsize
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       -- calc part of matrix, stepSize rows
+                       let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints[(run*stepSize) : (run*stepSize + step)]
+                       --convert to triples (data,ray,pixel)
+                       let triples_tmp = flatten(map(\i -> map(\v -> (v.1, i, v.2))(unsafe intersections[i])) (iota (length intersections)))
+                       -- remove none values
+                       let triples = filter (\x -> x.3 != -1) triples_tmp
+                       -- sort by pixel indexes
+                       let pixelsorted = rsort triples
+                       -- slplit int three arrays in order to use pixels only for shp
+                       let (data,rays,pixels) = unzip3 pixelsorted
+                       let num_pixels = length pixels
+                       -- contains sum of values where a row ends since columns will be rows.
+                       let shp_scn_tmp = map (\i -> if (i == num_pixels || (isnewsegment i pixels)) then i else 0) (iota (num_pixels+1))
+                       let shp_scn = filter (\p -> p != 0) shp_scn_tmp
+                       let values = map(\x-> (x.2,x.1))pixelsorted
+                       let partresult = spMatVctMult values shp_scn projections[(run*stepSize) : (run*stepSize + step)]
+                       let result = (map2 (+) partresult output)
+                       in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+               in backmat
+
      -- pads and transposes the matrix, nested, will perform better when tiling is improved in futhark
      let trans_map [m] [n]
                     (matrix : [m][n](f32, i32)) (gridsize: i32): [][]f32 =
                let rs = gridsize*gridsize
                let padded = map (\row -> let (vals, inds) = (unzip row) in scatter (replicate rs 0.0f32) inds vals ) matrix
                in transpose padded
+
      -- backprojection nested map version.
      let backprojection_map  (angles : []f32)
                          (rays : []f32)
@@ -214,7 +231,7 @@ module Projection = {
                           (stepSize : i32) : []f32 =
                let gridsize = t32(f32.sqrt(r32((length voxels))))
                let halfgridsize = gridsize/2
-               let entryexitpoints =  convert2entryexit angles rays r32(halfgridsize)
+               let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
                let totalLen =  (length entryexitpoints)
                let runLen = (totalLen/stepSize)
                let testmat = [0f32]
@@ -270,4 +287,75 @@ module Projection = {
                        let partresult = notSparseMatMult partmatrix voxels
                        in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
                in (tail testmat)
+
+     let forwardprojection_semiflat [r][a][n] (angles : [a]f32)
+                         (rays : [r]f32)
+                          (voxels : [n]f32)
+                          (stepSize : i32) : []f32 =
+               let gridsize = t32(f32.sqrt(r32((length voxels))))
+               let halfsize = r32(gridsize)/2
+               let entrypoints = convert2entry angles rays halfsize
+               let totalLen = (length entrypoints)
+               -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
+               let runLen = (totalLen/stepSize)
+               let testmat = [0f32]
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints[(run*stepSize) : (run*stepSize + step)]
+                       let shp = getshp intersections
+                       let shp_scn = scan (+) 0 shp
+                       let values_tmp = flatten(map(\r -> map(\(d,p)->(p,d))r)intersections)
+                       let values = filter (\x -> x.1 != -1) values_tmp
+                       let partresult = spMatVctMult values shp_scn voxels
+                       in (output++partresult, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
+               in (tail testmat)
+
+     let forwardprojection_integrated [r][a][n] (angles : [a]f32)
+                         (rays : [r]f32)
+                          (voxels : [n]f32)
+                          (stepSize : i32) : []f32 =
+               let gridsize = t32(f32.sqrt(r32((length voxels))))
+               let halfsize = gridsize/2
+               let entryexitpoints =  convert2entryexit angles rays (r32(halfsize))
+               let totalLen = (length entryexitpoints)
+               -- let runLen = if (totalLen/stepSize) == 0 then 1 else (totalLen/stepSize)
+               let runLen = (totalLen/stepSize)
+               let testmat = [0f32]
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let partresult = map(\(ent,ext) -> (reduce (+) 0 (flatten(map (\i ->
+                                 calculate_fp_val ent ext i gridsize voxels
+                            )((-halfsize)...(halfsize-1)))))) entryexitpoints[run*stepSize:run*stepSize+step]
+                       in (output++partresult, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+               in (tail testmat)
+
+
+     -- let backprojection_integrated  (angles : []f32)
+     --                     (rays : []f32)
+     --                     (projections : []f32)
+     --                     (gridsize: i32)
+     --                     (stepSize : i32) : []f32=
+     --           let halfsize = r32(gridsize)/2
+     --           let entryexitpoints =  convert2entryexit angles rays halfsize
+     --           let totalLen = (length entryexitpoints)
+     --           let runLen = (totalLen/stepSize)
+     --           -- result array
+     --           let backmat = replicate (gridsize*gridsize) 0.0f32
+     --           -- stripmined, sequential outer loop, mapped inner
+     --           let (backmat, _, _, _, _, _, _) =
+     --               loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+     --               while ( run < runLen ) do
+     --                   -- if the number of entrypoints doesn't line perfectly up with the stepsize
+     --                   let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+     --                   let partresult = map(\j -> (flatten(map (\i ->
+     --                            calculate_bp_val (unsafe entryexitpoints[run*stepSize+j].1) (unsafe entryexitpoints[run*stepSize+j].2) i gridsize projections[run*stepSize+j])
+     --                       ))((-halfgridsize)...(halfgridsize-1)))) (iota step)
+     --                   -- add
+     --                   let result = (map2 (+) partresult output)
+     --                   in (result, run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+     --           in backmat
 }
