@@ -8,7 +8,7 @@ module Matrix =
      let calculate_weight(ent: point)
                (ext: point)
                (i: i32)
-               (N: i32) : [](i32,f32) =
+               (N: i32) : [](f32,i32) =
           let Nhalf = N/2
           -- handle all lines as slope < 1 reverse the others
           let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
@@ -40,9 +40,7 @@ module Matrix =
           in [min,plus]
 
      -- assuming flat lines and gridsize even
-     let weights_doublepar    (angles: []f32)
-                              (rays: []f32)
-                              (gridsize: i32): [][](f32,i32) =
+     let weights_doublepar(angles: []f32) (rays: []f32) (gridsize: i32): [][](f32,i32) =
           let halfgridsize = gridsize/2
           let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
           in map(\(ent,ext) -> (flatten(map (\i ->
