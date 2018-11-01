@@ -34,4 +34,4 @@ let main  (angles: []f32)
           (rays: []f32)
           (voxels: []f32)
           (stepsize: i32) : []f32 =
-          forwardprojection_semiflat angles rays voxels stepsize
+          forwardprojection_integrated angles rays voxels stepsize
