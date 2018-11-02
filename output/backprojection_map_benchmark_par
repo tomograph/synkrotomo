@@ -1,0 +1,24 @@
+Compiling backprojection_map.fut...
+Results for backprojection_map.fut:
+dataset ../data/bpinputf32rad64_32:       8371.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_32:     31436.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_32:    127234.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_32:    532046.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_32:  2917783.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_32:  18619555.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_32:  127919626.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad64_64:       4450.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_64:     17349.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_64:     77832.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_64:    331348.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_64:  1900888.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_64:  12209355.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_64:  backprojection_map.fut failed with error code 1 and output:
+./backprojection_map: backprojection_map.c:2767: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/bpinputf32rad64_128:      2603.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_128:    10471.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_128:    50654.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_128:  

@@ -1,0 +1,8 @@
+Results for backprojection_map.fut:
+dataset ../data/bpinputf32rad64_32:       7432.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_32:     27169.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_32:    112805.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_32:    534147.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_32:  2904594.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_32:  18637657.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_32:  
