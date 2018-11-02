@@ -1,0 +1,22 @@
+Results for projectionmatrix_map.fut:
+dataset ../data/matrixinputf32rad64:       459.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad128:     2301.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad256:    17438.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad512:  projectionmatrix_map.fut failed with error code 1 and output:
+./projectionmatrix_map: projectionmatrix_map.c:2675: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/matrixinputf32rad1024: projectionmatrix_map.fut failed with error code 1 and output:
+./projectionmatrix_map: Negative allocation of -3689189376 bytes attempted for mem_9274 in space 'device'.
+
+dataset ../data/matrixinputf32rad2048: projectionmatrix_map.fut failed with error code 1 and output:
+./projectionmatrix_map: projectionmatrix_map.c:2675: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/matrixinputf32rad4096: projectionmatrix_map.fut failed with error code 1 and output:
+./projectionmatrix_map: projectionmatrix_map.c:2675: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
