@@ -43,6 +43,3 @@ loop (output, step, raysperstep)
 \end{lstlisting}
   \caption{A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}
-\todo{L\ae rke says there are errors in futhark bp code. We should fix it}
-
-\todo{Insert futhark implementations of nested version of FP and BP and the time it takes to run. Note which loops are parallel and why. Do work depth analysis of these algorithms. Make graphs displaying memory usage. Write something about why BP is slower than FP, what can we do about it?}

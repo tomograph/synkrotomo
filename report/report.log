@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  2 NOV 2018 16:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  2 NOV 2018 16:48
 entering extended mode
 **./report.tex
 (report.tex
@@ -1080,9 +1080,6 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Marginpar on page 8 moved.
-
 ) [8 <./images/resultsMatrixPlot.png>] [9] (content/flattening.tex
 <images/forwardprojection_32.png, id=53, 462.528pt x 346.896pt>
 File: images/forwardprojection_32.png Graphic file (type png)
@@ -1118,11 +1115,11 @@ LaTeX Warning: Marginpar on page 12 moved.
 Here is how much of TeX's memory you used:
  22625 strings out of 493305
  438783 string characters out of 3129367
- 749049 words of memory out of 3000000
+ 747049 words of memory out of 3000000
  25566 multiletter control sequences out of 15000+200000
  23271 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 92i,13n,87p,1924b,1437s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 92i,13n,87p,1847b,1436s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
 ppen\ec\dpi600\ecrm1000.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\
 ljfour\jknappen\ec\dpi600\ecti1200.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.
@@ -1141,9 +1138,9 @@ m/cmr12.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmr8.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/zgb585/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (12 pages, 324585 bytes).
+Output written on report.pdf (12 pages, 322338 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
+ 366 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,7 +1,7 @@
 echo "benchmarkprojectionmatrix"
 echo "generating data"
 cd ..
-python projectionmatrixdata.py
+#python projectionmatrixdata.py
 echo "compiling"
 cd futhark
 
