@@ -1,0 +1,49 @@
+Results for forwardprojection_dpintegrated.fut:
+dataset ../data/fpinputf32rad64_32:       3001.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_32:     11166.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_32:   forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad512_32:   forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad1024_32:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad2048_32:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad4096_32:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad64_64:       2965.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_64:     10619.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_64:   forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad512_64:   forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad1024_64:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad2048_64:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad4096_64:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad64_128:      4192.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_128:    11188.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_128:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad512_128:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad1024_128: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad2048_128: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad4096_128: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad64_256:      2978.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_256:    11663.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_256:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad512_256:  forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad1024_256: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad2048_256: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
+dataset ../data/fpinputf32rad4096_256: forwardprojection_dpintegrated.fut failed with error code -11 and output:
+
