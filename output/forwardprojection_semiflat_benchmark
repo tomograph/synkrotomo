@@ -1,0 +1,36 @@
+Results for forwardprojection_semiflat.fut:
+dataset ../data/fpinputf32rad128_32:   3086620.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_32:   6979774.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512_32:   13021669.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024_32:  32900592.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad2048_32:  76999194.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad4096_32:  202122342.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad64_64:     760951.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_64:   1528177.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_64:   3562584.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512_64:   6158573.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024_64:  17562605.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad2048_64:  39399525.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad4096_64:  103696631.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad64_128:    398394.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_128:   795642.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_128:  1776575.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512_128:  3316218.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024_128: 9302420.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad2048_128: 20427408.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad4096_128: forwardprojection_semiflat.fut failed with error code 1 and output:
+./forwardprojection_semiflat: forwardprojection_semiflat.c:6414: OpenCL call
+  clEnqueueReadBuffer(ctx->opencl.queue, mem_13410.mem, 1, last_index_12382 * 4, sizeof(int32_t), &read_res_13769, 0, ((void *)0), ((void *)0))
+failed with error code -5 (Out of resources)
+
+dataset ../data/fpinputf32rad64_256:    212346.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128_256:   404154.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256_256:   865532.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512_256:  1696191.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024_256: 4807768.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad2048_256: 11515967.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad4096_256: forwardprojection_semiflat.fut failed with error code 1 and output:
+./forwardprojection_semiflat: forwardprojection_semiflat.c:3017: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
