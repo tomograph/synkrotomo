@@ -948,904 +948,907 @@ static inline float futrts_from_bits32(int32_t x)
     p.f = x;
     return p.t;
 }
-#define group_sizze_10205 (group_size_10204)
-__kernel void kernel_replicate_9851(__global unsigned char *mem_10511)
+#define group_sizze_10735 (group_size_10734)
+__kernel void kernel_replicate_10381(__global unsigned char *mem_11041)
 {
-    const uint replicate_gtid_9851 = get_global_id(0);
+    const uint replicate_gtid_10381 = get_global_id(0);
     
-    if (replicate_gtid_9851 >= 1)
+    if (replicate_gtid_10381 >= 1)
         return;
-    *(__global float *) &mem_10511[replicate_gtid_9851 * 4] = 0.0F;
+    *(__global float *) &mem_11041[replicate_gtid_10381 * 4] = 0.0F;
 }
-__kernel void map_kernel_10116(int32_t sizze_9797, int32_t sizze_9798, __global
-                               unsigned char *mem_10494, __global
-                               unsigned char *mem_10502)
+__kernel void map_kernel_10646(int32_t sizze_10327, int32_t sizze_10328,
+                               __global unsigned char *mem_11024, __global
+                               unsigned char *mem_11032)
 {
-    int32_t wave_sizze_10562;
-    int32_t group_sizze_10563;
-    bool thread_active_10564;
-    int32_t gtid_10107;
-    int32_t gtid_10108;
-    int32_t global_tid_10116;
-    int32_t local_tid_10117;
-    int32_t group_id_10118;
+    int32_t wave_sizze_11092;
+    int32_t group_sizze_11093;
+    bool thread_active_11094;
+    int32_t gtid_10637;
+    int32_t gtid_10638;
+    int32_t global_tid_10646;
+    int32_t local_tid_10647;
+    int32_t group_id_10648;
     
-    global_tid_10116 = get_global_id(0);
-    local_tid_10117 = get_local_id(0);
-    group_sizze_10563 = get_local_size(0);
-    wave_sizze_10562 = LOCKSTEP_WIDTH;
-    group_id_10118 = get_group_id(0);
-    gtid_10107 = squot32(global_tid_10116, sizze_9798);
-    gtid_10108 = global_tid_10116 - squot32(global_tid_10116, sizze_9798) *
-        sizze_9798;
-    thread_active_10564 = slt32(gtid_10107, sizze_9797) && slt32(gtid_10108,
-                                                                 sizze_9798);
+    global_tid_10646 = get_global_id(0);
+    local_tid_10647 = get_local_id(0);
+    group_sizze_11093 = get_local_size(0);
+    wave_sizze_11092 = LOCKSTEP_WIDTH;
+    group_id_10648 = get_group_id(0);
+    gtid_10637 = squot32(global_tid_10646, sizze_10328);
+    gtid_10638 = global_tid_10646 - squot32(global_tid_10646, sizze_10328) *
+        sizze_10328;
+    thread_active_11094 = slt32(gtid_10637, sizze_10327) && slt32(gtid_10638,
+                                                                  sizze_10328);
     
-    float res_10119;
+    float res_10649;
     
-    if (thread_active_10564) {
-        res_10119 = *(__global float *) &mem_10494[gtid_10107 * 4];
+    if (thread_active_11094) {
+        res_10649 = *(__global float *) &mem_11024[gtid_10637 * 4];
     }
-    if (thread_active_10564) {
-        *(__global float *) &mem_10502[(gtid_10107 * sizze_9798 + gtid_10108) *
-                                       4] = res_10119;
-    }
-}
-__kernel void map_kernel_10132(int32_t sizze_9797, int32_t sizze_9798, __global
-                               unsigned char *mem_10491, __global
-                               unsigned char *mem_10498)
-{
-    int32_t wave_sizze_10559;
-    int32_t group_sizze_10560;
-    bool thread_active_10561;
-    int32_t gtid_10123;
-    int32_t gtid_10124;
-    int32_t global_tid_10132;
-    int32_t local_tid_10133;
-    int32_t group_id_10134;
-    
-    global_tid_10132 = get_global_id(0);
-    local_tid_10133 = get_local_id(0);
-    group_sizze_10560 = get_local_size(0);
-    wave_sizze_10559 = LOCKSTEP_WIDTH;
-    group_id_10134 = get_group_id(0);
-    gtid_10123 = squot32(global_tid_10132, sizze_9798);
-    gtid_10124 = global_tid_10132 - squot32(global_tid_10132, sizze_9798) *
-        sizze_9798;
-    thread_active_10561 = slt32(gtid_10123, sizze_9797) && slt32(gtid_10124,
-                                                                 sizze_9798);
-    
-    float res_10135;
-    
-    if (thread_active_10561) {
-        res_10135 = *(__global float *) &mem_10491[gtid_10123 * 4];
-    }
-    if (thread_active_10561) {
-        *(__global float *) &mem_10498[(gtid_10123 * sizze_9798 + gtid_10124) *
-                                       4] = res_10135;
+    if (thread_active_11094) {
+        *(__global float *) &mem_11032[(gtid_10637 * sizze_10328 + gtid_10638) *
+                                       4] = res_10649;
     }
 }
-__kernel void map_kernel_10144(int32_t sizze_9797, __global
-                               unsigned char *angles_mem_10484, __global
-                               unsigned char *mem_10491, __global
-                               unsigned char *mem_10494)
+__kernel void map_kernel_10662(int32_t sizze_10327, int32_t sizze_10328,
+                               __global unsigned char *mem_11021, __global
+                               unsigned char *mem_11028)
 {
-    int32_t wave_sizze_10556;
-    int32_t group_sizze_10557;
-    bool thread_active_10558;
-    int32_t gtid_10137;
-    int32_t global_tid_10144;
-    int32_t local_tid_10145;
-    int32_t group_id_10146;
+    int32_t wave_sizze_11089;
+    int32_t group_sizze_11090;
+    bool thread_active_11091;
+    int32_t gtid_10653;
+    int32_t gtid_10654;
+    int32_t global_tid_10662;
+    int32_t local_tid_10663;
+    int32_t group_id_10664;
     
-    global_tid_10144 = get_global_id(0);
-    local_tid_10145 = get_local_id(0);
-    group_sizze_10557 = get_local_size(0);
-    wave_sizze_10556 = LOCKSTEP_WIDTH;
-    group_id_10146 = get_group_id(0);
-    gtid_10137 = global_tid_10144;
-    thread_active_10558 = slt32(gtid_10137, sizze_9797);
+    global_tid_10662 = get_global_id(0);
+    local_tid_10663 = get_local_id(0);
+    group_sizze_11090 = get_local_size(0);
+    wave_sizze_11089 = LOCKSTEP_WIDTH;
+    group_id_10664 = get_group_id(0);
+    gtid_10653 = squot32(global_tid_10662, sizze_10328);
+    gtid_10654 = global_tid_10662 - squot32(global_tid_10662, sizze_10328) *
+        sizze_10328;
+    thread_active_11091 = slt32(gtid_10653, sizze_10327) && slt32(gtid_10654,
+                                                                  sizze_10328);
     
-    float x_10147;
-    float res_10148;
-    float res_10149;
+    float res_10665;
     
-    if (thread_active_10558) {
-        x_10147 = *(__global float *) &angles_mem_10484[gtid_10137 * 4];
-        res_10148 = futrts_sin32(x_10147);
-        res_10149 = futrts_cos32(x_10147);
+    if (thread_active_11091) {
+        res_10665 = *(__global float *) &mem_11021[gtid_10653 * 4];
     }
-    if (thread_active_10558) {
-        *(__global float *) &mem_10491[gtid_10137 * 4] = res_10148;
-    }
-    if (thread_active_10558) {
-        *(__global float *) &mem_10494[gtid_10137 * 4] = res_10149;
+    if (thread_active_11091) {
+        *(__global float *) &mem_11028[(gtid_10653 * sizze_10328 + gtid_10654) *
+                                       4] = res_10665;
     }
 }
-__kernel void map_kernel_10157(int32_t sizze_9798, float res_9808,
-                               float res_9821, int32_t nesting_sizze_10125,
-                               __global unsigned char *rays_mem_10486, __global
-                               unsigned char *mem_10498, __global
-                               unsigned char *mem_10502, __global
-                               unsigned char *mem_10505, __global
-                               unsigned char *mem_10508)
+__kernel void map_kernel_10674(int32_t sizze_10327, __global
+                               unsigned char *angles_mem_11014, __global
+                               unsigned char *mem_11021, __global
+                               unsigned char *mem_11024)
 {
-    int32_t wave_sizze_10565;
-    int32_t group_sizze_10566;
-    bool thread_active_10567;
-    int32_t gtid_10150;
-    int32_t global_tid_10157;
-    int32_t local_tid_10158;
-    int32_t group_id_10159;
+    int32_t wave_sizze_11086;
+    int32_t group_sizze_11087;
+    bool thread_active_11088;
+    int32_t gtid_10667;
+    int32_t global_tid_10674;
+    int32_t local_tid_10675;
+    int32_t group_id_10676;
     
-    global_tid_10157 = get_global_id(0);
-    local_tid_10158 = get_local_id(0);
-    group_sizze_10566 = get_local_size(0);
-    wave_sizze_10565 = LOCKSTEP_WIDTH;
-    group_id_10159 = get_group_id(0);
-    gtid_10150 = global_tid_10157;
-    thread_active_10567 = slt32(gtid_10150, nesting_sizze_10125);
+    global_tid_10674 = get_global_id(0);
+    local_tid_10675 = get_local_id(0);
+    group_sizze_11087 = get_local_size(0);
+    wave_sizze_11086 = LOCKSTEP_WIDTH;
+    group_id_10676 = get_group_id(0);
+    gtid_10667 = global_tid_10674;
+    thread_active_11088 = slt32(gtid_10667, sizze_10327);
     
-    int32_t new_index_10464;
-    int32_t binop_y_10466;
-    int32_t new_index_10467;
-    float x_10160;
-    float x_10161;
-    float x_10162;
-    bool cond_10163;
-    float res_10164;
-    bool cond_10168;
-    float res_10169;
-    float res_10173;
-    float res_10177;
-    bool cond_10178;
-    bool res_10179;
-    bool x_10180;
-    float res_10181;
-    float res_10182;
+    float x_10677;
+    float res_10678;
+    float res_10679;
     
-    if (thread_active_10567) {
-        new_index_10464 = squot32(gtid_10150, sizze_9798);
-        binop_y_10466 = sizze_9798 * new_index_10464;
-        new_index_10467 = gtid_10150 - binop_y_10466;
-        x_10160 = *(__global float *) &mem_10498[(new_index_10464 * sizze_9798 +
-                                                  new_index_10467) * 4];
-        x_10161 = *(__global float *) &mem_10502[(new_index_10464 * sizze_9798 +
-                                                  new_index_10467) * 4];
-        x_10162 = *(__global float *) &rays_mem_10486[new_index_10467 * 4];
-        cond_10163 = x_10160 == 0.0F;
-        if (cond_10163) {
-            res_10164 = x_10162;
+    if (thread_active_11088) {
+        x_10677 = *(__global float *) &angles_mem_11014[gtid_10667 * 4];
+        res_10678 = futrts_sin32(x_10677);
+        res_10679 = futrts_cos32(x_10677);
+    }
+    if (thread_active_11088) {
+        *(__global float *) &mem_11021[gtid_10667 * 4] = res_10678;
+    }
+    if (thread_active_11088) {
+        *(__global float *) &mem_11024[gtid_10667 * 4] = res_10679;
+    }
+}
+__kernel void map_kernel_10687(int32_t sizze_10328, float res_10338,
+                               float res_10351, int32_t nesting_sizze_10655,
+                               __global unsigned char *rays_mem_11016, __global
+                               unsigned char *mem_11028, __global
+                               unsigned char *mem_11032, __global
+                               unsigned char *mem_11035, __global
+                               unsigned char *mem_11038)
+{
+    int32_t wave_sizze_11095;
+    int32_t group_sizze_11096;
+    bool thread_active_11097;
+    int32_t gtid_10680;
+    int32_t global_tid_10687;
+    int32_t local_tid_10688;
+    int32_t group_id_10689;
+    
+    global_tid_10687 = get_global_id(0);
+    local_tid_10688 = get_local_id(0);
+    group_sizze_11096 = get_local_size(0);
+    wave_sizze_11095 = LOCKSTEP_WIDTH;
+    group_id_10689 = get_group_id(0);
+    gtid_10680 = global_tid_10687;
+    thread_active_11097 = slt32(gtid_10680, nesting_sizze_10655);
+    
+    int32_t new_index_10994;
+    int32_t binop_y_10996;
+    int32_t new_index_10997;
+    float x_10690;
+    float x_10691;
+    float x_10692;
+    bool cond_10693;
+    float res_10694;
+    bool cond_10698;
+    float res_10699;
+    float res_10703;
+    float res_10707;
+    bool cond_10708;
+    bool res_10709;
+    bool x_10710;
+    float res_10711;
+    float res_10712;
+    
+    if (thread_active_11097) {
+        new_index_10994 = squot32(gtid_10680, sizze_10328);
+        binop_y_10996 = sizze_10328 * new_index_10994;
+        new_index_10997 = gtid_10680 - binop_y_10996;
+        x_10690 = *(__global float *) &mem_11028[(new_index_10994 *
+                                                  sizze_10328 +
+                                                  new_index_10997) * 4];
+        x_10691 = *(__global float *) &mem_11032[(new_index_10994 *
+                                                  sizze_10328 +
+                                                  new_index_10997) * 4];
+        x_10692 = *(__global float *) &rays_mem_11016[new_index_10997 * 4];
+        cond_10693 = x_10690 == 0.0F;
+        if (cond_10693) {
+            res_10694 = x_10692;
         } else {
-            float y_10165;
-            float x_10166;
-            float res_10167;
+            float y_10695;
+            float x_10696;
+            float res_10697;
             
-            y_10165 = res_9821 * x_10161;
-            x_10166 = x_10162 - y_10165;
-            res_10167 = x_10166 / x_10160;
-            res_10164 = res_10167;
+            y_10695 = res_10351 * x_10691;
+            x_10696 = x_10692 - y_10695;
+            res_10697 = x_10696 / x_10690;
+            res_10694 = res_10697;
         }
-        cond_10168 = x_10161 == 0.0F;
-        if (cond_10168) {
-            res_10169 = x_10162;
+        cond_10698 = x_10691 == 0.0F;
+        if (cond_10698) {
+            res_10699 = x_10692;
         } else {
-            float y_10170;
-            float x_10171;
-            float res_10172;
+            float y_10700;
+            float x_10701;
+            float res_10702;
             
-            y_10170 = res_9821 * x_10160;
-            x_10171 = x_10162 - y_10170;
-            res_10172 = x_10171 / x_10161;
-            res_10169 = res_10172;
+            y_10700 = res_10351 * x_10690;
+            x_10701 = x_10692 - y_10700;
+            res_10702 = x_10701 / x_10691;
+            res_10699 = res_10702;
         }
-        if (cond_10168) {
-            res_10173 = x_10162;
+        if (cond_10698) {
+            res_10703 = x_10692;
         } else {
-            float y_10174;
-            float x_10175;
-            float res_10176;
+            float y_10704;
+            float x_10705;
+            float res_10706;
             
-            y_10174 = res_9808 * x_10160;
-            x_10175 = x_10162 - y_10174;
-            res_10176 = x_10175 / x_10161;
-            res_10173 = res_10176;
+            y_10704 = res_10338 * x_10690;
+            x_10705 = x_10692 - y_10704;
+            res_10706 = x_10705 / x_10691;
+            res_10703 = res_10706;
         }
-        res_10177 = (float) fabs(res_10164);
-        cond_10178 = res_10177 <= res_9808;
-        res_10179 = !cond_10163;
-        x_10180 = cond_10178 && res_10179;
-        if (x_10180) {
-            res_10181 = res_9821;
-            res_10182 = res_10164;
+        res_10707 = (float) fabs(res_10694);
+        cond_10708 = res_10707 <= res_10338;
+        res_10709 = !cond_10693;
+        x_10710 = cond_10708 && res_10709;
+        if (x_10710) {
+            res_10711 = res_10351;
+            res_10712 = res_10694;
         } else {
-            bool cond_10183;
-            float res_10184;
-            float res_10185;
+            bool cond_10713;
+            float res_10714;
+            float res_10715;
             
-            cond_10183 = res_10169 <= res_10173;
-            if (cond_10183) {
-                res_10184 = res_10169;
+            cond_10713 = res_10699 <= res_10703;
+            if (cond_10713) {
+                res_10714 = res_10699;
             } else {
-                res_10184 = res_10173;
+                res_10714 = res_10703;
             }
-            if (cond_10183) {
-                res_10185 = res_9821;
+            if (cond_10713) {
+                res_10715 = res_10351;
             } else {
-                res_10185 = res_9808;
+                res_10715 = res_10338;
             }
-            res_10181 = res_10184;
-            res_10182 = res_10185;
+            res_10711 = res_10714;
+            res_10712 = res_10715;
         }
     }
-    if (thread_active_10567) {
-        *(__global float *) &mem_10505[gtid_10150 * 4] = res_10181;
+    if (thread_active_11097) {
+        *(__global float *) &mem_11035[gtid_10680 * 4] = res_10711;
     }
-    if (thread_active_10567) {
-        *(__global float *) &mem_10508[gtid_10150 * 4] = res_10182;
+    if (thread_active_11097) {
+        *(__global float *) &mem_11038[gtid_10680 * 4] = res_10712;
     }
 }
-__kernel void map_kernel_10210(float res_9808, float res_9821, int32_t res_9856,
-                               int32_t arg_9857, int32_t res_9873, __global
-                               unsigned char *voxels_mem_10488, __global
-                               unsigned char *mem_10516, __global
-                               unsigned char *mem_10519, __global
-                               unsigned char *mem_10521, __global
-                               unsigned char *mem_10524, __global
-                               unsigned char *mem_10526, __global
-                               unsigned char *mem_10529, __global
-                               unsigned char *mem_10532, __global
-                               unsigned char *mem_10535)
+__kernel void map_kernel_10740(float res_10338, float res_10351,
+                               int32_t res_10386, int32_t arg_10387,
+                               int32_t res_10403, __global
+                               unsigned char *voxels_mem_11018, __global
+                               unsigned char *mem_11046, __global
+                               unsigned char *mem_11049, __global
+                               unsigned char *mem_11051, __global
+                               unsigned char *mem_11054, __global
+                               unsigned char *mem_11056, __global
+                               unsigned char *mem_11059, __global
+                               unsigned char *mem_11062, __global
+                               unsigned char *mem_11065)
 {
-    int32_t wave_sizze_10581;
-    int32_t group_sizze_10582;
-    bool thread_active_10583;
-    int32_t gtid_10203;
-    int32_t global_tid_10210;
-    int32_t local_tid_10211;
-    int32_t group_id_10212;
+    int32_t wave_sizze_11111;
+    int32_t group_sizze_11112;
+    bool thread_active_11113;
+    int32_t gtid_10733;
+    int32_t global_tid_10740;
+    int32_t local_tid_10741;
+    int32_t group_id_10742;
     
-    global_tid_10210 = get_global_id(0);
-    local_tid_10211 = get_local_id(0);
-    group_sizze_10582 = get_local_size(0);
-    wave_sizze_10581 = LOCKSTEP_WIDTH;
-    group_id_10212 = get_group_id(0);
-    gtid_10203 = global_tid_10210;
-    thread_active_10583 = slt32(gtid_10203, res_9873);
+    global_tid_10740 = get_global_id(0);
+    local_tid_10741 = get_local_id(0);
+    group_sizze_11112 = get_local_size(0);
+    wave_sizze_11111 = LOCKSTEP_WIDTH;
+    group_id_10742 = get_group_id(0);
+    gtid_10733 = global_tid_10740;
+    thread_active_11113 = slt32(gtid_10733, res_10403);
     
-    float arg_10213;
-    float arg_10214;
-    bool res_10215;
-    float res_10216;
-    bool cond_10217;
-    bool cond_10220;
-    bool res_10221;
-    bool x_10222;
-    bool cond_10223;
-    bool res_10224;
-    bool x_10225;
-    bool cond_10226;
-    bool res_10227;
-    bool x_10228;
-    bool x_10229;
-    bool x_10230;
-    bool y_10231;
-    bool res_10232;
-    bool x_10233;
-    bool cond_10234;
-    bool cond_10235;
-    float y_10236;
-    bool res_10237;
-    float res_10240;
-    float res_10241;
-    int32_t res_10242;
-    float res_10314;
+    float arg_10743;
+    float arg_10744;
+    bool res_10745;
+    float res_10746;
+    bool cond_10747;
+    bool cond_10750;
+    bool res_10751;
+    bool x_10752;
+    bool cond_10753;
+    bool res_10754;
+    bool x_10755;
+    bool cond_10756;
+    bool res_10757;
+    bool x_10758;
+    bool x_10759;
+    bool x_10760;
+    bool y_10761;
+    bool res_10762;
+    bool x_10763;
+    bool cond_10764;
+    bool cond_10765;
+    float y_10766;
+    bool res_10767;
+    float res_10770;
+    float res_10771;
+    int32_t res_10772;
+    float res_10844;
     
-    if (thread_active_10583) {
-        arg_10213 = *(__global float *) &mem_10516[gtid_10203 * 4];
-        arg_10214 = *(__global float *) &mem_10519[gtid_10203 * 4];
-        res_10215 = *(__global bool *) &mem_10521[gtid_10203];
-        res_10216 = *(__global float *) &mem_10524[gtid_10203 * 4];
-        cond_10217 = *(__global bool *) &mem_10526[gtid_10203];
-        for (int32_t i_10584 = 0; i_10584 < res_9856; i_10584++) {
-            *(__global float *) &mem_10529[(group_id_10212 * (res_9856 *
-                                                              group_sizze_10205) +
-                                            i_10584 * group_sizze_10205 +
-                                            local_tid_10211) * 4] = -INFINITY;
+    if (thread_active_11113) {
+        arg_10743 = *(__global float *) &mem_11046[gtid_10733 * 4];
+        arg_10744 = *(__global float *) &mem_11049[gtid_10733 * 4];
+        res_10745 = *(__global bool *) &mem_11051[gtid_10733];
+        res_10746 = *(__global float *) &mem_11054[gtid_10733 * 4];
+        cond_10747 = *(__global bool *) &mem_11056[gtid_10733];
+        for (int32_t i_11114 = 0; i_11114 < res_10386; i_11114++) {
+            *(__global float *) &mem_11059[(group_id_10742 * (res_10386 *
+                                                              group_sizze_10735) +
+                                            i_11114 * group_sizze_10735 +
+                                            local_tid_10741) * 4] = -INFINITY;
         }
-        for (int32_t i_10585 = 0; i_10585 < res_9856; i_10585++) {
-            *(__global float *) &mem_10532[(group_id_10212 * (res_9856 *
-                                                              group_sizze_10205) +
-                                            i_10585 * group_sizze_10205 +
-                                            local_tid_10211) * 4] = -INFINITY;
+        for (int32_t i_11115 = 0; i_11115 < res_10386; i_11115++) {
+            *(__global float *) &mem_11062[(group_id_10742 * (res_10386 *
+                                                              group_sizze_10735) +
+                                            i_11115 * group_sizze_10735 +
+                                            local_tid_10741) * 4] = -INFINITY;
         }
-        cond_10220 = res_9821 <= arg_10213;
-        res_10221 = arg_10213 < res_9808;
-        x_10222 = cond_10220 && res_10221;
-        cond_10223 = res_9821 < arg_10214;
-        res_10224 = arg_10214 <= res_9808;
-        x_10225 = cond_10223 && res_10224;
-        cond_10226 = res_9821 <= arg_10214;
-        res_10227 = arg_10214 < res_9808;
-        x_10228 = cond_10226 && res_10227;
-        x_10229 = cond_10217 && x_10225;
-        x_10230 = !cond_10217;
-        y_10231 = x_10228 && x_10230;
-        res_10232 = x_10229 || y_10231;
-        x_10233 = x_10222 && res_10232;
-        cond_10234 = res_10216 == 0.0F;
-        cond_10235 = res_10216 == 1.0F;
-        y_10236 = 1.0F / res_10216;
+        cond_10750 = res_10351 <= arg_10743;
+        res_10751 = arg_10743 < res_10338;
+        x_10752 = cond_10750 && res_10751;
+        cond_10753 = res_10351 < arg_10744;
+        res_10754 = arg_10744 <= res_10338;
+        x_10755 = cond_10753 && res_10754;
+        cond_10756 = res_10351 <= arg_10744;
+        res_10757 = arg_10744 < res_10338;
+        x_10758 = cond_10756 && res_10757;
+        x_10759 = cond_10747 && x_10755;
+        x_10760 = !cond_10747;
+        y_10761 = x_10758 && x_10760;
+        res_10762 = x_10759 || y_10761;
+        x_10763 = x_10752 && res_10762;
+        cond_10764 = res_10746 == 0.0F;
+        cond_10765 = res_10746 == 1.0F;
+        y_10766 = 1.0F / res_10746;
         
-        bool loop_while_10243;
-        float focusPoint_10246;
-        float focusPoint_10247;
-        int32_t write_index_10248;
+        bool loop_while_10773;
+        float focusPoint_10776;
+        float focusPoint_10777;
+        int32_t write_index_10778;
         
-        loop_while_10243 = x_10233;
-        focusPoint_10246 = arg_10213;
-        focusPoint_10247 = arg_10214;
-        write_index_10248 = 0;
-        while (loop_while_10243) {
-            float res_10249;
+        loop_while_10773 = x_10763;
+        focusPoint_10776 = arg_10743;
+        focusPoint_10777 = arg_10744;
+        write_index_10778 = 0;
+        while (loop_while_10773) {
+            float res_10779;
             
-            if (res_10215) {
-                res_10249 = focusPoint_10246;
+            if (res_10745) {
+                res_10779 = focusPoint_10776;
             } else {
-                int32_t res_10250;
-                float res_10251;
-                bool res_10252;
-                float res_10253;
-                float res_10260;
+                int32_t res_10780;
+                float res_10781;
+                bool res_10782;
+                float res_10783;
+                float res_10790;
                 
-                res_10250 = fptosi_f32_i32(focusPoint_10246);
-                res_10251 = sitofp_i32_f32(res_10250);
-                res_10252 = 0.0F <= focusPoint_10246;
-                if (res_10252) {
-                    bool res_10254;
-                    float res_10255;
+                res_10780 = fptosi_f32_i32(focusPoint_10776);
+                res_10781 = sitofp_i32_f32(res_10780);
+                res_10782 = 0.0F <= focusPoint_10776;
+                if (res_10782) {
+                    bool res_10784;
+                    float res_10785;
                     
-                    res_10254 = res_10251 < focusPoint_10246;
-                    if (res_10254) {
-                        res_10255 = res_10251;
+                    res_10784 = res_10781 < focusPoint_10776;
+                    if (res_10784) {
+                        res_10785 = res_10781;
                     } else {
-                        res_10255 = focusPoint_10246;
+                        res_10785 = focusPoint_10776;
                     }
-                    res_10253 = res_10255;
+                    res_10783 = res_10785;
                 } else {
-                    bool res_10256;
-                    float res_10257;
+                    bool res_10786;
+                    float res_10787;
                     
-                    res_10256 = focusPoint_10246 < res_10251;
-                    if (res_10256) {
-                        int32_t res_10258;
-                        float res_10259;
+                    res_10786 = focusPoint_10776 < res_10781;
+                    if (res_10786) {
+                        int32_t res_10788;
+                        float res_10789;
                         
-                        res_10258 = res_10250 - 1;
-                        res_10259 = sitofp_i32_f32(res_10258);
-                        res_10257 = res_10259;
+                        res_10788 = res_10780 - 1;
+                        res_10789 = sitofp_i32_f32(res_10788);
+                        res_10787 = res_10789;
                     } else {
-                        res_10257 = focusPoint_10246;
+                        res_10787 = focusPoint_10776;
                     }
-                    res_10253 = res_10257;
+                    res_10783 = res_10787;
                 }
-                res_10260 = 1.0F + res_10253;
-                res_10249 = res_10260;
+                res_10790 = 1.0F + res_10783;
+                res_10779 = res_10790;
             }
             
-            float res_10261;
+            float res_10791;
             
-            if (cond_10234) {
-                res_10261 = focusPoint_10247;
+            if (cond_10764) {
+                res_10791 = focusPoint_10777;
             } else {
-                float res_10262;
+                float res_10792;
                 
-                if (cond_10217) {
-                    int32_t res_10263;
-                    float res_10264;
-                    bool res_10265;
-                    float res_10266;
-                    float res_10273;
+                if (cond_10747) {
+                    int32_t res_10793;
+                    float res_10794;
+                    bool res_10795;
+                    float res_10796;
+                    float res_10803;
                     
-                    res_10263 = fptosi_f32_i32(focusPoint_10247);
-                    res_10264 = sitofp_i32_f32(res_10263);
-                    res_10265 = 0.0F <= focusPoint_10247;
-                    if (res_10265) {
-                        bool res_10267;
-                        float res_10268;
+                    res_10793 = fptosi_f32_i32(focusPoint_10777);
+                    res_10794 = sitofp_i32_f32(res_10793);
+                    res_10795 = 0.0F <= focusPoint_10777;
+                    if (res_10795) {
+                        bool res_10797;
+                        float res_10798;
                         
-                        res_10267 = res_10264 < focusPoint_10247;
-                        if (res_10267) {
-                            int32_t res_10269;
-                            float res_10270;
+                        res_10797 = res_10794 < focusPoint_10777;
+                        if (res_10797) {
+                            int32_t res_10799;
+                            float res_10800;
                             
-                            res_10269 = 1 + res_10263;
-                            res_10270 = sitofp_i32_f32(res_10269);
-                            res_10268 = res_10270;
+                            res_10799 = 1 + res_10793;
+                            res_10800 = sitofp_i32_f32(res_10799);
+                            res_10798 = res_10800;
                         } else {
-                            res_10268 = focusPoint_10247;
+                            res_10798 = focusPoint_10777;
                         }
-                        res_10266 = res_10268;
+                        res_10796 = res_10798;
                     } else {
-                        bool res_10271;
-                        float res_10272;
+                        bool res_10801;
+                        float res_10802;
                         
-                        res_10271 = focusPoint_10247 < res_10264;
-                        if (res_10271) {
-                            res_10272 = res_10264;
+                        res_10801 = focusPoint_10777 < res_10794;
+                        if (res_10801) {
+                            res_10802 = res_10794;
                         } else {
-                            res_10272 = focusPoint_10247;
+                            res_10802 = focusPoint_10777;
                         }
-                        res_10266 = res_10272;
+                        res_10796 = res_10802;
                     }
-                    res_10273 = res_10266 - 1.0F;
-                    res_10262 = res_10273;
+                    res_10803 = res_10796 - 1.0F;
+                    res_10792 = res_10803;
                 } else {
-                    int32_t res_10274;
-                    float res_10275;
-                    bool res_10276;
-                    float res_10277;
-                    float res_10284;
+                    int32_t res_10804;
+                    float res_10805;
+                    bool res_10806;
+                    float res_10807;
+                    float res_10814;
                     
-                    res_10274 = fptosi_f32_i32(focusPoint_10247);
-                    res_10275 = sitofp_i32_f32(res_10274);
-                    res_10276 = 0.0F <= focusPoint_10247;
-                    if (res_10276) {
-                        bool res_10278;
-                        float res_10279;
+                    res_10804 = fptosi_f32_i32(focusPoint_10777);
+                    res_10805 = sitofp_i32_f32(res_10804);
+                    res_10806 = 0.0F <= focusPoint_10777;
+                    if (res_10806) {
+                        bool res_10808;
+                        float res_10809;
                         
-                        res_10278 = res_10275 < focusPoint_10247;
-                        if (res_10278) {
-                            res_10279 = res_10275;
+                        res_10808 = res_10805 < focusPoint_10777;
+                        if (res_10808) {
+                            res_10809 = res_10805;
                         } else {
-                            res_10279 = focusPoint_10247;
+                            res_10809 = focusPoint_10777;
                         }
-                        res_10277 = res_10279;
+                        res_10807 = res_10809;
                     } else {
-                        bool res_10280;
-                        float res_10281;
+                        bool res_10810;
+                        float res_10811;
                         
-                        res_10280 = focusPoint_10247 < res_10275;
-                        if (res_10280) {
-                            int32_t res_10282;
-                            float res_10283;
+                        res_10810 = focusPoint_10777 < res_10805;
+                        if (res_10810) {
+                            int32_t res_10812;
+                            float res_10813;
                             
-                            res_10282 = res_10274 - 1;
-                            res_10283 = sitofp_i32_f32(res_10282);
-                            res_10281 = res_10283;
+                            res_10812 = res_10804 - 1;
+                            res_10813 = sitofp_i32_f32(res_10812);
+                            res_10811 = res_10813;
                         } else {
-                            res_10281 = focusPoint_10247;
+                            res_10811 = focusPoint_10777;
                         }
-                        res_10277 = res_10281;
+                        res_10807 = res_10811;
                     }
-                    res_10284 = 1.0F + res_10277;
-                    res_10262 = res_10284;
+                    res_10814 = 1.0F + res_10807;
+                    res_10792 = res_10814;
                 }
-                res_10261 = res_10262;
+                res_10791 = res_10792;
             }
             
-            float res_10285;
+            float res_10815;
             
-            if (cond_10235) {
-                res_10285 = 1.0F;
+            if (cond_10765) {
+                res_10815 = 1.0F;
             } else {
-                float res_10286;
+                float res_10816;
                 
-                if (cond_10234) {
-                    res_10286 = 0.0F;
+                if (cond_10764) {
+                    res_10816 = 0.0F;
                 } else {
-                    float x_10287;
-                    float res_10288;
+                    float x_10817;
+                    float res_10818;
                     
-                    x_10287 = res_10249 - focusPoint_10246;
-                    res_10288 = res_10216 * x_10287;
-                    res_10286 = res_10288;
+                    x_10817 = res_10779 - focusPoint_10776;
+                    res_10818 = res_10746 * x_10817;
+                    res_10816 = res_10818;
                 }
-                res_10285 = res_10286;
+                res_10815 = res_10816;
             }
             
-            float res_10289;
+            float res_10819;
             
-            if (cond_10235) {
-                res_10289 = 0.0F;
+            if (cond_10765) {
+                res_10819 = 0.0F;
             } else {
-                float res_10290;
+                float res_10820;
                 
-                if (cond_10234) {
-                    res_10290 = 1.0F;
+                if (cond_10764) {
+                    res_10820 = 1.0F;
                 } else {
-                    float x_10291;
-                    float res_10292;
+                    float x_10821;
+                    float res_10822;
                     
-                    x_10291 = res_10261 - focusPoint_10247;
-                    res_10292 = y_10236 * x_10291;
-                    res_10290 = res_10292;
+                    x_10821 = res_10791 - focusPoint_10777;
+                    res_10822 = y_10766 * x_10821;
+                    res_10820 = res_10822;
                 }
-                res_10289 = res_10290;
+                res_10819 = res_10820;
             }
             
-            float res_10293 = focusPoint_10247 + res_10285;
-            float res_10294 = focusPoint_10246 + res_10289;
-            bool cond_10295 = res_10249 < res_10294;
-            float res_10296;
+            float res_10823 = focusPoint_10777 + res_10815;
+            float res_10824 = focusPoint_10776 + res_10819;
+            bool cond_10825 = res_10779 < res_10824;
+            float res_10826;
             
-            if (cond_10295) {
-                res_10296 = res_10249;
+            if (cond_10825) {
+                res_10826 = res_10779;
             } else {
-                res_10296 = res_10294;
+                res_10826 = res_10824;
             }
             
-            float res_10297;
+            float res_10827;
             
-            if (cond_10295) {
-                res_10297 = res_10293;
+            if (cond_10825) {
+                res_10827 = res_10823;
             } else {
-                res_10297 = res_10261;
+                res_10827 = res_10791;
             }
-            *(__global float *) &mem_10529[(group_id_10212 * (res_9856 *
-                                                              group_sizze_10205) +
-                                            write_index_10248 *
-                                            group_sizze_10205 +
-                                            local_tid_10211) * 4] =
-                focusPoint_10246;
-            *(__global float *) &mem_10532[(group_id_10212 * (res_9856 *
-                                                              group_sizze_10205) +
-                                            write_index_10248 *
-                                            group_sizze_10205 +
-                                            local_tid_10211) * 4] =
-                focusPoint_10247;
+            *(__global float *) &mem_11059[(group_id_10742 * (res_10386 *
+                                                              group_sizze_10735) +
+                                            write_index_10778 *
+                                            group_sizze_10735 +
+                                            local_tid_10741) * 4] =
+                focusPoint_10776;
+            *(__global float *) &mem_11062[(group_id_10742 * (res_10386 *
+                                                              group_sizze_10735) +
+                                            write_index_10778 *
+                                            group_sizze_10735 +
+                                            local_tid_10741) * 4] =
+                focusPoint_10777;
             
-            int32_t res_10300 = 1 + write_index_10248;
-            bool cond_10301 = res_9821 <= res_10296;
-            bool res_10302 = res_10296 < res_9808;
-            bool x_10303 = cond_10301 && res_10302;
-            bool cond_10304 = res_9821 < res_10297;
-            bool res_10305 = res_10297 <= res_9808;
-            bool x_10306 = cond_10304 && res_10305;
-            bool cond_10307 = res_9821 <= res_10297;
-            bool res_10308 = res_10297 < res_9808;
-            bool x_10309 = cond_10307 && res_10308;
-            bool x_10310 = cond_10217 && x_10306;
-            bool y_10311 = x_10230 && x_10309;
-            bool res_10312 = x_10310 || y_10311;
-            bool x_10313 = x_10303 && res_10312;
-            bool loop_while_tmp_10586 = x_10313;
-            float focusPoint_tmp_10589 = res_10296;
-            float focusPoint_tmp_10590 = res_10297;
-            int32_t write_index_tmp_10591;
+            int32_t res_10830 = 1 + write_index_10778;
+            bool cond_10831 = res_10351 <= res_10826;
+            bool res_10832 = res_10826 < res_10338;
+            bool x_10833 = cond_10831 && res_10832;
+            bool cond_10834 = res_10351 < res_10827;
+            bool res_10835 = res_10827 <= res_10338;
+            bool x_10836 = cond_10834 && res_10835;
+            bool cond_10837 = res_10351 <= res_10827;
+            bool res_10838 = res_10827 < res_10338;
+            bool x_10839 = cond_10837 && res_10838;
+            bool x_10840 = cond_10747 && x_10836;
+            bool y_10841 = x_10760 && x_10839;
+            bool res_10842 = x_10840 || y_10841;
+            bool x_10843 = x_10833 && res_10842;
+            bool loop_while_tmp_11116 = x_10843;
+            float focusPoint_tmp_11119 = res_10826;
+            float focusPoint_tmp_11120 = res_10827;
+            int32_t write_index_tmp_11121;
             
-            write_index_tmp_10591 = res_10300;
-            loop_while_10243 = loop_while_tmp_10586;
-            focusPoint_10246 = focusPoint_tmp_10589;
-            focusPoint_10247 = focusPoint_tmp_10590;
-            write_index_10248 = write_index_tmp_10591;
+            write_index_tmp_11121 = res_10830;
+            loop_while_10773 = loop_while_tmp_11116;
+            focusPoint_10776 = focusPoint_tmp_11119;
+            focusPoint_10777 = focusPoint_tmp_11120;
+            write_index_10778 = write_index_tmp_11121;
         }
-        res_10237 = loop_while_10243;
-        res_10240 = focusPoint_10246;
-        res_10241 = focusPoint_10247;
-        res_10242 = write_index_10248;
+        res_10767 = loop_while_10773;
+        res_10770 = focusPoint_10776;
+        res_10771 = focusPoint_10777;
+        res_10772 = write_index_10778;
         
-        float x_10317 = 0.0F;
+        float x_10847 = 0.0F;
         
-        for (int32_t chunk_offset_10316 = 0; chunk_offset_10316 < arg_9857;
-             chunk_offset_10316++) {
-            float arg_10326 = *(__global float *) &mem_10529[(group_id_10212 *
-                                                              (res_9856 *
-                                                               group_sizze_10205) +
-                                                              chunk_offset_10316 *
-                                                              group_sizze_10205 +
-                                                              local_tid_10211) *
+        for (int32_t chunk_offset_10846 = 0; chunk_offset_10846 < arg_10387;
+             chunk_offset_10846++) {
+            float arg_10856 = *(__global float *) &mem_11059[(group_id_10742 *
+                                                              (res_10386 *
+                                                               group_sizze_10735) +
+                                                              chunk_offset_10846 *
+                                                              group_sizze_10735 +
+                                                              local_tid_10741) *
                                                              4];
-            float arg_10327 = *(__global float *) &mem_10532[(group_id_10212 *
-                                                              (res_9856 *
-                                                               group_sizze_10205) +
-                                                              chunk_offset_10316 *
-                                                              group_sizze_10205 +
-                                                              local_tid_10211) *
+            float arg_10857 = *(__global float *) &mem_11062[(group_id_10742 *
+                                                              (res_10386 *
+                                                               group_sizze_10735) +
+                                                              chunk_offset_10846 *
+                                                              group_sizze_10735 +
+                                                              local_tid_10741) *
                                                              4];
-            bool cond_10328 = res_9821 <= arg_10326;
-            bool res_10329 = arg_10326 < res_9808;
-            bool x_10330 = cond_10328 && res_10329;
-            bool cond_10331 = res_9821 < arg_10327;
-            bool res_10332 = arg_10327 <= res_9808;
-            bool x_10333 = cond_10331 && res_10332;
-            bool cond_10334 = res_9821 <= arg_10327;
-            bool res_10335 = arg_10327 < res_9808;
-            bool x_10336 = cond_10334 && res_10335;
-            bool x_10337 = cond_10217 && x_10333;
-            bool y_10338 = x_10230 && x_10336;
-            bool res_10339 = x_10337 || y_10338;
-            bool x_10340 = x_10330 && res_10339;
-            bool cond_10341 = !x_10340;
-            int32_t res_10342;
+            bool cond_10858 = res_10351 <= arg_10856;
+            bool res_10859 = arg_10856 < res_10338;
+            bool x_10860 = cond_10858 && res_10859;
+            bool cond_10861 = res_10351 < arg_10857;
+            bool res_10862 = arg_10857 <= res_10338;
+            bool x_10863 = cond_10861 && res_10862;
+            bool cond_10864 = res_10351 <= arg_10857;
+            bool res_10865 = arg_10857 < res_10338;
+            bool x_10866 = cond_10864 && res_10865;
+            bool x_10867 = cond_10747 && x_10863;
+            bool y_10868 = x_10760 && x_10866;
+            bool res_10869 = x_10867 || y_10868;
+            bool x_10870 = x_10860 && res_10869;
+            bool cond_10871 = !x_10870;
+            int32_t res_10872;
             
-            if (cond_10341) {
-                res_10342 = -1;
+            if (cond_10871) {
+                res_10872 = -1;
             } else {
-                float arg_10343;
-                int32_t res_10344;
-                float res_10345;
-                bool res_10346;
-                float res_10347;
-                int32_t res_10354;
-                float res_10355;
-                bool res_10356;
-                float res_10357;
-                float x_10364;
-                bool res_10365;
-                bool x_10366;
-                float res_10367;
-                float arg_10369;
-                int32_t res_10370;
-                float res_10371;
-                bool res_10372;
-                float res_10373;
-                float x_10380;
-                float y_10381;
-                float arg_10382;
-                int32_t res_10383;
+                float arg_10873;
+                int32_t res_10874;
+                float res_10875;
+                bool res_10876;
+                float res_10877;
+                int32_t res_10884;
+                float res_10885;
+                bool res_10886;
+                float res_10887;
+                float x_10894;
+                bool res_10895;
+                bool x_10896;
+                float res_10897;
+                float arg_10899;
+                int32_t res_10900;
+                float res_10901;
+                bool res_10902;
+                float res_10903;
+                float x_10910;
+                float y_10911;
+                float arg_10912;
+                int32_t res_10913;
                 
-                arg_10343 = res_9808 + arg_10327;
-                res_10344 = fptosi_f32_i32(arg_10343);
-                res_10345 = sitofp_i32_f32(res_10344);
-                res_10346 = 0.0F <= arg_10343;
-                if (res_10346) {
-                    bool res_10348;
-                    float res_10349;
+                arg_10873 = res_10338 + arg_10857;
+                res_10874 = fptosi_f32_i32(arg_10873);
+                res_10875 = sitofp_i32_f32(res_10874);
+                res_10876 = 0.0F <= arg_10873;
+                if (res_10876) {
+                    bool res_10878;
+                    float res_10879;
                     
-                    res_10348 = res_10345 < arg_10343;
-                    if (res_10348) {
-                        res_10349 = res_10345;
+                    res_10878 = res_10875 < arg_10873;
+                    if (res_10878) {
+                        res_10879 = res_10875;
                     } else {
-                        res_10349 = arg_10343;
+                        res_10879 = arg_10873;
                     }
-                    res_10347 = res_10349;
+                    res_10877 = res_10879;
                 } else {
-                    bool res_10350;
-                    float res_10351;
+                    bool res_10880;
+                    float res_10881;
                     
-                    res_10350 = arg_10343 < res_10345;
-                    if (res_10350) {
-                        int32_t res_10352;
-                        float res_10353;
+                    res_10880 = arg_10873 < res_10875;
+                    if (res_10880) {
+                        int32_t res_10882;
+                        float res_10883;
                         
-                        res_10352 = res_10344 - 1;
-                        res_10353 = sitofp_i32_f32(res_10352);
-                        res_10351 = res_10353;
+                        res_10882 = res_10874 - 1;
+                        res_10883 = sitofp_i32_f32(res_10882);
+                        res_10881 = res_10883;
                     } else {
-                        res_10351 = arg_10343;
+                        res_10881 = arg_10873;
                     }
-                    res_10347 = res_10351;
+                    res_10877 = res_10881;
                 }
-                res_10354 = fptosi_f32_i32(arg_10327);
-                res_10355 = sitofp_i32_f32(res_10354);
-                res_10356 = 0.0F <= arg_10327;
-                if (res_10356) {
-                    bool res_10358;
-                    float res_10359;
+                res_10884 = fptosi_f32_i32(arg_10857);
+                res_10885 = sitofp_i32_f32(res_10884);
+                res_10886 = 0.0F <= arg_10857;
+                if (res_10886) {
+                    bool res_10888;
+                    float res_10889;
                     
-                    res_10358 = res_10355 < arg_10327;
-                    if (res_10358) {
-                        res_10359 = res_10355;
+                    res_10888 = res_10885 < arg_10857;
+                    if (res_10888) {
+                        res_10889 = res_10885;
                     } else {
-                        res_10359 = arg_10327;
+                        res_10889 = arg_10857;
                     }
-                    res_10357 = res_10359;
+                    res_10887 = res_10889;
                 } else {
-                    bool res_10360;
-                    float res_10361;
+                    bool res_10890;
+                    float res_10891;
                     
-                    res_10360 = arg_10327 < res_10355;
-                    if (res_10360) {
-                        int32_t res_10362;
-                        float res_10363;
+                    res_10890 = arg_10857 < res_10885;
+                    if (res_10890) {
+                        int32_t res_10892;
+                        float res_10893;
                         
-                        res_10362 = res_10354 - 1;
-                        res_10363 = sitofp_i32_f32(res_10362);
-                        res_10361 = res_10363;
+                        res_10892 = res_10884 - 1;
+                        res_10893 = sitofp_i32_f32(res_10892);
+                        res_10891 = res_10893;
                     } else {
-                        res_10361 = arg_10327;
+                        res_10891 = arg_10857;
                     }
-                    res_10357 = res_10361;
+                    res_10887 = res_10891;
                 }
-                x_10364 = arg_10327 - res_10357;
-                res_10365 = x_10364 == 0.0F;
-                x_10366 = cond_10217 && res_10365;
-                if (x_10366) {
-                    float res_10368 = res_10347 - 1.0F;
+                x_10894 = arg_10857 - res_10887;
+                res_10895 = x_10894 == 0.0F;
+                x_10896 = cond_10747 && res_10895;
+                if (x_10896) {
+                    float res_10898 = res_10877 - 1.0F;
                     
-                    res_10367 = res_10368;
+                    res_10897 = res_10898;
                 } else {
-                    res_10367 = res_10347;
+                    res_10897 = res_10877;
                 }
-                arg_10369 = res_9808 + arg_10326;
-                res_10370 = fptosi_f32_i32(arg_10369);
-                res_10371 = sitofp_i32_f32(res_10370);
-                res_10372 = 0.0F <= arg_10369;
-                if (res_10372) {
-                    bool res_10374;
-                    float res_10375;
+                arg_10899 = res_10338 + arg_10856;
+                res_10900 = fptosi_f32_i32(arg_10899);
+                res_10901 = sitofp_i32_f32(res_10900);
+                res_10902 = 0.0F <= arg_10899;
+                if (res_10902) {
+                    bool res_10904;
+                    float res_10905;
                     
-                    res_10374 = res_10371 < arg_10369;
-                    if (res_10374) {
-                        res_10375 = res_10371;
+                    res_10904 = res_10901 < arg_10899;
+                    if (res_10904) {
+                        res_10905 = res_10901;
                     } else {
-                        res_10375 = arg_10369;
+                        res_10905 = arg_10899;
                     }
-                    res_10373 = res_10375;
+                    res_10903 = res_10905;
                 } else {
-                    bool res_10376;
-                    float res_10377;
+                    bool res_10906;
+                    float res_10907;
                     
-                    res_10376 = arg_10369 < res_10371;
-                    if (res_10376) {
-                        int32_t res_10378;
-                        float res_10379;
+                    res_10906 = arg_10899 < res_10901;
+                    if (res_10906) {
+                        int32_t res_10908;
+                        float res_10909;
                         
-                        res_10378 = res_10370 - 1;
-                        res_10379 = sitofp_i32_f32(res_10378);
-                        res_10377 = res_10379;
+                        res_10908 = res_10900 - 1;
+                        res_10909 = sitofp_i32_f32(res_10908);
+                        res_10907 = res_10909;
                     } else {
-                        res_10377 = arg_10369;
+                        res_10907 = arg_10899;
                     }
-                    res_10373 = res_10377;
+                    res_10903 = res_10907;
                 }
-                x_10380 = 2.0F * res_9808;
-                y_10381 = res_10367 * x_10380;
-                arg_10382 = res_10373 + y_10381;
-                res_10383 = fptosi_f32_i32(arg_10382);
-                res_10342 = res_10383;
+                x_10910 = 2.0F * res_10338;
+                y_10911 = res_10897 * x_10910;
+                arg_10912 = res_10903 + y_10911;
+                res_10913 = fptosi_f32_i32(arg_10912);
+                res_10872 = res_10913;
             }
             
-            int32_t i_10384 = 1 + chunk_offset_10316;
-            float arg_10385 = *(__global float *) &mem_10529[(group_id_10212 *
-                                                              (res_9856 *
-                                                               group_sizze_10205) +
-                                                              i_10384 *
-                                                              group_sizze_10205 +
-                                                              local_tid_10211) *
+            int32_t i_10914 = 1 + chunk_offset_10846;
+            float arg_10915 = *(__global float *) &mem_11059[(group_id_10742 *
+                                                              (res_10386 *
+                                                               group_sizze_10735) +
+                                                              i_10914 *
+                                                              group_sizze_10735 +
+                                                              local_tid_10741) *
                                                              4];
-            float arg_10386 = *(__global float *) &mem_10532[(group_id_10212 *
-                                                              (res_9856 *
-                                                               group_sizze_10205) +
-                                                              i_10384 *
-                                                              group_sizze_10205 +
-                                                              local_tid_10211) *
+            float arg_10916 = *(__global float *) &mem_11062[(group_id_10742 *
+                                                              (res_10386 *
+                                                               group_sizze_10735) +
+                                                              i_10914 *
+                                                              group_sizze_10735 +
+                                                              local_tid_10741) *
                                                              4];
-            bool cond_10387 = res_9821 <= arg_10385;
-            bool res_10388 = arg_10385 < res_9808;
-            bool x_10389 = cond_10387 && res_10388;
-            bool cond_10390 = res_9821 < arg_10386;
-            bool res_10391 = arg_10386 <= res_9808;
-            bool x_10392 = cond_10390 && res_10391;
-            bool cond_10393 = res_9821 <= arg_10386;
-            bool res_10394 = arg_10386 < res_9808;
-            bool x_10395 = cond_10393 && res_10394;
-            bool x_10396 = cond_10217 && x_10392;
-            bool y_10397 = x_10230 && x_10395;
-            bool res_10398 = x_10396 || y_10397;
-            bool x_10399 = x_10389 && res_10398;
-            float res_10400;
+            bool cond_10917 = res_10351 <= arg_10915;
+            bool res_10918 = arg_10915 < res_10338;
+            bool x_10919 = cond_10917 && res_10918;
+            bool cond_10920 = res_10351 < arg_10916;
+            bool res_10921 = arg_10916 <= res_10338;
+            bool x_10922 = cond_10920 && res_10921;
+            bool cond_10923 = res_10351 <= arg_10916;
+            bool res_10924 = arg_10916 < res_10338;
+            bool x_10925 = cond_10923 && res_10924;
+            bool x_10926 = cond_10747 && x_10922;
+            bool y_10927 = x_10760 && x_10925;
+            bool res_10928 = x_10926 || y_10927;
+            bool x_10929 = x_10919 && res_10928;
+            float res_10930;
             
-            if (x_10399) {
-                float x_10401;
-                float x_10402;
-                float x_10403;
-                float y_10404;
-                float arg_10405;
-                float res_10406;
+            if (x_10929) {
+                float x_10931;
+                float x_10932;
+                float x_10933;
+                float y_10934;
+                float arg_10935;
+                float res_10936;
                 
-                x_10401 = arg_10385 - arg_10326;
-                x_10402 = fpow32(x_10401, 2.0F);
-                x_10403 = arg_10386 - arg_10327;
-                y_10404 = fpow32(x_10403, 2.0F);
-                arg_10405 = x_10402 + y_10404;
-                res_10406 = futrts_sqrt32(arg_10405);
-                res_10400 = res_10406;
+                x_10931 = arg_10915 - arg_10856;
+                x_10932 = fpow32(x_10931, 2.0F);
+                x_10933 = arg_10916 - arg_10857;
+                y_10934 = fpow32(x_10933, 2.0F);
+                arg_10935 = x_10932 + y_10934;
+                res_10936 = futrts_sqrt32(arg_10935);
+                res_10930 = res_10936;
             } else {
-                res_10400 = 0.0F;
+                res_10930 = 0.0F;
             }
             
-            bool cond_10407 = res_10342 == -1;
-            float res_10408;
+            bool cond_10937 = res_10872 == -1;
+            float res_10938;
             
-            if (cond_10407) {
-                res_10408 = 0.0F;
+            if (cond_10937) {
+                res_10938 = 0.0F;
             } else {
-                float y_10409;
-                float res_10410;
+                float y_10939;
+                float res_10940;
                 
-                y_10409 = *(__global float *) &voxels_mem_10488[res_10342 * 4];
-                res_10410 = res_10400 * y_10409;
-                res_10408 = res_10410;
+                y_10939 = *(__global float *) &voxels_mem_11018[res_10872 * 4];
+                res_10940 = res_10930 * y_10939;
+                res_10938 = res_10940;
             }
             
-            float res_10412 = x_10317 + res_10408;
-            float x_tmp_10592 = res_10412;
+            float res_10942 = x_10847 + res_10938;
+            float x_tmp_11122 = res_10942;
             
-            x_10317 = x_tmp_10592;
+            x_10847 = x_tmp_11122;
         }
-        res_10314 = x_10317;
+        res_10844 = x_10847;
     }
-    if (thread_active_10583) {
-        *(__global float *) &mem_10535[gtid_10203 * 4] = res_10314;
+    if (thread_active_11113) {
+        *(__global float *) &mem_11065[gtid_10733 * 4] = res_10844;
     }
 }
-__kernel void map_kernel_10447(int32_t sizze_9798, int32_t res_9873,
-                               int32_t x_9886, __global
-                               unsigned char *mem_10498, __global
-                               unsigned char *mem_10502, __global
-                               unsigned char *mem_10505, __global
-                               unsigned char *mem_10508, __global
-                               unsigned char *mem_10516, __global
-                               unsigned char *mem_10519, __global
-                               unsigned char *mem_10521, __global
-                               unsigned char *mem_10524, __global
-                               unsigned char *mem_10526)
+__kernel void map_kernel_10977(int32_t sizze_10328, int32_t res_10403,
+                               int32_t x_10416, __global
+                               unsigned char *mem_11028, __global
+                               unsigned char *mem_11032, __global
+                               unsigned char *mem_11035, __global
+                               unsigned char *mem_11038, __global
+                               unsigned char *mem_11046, __global
+                               unsigned char *mem_11049, __global
+                               unsigned char *mem_11051, __global
+                               unsigned char *mem_11054, __global
+                               unsigned char *mem_11056)
 {
-    int32_t wave_sizze_10578;
-    int32_t group_sizze_10579;
-    bool thread_active_10580;
-    int32_t gtid_10440;
-    int32_t global_tid_10447;
-    int32_t local_tid_10448;
-    int32_t group_id_10449;
+    int32_t wave_sizze_11108;
+    int32_t group_sizze_11109;
+    bool thread_active_11110;
+    int32_t gtid_10970;
+    int32_t global_tid_10977;
+    int32_t local_tid_10978;
+    int32_t group_id_10979;
     
-    global_tid_10447 = get_global_id(0);
-    local_tid_10448 = get_local_id(0);
-    group_sizze_10579 = get_local_size(0);
-    wave_sizze_10578 = LOCKSTEP_WIDTH;
-    group_id_10449 = get_group_id(0);
-    gtid_10440 = global_tid_10447;
-    thread_active_10580 = slt32(gtid_10440, res_9873);
+    global_tid_10977 = get_global_id(0);
+    local_tid_10978 = get_local_id(0);
+    group_sizze_11109 = get_local_size(0);
+    wave_sizze_11108 = LOCKSTEP_WIDTH;
+    group_id_10979 = get_group_id(0);
+    gtid_10970 = global_tid_10977;
+    thread_active_11110 = slt32(gtid_10970, res_10403);
     
-    int32_t i_10451;
-    int32_t new_index_10452;
-    int32_t binop_y_10453;
-    int32_t new_index_10454;
-    float arg_10455;
-    float arg_10456;
-    float arg_10457;
-    float arg_10458;
-    float res_10459;
-    bool res_10460;
-    float y_10461;
-    float res_10462;
-    bool cond_10463;
+    int32_t i_10981;
+    int32_t new_index_10982;
+    int32_t binop_y_10983;
+    int32_t new_index_10984;
+    float arg_10985;
+    float arg_10986;
+    float arg_10987;
+    float arg_10988;
+    float res_10989;
+    bool res_10990;
+    float y_10991;
+    float res_10992;
+    bool cond_10993;
     
-    if (thread_active_10580) {
-        i_10451 = x_9886 + gtid_10440;
-        new_index_10452 = squot32(i_10451, sizze_9798);
-        binop_y_10453 = sizze_9798 * new_index_10452;
-        new_index_10454 = i_10451 - binop_y_10453;
-        arg_10455 = *(__global float *) &mem_10498[(new_index_10452 *
-                                                    sizze_9798 +
-                                                    new_index_10454) * 4];
-        arg_10456 = *(__global float *) &mem_10502[(new_index_10452 *
-                                                    sizze_9798 +
-                                                    new_index_10454) * 4];
-        arg_10457 = *(__global float *) &mem_10505[i_10451 * 4];
-        arg_10458 = *(__global float *) &mem_10508[i_10451 * 4];
-        res_10459 = (float) fabs(arg_10456);
-        res_10460 = res_10459 == 1.0F;
-        y_10461 = 0.0F - arg_10455;
-        res_10462 = arg_10456 / y_10461;
-        cond_10463 = res_10462 < 0.0F;
+    if (thread_active_11110) {
+        i_10981 = x_10416 + gtid_10970;
+        new_index_10982 = squot32(i_10981, sizze_10328);
+        binop_y_10983 = sizze_10328 * new_index_10982;
+        new_index_10984 = i_10981 - binop_y_10983;
+        arg_10985 = *(__global float *) &mem_11028[(new_index_10982 *
+                                                    sizze_10328 +
+                                                    new_index_10984) * 4];
+        arg_10986 = *(__global float *) &mem_11032[(new_index_10982 *
+                                                    sizze_10328 +
+                                                    new_index_10984) * 4];
+        arg_10987 = *(__global float *) &mem_11035[i_10981 * 4];
+        arg_10988 = *(__global float *) &mem_11038[i_10981 * 4];
+        res_10989 = (float) fabs(arg_10986);
+        res_10990 = res_10989 == 1.0F;
+        y_10991 = 0.0F - arg_10985;
+        res_10992 = arg_10986 / y_10991;
+        cond_10993 = res_10992 < 0.0F;
     }
-    if (thread_active_10580) {
-        *(__global float *) &mem_10516[gtid_10440 * 4] = arg_10457;
+    if (thread_active_11110) {
+        *(__global float *) &mem_11046[gtid_10970 * 4] = arg_10987;
     }
-    if (thread_active_10580) {
-        *(__global float *) &mem_10519[gtid_10440 * 4] = arg_10458;
+    if (thread_active_11110) {
+        *(__global float *) &mem_11049[gtid_10970 * 4] = arg_10988;
     }
-    if (thread_active_10580) {
-        *(__global bool *) &mem_10521[gtid_10440] = res_10460;
+    if (thread_active_11110) {
+        *(__global bool *) &mem_11051[gtid_10970] = res_10990;
     }
-    if (thread_active_10580) {
-        *(__global float *) &mem_10524[gtid_10440 * 4] = res_10462;
+    if (thread_active_11110) {
+        *(__global float *) &mem_11054[gtid_10970 * 4] = res_10992;
     }
-    if (thread_active_10580) {
-        *(__global bool *) &mem_10526[gtid_10440] = cond_10463;
+    if (thread_active_11110) {
+        *(__global bool *) &mem_11056[gtid_10970] = cond_10993;
     }
 }
 """
@@ -2900,351 +2903,353 @@ class forwardprojection_map:
                                        size_heuristics=size_heuristics,
                                        required_types=["i32", "f32", "bool"],
                                        user_sizes=sizes,
-                                       all_sizes={"group_size_10110": {"class": "group_size", "value": None},
-                                        "group_size_10126": {"class": "group_size", "value": None},
-                                        "group_size_10138": {"class": "group_size", "value": None},
-                                        "group_size_10151": {"class": "group_size", "value": None},
-                                        "group_size_10204": {"class": "group_size", "value": None},
-                                        "group_size_10441": {"class": "group_size", "value": None},
-                                        "group_size_10570": {"class": "group_size", "value": None}})
-    self.kernel_replicate_9851_var = program.kernel_replicate_9851
-    self.map_kernel_10116_var = program.map_kernel_10116
-    self.map_kernel_10132_var = program.map_kernel_10132
-    self.map_kernel_10144_var = program.map_kernel_10144
-    self.map_kernel_10157_var = program.map_kernel_10157
-    self.map_kernel_10210_var = program.map_kernel_10210
-    self.map_kernel_10447_var = program.map_kernel_10447
-  def futhark_main(self, angles_mem_sizze_10483, angles_mem_10484,
-                   rays_mem_sizze_10485, rays_mem_10486, voxels_mem_sizze_10487,
-                   voxels_mem_10488, sizze_9797, sizze_9798, sizze_9799,
-                   stepsizze_9803):
-    res_9804 = sitofp_i32_f32(sizze_9799)
-    res_9805 = futhark_sqrt32(res_9804)
-    res_9806 = fptosi_f32_i32(res_9805)
-    res_9807 = sitofp_i32_f32(res_9806)
-    res_9808 = (res_9807 / np.float32(2.0))
-    group_sizze_10139 = self.sizes["group_size_10138"]
-    y_10140 = (group_sizze_10139 - np.int32(1))
-    x_10141 = (sizze_9797 + y_10140)
-    num_groups_10142 = squot32(x_10141, group_sizze_10139)
-    num_threads_10143 = (group_sizze_10139 * num_groups_10142)
-    binop_x_10490 = sext_i32_i64(sizze_9797)
-    bytes_10489 = (np.int64(4) * binop_x_10490)
-    mem_10491 = opencl_alloc(self, bytes_10489, "mem_10491")
-    mem_10494 = opencl_alloc(self, bytes_10489, "mem_10494")
-    if ((1 * (num_groups_10142 * group_sizze_10139)) != 0):
-      self.map_kernel_10144_var.set_args(np.int32(sizze_9797), angles_mem_10484,
-                                         mem_10491, mem_10494)
-      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10144_var,
-                                 (np.long((num_groups_10142 * group_sizze_10139)),),
-                                 (np.long(group_sizze_10139),))
+                                       all_sizes={"group_size_10640": {"class": "group_size", "value": None},
+                                        "group_size_10656": {"class": "group_size", "value": None},
+                                        "group_size_10668": {"class": "group_size", "value": None},
+                                        "group_size_10681": {"class": "group_size", "value": None},
+                                        "group_size_10734": {"class": "group_size", "value": None},
+                                        "group_size_10971": {"class": "group_size", "value": None},
+                                        "group_size_11100": {"class": "group_size", "value": None}})
+    self.kernel_replicate_10381_var = program.kernel_replicate_10381
+    self.map_kernel_10646_var = program.map_kernel_10646
+    self.map_kernel_10662_var = program.map_kernel_10662
+    self.map_kernel_10674_var = program.map_kernel_10674
+    self.map_kernel_10687_var = program.map_kernel_10687
+    self.map_kernel_10740_var = program.map_kernel_10740
+    self.map_kernel_10977_var = program.map_kernel_10977
+  def futhark_main(self, angles_mem_sizze_11013, angles_mem_11014,
+                   rays_mem_sizze_11015, rays_mem_11016, voxels_mem_sizze_11017,
+                   voxels_mem_11018, sizze_10327, sizze_10328, sizze_10329,
+                   stepsizze_10333):
+    res_10334 = sitofp_i32_f32(sizze_10329)
+    res_10335 = futhark_sqrt32(res_10334)
+    res_10336 = fptosi_f32_i32(res_10335)
+    res_10337 = sitofp_i32_f32(res_10336)
+    res_10338 = (res_10337 / np.float32(2.0))
+    group_sizze_10669 = self.sizes["group_size_10668"]
+    y_10670 = (group_sizze_10669 - np.int32(1))
+    x_10671 = (sizze_10327 + y_10670)
+    num_groups_10672 = squot32(x_10671, group_sizze_10669)
+    num_threads_10673 = (group_sizze_10669 * num_groups_10672)
+    binop_x_11020 = sext_i32_i64(sizze_10327)
+    bytes_11019 = (np.int64(4) * binop_x_11020)
+    mem_11021 = opencl_alloc(self, bytes_11019, "mem_11021")
+    mem_11024 = opencl_alloc(self, bytes_11019, "mem_11024")
+    if ((1 * (num_groups_10672 * group_sizze_10669)) != 0):
+      self.map_kernel_10674_var.set_args(np.int32(sizze_10327),
+                                         angles_mem_11014, mem_11021, mem_11024)
+      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10674_var,
+                                 (np.long((num_groups_10672 * group_sizze_10669)),),
+                                 (np.long(group_sizze_10669),))
       if synchronous:
         self.queue.finish()
-    nesting_sizze_10125 = (sizze_9797 * sizze_9798)
-    group_sizze_10127 = self.sizes["group_size_10126"]
-    y_10128 = (group_sizze_10127 - np.int32(1))
-    x_10129 = (nesting_sizze_10125 + y_10128)
-    num_groups_10130 = squot32(x_10129, group_sizze_10127)
-    num_threads_10131 = (group_sizze_10127 * num_groups_10130)
-    binop_x_10497 = sext_i32_i64(nesting_sizze_10125)
-    bytes_10495 = (np.int64(4) * binop_x_10497)
-    mem_10498 = opencl_alloc(self, bytes_10495, "mem_10498")
-    if ((1 * (num_groups_10130 * group_sizze_10127)) != 0):
-      self.map_kernel_10132_var.set_args(np.int32(sizze_9797),
-                                         np.int32(sizze_9798), mem_10491,
-                                         mem_10498)
-      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10132_var,
-                                 (np.long((num_groups_10130 * group_sizze_10127)),),
-                                 (np.long(group_sizze_10127),))
+    nesting_sizze_10655 = (sizze_10327 * sizze_10328)
+    group_sizze_10657 = self.sizes["group_size_10656"]
+    y_10658 = (group_sizze_10657 - np.int32(1))
+    x_10659 = (nesting_sizze_10655 + y_10658)
+    num_groups_10660 = squot32(x_10659, group_sizze_10657)
+    num_threads_10661 = (group_sizze_10657 * num_groups_10660)
+    binop_x_11027 = sext_i32_i64(nesting_sizze_10655)
+    bytes_11025 = (np.int64(4) * binop_x_11027)
+    mem_11028 = opencl_alloc(self, bytes_11025, "mem_11028")
+    if ((1 * (num_groups_10660 * group_sizze_10657)) != 0):
+      self.map_kernel_10662_var.set_args(np.int32(sizze_10327),
+                                         np.int32(sizze_10328), mem_11021,
+                                         mem_11028)
+      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10662_var,
+                                 (np.long((num_groups_10660 * group_sizze_10657)),),
+                                 (np.long(group_sizze_10657),))
       if synchronous:
         self.queue.finish()
-    mem_10491 = None
-    group_sizze_10111 = self.sizes["group_size_10110"]
-    y_10112 = (group_sizze_10111 - np.int32(1))
-    x_10113 = (y_10112 + nesting_sizze_10125)
-    num_groups_10114 = squot32(x_10113, group_sizze_10111)
-    num_threads_10115 = (group_sizze_10111 * num_groups_10114)
-    mem_10502 = opencl_alloc(self, bytes_10495, "mem_10502")
-    if ((1 * (num_groups_10114 * group_sizze_10111)) != 0):
-      self.map_kernel_10116_var.set_args(np.int32(sizze_9797),
-                                         np.int32(sizze_9798), mem_10494,
-                                         mem_10502)
-      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10116_var,
-                                 (np.long((num_groups_10114 * group_sizze_10111)),),
-                                 (np.long(group_sizze_10111),))
+    mem_11021 = None
+    group_sizze_10641 = self.sizes["group_size_10640"]
+    y_10642 = (group_sizze_10641 - np.int32(1))
+    x_10643 = (y_10642 + nesting_sizze_10655)
+    num_groups_10644 = squot32(x_10643, group_sizze_10641)
+    num_threads_10645 = (group_sizze_10641 * num_groups_10644)
+    mem_11032 = opencl_alloc(self, bytes_11025, "mem_11032")
+    if ((1 * (num_groups_10644 * group_sizze_10641)) != 0):
+      self.map_kernel_10646_var.set_args(np.int32(sizze_10327),
+                                         np.int32(sizze_10328), mem_11024,
+                                         mem_11032)
+      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10646_var,
+                                 (np.long((num_groups_10644 * group_sizze_10641)),),
+                                 (np.long(group_sizze_10641),))
       if synchronous:
         self.queue.finish()
-    mem_10494 = None
-    res_9821 = (np.float32(0.0) - res_9808)
-    group_sizze_10152 = self.sizes["group_size_10151"]
-    y_10153 = (group_sizze_10152 - np.int32(1))
-    x_10154 = (nesting_sizze_10125 + y_10153)
-    num_groups_10155 = squot32(x_10154, group_sizze_10152)
-    num_threads_10156 = (group_sizze_10152 * num_groups_10155)
-    mem_10505 = opencl_alloc(self, bytes_10495, "mem_10505")
-    mem_10508 = opencl_alloc(self, bytes_10495, "mem_10508")
-    if ((1 * (num_groups_10155 * group_sizze_10152)) != 0):
-      self.map_kernel_10157_var.set_args(np.int32(sizze_9798),
-                                         np.float32(res_9808),
-                                         np.float32(res_9821),
-                                         np.int32(nesting_sizze_10125),
-                                         rays_mem_10486, mem_10498, mem_10502,
-                                         mem_10505, mem_10508)
-      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10157_var,
-                                 (np.long((num_groups_10155 * group_sizze_10152)),),
-                                 (np.long(group_sizze_10152),))
+    mem_11024 = None
+    res_10351 = (np.float32(0.0) - res_10338)
+    group_sizze_10682 = self.sizes["group_size_10681"]
+    y_10683 = (group_sizze_10682 - np.int32(1))
+    x_10684 = (nesting_sizze_10655 + y_10683)
+    num_groups_10685 = squot32(x_10684, group_sizze_10682)
+    num_threads_10686 = (group_sizze_10682 * num_groups_10685)
+    mem_11035 = opencl_alloc(self, bytes_11025, "mem_11035")
+    mem_11038 = opencl_alloc(self, bytes_11025, "mem_11038")
+    if ((1 * (num_groups_10685 * group_sizze_10682)) != 0):
+      self.map_kernel_10687_var.set_args(np.int32(sizze_10328),
+                                         np.float32(res_10338),
+                                         np.float32(res_10351),
+                                         np.int32(nesting_sizze_10655),
+                                         rays_mem_11016, mem_11028, mem_11032,
+                                         mem_11035, mem_11038)
+      cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10687_var,
+                                 (np.long((num_groups_10685 * group_sizze_10682)),),
+                                 (np.long(group_sizze_10682),))
       if synchronous:
         self.queue.finish()
-    res_9850 = sdiv32(nesting_sizze_10125, stepsizze_9803)
-    mem_10511 = opencl_alloc(self, np.int64(4), "mem_10511")
-    group_sizze_10570 = self.sizes["group_size_10570"]
-    num_groups_10571 = squot32(((np.int32(1) + sext_i32_i32(group_sizze_10570)) - np.int32(1)),
-                               sext_i32_i32(group_sizze_10570))
-    if ((1 * (num_groups_10571 * group_sizze_10570)) != 0):
-      self.kernel_replicate_9851_var.set_args(mem_10511)
-      cl.enqueue_nd_range_kernel(self.queue, self.kernel_replicate_9851_var,
-                                 (np.long((num_groups_10571 * group_sizze_10570)),),
-                                 (np.long(group_sizze_10570),))
+    res_10380 = sdiv32(nesting_sizze_10655, stepsizze_10333)
+    mem_11041 = opencl_alloc(self, np.int64(4), "mem_11041")
+    group_sizze_11100 = self.sizes["group_size_11100"]
+    num_groups_11101 = squot32(((np.int32(1) + sext_i32_i32(group_sizze_11100)) - np.int32(1)),
+                               sext_i32_i32(group_sizze_11100))
+    if ((1 * (num_groups_11101 * group_sizze_11100)) != 0):
+      self.kernel_replicate_10381_var.set_args(mem_11041)
+      cl.enqueue_nd_range_kernel(self.queue, self.kernel_replicate_10381_var,
+                                 (np.long((num_groups_11101 * group_sizze_11100)),),
+                                 (np.long(group_sizze_11100),))
       if synchronous:
         self.queue.finish()
-    loop_cond_9852 = slt32(np.int32(0), res_9850)
-    x_9853 = (np.float32(2.0) * res_9808)
-    x_9854 = (np.float32(2.0) * x_9853)
-    arg_9855 = (x_9854 - np.float32(1.0))
-    res_9856 = fptosi_f32_i32(arg_9855)
-    arg_9857 = (res_9856 - np.int32(1))
-    group_sizze_10442 = self.sizes["group_size_10441"]
-    y_10443 = (group_sizze_10442 - np.int32(1))
-    group_sizze_10205 = self.sizes["group_size_10204"]
-    y_10206 = (group_sizze_10205 - np.int32(1))
-    binop_x_10528 = sext_i32_i64(res_9856)
-    bytes_10527 = (np.int64(4) * binop_x_10528)
-    sizze_9866 = np.int32(1)
-    output_mem_sizze_10512 = np.int64(4)
-    output_mem_10513 = mem_10511
-    loop_while_9867 = loop_cond_9852
-    run_9869 = np.int32(0)
-    while loop_while_9867:
-      x_9870 = (np.int32(1) + run_9869)
-      x_9871 = (stepsizze_9803 * x_9870)
-      cond_9872 = sle32(nesting_sizze_10125, x_9871)
-      if cond_9872:
-        y_9874 = (stepsizze_9803 * run_9869)
-        res_9875 = (nesting_sizze_10125 - y_9874)
-        res_9873 = res_9875
+    loop_cond_10382 = slt32(np.int32(0), res_10380)
+    x_10383 = (np.float32(2.0) * res_10338)
+    x_10384 = (np.float32(2.0) * x_10383)
+    arg_10385 = (x_10384 - np.float32(1.0))
+    res_10386 = fptosi_f32_i32(arg_10385)
+    arg_10387 = (res_10386 - np.int32(1))
+    group_sizze_10972 = self.sizes["group_size_10971"]
+    y_10973 = (group_sizze_10972 - np.int32(1))
+    group_sizze_10735 = self.sizes["group_size_10734"]
+    y_10736 = (group_sizze_10735 - np.int32(1))
+    binop_x_11058 = sext_i32_i64(res_10386)
+    bytes_11057 = (np.int64(4) * binop_x_11058)
+    sizze_10396 = np.int32(1)
+    output_mem_sizze_11042 = np.int64(4)
+    output_mem_11043 = mem_11041
+    loop_while_10397 = loop_cond_10382
+    run_10399 = np.int32(0)
+    while loop_while_10397:
+      x_10400 = (np.int32(1) + run_10399)
+      x_10401 = (stepsizze_10333 * x_10400)
+      cond_10402 = sle32(nesting_sizze_10655, x_10401)
+      if cond_10402:
+        y_10404 = (stepsizze_10333 * run_10399)
+        res_10405 = (nesting_sizze_10655 - y_10404)
+        res_10403 = res_10405
       else:
-        res_9873 = stepsizze_9803
-      bounds_invalid_upwards_9876 = slt32(res_9873, np.int32(0))
-      eq_x_zz_9879 = (np.int32(0) == res_9873)
-      not_p_9880 = not(bounds_invalid_upwards_9876)
-      p_and_eq_x_y_9881 = (eq_x_zz_9879 and not_p_9880)
-      dim_zzero_9882 = (bounds_invalid_upwards_9876 or p_and_eq_x_y_9881)
-      both_empty_9883 = (eq_x_zz_9879 and dim_zzero_9882)
-      empty_or_match_9884 = (not_p_9880 or both_empty_9883)
-      empty_or_match_cert_9885 = True
-      assert empty_or_match_9884, ("Error at forwardprojection_map.fut:6:1-10:59 -> forwardprojection_map.fut:10:11-10:59 -> projection_lib.fut:205:189-205:197 -> /futlib/array.fut:61:1-62:12: %s%s%s%d%s%s" % ("Function return value does not match shape of type ",
-                                                                                                                                                                                                                  "*",
-                                                                                                                                                                                                                  "[",
-                                                                                                                                                                                                                  res_9873,
-                                                                                                                                                                                                                  "]",
-                                                                                                                                                                                                                  "intrinsics.i32"))
-      x_9886 = (stepsizze_9803 * run_9869)
-      x_10444 = (res_9873 + y_10443)
-      num_groups_10445 = squot32(x_10444, group_sizze_10442)
-      num_threads_10446 = (group_sizze_10442 * num_groups_10445)
-      binop_x_10515 = sext_i32_i64(res_9873)
-      bytes_10514 = (np.int64(4) * binop_x_10515)
-      mem_10516 = opencl_alloc(self, bytes_10514, "mem_10516")
-      mem_10519 = opencl_alloc(self, bytes_10514, "mem_10519")
-      mem_10521 = opencl_alloc(self, binop_x_10515, "mem_10521")
-      mem_10524 = opencl_alloc(self, bytes_10514, "mem_10524")
-      mem_10526 = opencl_alloc(self, binop_x_10515, "mem_10526")
-      if ((1 * (num_groups_10445 * group_sizze_10442)) != 0):
-        self.map_kernel_10447_var.set_args(np.int32(sizze_9798),
-                                           np.int32(res_9873), np.int32(x_9886),
-                                           mem_10498, mem_10502, mem_10505,
-                                           mem_10508, mem_10516, mem_10519,
-                                           mem_10521, mem_10524, mem_10526)
-        cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10447_var,
-                                   (np.long((num_groups_10445 * group_sizze_10442)),),
-                                   (np.long(group_sizze_10442),))
+        res_10403 = stepsizze_10333
+      bounds_invalid_upwards_10406 = slt32(res_10403, np.int32(0))
+      eq_x_zz_10409 = (np.int32(0) == res_10403)
+      not_p_10410 = not(bounds_invalid_upwards_10406)
+      p_and_eq_x_y_10411 = (eq_x_zz_10409 and not_p_10410)
+      dim_zzero_10412 = (bounds_invalid_upwards_10406 or p_and_eq_x_y_10411)
+      both_empty_10413 = (eq_x_zz_10409 and dim_zzero_10412)
+      empty_or_match_10414 = (not_p_10410 or both_empty_10413)
+      empty_or_match_cert_10415 = True
+      assert empty_or_match_10414, ("Error at forwardprojection_map.fut:26:1-30:59 -> forwardprojection_map.fut:30:11-30:59 -> projection_lib.fut:286:189-286:197 -> /futlib/array.fut:61:1-62:12: %s%s%s%d%s%s" % ("Function return value does not match shape of type ",
+                                                                                                                                                                                                                    "*",
+                                                                                                                                                                                                                    "[",
+                                                                                                                                                                                                                    res_10403,
+                                                                                                                                                                                                                    "]",
+                                                                                                                                                                                                                    "intrinsics.i32"))
+      x_10416 = (stepsizze_10333 * run_10399)
+      x_10974 = (res_10403 + y_10973)
+      num_groups_10975 = squot32(x_10974, group_sizze_10972)
+      num_threads_10976 = (group_sizze_10972 * num_groups_10975)
+      binop_x_11045 = sext_i32_i64(res_10403)
+      bytes_11044 = (np.int64(4) * binop_x_11045)
+      mem_11046 = opencl_alloc(self, bytes_11044, "mem_11046")
+      mem_11049 = opencl_alloc(self, bytes_11044, "mem_11049")
+      mem_11051 = opencl_alloc(self, binop_x_11045, "mem_11051")
+      mem_11054 = opencl_alloc(self, bytes_11044, "mem_11054")
+      mem_11056 = opencl_alloc(self, binop_x_11045, "mem_11056")
+      if ((1 * (num_groups_10975 * group_sizze_10972)) != 0):
+        self.map_kernel_10977_var.set_args(np.int32(sizze_10328),
+                                           np.int32(res_10403),
+                                           np.int32(x_10416), mem_11028,
+                                           mem_11032, mem_11035, mem_11038,
+                                           mem_11046, mem_11049, mem_11051,
+                                           mem_11054, mem_11056)
+        cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10977_var,
+                                   (np.long((num_groups_10975 * group_sizze_10972)),),
+                                   (np.long(group_sizze_10972),))
         if synchronous:
           self.queue.finish()
-      x_10207 = (res_9873 + y_10206)
-      num_groups_10208 = squot32(x_10207, group_sizze_10205)
-      num_threads_10209 = (group_sizze_10205 * num_groups_10208)
-      mem_10535 = opencl_alloc(self, bytes_10514, "mem_10535")
-      num_threads64_10550 = sext_i32_i64(num_threads_10209)
-      total_sizze_10551 = (bytes_10527 * num_threads64_10550)
-      mem_10529 = opencl_alloc(self, total_sizze_10551, "mem_10529")
-      total_sizze_10552 = (bytes_10527 * num_threads64_10550)
-      mem_10532 = opencl_alloc(self, total_sizze_10552, "mem_10532")
-      if ((1 * (num_groups_10208 * group_sizze_10205)) != 0):
-        self.map_kernel_10210_var.set_args(np.float32(res_9808),
-                                           np.float32(res_9821),
-                                           np.int32(res_9856),
-                                           np.int32(arg_9857),
-                                           np.int32(res_9873), voxels_mem_10488,
-                                           mem_10516, mem_10519, mem_10521,
-                                           mem_10524, mem_10526, mem_10529,
-                                           mem_10532, mem_10535)
-        cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10210_var,
-                                   (np.long((num_groups_10208 * group_sizze_10205)),),
-                                   (np.long(group_sizze_10205),))
+      x_10737 = (res_10403 + y_10736)
+      num_groups_10738 = squot32(x_10737, group_sizze_10735)
+      num_threads_10739 = (group_sizze_10735 * num_groups_10738)
+      mem_11065 = opencl_alloc(self, bytes_11044, "mem_11065")
+      num_threads64_11080 = sext_i32_i64(num_threads_10739)
+      total_sizze_11081 = (bytes_11057 * num_threads64_11080)
+      mem_11059 = opencl_alloc(self, total_sizze_11081, "mem_11059")
+      total_sizze_11082 = (bytes_11057 * num_threads64_11080)
+      mem_11062 = opencl_alloc(self, total_sizze_11082, "mem_11062")
+      if ((1 * (num_groups_10738 * group_sizze_10735)) != 0):
+        self.map_kernel_10740_var.set_args(np.float32(res_10338),
+                                           np.float32(res_10351),
+                                           np.int32(res_10386),
+                                           np.int32(arg_10387),
+                                           np.int32(res_10403),
+                                           voxels_mem_11018, mem_11046,
+                                           mem_11049, mem_11051, mem_11054,
+                                           mem_11056, mem_11059, mem_11062,
+                                           mem_11065)
+        cl.enqueue_nd_range_kernel(self.queue, self.map_kernel_10740_var,
+                                   (np.long((num_groups_10738 * group_sizze_10735)),),
+                                   (np.long(group_sizze_10735),))
         if synchronous:
           self.queue.finish()
-      mem_10516 = None
-      mem_10519 = None
-      mem_10521 = None
-      mem_10524 = None
-      mem_10526 = None
-      mem_10529 = None
-      mem_10532 = None
-      conc_tmp_10089 = (sizze_9866 + res_9873)
-      binop_x_10537 = sext_i32_i64(conc_tmp_10089)
-      bytes_10536 = (np.int64(4) * binop_x_10537)
-      mem_10538 = opencl_alloc(self, bytes_10536, "mem_10538")
-      tmp_offs_10593 = np.int32(0)
-      if ((sizze_9866 * np.int32(4)) != 0):
-        cl.enqueue_copy(self.queue, mem_10538, output_mem_10513,
-                        dest_offset=np.long((tmp_offs_10593 * np.int32(4))),
+      mem_11046 = None
+      mem_11049 = None
+      mem_11051 = None
+      mem_11054 = None
+      mem_11056 = None
+      mem_11059 = None
+      mem_11062 = None
+      conc_tmp_10619 = (sizze_10396 + res_10403)
+      binop_x_11067 = sext_i32_i64(conc_tmp_10619)
+      bytes_11066 = (np.int64(4) * binop_x_11067)
+      mem_11068 = opencl_alloc(self, bytes_11066, "mem_11068")
+      tmp_offs_11123 = np.int32(0)
+      if ((sizze_10396 * np.int32(4)) != 0):
+        cl.enqueue_copy(self.queue, mem_11068, output_mem_11043,
+                        dest_offset=np.long((tmp_offs_11123 * np.int32(4))),
                         src_offset=np.long(np.int32(0)),
-                        byte_count=np.long((sizze_9866 * np.int32(4))))
+                        byte_count=np.long((sizze_10396 * np.int32(4))))
       if synchronous:
         self.queue.finish()
-      tmp_offs_10593 = (tmp_offs_10593 + sizze_9866)
-      if ((res_9873 * np.int32(4)) != 0):
-        cl.enqueue_copy(self.queue, mem_10538, mem_10535,
-                        dest_offset=np.long((tmp_offs_10593 * np.int32(4))),
+      tmp_offs_11123 = (tmp_offs_11123 + sizze_10396)
+      if ((res_10403 * np.int32(4)) != 0):
+        cl.enqueue_copy(self.queue, mem_11068, mem_11065,
+                        dest_offset=np.long((tmp_offs_11123 * np.int32(4))),
                         src_offset=np.long(np.int32(0)),
-                        byte_count=np.long((res_9873 * np.int32(4))))
+                        byte_count=np.long((res_10403 * np.int32(4))))
       if synchronous:
         self.queue.finish()
-      tmp_offs_10593 = (tmp_offs_10593 + res_9873)
-      mem_10535 = None
-      loop_cond_10091 = slt32(x_9870, res_9850)
-      sizze_tmp_10572 = conc_tmp_10089
-      output_mem_sizze_tmp_10573 = bytes_10536
-      output_mem_tmp_10574 = mem_10538
-      loop_while_tmp_10575 = loop_cond_10091
-      run_tmp_10577 = x_9870
-      sizze_9866 = sizze_tmp_10572
-      output_mem_sizze_10512 = output_mem_sizze_tmp_10573
-      output_mem_10513 = output_mem_tmp_10574
-      loop_while_9867 = loop_while_tmp_10575
-      run_9869 = run_tmp_10577
-    sizze_9862 = sizze_9866
-    res_mem_sizze_10539 = output_mem_sizze_10512
-    res_mem_10540 = output_mem_10513
-    res_9863 = loop_while_9867
-    res_9865 = run_9869
-    mem_10498 = None
-    mem_10502 = None
-    mem_10505 = None
-    mem_10508 = None
-    mem_10511 = None
-    j_m_i_10092 = (sizze_9862 - np.int32(1))
-    x_10093 = abs(j_m_i_10092)
-    empty_slice_10094 = (x_10093 == np.int32(0))
-    m_10095 = (x_10093 - np.int32(1))
-    i_p_m_t_s_10096 = (np.int32(1) + m_10095)
-    zzero_leq_i_p_m_t_s_10097 = sle32(np.int32(0), i_p_m_t_s_10096)
-    i_p_m_t_s_leq_w_10098 = slt32(i_p_m_t_s_10096, sizze_9862)
-    i_lte_j_10099 = sle32(np.int32(1), sizze_9862)
-    y_10100 = (zzero_leq_i_p_m_t_s_10097 and i_p_m_t_s_leq_w_10098)
-    y_10101 = (i_lte_j_10099 and y_10100)
-    ok_or_empty_10102 = (empty_slice_10094 or y_10101)
-    index_certs_10103 = True
-    assert ok_or_empty_10102, ("Error at forwardprojection_map.fut:6:1-10:59 -> forwardprojection_map.fut:10:11-10:59 -> projection_lib.fut:208:20-208:31 -> /futlib/array.fut:21:29-21:33: %s%d%s%d%s" % ("Index [",
-                                                                                                                                                                                                           np.int32(1),
-                                                                                                                                                                                                           "] out of bounds for array of shape [",
-                                                                                                                                                                                                           sizze_9862,
-                                                                                                                                                                                                           "]."))
-    binop_x_10542 = sext_i32_i64(x_10093)
-    bytes_10541 = (np.int64(4) * binop_x_10542)
-    mem_10543 = opencl_alloc(self, bytes_10541, "mem_10543")
-    if ((x_10093 * np.int32(4)) != 0):
-      cl.enqueue_copy(self.queue, mem_10543, res_mem_10540,
+      tmp_offs_11123 = (tmp_offs_11123 + res_10403)
+      mem_11065 = None
+      loop_cond_10621 = slt32(x_10400, res_10380)
+      sizze_tmp_11102 = conc_tmp_10619
+      output_mem_sizze_tmp_11103 = bytes_11066
+      output_mem_tmp_11104 = mem_11068
+      loop_while_tmp_11105 = loop_cond_10621
+      run_tmp_11107 = x_10400
+      sizze_10396 = sizze_tmp_11102
+      output_mem_sizze_11042 = output_mem_sizze_tmp_11103
+      output_mem_11043 = output_mem_tmp_11104
+      loop_while_10397 = loop_while_tmp_11105
+      run_10399 = run_tmp_11107
+    sizze_10392 = sizze_10396
+    res_mem_sizze_11069 = output_mem_sizze_11042
+    res_mem_11070 = output_mem_11043
+    res_10393 = loop_while_10397
+    res_10395 = run_10399
+    mem_11028 = None
+    mem_11032 = None
+    mem_11035 = None
+    mem_11038 = None
+    mem_11041 = None
+    j_m_i_10622 = (sizze_10392 - np.int32(1))
+    x_10623 = abs(j_m_i_10622)
+    empty_slice_10624 = (x_10623 == np.int32(0))
+    m_10625 = (x_10623 - np.int32(1))
+    i_p_m_t_s_10626 = (np.int32(1) + m_10625)
+    zzero_leq_i_p_m_t_s_10627 = sle32(np.int32(0), i_p_m_t_s_10626)
+    i_p_m_t_s_leq_w_10628 = slt32(i_p_m_t_s_10626, sizze_10392)
+    i_lte_j_10629 = sle32(np.int32(1), sizze_10392)
+    y_10630 = (zzero_leq_i_p_m_t_s_10627 and i_p_m_t_s_leq_w_10628)
+    y_10631 = (i_lte_j_10629 and y_10630)
+    ok_or_empty_10632 = (empty_slice_10624 or y_10631)
+    index_certs_10633 = True
+    assert ok_or_empty_10632, ("Error at forwardprojection_map.fut:26:1-30:59 -> forwardprojection_map.fut:30:11-30:59 -> projection_lib.fut:289:20-289:31 -> /futlib/array.fut:21:29-21:33: %s%d%s%d%s" % ("Index [",
+                                                                                                                                                                                                            np.int32(1),
+                                                                                                                                                                                                            "] out of bounds for array of shape [",
+                                                                                                                                                                                                            sizze_10392,
+                                                                                                                                                                                                            "]."))
+    binop_x_11072 = sext_i32_i64(x_10623)
+    bytes_11071 = (np.int64(4) * binop_x_11072)
+    mem_11073 = opencl_alloc(self, bytes_11071, "mem_11073")
+    if ((x_10623 * np.int32(4)) != 0):
+      cl.enqueue_copy(self.queue, mem_11073, res_mem_11070,
                       dest_offset=np.long(np.int32(0)),
                       src_offset=np.long(np.int32(4)),
-                      byte_count=np.long((x_10093 * np.int32(4))))
+                      byte_count=np.long((x_10623 * np.int32(4))))
     if synchronous:
       self.queue.finish()
-    res_mem_10540 = None
-    out_arrsizze_10555 = x_10093
-    out_memsizze_10554 = bytes_10541
-    out_mem_10553 = mem_10543
-    return (out_memsizze_10554, out_mem_10553, out_arrsizze_10555)
-  def main(self, angles_mem_10484_ext, rays_mem_10486_ext, voxels_mem_10488_ext,
-           stepsizze_9803_ext):
+    res_mem_11070 = None
+    out_arrsizze_11085 = x_10623
+    out_memsizze_11084 = bytes_11071
+    out_mem_11083 = mem_11073
+    return (out_memsizze_11084, out_mem_11083, out_arrsizze_11085)
+  def main(self, angles_mem_11014_ext, rays_mem_11016_ext, voxels_mem_11018_ext,
+           stepsizze_10333_ext):
     try:
-      assert ((type(angles_mem_10484_ext) in [np.ndarray,
-                                              cl.array.Array]) and (angles_mem_10484_ext.dtype == np.float32)), "Parameter has unexpected type"
-      sizze_9797 = np.int32(angles_mem_10484_ext.shape[0])
-      angles_mem_sizze_10483 = np.int64(angles_mem_10484_ext.nbytes)
-      if (type(angles_mem_10484_ext) == cl.array.Array):
-        angles_mem_10484 = angles_mem_10484_ext.data
+      assert ((type(angles_mem_11014_ext) in [np.ndarray,
+                                              cl.array.Array]) and (angles_mem_11014_ext.dtype == np.float32)), "Parameter has unexpected type"
+      sizze_10327 = np.int32(angles_mem_11014_ext.shape[0])
+      angles_mem_sizze_11013 = np.int64(angles_mem_11014_ext.nbytes)
+      if (type(angles_mem_11014_ext) == cl.array.Array):
+        angles_mem_11014 = angles_mem_11014_ext.data
       else:
-        angles_mem_10484 = opencl_alloc(self, angles_mem_sizze_10483,
-                                        "angles_mem_10484")
-        if (angles_mem_sizze_10483 != 0):
-          cl.enqueue_copy(self.queue, angles_mem_10484,
-                          normaliseArray(angles_mem_10484_ext),
+        angles_mem_11014 = opencl_alloc(self, angles_mem_sizze_11013,
+                                        "angles_mem_11014")
+        if (angles_mem_sizze_11013 != 0):
+          cl.enqueue_copy(self.queue, angles_mem_11014,
+                          normaliseArray(angles_mem_11014_ext),
                           is_blocking=synchronous)
     except (TypeError, AssertionError) as e:
       raise TypeError("Argument #0 has invalid value\nFuthark type: {}\nArgument has Python type {} and value: {}\n".format("[]f32",
-                                                                                                                            type(angles_mem_10484_ext),
-                                                                                                                            angles_mem_10484_ext))
+                                                                                                                            type(angles_mem_11014_ext),
+                                                                                                                            angles_mem_11014_ext))
     try:
-      assert ((type(rays_mem_10486_ext) in [np.ndarray,
-                                            cl.array.Array]) and (rays_mem_10486_ext.dtype == np.float32)), "Parameter has unexpected type"
-      sizze_9798 = np.int32(rays_mem_10486_ext.shape[0])
-      rays_mem_sizze_10485 = np.int64(rays_mem_10486_ext.nbytes)
-      if (type(rays_mem_10486_ext) == cl.array.Array):
-        rays_mem_10486 = rays_mem_10486_ext.data
+      assert ((type(rays_mem_11016_ext) in [np.ndarray,
+                                            cl.array.Array]) and (rays_mem_11016_ext.dtype == np.float32)), "Parameter has unexpected type"
+      sizze_10328 = np.int32(rays_mem_11016_ext.shape[0])
+      rays_mem_sizze_11015 = np.int64(rays_mem_11016_ext.nbytes)
+      if (type(rays_mem_11016_ext) == cl.array.Array):
+        rays_mem_11016 = rays_mem_11016_ext.data
       else:
-        rays_mem_10486 = opencl_alloc(self, rays_mem_sizze_10485,
-                                      "rays_mem_10486")
-        if (rays_mem_sizze_10485 != 0):
-          cl.enqueue_copy(self.queue, rays_mem_10486,
-                          normaliseArray(rays_mem_10486_ext),
+        rays_mem_11016 = opencl_alloc(self, rays_mem_sizze_11015,
+                                      "rays_mem_11016")
+        if (rays_mem_sizze_11015 != 0):
+          cl.enqueue_copy(self.queue, rays_mem_11016,
+                          normaliseArray(rays_mem_11016_ext),
                           is_blocking=synchronous)
     except (TypeError, AssertionError) as e:
       raise TypeError("Argument #1 has invalid value\nFuthark type: {}\nArgument has Python type {} and value: {}\n".format("[]f32",
-                                                                                                                            type(rays_mem_10486_ext),
-                                                                                                                            rays_mem_10486_ext))
+                                                                                                                            type(rays_mem_11016_ext),
+                                                                                                                            rays_mem_11016_ext))
     try:
-      assert ((type(voxels_mem_10488_ext) in [np.ndarray,
-                                              cl.array.Array]) and (voxels_mem_10488_ext.dtype == np.float32)), "Parameter has unexpected type"
-      sizze_9799 = np.int32(voxels_mem_10488_ext.shape[0])
-      voxels_mem_sizze_10487 = np.int64(voxels_mem_10488_ext.nbytes)
-      if (type(voxels_mem_10488_ext) == cl.array.Array):
-        voxels_mem_10488 = voxels_mem_10488_ext.data
+      assert ((type(voxels_mem_11018_ext) in [np.ndarray,
+                                              cl.array.Array]) and (voxels_mem_11018_ext.dtype == np.float32)), "Parameter has unexpected type"
+      sizze_10329 = np.int32(voxels_mem_11018_ext.shape[0])
+      voxels_mem_sizze_11017 = np.int64(voxels_mem_11018_ext.nbytes)
+      if (type(voxels_mem_11018_ext) == cl.array.Array):
+        voxels_mem_11018 = voxels_mem_11018_ext.data
       else:
-        voxels_mem_10488 = opencl_alloc(self, voxels_mem_sizze_10487,
-                                        "voxels_mem_10488")
-        if (voxels_mem_sizze_10487 != 0):
-          cl.enqueue_copy(self.queue, voxels_mem_10488,
-                          normaliseArray(voxels_mem_10488_ext),
+        voxels_mem_11018 = opencl_alloc(self, voxels_mem_sizze_11017,
+                                        "voxels_mem_11018")
+        if (voxels_mem_sizze_11017 != 0):
+          cl.enqueue_copy(self.queue, voxels_mem_11018,
+                          normaliseArray(voxels_mem_11018_ext),
                           is_blocking=synchronous)
     except (TypeError, AssertionError) as e:
       raise TypeError("Argument #2 has invalid value\nFuthark type: {}\nArgument has Python type {} and value: {}\n".format("[]f32",
-                                                                                                                            type(voxels_mem_10488_ext),
-                                                                                                                            voxels_mem_10488_ext))
+                                                                                                                            type(voxels_mem_11018_ext),
+                                                                                                                            voxels_mem_11018_ext))
     try:
-      stepsizze_9803 = np.int32(ct.c_int32(stepsizze_9803_ext))
+      stepsizze_10333 = np.int32(ct.c_int32(stepsizze_10333_ext))
     except (TypeError, AssertionError) as e:
       raise TypeError("Argument #3 has invalid value\nFuthark type: {}\nArgument has Python type {} and value: {}\n".format("i32",
-                                                                                                                            type(stepsizze_9803_ext),
-                                                                                                                            stepsizze_9803_ext))
-    (out_memsizze_10554, out_mem_10553,
-     out_arrsizze_10555) = self.futhark_main(angles_mem_sizze_10483,
-                                             angles_mem_10484,
-                                             rays_mem_sizze_10485,
-                                             rays_mem_10486,
-                                             voxels_mem_sizze_10487,
-                                             voxels_mem_10488, sizze_9797,
-                                             sizze_9798, sizze_9799,
-                                             stepsizze_9803)
-    return cl.array.Array(self.queue, (out_arrsizze_10555,), ct.c_float,
-                          data=out_mem_10553)
+                                                                                                                            type(stepsizze_10333_ext),
+                                                                                                                            stepsizze_10333_ext))
+    (out_memsizze_11084, out_mem_11083,
+     out_arrsizze_11085) = self.futhark_main(angles_mem_sizze_11013,
+                                             angles_mem_11014,
+                                             rays_mem_sizze_11015,
+                                             rays_mem_11016,
+                                             voxels_mem_sizze_11017,
+                                             voxels_mem_11018, sizze_10327,
+                                             sizze_10328, sizze_10329,
+                                             stepsizze_10333)
+    return cl.array.Array(self.queue, (out_arrsizze_11085,), ct.c_float,
+                          data=out_mem_11083)
