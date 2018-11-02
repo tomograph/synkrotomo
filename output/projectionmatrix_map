@@ -1,0 +1,109 @@
+Using platform: NVIDIA CUDA
+Using device: GeForce GTX 780 Ti
+Lockstep width: 1
+Default group size: 256
+Default number of groups: 128
+Created kernel fut_kernel_map_transpose_f32.
+Created kernel fut_kernel_map_transpose_lowheight_f32.
+Created kernel fut_kernel_map_transpose_lowwidth_f32.
+Created kernel fut_kernel_map_transpose_small_f32.
+Created kernel map_kernel_8881.
+Created kernel map_kernel_8897.
+Created kernel map_kernel_8909.
+Created kernel map_kernel_8928.
+Created kernel map_kernel_9031.
+Created kernel map_kernel_9169.
+Allocated 1612 bytes for arr->mem in space 'device' (now allocated: 1612 bytes) (new peak).
+Allocated 1024 bytes for arr->mem in space 'device' (now allocated: 2636 bytes) (new peak).
+Allocated 1612 bytes for mem_9238 in space 'device' (now allocated: 4248 bytes) (new peak).
+Allocated 1612 bytes for mem_9241 in space 'device' (now allocated: 5860 bytes) (new peak).
+Launching map_kernel_8909 with global work size [512] and local work size [256].
+kernel map_kernel_8909 runtime: 43us
+Allocated 412672 bytes for mem_9245 in space 'device' (now allocated: 418532 bytes) (new peak).
+Launching map_kernel_8897 with global work size [103168] and local work size [256].
+kernel map_kernel_8897 runtime: 24us
+Unreferencing block mem_9238 (allocated as mem_9238) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 416920 bytes)
+Allocated 412672 bytes for mem_9249 in space 'device' (now allocated: 829592 bytes) (new peak).
+Launching map_kernel_8881 with global work size [103168] and local work size [256].
+kernel map_kernel_8881 runtime: 21us
+Unreferencing block mem_9241 (allocated as mem_9241) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 827980 bytes)
+Allocated 412672 bytes for mem_9252 in space 'device' (now allocated: 1240652 bytes) (new peak).
+Allocated 412672 bytes for mem_9255 in space 'device' (now allocated: 1653324 bytes) (new peak).
+Allocated 103168 bytes for mem_9257 in space 'device' (now allocated: 1756492 bytes) (new peak).
+Allocated 412672 bytes for mem_9260 in space 'device' (now allocated: 2169164 bytes) (new peak).
+Allocated 103168 bytes for mem_9262 in space 'device' (now allocated: 2272332 bytes) (new peak).
+Launching map_kernel_9169 with global work size [103168] and local work size [256].
+kernel map_kernel_9169 runtime: 30us
+Unreferencing block mem_9245 (allocated as mem_9245) in space 'device': 0 references remaining.
+412672 bytes freed (now allocated: 1859660 bytes)
+Unreferencing block mem_9249 (allocated as mem_9249) in space 'device': 0 references remaining.
+412672 bytes freed (now allocated: 1446988 bytes)
+Allocated 103168 bytes for mem_9270 in space 'device' (now allocated: 1550156 bytes).
+Allocated 210875392 bytes for mem_9274 in space 'device' (now allocated: 212425548 bytes) (new peak).
+Allocated 210875392 bytes for mem_9278 in space 'device' (now allocated: 423300940 bytes) (new peak).
+Allocated 210875392 bytes for mem_9265 in space 'device' (now allocated: 634176332 bytes) (new peak).
+Allocated 210875392 bytes for mem_9268 in space 'device' (now allocated: 845051724 bytes) (new peak).
+Launching map_kernel_9031 with global work size [103168] and local work size [256].
+kernel map_kernel_9031 runtime: 6157us
+Unreferencing block mem_9252 (allocated as mem_9252) in space 'device': 0 references remaining.
+412672 bytes freed (now allocated: 844639052 bytes)
+Unreferencing block mem_9255 (allocated as mem_9255) in space 'device': 0 references remaining.
+412672 bytes freed (now allocated: 844226380 bytes)
+Unreferencing block mem_9257 (allocated as mem_9257) in space 'device': 0 references remaining.
+103168 bytes freed (now allocated: 844123212 bytes)
+Unreferencing block mem_9260 (allocated as mem_9260) in space 'device': 0 references remaining.
+412672 bytes freed (now allocated: 843710540 bytes)
+Unreferencing block mem_9265 (allocated as mem_9265) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 632835148 bytes)
+Unreferencing block mem_9268 (allocated as mem_9268) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 421959756 bytes)
+Allocated 210875392 bytes for mem_9282 in space 'device' (now allocated: 632835148 bytes).
+Launching fut_kernel_map_transpose_f32 with global work size [103168, 512, 1] and local work size [16, 16, 1].
+kernel fut_kernel_map_transpose_f32 runtime: 2506us
+Unreferencing block mem_9274 (allocated as mem_9274) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 421959756 bytes)
+Allocated 210875392 bytes for mem_9286 in space 'device' (now allocated: 632835148 bytes).
+Launching fut_kernel_map_transpose_f32 with global work size [103168, 512, 1] and local work size [16, 16, 1].
+kernel fut_kernel_map_transpose_f32 runtime: 2500us
+Unreferencing block mem_9278 (allocated as mem_9278) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 421959756 bytes)
+Allocated 210462720 bytes for mem_9290 in space 'device' (now allocated: 632422476 bytes).
+Allocated 210462720 bytes for mem_9294 in space 'device' (now allocated: 842885196 bytes).
+Launching map_kernel_8928 with global work size [52615680] and local work size [256].
+kernel map_kernel_8928 runtime: 6405us
+Unreferencing block mem_9262 (allocated as mem_9262) in space 'device': 0 references remaining.
+103168 bytes freed (now allocated: 842782028 bytes)
+Unreferencing block mem_9270 (allocated as mem_9270) in space 'device': 0 references remaining.
+103168 bytes freed (now allocated: 842678860 bytes)
+Unreferencing block mem_9282 (allocated as mem_9282) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 631803468 bytes)
+Unreferencing block mem_9286 (allocated as mem_9286) in space 'device': 0 references remaining.
+210875392 bytes freed (now allocated: 420928076 bytes)
+Unreferencing block mem_9294 (allocated as mem_9294) in space 'device': 2 references remaining.
+Unreferencing block mem_9290 (allocated as mem_9290) in space 'device': 2 references remaining.
+Unreferencing block out_mem_9307 (allocated as mem_9294) in space 'device': 1 references remaining.
+Unreferencing block out_mem_9303 (allocated as mem_9290) in space 'device': 1 references remaining.
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 420926464 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+1024 bytes freed (now allocated: 420925440 bytes)
+Unreferencing block arr->mem (allocated as mem_9290) in space 'device': 0 references remaining.
+210462720 bytes freed (now allocated: 210462720 bytes)
+Unreferencing block arr->mem (allocated as mem_9294) in space 'device': 0 references remaining.
+210462720 bytes freed (now allocated: 0 bytes)
+Peak memory usage for space 'device': 845051724 bytes.
+Peak memory usage for space 'local': 0 bytes.
+Peak memory usage for default space: 0 bytes.
+Kernel fut_kernel_map_transpose_f32           executed      2 times, with average runtime:   2503us	and total runtime:   5006us
+Kernel fut_kernel_map_transpose_lowheight_f32 executed      0 times, with average runtime:      0us	and total runtime:      0us
+Kernel fut_kernel_map_transpose_lowwidth_f32  executed      0 times, with average runtime:      0us	and total runtime:      0us
+Kernel fut_kernel_map_transpose_small_f32     executed      0 times, with average runtime:      0us	and total runtime:      0us
+Kernel map_kernel_8881                        executed      1 times, with average runtime:     21us	and total runtime:     21us
+Kernel map_kernel_8897                        executed      1 times, with average runtime:     24us	and total runtime:     24us
+Kernel map_kernel_8909                        executed      1 times, with average runtime:     43us	and total runtime:     43us
+Kernel map_kernel_8928                        executed      1 times, with average runtime:   6405us	and total runtime:   6405us
+Kernel map_kernel_9031                        executed      1 times, with average runtime:   6157us	and total runtime:   6157us
+Kernel map_kernel_9169                        executed      1 times, with average runtime:     30us	and total runtime:     30us
+Ran 8 kernels with cumulative runtime:  17686us
