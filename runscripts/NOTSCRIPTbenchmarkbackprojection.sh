@@ -22,4 +22,4 @@ futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#0 backprojecti
 futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#1 backprojection_doubleparallel.fut > ../output/backprojection_doubleparallel_benchmark_par
 futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#1 backprojection_map.fut > ../output/backprojection_map_benchmark_par
 futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#1 backprojection_semiflat.fut > ../output/backprojection_semiflat_benchmark_par
-futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#1 backprojection_bpintegrated.fut > ../output/backprojection_bpintegrated_benchmark_par
+futhark-bench --runs=1 --compiler=futhark-opencl --pass-option=-d#1 backprojection_dpintegrated.fut > ../output/backprojection_bpintegrated_benchmark_par
