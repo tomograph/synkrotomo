@@ -140,7 +140,7 @@ module Matrix =
                (ext: point)
                (i: i32)
                (N: i32)
-               (proj_val: f32) : []f32 =
+               (proj_val: f32) : [](f32,i32) =
           let Nhalf = N/2
           -- handle all lines as slope < 1 reverse the others
           let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
@@ -166,11 +166,11 @@ module Matrix =
           let lymin = yminfact*baselength
           let lyplus = yplusfact*baselength
           let min = if (pixmin >= 0 && pixmin < N ** 2) then
-               (if Ypixmin == Ypixplus then baselength*proj_val else lymin*proj_val)
-               else 0
+               (if Ypixmin == Ypixplus then ((baselength*proj_val),pixmin) else (lymin*proj_val,pixmin))
+               else (-1f32,-1i32)
           let plus = if (pixplus >= 0 && pixplus < N ** 2) then
-               (if Ypixmin == Ypixplus then 0 else lyplus*proj_val)
-               else 0
+               (if Ypixmin == Ypixplus then (-1f32,-1i32) else ((lyplus*proj_val), pixmin))
+               else (-1f32,-1i32)
           in [min,plus]
 
 
