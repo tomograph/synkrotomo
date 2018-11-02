@@ -37,4 +37,24 @@
   url       = {https://epubs.siam.org/doi/abs/10.1137/1.9780898719284},
 }
 
+@Article{Gao2012,
+  author        = {Gao, Hao},
+  title         = {Fast parallel algorithms for the x-ray transform and its adjoint},
+  journal       = {Medical physics},
+  year          = {2012},
+  volume        = {39},
+  number        = {23127102},
+  pages         = {7110--7120},
+  month         = nov,
+  issn          = {0094-2405},
+  __markedentry = {[zgb585:6]},
+  abstract      = {PURPOSE: Iterative reconstruction methods often offer better imaging quality and allow for reconstructions with lower imaging dose than classical methods in computed tomography. However, the computational speed is a major concern for these iterative methods, for which the x-ray transform and its adjoint are two most time-consuming components. The speed issue becomes even notable for the 3D imaging such as cone beam scans or helical scans, since the x-ray transform and its adjoint are frequently computed as there is usually not enough computer memory to save the corresponding system matrix. The purpose of this paper is to optimize the algorithm for computing the x-ray transform and its adjoint, and their parallel computation. METHODS: The fast and highly parallelizable algorithms for the x-ray transform and its adjoint are proposed for the infinitely narrow beam in both 2D and 3D. The extension of these fast algorithms to the finite-size beam is proposed in 2D and discussed in 3D. RESULTS: The CPU and GPU codes are available at https://sites.google.com/site/fastxraytransform. The proposed algorithm is faster than Siddon's algorithm for computing the x-ray transform. In particular, the improvement for the parallel computation can be an order of magnitude. CONCLUSIONS: The authors have proposed fast and highly parallelizable algorithms for the x-ray transform and its adjoint, which are extendable for the finite-size beam. The proposed algorithms are suitable for parallel computing in the sense that the computational cost per parallel thread is O(1).},
+  comment       = {23127102[pmid]
+PMC3505201[pmcid]},
+  database      = {PubMed},
+  edition       = {2012/11/05},
+  publisher     = {American Association of Physicists in Medicine},
+  url           = {https://www.ncbi.nlm.nih.gov/pmc/PMC3505201/},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

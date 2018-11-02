@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{Gao2012}
+Hao Gao.
+\newblock Fast parallel algorithms for the x-ray transform and its adjoint.
+\newblock {\em Medical physics}, 39(23127102):7110--7120, November 2012.
+
 \bibitem{footprints2010}
 Y.~Long, J.~A. Fessler, and J.~M. Balter.
 \newblock 3d forward and back-projection for x-ray ct using separable
