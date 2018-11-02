@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  2 NOV 2018 18:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  2 NOV 2018 19:37
 entering extended mode
 **./report.tex
 (report.tex
@@ -71,7 +71,7 @@ sty"
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
- ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\Latin1.def"
+ ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\latin1.def"
 File: latin1.def 2015/03/17 v1.2c Input encoding file
 ))
 ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\a4wide\a4wide.sty
@@ -957,7 +957,14 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'danish'.
- (report.aux)
+ (report.aux
+
+LaTeX Warning: Label `fpcompare' multiply defined.
+
+
+LaTeX Warning: Label `fpcompare' multiply defined.
+
+)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -1040,7 +1047,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
-<images/sirt.png, id=22, 963.6pt x 722.7pt>
+<images/sirt.png, id=21, 963.6pt x 722.7pt>
 File: images/sirt.png Graphic file (type png)
 <use images/sirt.png>
 Package pdftex.def Info: images/sirt.png  used on input line 49.
@@ -1092,14 +1099,42 @@ Overfull \hbox (1.80562pt too wide) in paragraph at lines 6--8
 [][]
  []
 
+<images/backprojection_32.png, id=54, 462.528pt x 346.896pt>
+File: images/backprojection_32.png Graphic file (type png)
+<use images/backprojection_32.png>
+Package pdftex.def Info: images/backprojection_32.png  used on input line 11.
+(pdftex.def)             Requested size: 462.52686pt x 346.89514pt.
+
+Overfull \hbox (1.80562pt too wide) in paragraph at lines 11--13
+[][]
+ []
+
+<images/backvsforwardprojection_32.png, id=55, 462.528pt x 346.896pt>
+File: images/backvsforwardprojection_32.png Graphic file (type png)
+<use images/backvsforwardprojection_32.png>
+Package pdftex.def Info: images/backvsforwardprojection_32.png  used on input l
+ine 16.
+(pdftex.def)             Requested size: 462.52686pt x 346.89514pt.
+
+Overfull \hbox (1.80562pt too wide) in paragraph at lines 16--18
+[][]
+ []
+
 )
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [10
 
-] [11 <./images/forwardprojection_32.png>] (content/astra.tex
-<images/FPplot.png, id=61, 462.528pt x 346.896pt>
+] [11 <./images/forwardprojection_32.png>] [12 <./images/backprojection_32.png>
+] [13 <./images/backvsforwardprojection_32.png>] (content/astra.tex
+<images/FPplot.png, id=72, 462.528pt x 346.896pt>
 File: images/FPplot.png Graphic file (type png)
 <use images/FPplot.png>
 Package pdftex.def Info: images/FPplot.png  used on input line 4.
@@ -1109,7 +1144,7 @@ Overfull \hbox (1.80562pt too wide) in paragraph at lines 4--5
 [][] 
  []
 
-<images/BPplot.png, id=62, 462.528pt x 346.896pt>
+<images/BPplot.png, id=73, 462.528pt x 346.896pt>
 File: images/BPplot.png Graphic file (type png)
 <use images/BPplot.png>
 Package pdftex.def Info: images/BPplot.png  used on input line 7.
@@ -1123,47 +1158,45 @@ Overfull \hbox (1.80562pt too wide) in paragraph at lines 7--9
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12
+[14
 
- <./images/FPplot.png>] [13 <./images/BPplot.png>] (content/conclusion.tex
+ <./images/FPplot.png>] [15 <./images/BPplot.png>] (content/conclusion.tex)
+(report.bbl) [16
 
-LaTeX Warning: Marginpar on page 14 moved.
+] (report.aux)
 
+LaTeX Warning: There were multiply-defined labels.
 
-LaTeX Warning: Marginpar on page 14 moved.
-
-) (report.bbl) [14
-
-] (report.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 22636 strings out of 493305
- 438942 string characters out of 3129367
- 747058 words of memory out of 3000000
- 25575 multiletter control sequences out of 15000+200000
+ 22646 strings out of 493305
+ 439291 string characters out of 3129367
+ 747097 words of memory out of 3000000
+ 25583 multiletter control sequences out of 15000+200000
  23271 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  92i,13n,87p,1847b,1436s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
-ppen\ec\dpi600\ecrm1000.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\
-ljfour\jknappen\ec\dpi600\ecti1200.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\zgb585\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\zgb585\A
-ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Use
-rs\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.
-pk><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmex10.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/zgb585/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/zgb585/App
-Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><
-C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/zgb585/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (14 pages, 359242 bytes).
+ <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
+\ecrm1000.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
+n\ec\dpi600\ecti1200.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\f
+onts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\zgb585\AppData\Local\M
+iKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\zgb585\AppD
+ata\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk><C:/Users/z
+gb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
+fb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmi12.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/zgb585/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/zgb58
+5/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C
+:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on report.pdf (16 pages, 415083 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
+ 383 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
