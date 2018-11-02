@@ -1,0 +1,13 @@
+\section{Code Overview}
+Our code is primarily comprised of Futhark code, alongside a few python script for data generation, and shell scripts.
+
+\subsection{folder structure}
+\begin{itemize}
+  \item futhark contains the source code files, as well as the files generated during compilation.
+  \item runscripts contains the shell scripts used to run tests and benchmarks
+  \item root folder - the python scripts are located in the root folder, which makes it easier to navigate the folder structure from the python code.
+  \item data and output - data is an, so far, empty folder to store the generated input data, while the output is the same for output data
+\end{itemize}
+
+\subsection{Code structure}
+The actual Futhark code is located in the files projection\-lib.fut, matrix\-lib.fut and line\-lib.fut. All the forwardprojection and backprojection files contains main functions to call the libraries for testing. The projection\-lib contains the actual code for doing the forwardprojections and backprojections, as well as a few limited helper functions. The matrix\-lib is focused on generating the system matrices, with code for each way of doing this. Finally the line\-lib contains helper functions for the matrix\-lib.
