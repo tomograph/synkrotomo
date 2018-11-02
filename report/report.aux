@@ -23,7 +23,10 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}}{9}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Flattening and other optimization attempts}{10}}
 \newlabel{fpcompare}{{4}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside.}}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside. We had to run our algorithms for only 30 angles as we got memory errors otherwise.}}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison to a CUDA implementation}{12}}
+\newlabel{astra}{{5}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces A comparison of the back projections from astra and our fastest futhark algorithms. The futhark algorithms perform much worse, approximately 128 times worse for both forward and backprojection. It would be worth comparing our code with the implemented version from the astra toolbox, to see how they get such a good running time.}}{13}}
 \citation{*}
 \bibstyle{plain}
 \bibdata{gpu}
@@ -31,5 +34,4 @@
 \bibcite{footprints2010}{2}
 \bibcite{natterer2001}{3}
 \bibcite{zhen2011}{4}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison to a CUDA implementation}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Memory coalescence and other optimization ideas}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{14}}
