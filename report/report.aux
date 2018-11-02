@@ -21,6 +21,9 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Nested parallel forward and back projctions}{8}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A looped version of the forward projection, where the raysperstep should be chosen such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Flattening and other optimization attempts}{10}}
+\newlabel{fpcompare}{{4}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside.}}{11}}
 \citation{*}
 \bibstyle{plain}
 \bibdata{gpu}
@@ -28,6 +31,5 @@
 \bibcite{footprints2010}{2}
 \bibcite{natterer2001}{3}
 \bibcite{zhen2011}{4}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Flattening and other optimization attempts}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison to a CUDA implementation}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Memory coalescence and other optimization ideas}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison to a CUDA implementation}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Memory coalescence and other optimization ideas}{12}}
