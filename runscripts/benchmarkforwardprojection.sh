@@ -1,7 +1,7 @@
 echo "benchmarkforwardprojection"
 echo "generating data"
 cd ..
-# python forwardprojectiondata.py
+python forwardprojectiondata.py
 echo "compiling"
 cd futhark
 
