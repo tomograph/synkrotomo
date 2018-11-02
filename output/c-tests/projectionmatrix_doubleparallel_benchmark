@@ -1,0 +1,16 @@
+Results for projectionmatrix_doubleparallel.fut:
+dataset ../data/matrixinputf32rad64:       223.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad128:      382.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad256:     1031.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad512:     3593.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad1024:   13808.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/matrixinputf32rad2048: projectionmatrix_doubleparallel.fut failed with error code 1 and output:
+./projectionmatrix_doubleparallel: projectionmatrix_doubleparallel.c:2839: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/matrixinputf32rad4096: projectionmatrix_doubleparallel.fut failed with error code 1 and output:
+./projectionmatrix_doubleparallel: projectionmatrix_doubleparallel.c:2839: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
