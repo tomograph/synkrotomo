@@ -38,8 +38,8 @@ loop (output, step, raysperstep)
 	let A = getRays raysperstep step
 	let AT = transpose A
 	let partresult = map (\row -> reduce (+) 0 <| map2 (*) row vect ) AT
-	map2 (+) partresult output
-	in (output, step, raysperstep)
+	let result = map2 (+) partresult output
+	in (result, step, raysperstep)
 \end{lstlisting}
   \caption{A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}

@@ -1,3 +1,47 @@
 \relax 
 \catcode `"\active 
 \providecommand*\new@tpo@label[2]{}
+\providecommand \oddpage@label [2]{}
+\babel@aux{danish}{}
+\babel@aux{danish}{}
+\babel@aux{english}{}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Example of a weighting $a_{ij}$.}}{2}}
+\newlabel{fig:weightings}{{1}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}}
+\citation{footprints2010}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces An illustration of the SIRT algorithm.}}{4}}
+\newlabel{fig:sirt}{{2}{4}}
+\citation{natterer2001}
+\citation{Gao2012}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Computing the projection matrix}{5}}
+\newlabel{sysmat}{{2}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A looped version of the projection matrix algorithm.}}{6}}
+\newlabel{sysmatcompare}{{2}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A lcomparison of the projection matrix algorithms run for gridsizes 64 to 256. Since the universities GPUs only have about 3GB of memory this was the largest size we could run for without chunking up the matrix.}}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Nested parallel forward and back projctions}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A looped version of the forward projection, where the raysperstep should be chosen such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Optimizations}{10}}
+\newlabel{fpcompare}{{4}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. We chose this number to fit a CUDA warp. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside. We had to run our algorithms for only 30 angles as we got memory errors otherwise. This requires further investigation. In our initial tests our stripmined algorithms ran for all sizes, but perhaps we were competing for space with other groups. }}{11}}
+\newlabel{fpcompare}{{4}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces A comparison of the backprojections projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. The implementation using the double parallel version of the matrix performed best again as expected. The integrated version performed very badly, and it would be interesting to investigate why. We had to run our algorithms for only 30 angles as we got memory errors otherwise.}}{12}}
+\newlabel{fpcompare}{{4}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A comparison of backprojection and forward projection. Backprojection seems to be faster for small problem sizes, but scale worse.}}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Comparison to a CUDA implementation}{14}}
+\newlabel{astra}{{5}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces A comparison of the back projections from astra and our fastest futhark algorithms. The futhark algorithms perform much worse, approximately 128 times worse for both forward and backprojection. It would be worth comparing our code with the implemented version from the astra toolbox, to see how they get such a good running time.}}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Code Overview}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}folder structure}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Code structure}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Code}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}projection lib}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}matrix lib}{26}}
+\citation{*}
+\bibstyle{plain}
+\bibdata{gpu}
+\bibcite{Gao2012}{1}
+\bibcite{footprints2010}{2}
+\bibcite{natterer2001}{3}
+\bibcite{zhen2011}{4}
