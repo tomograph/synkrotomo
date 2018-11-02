@@ -36,12 +36,12 @@ def get_time(filename, stepsize=-1):
 
 
 def main(argv):
-    filesMatrix = ["output\\projectionmatrix_jh_benchmark", "output\\projectionmatrix_map_benchmark", "output\\projectionmatrix_doubleparallel_benchmark"]
-    sizes = [64,128,256,512,1024,2048,4096]
-    plot_times(filesMatrix, sizes, "report\\images\\resultsMatrixPlot.png")
+    # filesMatrix = ["output\\projectionmatrix_jh_benchmark", "output\\projectionmatrix_map_benchmark", "output\\projectionmatrix_doubleparallel_benchmark"]
+    # sizes = [64,128,256,512,1024,2048,4096]
+    # plot_times(filesMatrix, sizes, "report\\images\\resultsMatrixPlot.png")
 
     for stepsize in [32,64,128,256]:
-        filesMatrix = ["output\\forwardprojection_jh_benchmark", "output\\forwardprojection_map_benchmark", "output\\forwardprojection_doubleparallel_benchmark"]#, "output\\forwardprojection_semiflat_benchmark", "output\\forwardprojection_dpintegrated_benchmark"]
+        filesMatrix = ["output\\forwardprojection_jh_benchmark", "output\\forwardprojection_map_benchmark", "output\\forwardprojection_doubleparallel_benchmark", "output\\forwardprojection_semiflat_benchmark", "output\\forwardprojection_dpintegrated_benchmark"]
         sizes = [64,128,256,512,1024,2048,4096]
         plot_times(filesMatrix, sizes, "report\\images\\forwardprojection"+"_"+str(stepsize)+".png", stepsize=stepsize)
 
