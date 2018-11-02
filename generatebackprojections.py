@@ -4,7 +4,9 @@ import sys
 from futhark import backprojection_map
 from futhark import backprojection_jh
 from futhark import backprojection_doubleparallel
-#from futhark import backprojection_semiflat
+# from futhark import backprojection_semiflat
+from futhark import backprojection_dpintegrated
+
 
 
 def main(argv):
@@ -31,6 +33,10 @@ def main(argv):
     # back = backprojection_semiflat.backprojection_semiflat()
     # backproj = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), sinogram.flatten().astype(np.float32), size, 32).get()
     # tomo_lib.savebackprojection("output//backprojection_semiflat.png", backproj, size)
+
+    back = backprojection_dpintegrated.backprojection_dpintegrated()
+    backproj = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), sinogram.flatten().astype(np.float32), size, 32).get()
+    tomo_lib.savebackprojection("output//backprojection_integrated.png", backproj, size)
 
 
 
