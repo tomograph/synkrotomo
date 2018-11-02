@@ -15,6 +15,6 @@ echo "running benchmarks memory"
 ./projectionmatrix_map -D < ../data/matrixinputf32rad256 1> /dev/null 2> ../output/projectionmatrix_map
 echo "running benchmarks"
 
-futhark-bench --runs=1 --skip-compilation projectionmatrix_jh.fut > ../output/projectionmatrix_jh_benchmark
-futhark-bench --runs=1 --skip-compilation projectionmatrix_doubleparallel.fut > ../output/projectionmatrix_doubleparallel_benchmark
-futhark-bench --runs=1 --skip-compilation projectionmatrix_map.fut > ../output/projectionmatrix_map_benchmark
+futhark-bench --runs=10 --skip-compilation projectionmatrix_jh.fut > ../output/projectionmatrix_jh_benchmark
+futhark-bench --runs=10 --skip-compilation projectionmatrix_doubleparallel.fut > ../output/projectionmatrix_doubleparallel_benchmark
+futhark-bench --runs=10 --skip-compilation projectionmatrix_map.fut > ../output/projectionmatrix_map_benchmark
