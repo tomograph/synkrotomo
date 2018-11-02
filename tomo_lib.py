@@ -6,7 +6,7 @@ import scipy.io
 import scipy.misc
 
 def get_angles(size, degrees=True):
-    num_angles = math.ceil(size*math.pi/2)
+    num_angles = 30#math.ceil(size*math.pi/2)
     if degrees:
         return np.linspace(0, 180, num_angles, False)
     else:
