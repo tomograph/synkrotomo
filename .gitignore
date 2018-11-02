@@ -2,7 +2,6 @@
 *.actual
 *.expected
 .remote-sync.json
-*.png
 *.pyc
 *.c
 sysmatas/
