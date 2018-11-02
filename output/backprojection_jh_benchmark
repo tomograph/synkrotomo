@@ -1,0 +1,43 @@
+Results for backprojection_jh.fut:
+dataset ../data/bpinputf32rad64_32:     125453.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_32:    397435.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_32:   1625870.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_32:   3328725.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_32:  15502831.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_32:  50416970.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_32:  169410495.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad64_64:       9940.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_64:     39254.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_64:    157983.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_64:    667245.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_64:  3207520.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_64:  17344965.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_64:  backprojection_jh.fut failed with error code 1 and output:
+./backprojection_jh: backprojection_jh.c:2829: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/bpinputf32rad64_128:      5500.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_128:    21162.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_128:    93081.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_128:   410346.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_128: 2039043.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_128: 11621178.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_128: backprojection_jh.fut failed with error code 1 and output:
+./backprojection_jh: Negative allocation of -8589934592 bytes attempted for mem_11629 in space 'device'.
+
+dataset ../data/bpinputf32rad64_256:      3004.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_256:    12248.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_256:    56355.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_256:   279642.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_256: 1633025.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_256: backprojection_jh.fut failed with error code 1 and output:
+./backprojection_jh: backprojection_jh.c:2829: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/bpinputf32rad4096_256: backprojection_jh.fut failed with error code 1 and output:
+./backprojection_jh: backprojection_jh.c:2829: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+

@@ -1,0 +1,44 @@
+Compiling backprojection_doubleparallel.fut...
+Results for backprojection_doubleparallel.fut:
+dataset ../data/bpinputf32rad64_32:       3829.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_32:      7742.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_32:     36176.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_32:    221472.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_32:  1644250.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_32:  12911591.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_32:  102631166.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad64_64:       1983.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_64:      5057.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_64:     28373.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_64:    172208.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_64:  1186991.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_64:  9068691.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_64:  backprojection_doubleparallel.fut failed with error code 1 and output:
+./backprojection_doubleparallel: backprojection_doubleparallel.c:2950: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/bpinputf32rad64_128:      1106.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_128:     4073.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_128:    24540.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_128:   137385.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_128:  958989.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_128: 7348632.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096_128: backprojection_doubleparallel.fut failed with error code 1 and output:
+./backprojection_doubleparallel: Negative allocation of -8589934592 bytes attempted for mem_11837 in space 'device'.
+
+dataset ../data/bpinputf32rad64_256:       783.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128_256:     3278.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256_256:    20221.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512_256:   126663.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad1024_256: 1041491.00us (avg. of 1 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048_256: backprojection_doubleparallel.fut failed with error code 1 and output:
+./backprojection_doubleparallel: backprojection_doubleparallel.c:2950: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/bpinputf32rad4096_256: backprojection_doubleparallel.fut failed with error code 1 and output:
+./backprojection_doubleparallel: backprojection_doubleparallel.c:2950: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+

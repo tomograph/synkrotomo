@@ -92,41 +92,27 @@ module Projection = {
      let isnewsegment (i: i32) (arr: []i32) : bool =
                          i!=0 && (unsafe arr[i]) != (unsafe arr[i-1])
 
-     let backprojection_semiflat  (angles : []f32)
-                         (rays : []f32)
+     let backprojection_semiflat  (rays : []f32)
+                         (angles : []f32)
                          (projections : []f32)
-                         (gridsize: i32)
-                         (stepSize : i32) :[]f32=
+                         (gridsize: i32) : []f32=
                let halfsize = r32(gridsize)/2
                let entrypoints = convert2entry angles rays halfsize
-               let totalLen = (length entrypoints)
-               let runLen = (totalLen/stepSize)
-               -- result array
-               let backmat = replicate (gridsize*gridsize) 0.0f32
-               -- stripmined, sequential outer loop, mapped inner
-               let (backmat, _, _, _, _, _, _) =
-                   loop (output, run, runLen, stepSize, gridsize, entrypoints, totalLen) = (backmat, 0, runLen, stepSize, gridsize, entrypoints, totalLen)
-                   while ( run < runLen ) do
-                       -- if the number of entrypoints doesn't line perfectly up with the stepsize
-                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
-                       -- calc part of matrix, stepSize rows
-                       let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints[(run*stepSize) : (run*stepSize + step)]
-                       --convert to triples (data,ray,pixel)
-                       let triples_tmp = flatten(map(\i -> map(\v -> (v.1, i, v.2))(unsafe intersections[i])) (iota (length intersections)))
-                       -- remove none values
-                       let triples = filter (\x -> x.3 != -1) triples_tmp
-                       -- sort by pixel indexes
-                       let pixelsorted = rsort triples
-                       -- slplit int three arrays in order to use pixels only for shp
-                       let (data,rays,pixels) = unzip3 pixelsorted
-                       -- contains sum of values where a row ends since columns will be rows.
-                       let shp_scn_tmp = map (\i -> if (i == step || (isnewsegment i pixels)) then i else 0) (iota (step+1))
-                       let shp_scn = filter (\p -> p != 0) shp_scn_tmp
-                       let values = map(\x-> (x.2,x.1))pixelsorted
-                       let partresult = spMatVctMult values shp_scn projections[(run*stepSize) : (run*stepSize + step)]
-                       let result = (map2 (+) partresult output)
-                       in (result, run+1, runLen, stepSize, gridsize, entrypoints, totalLen)
-               in backmat
+               let intersections = map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints
+               --convert to triples (data,ray,pixel)
+               let triples_tmp = flatten(map(\i -> map(\v -> (v.1, i, v.2))(unsafe intersections[i])) (iota (length intersections)))
+               -- remove none values
+               let triples = filter (\x -> x.3 != -1) triples_tmp
+               -- sort by pixel indexes
+               let pixelsorted = rsort triples
+               -- slplit int three arrays in order to use pixels only for shp
+               let (data,rays,pixels) = unzip3 pixelsorted
+               let num_pixels = length pixels
+               -- contains sum of values where a row ends since columns will be rows.
+               let shp_scn_tmp = map (\i -> if (i == num_pixels || (isnewsegment i pixels)) then i else 0) (iota (num_pixels+1))
+               let shp_scn = filter (\p -> p != 0) shp_scn_tmp
+               let values = map(\x-> (x.2,x.1))pixelsorted
+               in spMatVctMult values shp_scn projections
 
      -- pads and transposes the matrix, nested, will perform better when tiling is improved in futhark
      let trans_map [m] [n]
