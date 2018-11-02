@@ -3,8 +3,10 @@ import numpy as np
 import pylab
 import time
 import sys
-from futhark import backprojection
-from futhark import forwardprojection
+from futhark import backprojection_doubleparallel
+from futhark import forwardprojection_doubleparallel
+from futhark import backprojection_dpintegrated
+from futhark import forwardprojection_dpintegrated
 from skimage.transform import rotate
 from skimage.draw import random_shapes
 from matplotlib import pyplot
@@ -47,9 +49,14 @@ def aggregate_results(timings):
 def plot_results(results):
     fig, ax = plt.subplots()
     x = results.index
+    x = x.drop([32])
+    print(x)
     for func in results.columns.levels[0]:
         y = results[func, 'avg']
+        y = y.drop([32])
+        print(y)
         yerr = results[func, 'yerr']
+        yerr = yerr.drop([32])
         ax.errorbar(x, y, yerr=yerr, fmt='-o', label=func)
 
     ax.set_xlabel('Input')
@@ -64,7 +71,7 @@ def get_phantom(size):
     return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]
 
 def get_angles(size, degrees=True):
-    num_angles = math.ceil(size*math.pi/2)
+    num_angles = 10#math.ceil(size*math.pi/2)
     if degrees:
         return np.linspace(0, 180, num_angles, False).astype(np.float32)
     else:
@@ -146,34 +153,39 @@ def astra_FP(cfg):
 
     return result
 
-def futhark_FP(cfg):
-    proj = forwardprojection.forwardprojection()
-    return proj.main(cfg.rays, cfg.angles, cfg.phantom.flatten().astype(np.float32))
+def futhark_FP_integrated(cfg):
+    proj = forwardprojection_dpintegrated.forwardprojection_dpintegrated()
+    return proj.main(cfg.angles, cfg.rays, cfg.phantom.flatten().astype(np.float32), 8000)
 
-def futhark_BP(cfg):
-    proj = backprojection.backprojection()
-    return proj.main(cfg.rays, cfg.angles, cfg.sinogram, cfg.size)
+def futhark_BP_integrated(cfg):
+    proj = backprojection_dpintegrated.backprojection_dpintegrated()
+    return proj.main(cfg.angles, cfg.rays, cfg.sinogram.flatten().astype(np.float32), cfg.size, 8000)
+
+def futhark_FP_dp(cfg):
+    proj = forwardprojection_doubleparallel.forwardprojection_doubleparallel()
+    return proj.main(cfg.angles, cfg.rays, cfg.phantom.flatten().astype(np.float32), 8000)
+
+def futhark_BP_dp(cfg):
+    proj = backprojection_doubleparallel.backprojection_doubleparallel()
+    return proj.main(cfg.angles, cfg.rays, cfg.sinogram.flatten().astype(np.float32), cfg.size, 8000)
 
 ###############################################################################
 #Time algorithms, and plot the results
 ###############################################################################
 def main(argv):
-    #sizes = [128,256]#,512,1024,2048,4096]
-    size = 128
-    config = Config(size)
-    pylab.imsave("sinogramtest.png", futhark_FP(config).get().reshape((len(config.angles),len(config.rays))))
-    # configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
-    # pickle.dump(configs, open("configs.p", "wb"))
-    # #configs = pickle.load(open("configs.p", "rb"))
-    # BPs = [astra_BP, futhark_BP]
-    # FPs = [astra_FP, futhark_FP]
-    #
-    # figBP, axBP, resultsBP = plot_times(BPs, configs)
-    # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
-    # figBP.savefig("BPplot.png")
-    # figFP, axFP, resultsFP = plot_times(FPs, configs)
-    # pickle.dump(resultsFP, open("resultsFP.p", "wb"))
-    # figFP.savefig("FPplot.png")
+    sizes = [32,64,128,256,512]#,1024,2048,4096]
+    configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
+    pickle.dump(configs, open("configs.p", "wb"))
+    #configs = pickle.load(open("configs.p", "rb"))
+    BPs = [astra_BP, futhark_BP_integrated, futhark_BP_dp]
+    FPs = [astra_FP, futhark_FP_integrated, futhark_FP_dp]
+
+    figFP, axFP, resultsFP = plot_times(FPs, configs)
+    pickle.dump(resultsFP, open("resultsFP.p", "wb"))
+    figFP.savefig("FPplot.png")
+    figBP, axBP, resultsBP = plot_times(BPs, configs)
+    pickle.dump(resultsBP, open("resultsBP.p", "wb"))
+    figBP.savefig("BPplot.png")
 
 
 

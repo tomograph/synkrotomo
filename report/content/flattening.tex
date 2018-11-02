@@ -5,5 +5,5 @@ A much more promising approach seems to be feeding the data directly to the matr
 \begin{figure}[h]
 \includegraphics{images/forwardprojection_32.png}
 \label{fpcompare}
-  \caption{A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside.}
+  \caption{A comparison of the forward projections run with different matrix implementations and the version where the forward projection is integrated in projectiomatrix\_doubleparallel. The chunk size was 32. As expected the semiflat version performed rather badly. The implementation using the double parallel version performed best. The rest of the algorithms are nested, using different projection matrix algorithms inside. We had to run our algorithms for only 30 angles as we got memory errors otherwise.}
 \end{figure}
