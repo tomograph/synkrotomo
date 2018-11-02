@@ -1,4 +1,4 @@
-\section{Nested parallel version}
+\section{Nested parallel forward and back projctions}
 A first approach at forward and backprojection was to do a nested parallel version and using computed chunks of the system matrix.\\
 A looped version of the forward projection with the system matrix cut in $steps$ chunks looks like this:
 
@@ -14,12 +14,12 @@ for step = 0; step < steps; step++
 
 this can be written in futhark like pseudo code as:
 
-map (\step ->
+loop (output, step, raysperstep)
 	let A = getRays raysperstep step
-	map (\row -> reduce (+) 0 <| map ( \i -> row[i]*vector[i] ) (iota (length row)) ) A
-) steps
+	let partresult = map (\row -> reduce (+) 0 <| map ( \i -> row[i]*vector[i] ) (iota (length row)) ) A
+	in (output++partresult, step, raysperstep)
 \end{lstlisting}
-\caption{A looped version of the forward projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
+\caption{A looped version of the forward projection, where the raysperstep should be chosen such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}
 \begin{figure}[h]
 \begin{lstlisting}[frame=single]
@@ -34,11 +34,12 @@ for step = 0; step < steps; step++
 
 this can be written in futhark like pseudo code as:
 
-map (\rays ->
+loop (output, step, raysperstep)
 	let A = getRays raysperstep step
 	let AT = transpose A
-	map (\row -> reduce (+) 0 <| map (\i -> row[i]*sinogram[i]) (iota raysperstep) ) AT
-) steps
+	let partresult = map (\row -> reduce (+) 0 <| map2 (*) row vect ) AT
+	map2 (+) partresult output
+	in (output, step, raysperstep)
 \end{lstlisting}
   \caption{A looped version of the back projection, where the raysperstep should be the largest number possible such that the computations fit in the memory. $step*raysperstep$ should equal the total number of rows.}
 \end{figure}
