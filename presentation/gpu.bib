@@ -1,0 +1,60 @@
+% Encoding: UTF-8
+
+@InProceedings{zhen2011,
+  author    = {Z. Xue and L. Zhang and J. Pan},
+  title     = {A new algorithm for calculating the radiological path in CT image reconstruction},
+  booktitle = {Proceedings of 2011 International Conference on Electronic Mechanical Engineering and Information Technology},
+  year      = {2011},
+  volume    = {9},
+  pages     = {4527-4530},
+  month     = {Aug},
+  abstract  = {In this paper an algorithm is presented for calculating the radiological path in CT image reconstruction. Based on the coordinate component of the intersections the lengths of the voxels intersected with this ray are rapidly calculated. Meanwhile, after determining the index of the first voxel intersected with the ray, the indices of the remaining voxels intersected with this ray can be successively determined in terms of the incremental of the coordinate component between the adjacent intersections. By so doing shortens the time consumed in calculating the radiological path. The simulation results show that this algorithm is feasible and effective. Compared with the Siddon algorithm, it results in an about 4 times speedup in the calculation of the radiological path.},
+  doi       = {10.1109/EMEIT.2011.6024036},
+  keywords  = {computerised tomography;image reconstruction;radiological path calculation;CT image reconstruction;intersection coordinate component;voxel length;Siddon algorithm;Indexes;Arrays;Image reconstruction;Computed tomography;Algorithm design and analysis;Mathematical model;Equations;CT;incremental of coordinate component;index;length;radiological path},
+}
+
+@Article{footprints2010,
+  author   = {Y. Long and J. A. Fessler and J. M. Balter},
+  title    = {3D Forward and Back-Projection for X-Ray CT Using Separable Footprints},
+  journal  = {IEEE Transactions on Medical Imaging},
+  year     = {2010},
+  volume   = {29},
+  number   = {11},
+  pages    = {1839-1850},
+  month    = {Nov},
+  issn     = {0278-0062},
+  doi      = {10.1109/TMI.2010.2050898},
+  keywords = {computerised tomography;diagnostic radiography;image reconstruction;iterative methods;medical image processing;X-ray CT;separable footprints;iterative methods;3D image reconstruction;X-ray computed tomography;SF-TR projector;distance-driven projector;SF-TT projector;3D forward projection;3D back-projection;Iterative methods;Computed tomography;Image reconstruction;Reconstruction algorithms;Postal services;Image quality;Detectors;Permission;Argon;USA Councils;Cone-beam tomography;forward and back-projection;iterative tomographic image reconstruction;Algorithms;Artificial Intelligence;Imaging, Three-Dimensional;Pattern Recognition, Automated;Phantoms, Imaging;Radiographic Image Enhancement;Radiographic Image Interpretation, Computer-Assisted;Reproducibility of Results;Sensitivity and Specificity;Tomography, X-Ray Computed;Tomography, X-Ray Computed},
+}
+
+@Book{natterer2001,
+  title     = {The Mathematics of Computerized Tomography},
+  publisher = {Society for Industrial and Applied Mathematics},
+  year      = {2001},
+  author    = {Natterer, F.},
+  doi       = {10.1137/1.9780898719284},
+  eprint    = {https://epubs.siam.org/doi/pdf/10.1137/1.9780898719284},
+  url       = {https://epubs.siam.org/doi/abs/10.1137/1.9780898719284},
+}
+
+@Article{Gao2012,
+  author        = {Gao, Hao},
+  title         = {Fast parallel algorithms for the x-ray transform and its adjoint},
+  journal       = {Medical physics},
+  year          = {2012},
+  volume        = {39},
+  number        = {23127102},
+  pages         = {7110--7120},
+  month         = nov,
+  issn          = {0094-2405},
+  __markedentry = {[zgb585:6]},
+  abstract      = {PURPOSE: Iterative reconstruction methods often offer better imaging quality and allow for reconstructions with lower imaging dose than classical methods in computed tomography. However, the computational speed is a major concern for these iterative methods, for which the x-ray transform and its adjoint are two most time-consuming components. The speed issue becomes even notable for the 3D imaging such as cone beam scans or helical scans, since the x-ray transform and its adjoint are frequently computed as there is usually not enough computer memory to save the corresponding system matrix. The purpose of this paper is to optimize the algorithm for computing the x-ray transform and its adjoint, and their parallel computation. METHODS: The fast and highly parallelizable algorithms for the x-ray transform and its adjoint are proposed for the infinitely narrow beam in both 2D and 3D. The extension of these fast algorithms to the finite-size beam is proposed in 2D and discussed in 3D. RESULTS: The CPU and GPU codes are available at https://sites.google.com/site/fastxraytransform. The proposed algorithm is faster than Siddon's algorithm for computing the x-ray transform. In particular, the improvement for the parallel computation can be an order of magnitude. CONCLUSIONS: The authors have proposed fast and highly parallelizable algorithms for the x-ray transform and its adjoint, which are extendable for the finite-size beam. The proposed algorithms are suitable for parallel computing in the sense that the computational cost per parallel thread is O(1).},
+  comment       = {23127102[pmid]
+PMC3505201[pmcid]},
+  database      = {PubMed},
+  edition       = {2012/11/05},
+  publisher     = {American Association of Physicists in Medicine},
+  url           = {https://www.ncbi.nlm.nih.gov/pmc/PMC3505201/},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
