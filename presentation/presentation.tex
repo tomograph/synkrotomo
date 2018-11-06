@@ -95,6 +95,64 @@
 \tcbuselibrary{fitting}
 \definecolor{ku}{RGB}{144,26,30}
 \definecolor{ku-yellow}{RGB}{255,249,25}
+% Package for typesetting programs. Listings does not support fsharp, but a little modification goes a long way
+\usepackage{listings}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{comment}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+\lstdefinelanguage{FSharp}
+{morekeywords={let, new, match, with, rec, open, module, namespace, type, of, member, and, for, in, do, begin, end, fun, function, try, mutable, if, then, else, return,
+while},
+keywordstyle=\color{magenta},
+sensitive=false,
+escapechar=\%,
+morecomment=[l][\color{greencomments}]{///},
+morecomment=[l][\color{green}]{//},
+morecomment=[s][\color{greencomments}]{{(*}{*)}},
+morestring=[b]",
+stringstyle=\color{redstrings}
+}
+\lstdefinelanguage{CUDA}
+{morekeywords={let, new, match, with, rec, open, module, namespace, type, of, member, and, for, in, do, begin, end, fun, function, try, mutable, if, then, else, return,
+while},
+keywordstyle=\color{magenta},
+sensitive=false,
+escapechar=\£,
+morecomment=[l][\color{greencomments}]{///},
+morecomment=[l][\color{green}]{//},
+morecomment=[s][\color{greencomments}]{{(*}{*)}},
+morestring=[b]",
+stringstyle=\color{redstrings}
+}
+\lstdefinelanguage{Futhark}
+{morekeywords={let, if, then, else, return, map, scatter, iota, replicate, reduce, scan, &&, ||, if, then, unsafe, loop, ->, <|, in, =>},
+keywordstyle=\color{magenta},
+sensitive=false,
+escapechar=\%,
+morecomment=[l][\color{greencomments}]{///},
+morecomment=[l][\color{green}]{--},
+morestring=[b]",
+stringstyle=\color{redstrings}
+}
+\lstset{ %
+basicstyle=\footnotesize\ttfamily,
+commentstyle=\color{greencomments},    % comment style
+keywordstyle=\color{magenta},       % keyword style
+numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers
+numbers=left,
+xleftmargin=2em,
+tabsize=2,	                   % sets default tabsize to 2 spaces
+rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+breaklines=true,                                        % sets automatic line breaking
+stringstyle=\color{redstrings},     % string literal style
+}
+% \lstset{language=Futhark}          % Set your language (you can change the language for each code-block optionally)
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -115,31 +173,47 @@ University of Copenhagen\\ % Your institution for the title page
 \titlepage % Print the title page as the first slide
 \end{frame}
 
- \begin{frame}
-  \frametitle{The system matrix}
-  \inputTikZ{0.4}{figures/weightings.tex}
- \includegraphics[width=0.4\linewidth,trim={5cm 3cm 5cm 0.5cm},clip]{images/sparsity.png}
- \end{frame}
-
- \begin{frame}
- \frametitle{SIRT}
- Solve the problem:
- \begin{align}
- \vec{f}^{\ast}=argmin_{\vec{f}}\norm{\vec{p}-\mat{A}\vec{f}}
+\begin{frame}
+\frametitle{SIRT}
+Solve the problem:
+\begin{align}
+\vec{f}^{\ast}=argmin_{\vec{f}}\norm{\vec{p}-\mat{A}\vec{f}}
 \end{align}
 iteratively using this update step:
- \begin{align}
+\begin{align}
 \vec{f}^{n} = \vec{f}^{(n-1)}+\mat{C}\mat{A}^{T}\mat{R}(\vec{p}-\mat{A}\vec{f}^{(n-1)}),
 \end{align}
 
 where $\mat{C}$ and $\mat{R}$ are the diagonal matrices containing the inverse column and row sums of the system matrix respectively.
- \end{frame}
+\end{frame}
 
-  \begin{frame}
-  \frametitle{SIRT}
-  \centering
- \includegraphics[width=0.8\linewidth]{images/sirt.png}
- \end{frame}
+\begin{frame}
+\frametitle{The system matrix}
+\inputTikZ{1}{figures/weightings.tex}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item{Consider reconstructing a single slize of a volume from a detector of size $n\times n$}
+\item{The number of rays is $n$}
+\item{The number of angles is $\frac{n\cdot\pi}{2}$}
+\item{A typical value for $n$ is 2048 }
+\item{In semi sparse format the matrix will take up $2\cdot4\cdot\lceil\frac{2048\cdot\pi}{2}\rceil\cdot (2*2048-1)\approx 105MB$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{System matrix computation}
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+for ray = 0; ray < numberofrays; ray++ //parallel
+	for pixel = 0; pixel < pixels; pixel++ //parallel
+		if ray intersects pixel:
+        (p1,p2) = intersectionpoints pixel ray
+        A[ray][pixel] = distance p1 p2
+\end{lstlisting}
+\end{figure}
+\end{frame}
 
  \begin{frame}
  \frametitle{Futhark}
@@ -149,7 +223,7 @@ where $\mat{C}$ and $\mat{R}$ are the diagonal matrices containing the inverse c
 \item{Has performed well on several benchmarks}
 \item{Hardware-agnostic}
 \end{itemize}
- \end{frame}
+\end{frame}
 
  \begin{frame}
  \nocite{*}
