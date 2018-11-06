@@ -225,6 +225,34 @@ for ray = 0; ray < numberofrays; ray++ //parallel
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Flattening}
+  Utilizing nested parallelism is notoriously difficult, flattening the code can give marked improvements. However, flattening is also a way to systematically reason about nested code, as well as transforming it. Our project is currently a mix of flattened and nested code.\newline
+  \newline
+  I will look into flattening our code in each of our primary areas of work, for the different methods we utilize
+  \begin{itemize}
+    \item Projections
+    \item Transpose
+    \item System matrix
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening - forward projection}
+  Forward projection is handled as a matrix vector multiplication. We utilize both a nested version and a flattened version. %TODO check code after compile, is it flat
+  The nested version will, for each row, multiply the row and vector and get the sum.
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row ->
+      reduce (+) 0 <| map (\(v, ind) ->
+        unsafe (if ind == -1 then 0.0 else v*vect[ind])
+      ) row
+    ) mat_vals
+  \end{lstlisting}
+  Flattening this will require a flattened matrix, (calculating) a flag array, 
+\end{frame}
+
+
  \begin{frame}
  \nocite{*}
  \bibliographystyle{plain}
