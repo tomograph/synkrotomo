@@ -1,0 +1,36 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{animate}
+\usepackage{pstricks-add}
+\usepackage{multido}
+\def\TINY{\fontsize{2pt}{2.1pt}\selectfont}
+\begin{document}
+  %-------------------- write timeline file ---------------------%
+  \newwrite\TimeLineFile
+  \immediate\openout\TimeLineFile=sinus.txt
+  \immediate\write\TimeLineFile{::0x0,1}%
+  \multido{\i=1+1}{37}{\immediate\write\TimeLineFile{::\i}}
+  \immediate\closeout\TimeLineFile
+  %------------------- assemble animation -----------------------%
+  \psset{xunit=\pstRadUnit,yunit=1.5,dashadjust=false}
+  \begin{animateinline}[controls,timeline=sinus.txt,
+    begin={\begin{pspicture}(-2,-1.5)(6.6,2)},
+    end={\end{pspicture}}]{3}
+    %---- static material: axes, labels, curve ----%
+    \psaxes[trigLabels,trigLabelBase=3]{->}(0,0)(-2mm,-1.5)(6.5,1.5)[t,-90][$y=\sin(t)$,0]
+    \psplot[xunit=1cm,linestyle=dashed,algebraic]{0}{\psPiTwo}{sin(x)}
+    \newframe
+    \multiframe{37}{r=0+0.174444,i=0+1}{\psset{xunit=1cm,linecolor=red}
+      \pscustom[xunit=1cm,fillcolor=red!30,fillstyle=solid,
+        linestyle=none,algebraic,dimen=inner]{%
+        \psplot{0}{\r}{sin(x)}
+        \psline(!\r\space 0)
+      }
+      \psplot[xunit=1cm,linestyle=dashed,linecolor=black,
+         algebraic]{0}{\r}{sin(x)}
+      \psdot[opacity=0.4,dotsize=3mm](!\r\space dup exch RadtoDeg sin)
+      \psline[linestyle=dashed](!\r\space dup exch RadtoDeg sin)(!\r\space 0)
+      \multido{\rA=0+0.174444}{\i}{\rput[lc](!-1.5 \rA\space RadtoDeg sin){\makebox[1cm][l]{\TINY\rA}}}
+      \rput[lc](!-1.5 \r\space  RadtoDeg sin){\makebox[1cm][l]{\textcolor{red}{\TINY\r}}}%
+    }
+  \end{animateinline}
+\end{document}
