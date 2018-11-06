@@ -1,0 +1,10 @@
+\frametitle{System matrix computation}
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+for ray = 0; ray < numberofrays; ray++ //parallel
+	for pixel = 0; pixel < pixels; pixel++ //parallel
+		if ray intersects pixel:
+        (p1,p2) = intersectionpoints pixel ray
+        A[ray][pixel] = distance p1 p2
+\end{lstlisting}
+\end{figure}
