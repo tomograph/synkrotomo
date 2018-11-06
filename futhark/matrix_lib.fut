@@ -173,6 +173,34 @@ module Matrix =
                else (-1f32,-1i32)
           in [min,plus]
 
+     let sumPP (p1: point) (p2: point): point =
+          ((p1.1+p2.1),(p1.2+p2.2))
+
+     let sumPPPP (p1: (point,point)) (p2: (point,point)): (point,point) =
+          ((sumPP p1.1 p2.1), (sumPP p1.2 p2.2))
+
+     --segmented scan with (+) on (point,point):
+     let sgmSumPP [n]
+           (flg : [n]i32)
+           (arr : [n](point,point)) : [n](point,point) =
+               let flgs_vals =
+                scan ( \ (f1, x1) (f2,x2) ->
+                        let f = f1 | f2 in
+                        if f2 > 0 then (f, x2)
+                        else (f, (sumPPPP x1 x2)) )
+                     (0,((0f32,0f32),(0f32,0f32))) (zip flg arr)
+               let (_, vals) = unzip flgs_vals
+               in vals
+
+
+     let mapreplicate [n] (gridsize: i32) (arr: [n](point,point)): [](point,point) =
+          let indexes = map(\i->i*gridsize)(iota n)
+          let totalsize = (n*gridsize)
+          let zeroPP = ((0f32,0f32),(0f32,0f32))
+          let flags = scatter (replicate totalsize 0) indexes (replicate n 1)
+          let distributedValues = scatter (replicate totalsize zeroPP) indexes arr
+          in sgmSumPP flags distributedValues
+
 
      --- DOUBLE PARALLEL
      -- function which computes the weight of pixels in grid_column for ray with entry/exit p
@@ -204,6 +232,7 @@ module Matrix =
           -- index calculated wrong for reversed lines i think
           let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
           let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
+          --let pixnon = if -- find pixel that is not crossed by line
           let min = if (pixmin >= 0 && pixmin < N ** 2) then
                (if Ypixmin == Ypixplus then (baselength,pixmin) else (lymin,pixmin))
                else (-1f32,-1i32)
@@ -219,6 +248,16 @@ module Matrix =
           in map(\(ent,ext) -> (flatten(map (\i ->
                     calculate_weight ent ext i gridsize
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
+
+     let weights_doublepar_flat [n] [m](angles: [n]f32) (rays: [m]f32) (gridsize: i32): [](f32,i32) =
+          let halfgridsize = gridsize/2
+          let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+          let replicatedentries = mapreplicate gridsize entryexitpoints
+          let replicatedcolumns = flatten(replicate (n*m) ((-halfgridsize)...(halfgridsize-1)))
+          let flatgridEntryexit = zip replicatedentries replicatedcolumns
+          in flatten(map(\((p1,p2),i) ->
+                    calculate_weight p1 p2 i gridsize
+               ) flatgridEntryexit)
 
      --- JH VERSION
      let lengths    (grid_size: i32)
