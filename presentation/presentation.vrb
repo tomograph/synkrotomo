@@ -1,12 +1,23 @@
-\frametitle{Changing the algorithm}
+\frametitle{Flattening the new algorithm}
 \begin{figure}[!h]
-\begin{lstlisting}[frame=single]
-for ray in rays //parallel
-  for i=-halfsize; i < halfsize; i++ //parallel
-        (l1,pixel1) = intersection1 ray i
-        (l2,pixel2) = intersection2 ray i
-        A[ray][pixel1] = l1
-        A[ray][pixel2] = l2
+\begin{lstlisting}[frame=single, language=Futhark,basicstyle=\tiny]
+let weights_doublepar(angles: []f32) (rays: []f32) (gridsize: i32): [][](f32,i32) =
+     let halfgridsize = gridsize/2
+     let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+     in map(\(ent,ext) -> (flatten(map (\i ->
+               calculate_weight ent ext i gridsize
+          )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 \end{lstlisting}
-  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(1)$}
+\begin{lstlisting}[frame=single, language=Futhark,basicstyle=\tiny]
+let weights_doublepar_flat [n] [m](angles: [n]f32) (rays: [m]f32) (gridsize: i32): [](f32,i32) =
+     let halfgridsize = gridsize/2
+     let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+     let replicatedentries = mapreplicate gridsize entryexitpoints
+     let replicatedcolumns = flatten(replicate (n*m) ((-halfgridsize)...(halfgridsize-1)))
+     let flatgridEntryexit = zip replicatedentries replicatedcolumns
+     in flatten(map(\((p1,p2),i) ->
+               calculate_weight p1 p2 i gridsize
+          ) flatgridEntryexit)
+\end{lstlisting}
+  \caption{Flattening the new algorithm.}
 \end{figure}

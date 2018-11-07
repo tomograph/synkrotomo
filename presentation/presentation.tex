@@ -236,21 +236,38 @@ for ray in rays //parallel
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Flattening}
-  Forward projection is handled as a matrix vector multiplication. We utilize both a nested version and a flattened version. %TODO check code after compile, is it flat
-  The nested version will, for each row, multiply the row and vector and get the sum.
-  \begin{lstlisting}[frame=single, language=Futhark]
-    map (\row ->
-      reduce (+) 0 <| map (\(v, ind) ->
-        unsafe (if ind == -1 then 0.0 else v*vect[ind])
-      ) row
-    ) mat_vals
-  \end{lstlisting}
-  Flattening this will require a flattened matrix, (calculating) a flag array,
+\frametitle{The format of the matrix}
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+[[(0.01,0),(0.04,3),(0.01,2),(-1.0,-1)],
+[ (0.10,0),(0.40,3),(0.05,2),( 1.0,-1)],
+[ (0.01,1),(0.04,5),(-1.,-1),(-1.0,-1)],
+[...                                  ],
+[...                                  ],
+[...                                  ]]
+\end{lstlisting}
+  \caption{An example of the matrix output format.}
+\end{figure}
 \end{frame}
+
+%
+% \begin{frame}[fragile]
+%   \frametitle{Flattening}
+%   Forward projection is handled as a matrix vector multiplication. We utilize both a nested version and a flattened version. %TODO check code after compile, is it flat
+%   The nested version will, for each row, multiply the row and vector and get the sum.
+%   \begin{lstlisting}[frame=single, language=Futhark]
+%     map (\row ->
+%       reduce (+) 0 <| map (\(v, ind) ->
+%         unsafe (if ind == -1 then 0.0 else v*vect[ind])
+%       ) row
+%     ) mat_vals
+%   \end{lstlisting}
+%   Flattening this will require a flattened matrix, (calculating) a flag array,
+% \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Flattening}
+  Forward projection is handled as a matrix vector multiplication. We utilize both a nested version and a flattened version. %TODO check code after compile, is it flat
   \begin{lstlisting}[frame=single, language=Futhark]
     map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
   \end{lstlisting}
@@ -263,18 +280,18 @@ for ray in rays //parallel
     ) mat_vals
   \end{lstlisting}
 \end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Flattening}
-  \begin{lstlisting}[frame=single, language=Futhark]
-    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
-  \end{lstlisting}
-  This translates to, still nested;
-  \begin{lstlisting}[frame=single, language=Futhark]
-    make flag array
-
-  \end{lstlisting}
-\end{frame}
+%
+% \begin{frame}[fragile]
+%   \frametitle{Flattening}
+%   \begin{lstlisting}[frame=single, language=Futhark]
+%     map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+%   \end{lstlisting}
+%   This translates to, still nested;
+%   \begin{lstlisting}[frame=single, language=Futhark]
+%     make flag array
+%
+%   \end{lstlisting}
+% \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Flattening}
@@ -285,19 +302,20 @@ for ray in rays //parallel
   \begin{itemize}
     \item A flattened matrix enforces coalesed reads from memory
     \item In SIMD a if-then-else is executed by evaluating the if, executing the then brach while the rest of the cores wait, then the same for the else branch. Partition means coalesed reads going forward
+    \item The cons of flattening are that it may require impractically high memory-usage which is already an issue in our problem, and does not account for locality of reference.
   \end{itemize}
 \end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Flattening}
-  \begin{lstlisting}[frame=single, language=Futhark]
-    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
-  \end{lstlisting}
-  \begin{itemize}
-    \item First step is to make a flag array, based on the matrix shape, and flatten the matrix
-    \item Then
-  \end{itemize}
-  \end{frame}
+%
+% \begin{frame}[fragile]
+%   \frametitle{Flattening}
+%   \begin{lstlisting}[frame=single, language=Futhark]
+%     map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+%   \end{lstlisting}
+%   \begin{itemize}
+%     \item First step is to make a flag array, based on the matrix shape, and flatten the matrix
+%     \item Then
+%   \end{itemize}
+%   \end{frame}
 
 \begin{frame}
 \frametitle{Code transformations}
@@ -324,9 +342,30 @@ for ray in rays //parallel
 \end{figure}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Flattening the new algorithm}
-Show them how its done ;-)
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single, language=Futhark,basicstyle=\tiny]
+let weights_doublepar(angles: []f32) (rays: []f32) (gridsize: i32): [][](f32,i32) =
+     let halfgridsize = gridsize/2
+     let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+     in map(\(ent,ext) -> (flatten(map (\i ->
+               calculate_weight ent ext i gridsize
+          )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
+\end{lstlisting}
+\begin{lstlisting}[frame=single, language=Futhark,basicstyle=\tiny]
+let weights_doublepar_flat [n] [m](angles: [n]f32) (rays: [m]f32) (gridsize: i32): [](f32,i32) =
+     let halfgridsize = gridsize/2
+     let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+     let replicatedentries = mapreplicate gridsize entryexitpoints
+     let replicatedcolumns = flatten(replicate (n*m) ((-halfgridsize)...(halfgridsize-1)))
+     let flatgridEntryexit = zip replicatedentries replicatedcolumns
+     in flatten(map(\((p1,p2),i) ->
+               calculate_weight p1 p2 i gridsize
+          ) flatgridEntryexit)
+\end{lstlisting}
+  \caption{Flattening the new algorithm.}
+\end{figure}
 \end{frame}
 
  \begin{frame}
