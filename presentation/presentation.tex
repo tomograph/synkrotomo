@@ -189,16 +189,17 @@ where $\mat{C}$ and $\mat{R}$ are the diagonal matrices containing the inverse c
 
 \begin{frame}
 \frametitle{The system matrix}
-\inputTikZ{1}{figures/weightings.tex}
+\inputTikZ{0.6}{figures/weightings.tex}
 \end{frame}
 
 \begin{frame}
+\frametitle{The problem is in the size}
 \begin{itemize}
 \item{Consider reconstructing a single slize of a volume from a detector of size $n\times n$}
 \item{The number of rays is $n$}
 \item{The number of angles is $\frac{n\cdot\pi}{2}$}
 \item{A typical value for $n$ is 2048 }
-\item{In semi sparse format the matrix will take up $2\cdot4\cdot\lceil\frac{2048\cdot\pi}{2}\rceil\cdot (2*2048-1)\approx 105MB$}
+\item{In semi sparse format the matrix will take up $2\cdot4\cdot2048\cdot\lceil\frac{2048\cdot\pi}{2}\rceil\cdot (2\cdot2048-1)\approx 216GB$}
 \end{itemize}
 \end{frame}
 
@@ -212,17 +213,54 @@ for ray = 0; ray < numberofrays; ray++ //parallel
         (p1,p2) = intersectionpoints pixel ray
         A[ray][pixel] = distance p1 p2
 \end{lstlisting}
+  \caption{$W(r,n)=O(r\cdot n^2)$, $D(r,n)=O(1)$}
+\end{figure}
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+for ray in rays //parallel
+	while (isingrid focuspoint) //seq
+        pixel = calculatepixel focuspoint ray
+        nextpoint = findnextpoint focuspoint ray
+        A[ray][pixel] = distance nextpoint focuspoint
+        focuspoint = nextpoint
+\end{lstlisting}
+  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(n)$}
 \end{figure}
 \end{frame}
 
- \begin{frame}
- \frametitle{Futhark}
- \begin{itemize}
-\item{High level data-parallel, and purely functional array language}
-\item{Comes with a heavily optimising ahead-of-time compiler}
-\item{Has performed well on several benchmarks}
-\item{Hardware-agnostic}
+\begin{frame}
+\frametitle{Flattening}
+Preliminiary results - not good but also we weren't completely done. Also flattening takes up even more space!
+\end{frame}
+
+\begin{frame}
+\frametitle{Code transformations}
+\begin{itemize}
+\item{By dumping the compiled code with the --dump command and getting the time spend in different kernels with the -D option we found that most of the time was spend on calculating the system matrix}
+\item{Futhark can not merge a map with a loop}
+\item{The code had a lot of branching}
+\item{We tried to mitigate this by removing as much from the loop as possible, and reorganising branches.}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Changing the algorithm}
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+for ray in rays //parallel
+  for i=-halfsize; i < halfsize; i++ //parallel
+        (l1,pixel1) = intersection1 ray i
+        (l2,pixel2) = intersection2 ray i
+        A[ray][pixel1] = l1
+        A[ray][pixel2] = l2
+\end{lstlisting}
+  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(1)$}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Flattening the new algorithm}
+Show them how its done ;-)
 \end{frame}
 
  \begin{frame}
