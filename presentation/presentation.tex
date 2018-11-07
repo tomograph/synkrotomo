@@ -229,9 +229,75 @@ for ray in rays //parallel
 \end{frame}
 
 \begin{frame}
-\frametitle{Flattening}
-Preliminiary results - not good but also we weren't completely done. Also flattening takes up even more space!
+  \frametitle{Flattening}
+  Utilizing nested parallelism is notoriously difficult, flattening the code can give marked improvements. However, flattening is also a way to systematically reason about nested code, as well as transforming it. Our project is currently a mix of flattened and nested code.\newline
+  \newline
+  I will look into flattening our code in an example of one of our primary work areas, forward projection
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening}
+  Forward projection is handled as a matrix vector multiplication. We utilize both a nested version and a flattened version. %TODO check code after compile, is it flat
+  The nested version will, for each row, multiply the row and vector and get the sum.
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row ->
+      reduce (+) 0 <| map (\(v, ind) ->
+        unsafe (if ind == -1 then 0.0 else v*vect[ind])
+      ) row
+    ) mat_vals
+  \end{lstlisting}
+  Flattening this will require a flattened matrix, (calculating) a flag array,
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening}
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+  \end{lstlisting}
+  This translates to, still nested;
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map(\row ->
+      let (ts, fs) = partition2 (\(_, ind) -> != -1) row Work(n), depth(log(n)) --if-then-else
+      let multiplied = map (\(v, ind) -> v*vect[ind]) ts work(n)
+      in reduce (+) 0 multiplied Work(n), depth(log(n))
+    ) mat_vals
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening}
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+  \end{lstlisting}
+  This translates to, still nested;
+  \begin{lstlisting}[frame=single, language=Futhark]
+    make flag array
+
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening}
+
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+  \end{lstlisting}
+  \begin{itemize}
+    \item A flattened matrix enforces coalesed reads from memory
+    \item In SIMD a if-then-else is executed by evaluating the if, executing the then brach while the rest of the cores wait, then the same for the else branch. Partition means coalesed reads going forward
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Flattening}
+  \begin{lstlisting}[frame=single, language=Futhark]
+    map (\row -> reduce (+) 0 <| map (\(v, ind) -> unsafe (if ind == -1 then 0.0 else v*vect[ind])) row ) mat_vals
+  \end{lstlisting}
+  \begin{itemize}
+    \item First step is to make a flag array, based on the matrix shape, and flatten the matrix
+    \item Then
+  \end{itemize}
+  \end{frame}
 
 \begin{frame}
 \frametitle{Code transformations}
