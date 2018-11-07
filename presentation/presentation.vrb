@@ -1,10 +1,12 @@
-\frametitle{System matrix computation}
+\frametitle{Changing the algorithm}
 \begin{figure}[!h]
 \begin{lstlisting}[frame=single]
-for ray = 0; ray < numberofrays; ray++ //parallel
-	for pixel = 0; pixel < pixels; pixel++ //parallel
-		if ray intersects pixel:
-        (p1,p2) = intersectionpoints pixel ray
-        A[ray][pixel] = distance p1 p2
+for ray in rays //parallel
+  for i=-halfsize; i < halfsize; i++ //parallel
+        (l1,pixel1) = intersection1 ray i
+        (l2,pixel2) = intersection2 ray i
+        A[ray][pixel1] = l1
+        A[ray][pixel2] = l2
 \end{lstlisting}
+  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(1)$}
 \end{figure}
