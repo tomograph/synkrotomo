@@ -240,13 +240,13 @@ for ray in rays //parallel
 \begin{figure}[!h]
 \begin{lstlisting}[frame=single]
 [[(0.01,0),(0.04,3),(0.01,2),(-1.0,-1)],
-[ (0.10,0),(0.40,3),(0.05,2),( 1.0,-1)],
-[ (0.01,1),(0.04,5),(-1.,-1),(-1.0,-1)],
+[ (0.10,0),(0.40,3),(0.05,2),(-1.0,-1)],
+[ (0.7,1),(0.04,5),(-1.0,-1),(-1.0,-1)],
 [...                                  ],
 [...                                  ],
 [...                                  ]]
 \end{lstlisting}
-  \caption{An example of the system matrix format - semisparse with a width of gridsize*gridsize.}
+  \caption{An example of the system matrix format - semisparse with a width of $2\cdot n -1$.}
 \end{figure}
 \end{frame}
 
@@ -321,7 +321,7 @@ for ray in rays //parallel
 \begin{frame}
 \frametitle{Code transformations}
 \begin{itemize}
-\item{By dumping the compiled code with the --dump command and getting the time spend in different kernels with the -D option we found that most of the time was spend on calculating the system matrix}
+\item{By dumping the compiled code with the --dump command and getting the time spend in different kernels with the -D option we found that most of the time was spent on calculating the system matrix}
 \item{Futhark can not merge a map with a loop}
 \item{The code had a lot of branching}
 \item{We tried to mitigate this by removing as much from the loop as possible, and reorganising branches.}
@@ -367,7 +367,7 @@ let weights_doublepar_flat [n] [m](angles: [n]f32) (rays: [m]f32) (gridsize: i32
 \end{lstlisting}
 \end{figure}
 \end{frame}
-
+%%% NOTE calculate weight has an if then else based on the angle of the ray, this would be a good oint to pull it out from the inner function and partition to avoid if then else branching waits
  \begin{frame}
  \nocite{*}
  \bibliographystyle{plain}
