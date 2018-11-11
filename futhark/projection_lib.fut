@@ -1,4 +1,3 @@
-import "futlib/array"
 import "matrix_lib"
 open Matrix
 
@@ -117,11 +116,7 @@ module Projection = {
 
                        -- transpose
                        let transmat = trans_map partmatrix gridsize
-                       -- mult
-                       let partresult = (notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)])
-                       -- add
-                       let result = (map2 (+) partresult output)
-                       in (result, run+1, runLen, stepSize, gridsize, entryexitpoints, p)
+                       in ((map2 (+) ((notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)])) output), run+1, runLen, stepSize, gridsize, entryexitpoints, p)
                in backmat
 
      let SIRT [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: []f32) (iterations: i32): [n][n]f32 =
