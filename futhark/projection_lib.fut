@@ -126,4 +126,7 @@ module Projection = {
                let bp = backprojection angles rhos projections n n
                in (map(\i -> (unsafe (map2 (+) (unsafe img[i]) (unsafe bp[i*n:(i+1)*n]))))(iota n))
           in res
+
+     let projection_difference_base [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: [p]f32): [p]f32 =
+          map2 (-) projections (forwardprojection_doubleparallel angles rhos (flatten(img)) n)
 }
