@@ -126,6 +126,29 @@ def astra_BP(cfg):
 
     return result
 
+def astra_SIRT(cfg):
+    # Create projection data
+    proj_id = astra.data2d.create('-sino', cfg.proj_geom, cfg.sinogram)
+
+    # Create a data object for the reconstruction
+    rec_id = astra.data2d.create('-vol', cfg.vol_geom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict("SIRT_CUDA")
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id, 200)
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    astra.algorithm.delete(alg_id)
+    astra.data2d.delete(rec_id)
+    astra.data2d.delete(proj_id)
+
+    return result
+
 
 def astra_FP(cfg):
     # Create projection data
@@ -153,39 +176,30 @@ def astra_FP(cfg):
 
     return result
 
-def futhark_FP_integrated(cfg):
-    proj = forwardprojection_dpintegrated.forwardprojection_dpintegrated()
-    return proj.main(cfg.angles, cfg.rays, cfg.phantom.flatten().astype(np.float32), 8000)
-
-def futhark_BP_integrated(cfg):
-    proj = backprojection_dpintegrated.backprojection_dpintegrated()
-    return proj.main(cfg.angles, cfg.rays, cfg.sinogram.flatten().astype(np.float32), cfg.size, 8000)
-
-def futhark_FP_dp(cfg):
-    proj = forwardprojection_doubleparallel.forwardprojection_doubleparallel()
-    return proj.main(cfg.angles, cfg.rays, cfg.phantom.flatten().astype(np.float32), 8000)
-
-def futhark_BP_dp(cfg):
-    proj = backprojection_doubleparallel.backprojection_doubleparallel()
-    return proj.main(cfg.angles, cfg.rays, cfg.sinogram.flatten().astype(np.float32), cfg.size, 8000)
 
 ###############################################################################
 #Time algorithms, and plot the results
 ###############################################################################
 def main(argv):
-    sizes = [32,64,128,256,512]#,1024,2048,4096]
-    configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
-    pickle.dump(configs, open("configs.p", "wb"))
-    #configs = pickle.load(open("configs.p", "rb"))
-    BPs = [astra_BP, futhark_BP_integrated, futhark_BP_dp]
-    FPs = [astra_FP, futhark_FP_integrated, futhark_FP_dp]
-
-    figFP, axFP, resultsFP = plot_times(FPs, configs)
-    pickle.dump(resultsFP, open("resultsFP.p", "wb"))
-    figFP.savefig("FPplot.png")
-    figBP, axBP, resultsBP = plot_times(BPs, configs)
-    pickle.dump(resultsBP, open("resultsBP.p", "wb"))
-    figBP.savefig("BPplot.png")
+    # sizes = [32,64,128,256,512]#,1024,2048,4096]
+    # configs = np.array([Config(sizes[i]) for i in range(0, len(sizes))])
+    # pickle.dump(configs, open("configs.p", "wb"))
+    # #configs = pickle.load(open("configs.p", "rb"))
+    # BPs = [astra_BP, futhark_BP_integrated, futhark_BP_dp]
+    # FPs = [astra_FP, futhark_FP_integrated, futhark_FP_dp]
+    #
+    # figFP, axFP, resultsFP = plot_times(FPs, configs)
+    # pickle.dump(resultsFP, open("resultsFP.p", "wb"))
+    # figFP.savefig("FPplot.png")
+    # figBP, axBP, resultsBP = plot_times(BPs, configs)
+    # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
+    # figBP.savefig("BPplot.png")
+    config = Config(512)
+    start = time.time()
+    result = astra_SIRT(config)
+    end = time.time()
+    elapsed = end-start
+    print("It took %d seconds to run astras SIRT",elapsed)
 
 
 
