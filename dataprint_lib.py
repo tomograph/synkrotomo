@@ -18,3 +18,14 @@ def print_f64array(arr):
         result+=str(i)+"f64,"
     result = result[:-1]
     return result+"]"
+
+def print_f32matrix(mat):
+    result="["
+    for r in mat:
+        result+="["
+        for c in r:
+            result+=str(c)+"f32,"
+        result = result[:-1]
+        result+="],"
+    result = result[:-1]
+    return result+"]"

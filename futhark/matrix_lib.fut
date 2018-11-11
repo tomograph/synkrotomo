@@ -1,207 +1,7 @@
--- ==
--- compiled input {
---    -2f32
---    -0.5f32
---    2f32
---    0.5f32
---    0i32
---    4i32
--- }
--- output {
---   [1.030776f32,-1f32]
---   [10i32, -1i32]
--- }
--- compiled input {
---    -1f32
---    2f32
---    2f32
---    0f32
---    0i32
---    4i32
--- }
--- output {
---   [0.600925f32,0.600925f32]
---   [14i32,10i32]
--- }
--- compiled input {
---    -0.5f32
---    2f32
---    0.5f32
---    -2f32
---    0i32
---    4i32
--- }
--- output {
---   [1.030776f32,-1f32]
---   [6i32, -1i32]
--- }
--- compiled input {
---    -0.5f32
---    2f32
---    0.5f32
---    -2f32
---    -2i32
---    4i32
--- }
--- output {
---   [1.030776f32,-1f32]
---   [13i32, -1i32]
--- }
--- compiled input {
---    -0.5f32
---    2f32
---    0.5f32
---    -2f32
---    1i32
---    4i32
--- }
--- output {
---   [1.030776f32,-1f32]
---   [2i32, -1i32]
--- }
--- compiled input {
---    0f32
---    -2f32
---    2f32
---    1f32
---    1i32
---    4i32
--- }
--- output {
---   [1.20185042515f32,-1f32]
---   [2i32, -1i32]
--- }
--- compiled input {
---    0f32
---    0f32
---    2f32
---    2f32
---    1i32
---    4i32
--- }
--- output {
---   [1.41421356237f32,-1f32]
---   [15i32, -1i32]
--- }
--- compiled input {
---    -2f32
---    2f32
---    2f32
---    -2f32
---    1i32
---    4i32
--- }
--- output {
---   [-0f32,1.41421356237f32]
---   [7i32, 3i32]
--- }
 import "line_lib"
 open Lines
 module Matrix =
 {
-     let calculate_fp_val(ent: point)
-               (ext: point)
-               (i: i32)
-               (N: i32)
-               (pixels: []f32) : []f32 =
-          let Nhalf = N/2
-          -- handle all lines as slope < 1 reverse the others
-          let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let reverse = f32.abs(slope) > 1
-          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
-          let k = if reverse then (-1/slope) else slope
-
-          --- calculate stuff
-          let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let Ypixmin = t32(f32.floor(ymin))
-          let Ypixplus = t32(f32.floor(yplus))
-          let baselength = f32.sqrt(1+k*k)
-          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
-          let Ypixmax = i32.max Ypixmin Ypixplus
-          let ydiff = yplus - ymin
-          let yminfact = (r32(Ypixmax) - ymin)/ydiff
-          let yplusfact = (yplus - r32(Ypixmax))/ydiff
-          let iindex = i+Nhalf
-          -- index calculated wrong for reversed lines i think
-          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
-          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
-          let lymin = yminfact*baselength
-          let lyplus = yplusfact*baselength
-          let min = if (pixmin >= 0 && pixmin < N ** 2) then
-               (if Ypixmin == Ypixplus then (unsafe baselength*pixels[pixmin]) else (unsafe lymin*pixels[pixmin]))
-               else 0
-          let plus = if (pixplus >= 0 && pixplus < N ** 2) then
-               (if Ypixmin == Ypixplus then 0 else (unsafe lyplus*pixels[pixmin]))
-               else 0
-          in [min,plus]
-
-     let calculate_bp_val(ent: point)
-               (ext: point)
-               (i: i32)
-               (N: i32)
-               (proj_val: f32) : [](f32,i32) =
-          let Nhalf = N/2
-          -- handle all lines as slope < 1 reverse the others
-          let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let reverse = f32.abs(slope) > 1
-          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
-          let k = if reverse then (-1/slope) else slope
-
-          --- calculate stuff
-          let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let Ypixmin = t32(f32.floor(ymin))
-          let Ypixplus = t32(f32.floor(yplus))
-          let baselength = f32.sqrt(1+k*k)
-          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
-          let Ypixmax = i32.max Ypixmin Ypixplus
-          let ydiff = yplus - ymin
-          let yminfact = (r32(Ypixmax) - ymin)/ydiff
-          let yplusfact = (yplus - r32(Ypixmax))/ydiff
-          let iindex = i+Nhalf
-          -- index calculated wrong for reversed lines i think
-          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
-          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
-          let lymin = yminfact*baselength
-          let lyplus = yplusfact*baselength
-          let min = if (pixmin >= 0 && pixmin < N ** 2) then
-               (if Ypixmin == Ypixplus then ((baselength*proj_val),pixmin) else (lymin*proj_val,pixmin))
-               else (-1f32,-1i32)
-          let plus = if (pixplus >= 0 && pixplus < N ** 2) then
-               (if Ypixmin == Ypixplus then (-1f32,-1i32) else ((lyplus*proj_val), pixmin))
-               else (-1f32,-1i32)
-          in [min,plus]
-
-     let sumPP (p1: point) (p2: point): point =
-          ((p1.1+p2.1),(p1.2+p2.2))
-
-     let sumPPPP (p1: (point,point)) (p2: (point,point)): (point,point) =
-          ((sumPP p1.1 p2.1), (sumPP p1.2 p2.2))
-
-     --segmented scan with (+) on (point,point):
-     let sgmSumPP [n]
-           (flg : [n]i32)
-           (arr : [n](point,point)) : [n](point,point) =
-               let flgs_vals =
-                scan ( \ (f1, x1) (f2,x2) ->
-                        let f = f1 | f2 in
-                        if f2 > 0 then (f, x2)
-                        else (f, (sumPPPP x1 x2)) )
-                     (0,((0f32,0f32),(0f32,0f32))) (zip flg arr)
-               let (_, vals) = unzip flgs_vals
-               in vals
-
-
-     let mapreplicate [n] (gridsize: i32) (arr: [n](point,point)): [](point,point) =
-          let indexes = map(\i->i*gridsize)(iota n)
-          let totalsize = (n*gridsize)
-          let zeroPP = ((0f32,0f32),(0f32,0f32))
-          let flags = scatter (replicate totalsize 0) indexes (replicate n 1)
-          let distributedValues = scatter (replicate totalsize zeroPP) indexes arr
-          in sgmSumPP flags distributedValues
-
-
      --- DOUBLE PARALLEL
      -- function which computes the weight of pixels in grid_column for ray with entry/exit p
      let calculate_weight(ent: point)
@@ -249,150 +49,80 @@ module Matrix =
                     calculate_weight ent ext i gridsize
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 
-     let weights_doublepar_flat [n] [m](angles: [n]f32) (rays: [m]f32) (gridsize: i32): [](f32,i32) =
-          let halfgridsize = gridsize/2
-          let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
-          let replicatedentries = mapreplicate gridsize entryexitpoints
-          let replicatedcolumns = flatten(replicate (n*m) ((-halfgridsize)...(halfgridsize-1)))
-          let flatgridEntryexit = zip replicatedentries replicatedcolumns
-          in flatten(map(\((p1,p2),i) ->
-                    calculate_weight p1 p2 i gridsize
-               ) flatgridEntryexit)
+     -- integrated version, i.e no matrix storage
+     let intersect_steep (rho: f32) (i: i32) (sin: f32) (cos: f32) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+          let (ent,ext) = entryexitPoint sin cos rho (r32(Nhalf))
+          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
+          let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
+          let Xpixmin = t32(f32.floor(xmin))
+          let Xpixplus = t32(f32.floor(xplus))
+          let baselength = f32.sqrt(1+k*k)
+          let Xpixmax = i32.max Xpixmin Xpixplus
+          let xdiff = xplus - xmin
+          -- if both equal then l is baselength and we only want one l
+          let xminfact = if Xpixmin == Xpixplus then 1 else (r32(Xpixmax) - xmin)/xdiff
+          let xplusfact = if Xpixmin == Xpixplus then 0 else (xplus - r32(Xpixmax))/xdiff
+          let lxmin = xminfact*baselength
+          let lxplus = xplusfact*baselength
+          let y = i+Nhalf
+          in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
 
-     --- JH VERSION
-     let lengths    (grid_size: i32)
-                    (sint: f32)
-                    (cost: f32)
-                    (entry_point: point): [](f32, i32) =
+     let intersect_flat (rho: f32) (i: i32) (sin: f32) (cos: f32) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+          let (ent,ext) = entryexitPoint sin cos rho (r32(Nhalf))
+          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
+          let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(Nhalf))
+          let Ypixmin = t32(f32.floor(ymin))
+          let Ypixplus = t32(f32.floor(yplus))
+          let baselength = f32.sqrt(1+k*k)
+          let Ypixmax = i32.max Ypixmin Ypixplus
+          let ydiff = yplus - ymin
+          -- if both equal then l is baselength and we only want one l
+          let yminfact = if Ypixmin == Ypixplus then 1 else (r32(Ypixmax) - ymin)/ydiff
+          let yplusfact = if Ypixmin == Ypixplus then 0 else (yplus - r32(Ypixmax))/ydiff
+          let lymin = yminfact*baselength
+          let lyplus = yplusfact*baselength
+          let x = i+Nhalf
+          -- return with x, y switched since image has been transposed
+          in ((lymin, Ypixmin, x), (lyplus, Ypixplus, x))
 
-          let horizontal = cost == 0
-          let vertical = f32.abs(cost) == 1
-          let slope = cost/(-sint) -- tan(x+90) = -cot(x) = slope since the angles ar ethe normals of the line
+     -- mareika from Hamburg says they have special implementation of cone beam FDK from astra for GPU as it can not handle large datasets
+     let calculate_product [n](sin: f32)
+               (cos: f32)
+               (rho: f32)
+               (i: i32)
+               (halfsize: i32)
+               (flat: bool)
+               (vct: [n]f32) : f32 =
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i sin cos halfsize else intersect_steep rho i sin cos halfsize
+          let size = halfsize*2
+          let pixmin = xmin+ymin*size
+          let pixplus = xplus+yplus*size
+          --let pixnon = if -- find pixel that is not crossed by line
+          let min = (if pixmin >= 0 && pixmin < size**2 then lmin*vct[pixmin] else 0)
+          let plus = (if pixplus >= 0 && pixplus < size**2 then lplus*vct[pixplus] else 0)
+          in (min+plus)
 
-          let size = r32(grid_size)
-          let halfsize = size/2.0f32
-
-          let A = replicate (t32(size*2f32-1f32)) (-1f32, -1)
-
-          let y_step_dir = if slope < 0f32 then -1f32 else 1f32
-          let anchorX = f32.floor(entry_point.1) + 1f32
-          let anchorY = if y_step_dir == -1f32
-               then f32.ceil(entry_point.2) - 1f32
-               else f32.floor(entry_point.2) + 1f32
-
-         let (A, _, _, _, _) =
-           loop (A, focusPoint, anchorX, anchorY, write_index) = (A, entry_point, anchorX, anchorY, 0)
-           while ( isInGrid halfsize y_step_dir focusPoint ) do
-             --compute index of pixel in array by computing x component and y component if
-             --center was at bottom left corner (add halfsize), and add them multiplying y_comp by size
-             let y_floor = f32.floor(halfsize+focusPoint.2)
-             let y_comp =
-               if (y_step_dir == -1f32 && focusPoint.2 - f32.floor(focusPoint.2) == 0f32)
-               then y_floor - 1f32
-               else y_floor
-             let x_comp= f32.floor(halfsize+focusPoint.1)
-             let index = t32(x_comp+size*y_comp)
-
-             --compute the distances using the difference travelled along an axis to the
-             --next whole number and the slope or inverse slope
-             let dy = if vertical then 1f32 else if horizontal then 0f32 else (anchorX-focusPoint.1)*slope
-             let dx = if vertical then 0f32 else if horizontal then 1f32 else (anchorY-focusPoint.2)*(1/slope)
-             let p_anchor_x = (anchorX, focusPoint.2+dy)
-             let p_anchor_y = (focusPoint.1+dx, anchorY)
-
-             let dist_p_x = distance focusPoint p_anchor_x
-             let dist_p_y = distance focusPoint p_anchor_y
-
-             in
-               if horizontal then
-                 unsafe let A[write_index] = (dist_p_x, index)
-                 in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
-               else if vertical then
-                 unsafe let A[write_index] = (dist_p_y, index)
-                 in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
-               else
-               if (f32.abs(dist_p_x - dist_p_y) > 0.000000001f32)
-               then
-                 if ( dist_p_x < dist_p_y )
-                 then
-                   unsafe let A[write_index] = (dist_p_x, index)
-                   in (A, p_anchor_x, anchorX + 1f32, anchorY, write_index+1)
-                 else
-                   unsafe let A[write_index] = (dist_p_y, index)
-                   in (A, p_anchor_y, anchorX, anchorY + y_step_dir, write_index+1)
-               else
-                   unsafe let A[write_index] = (dist_p_x, index)
-                   in (A, p_anchor_x, anchorX + 1f32, anchorY + y_step_dir, write_index+1)
-         in A
-
-     let weights_jh   (angles: []f32)
-                   (rays: []f32)
-                   (gridsize: i32) : [][](f32,i32) =
-         let halfsize = r32(gridsize)/2
-         let entrypoints = convert2entry angles rays halfsize
-         in map (\(p,sc) -> (lengths gridsize sc.1 sc.2 p)) entrypoints
-
-     ------------------------MAP----------------------------------------------------------
-     let index (focusPoint: point) (halfsize: f32) (y_step_dir): i32 =
-          let y_floor = f32.floor(halfsize+focusPoint.2)
-          let y_comp =
-               if (y_step_dir == -1f32 && focusPoint.2 - f32.floor(focusPoint.2) == 0f32)
-               then y_floor - 1f32
-               else y_floor
-          let x_comp= f32.floor(halfsize+focusPoint.1)
-          in t32(x_comp+(halfsize*2f32)*y_comp)
-
-       -- let nextpointonline (vertical: bool) (horizontal: bool) (anchorX: point) (anchorY: point) (slope: f32) (focusPoint: point): point or array of points and lengths
-     let nextpointonline (slope: f32) (vertical: bool) (focusPoint: point): point =
-          let y_step_dir = if slope < 0f32 then -1f32 else 1f32
-          let anchorX = if vertical then focusPoint.1 else f32.floor(focusPoint.1) + 1f32
-          let anchorY = if slope == 0 then focusPoint.2 else if y_step_dir == -1f32
-             then f32.ceil(focusPoint.2) - 1f32
-             else f32.floor(focusPoint.2) + 1f32
-          let dy = if slope == 1 then 1f32 else if slope == 0 then 0f32 else (anchorX-focusPoint.1)*slope
-          let dx = if slope == 1 then 0f32 else if slope == 0 then 1f32 else (anchorY-focusPoint.2)*(1/slope)
-          let p_anchor_x = (anchorX, focusPoint.2+dy)
-          let p_anchor_y = (focusPoint.1+dx, anchorY)
-          in if p_anchor_x.1 < p_anchor_y.1 then p_anchor_x else p_anchor_y
-
-     let getFocusPoints (entryPoint: point) slope vertical halfsize y_step_dir =
-          let A = replicate (t32(2f32*halfsize*2f32-1f32)) (f32.lowest, f32.lowest)
-          let (A, _, _) =
-          loop (A, focusPoint, write_index) = (A, entryPoint, 0)
-               while ( isInGrid halfsize y_step_dir focusPoint ) do
-               let nextpoint = (nextpointonline slope vertical focusPoint)
-               in unsafe let A[write_index] = focusPoint
-               in (A, nextpoint, write_index+1)
-          in A
-
-     let lengths_map
-          (grid_size: i32)
-          (sint: f32)
-          (cost: f32)
-          (entryPoint: point): [](f32, i32) =
-
-          let vertical = f32.abs(cost) == 1
-          let slope =  cost/(-sint)
-
-          let size = r32(grid_size)
-          let halfsize = size/2.0f32
-
-          let y_step_dir = if slope < 0f32 then -1f32 else 1f32
-          let focuspoints = (getFocusPoints entryPoint slope vertical halfsize y_step_dir)
-          --for all focuspoints, save index and distance
-          let mf = map(\i ->
-               let ind = if !(isInGrid halfsize y_step_dir (unsafe focuspoints[i])) then -1 else index (unsafe focuspoints[i]) halfsize y_step_dir
-               let dist = if isInGrid halfsize y_step_dir (unsafe focuspoints[i+1]) then (unsafe (distance focuspoints[i] focuspoints[i+1])) else 0.0f32
-               in (dist, ind)
-           ) (iota ((length focuspoints)-1))
-           in mf
-
-     let weights_map   (angles: []f32)
-                    (rays: []f32)
-                    (gridsize: i32) : [][](f32,i32) =
-          let halfsize = r32(gridsize)/2
-          let entrypoints = convert2entry angles rays halfsize
-          in map (\(p,sc) -> (lengths_map gridsize sc.1 sc.2 p)) entrypoints
+     -- loops are intechanged and no matrix values are saved
+     -- in future only do half of the rhos by mirroring but concept needs more work.
+     let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: [p]f32): [p]f32 =
+          let halfsize = r/2
+          let cosflatmin = f32.sqrt(2)/2
+          in flatten((map(\i ->
+               (map(\j->
+                    let a = unsafe angles[j]
+                    let sin = f32.sin(a)
+                    let cos = f32.cos(a)
+                    let flat = f32.abs(cos) >= cosflatmin
+                    -- transpose image (rotate) so that when taking a row of the matrix its actually a column when need be
+                    let imrot = if flat then (transpose img) else img
+                    let p = (unsafe projections[j*r+i+halfsize])
+                    let prods = (map(\r -> calculate_product sin cos r halfsize i flat (unsafe imrot[i+halfsize]))(rhos[0:halfsize]))
+                    let fp = reduce (+) 0 prods
+                    in (p - fp)
+               ) (iota(a))))
+          )((-halfsize)...(halfsize-1)))
 }
 
 -- open Matrix
