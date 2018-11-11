@@ -43,8 +43,8 @@ module Lines = {
           let anglesrays = flatten(map (\t -> map(\r -> (t.1,t.2,r)) rays) sincos)
           in map(\(s,c,r) -> ((entryPoint s c r maxval), (s,c))) anglesrays
 
-     let distance ((x1, y1) : point) ((x2, y2) : point): f32 =
-          f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
+     -- let distance ((x1, y1) : point) ((x2, y2) : point): f32 =
+     --      f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
 
      -- Check whether a point is within the grid.
      let isInGrid (halfsize : f32) (y_step_dir : f32) ((x, y) : point) : bool =

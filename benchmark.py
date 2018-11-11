@@ -71,7 +71,7 @@ def get_phantom(size):
     return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]
 
 def get_angles(size, degrees=True):
-    num_angles = 10#math.ceil(size*math.pi/2)
+    num_angles = 30#math.ceil(size*math.pi/2)
     if degrees:
         return np.linspace(0, 180, num_angles, False).astype(np.float32)
     else:
