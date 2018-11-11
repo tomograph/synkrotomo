@@ -70,11 +70,13 @@ module Matrix =
 
      let intersect_flat (rho: f32) (i: i32) (sin: f32) (cos: f32) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let (ent,ext) = entryexitPoint sin cos rho (r32(Nhalf))
+          -- could be done for all rays of same angle at once
           let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
           let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(Nhalf))
           let Ypixmin = t32(f32.floor(ymin))
           let Ypixplus = t32(f32.floor(yplus))
+          -- could be done for all rays of same angle at once
           let baselength = f32.sqrt(1+k*k)
           let Ypixmax = i32.max Ypixmin Ypixplus
           let ydiff = yplus - ymin
