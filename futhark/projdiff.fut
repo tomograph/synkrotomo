@@ -4,4 +4,4 @@ let main  (angles: []f32)
           (rays: []f32)
           (voxels: [][]f32)
           (projections: []f32) : []f32 =
-          unsafe (projection_difference angles rays voxels projections)
+          projection_difference angles rays voxels projections

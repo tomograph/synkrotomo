@@ -119,14 +119,37 @@ module Projection = {
                        in ((map2 (+) ((notSparseMatMult_back transmat projections[(run*stepSize) : (run*stepSize + step)])) output), run+1, runLen, stepSize, gridsize, entryexitpoints, p)
                in backmat
 
-     let SIRT [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: []f32) (iterations: i32): [n][n]f32 =
-          let res = loop (img) = (img) for iter < iterations do
-               let diff = projection_difference angles rhos img projections
-               -- use stepsize = n for now (i.e one angle at a time)
-               let bp = backprojection angles rhos projections n n
-               in (map(\i -> (unsafe (map2 (+) (unsafe img[i]) (unsafe bp[i*n:(i+1)*n]))))(iota n))
-          in res
+     let forwardprojection_doubleparallel (angles : []f32)
+                         (rays : []f32)
+                          (voxels : []f32)
+                          (stepSize : i32) : []f32 =
+               let gridsize = t32(f32.sqrt(r32((length voxels))))
+               let halfgridsize = gridsize/2
+               let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
+               let totalLen =  (length entryexitpoints)
+               let runLen = (totalLen/stepSize)
+               let testmat = replicate totalLen 0f32
+               let (testmat, _, _, _, _, _, _) =
+                   loop (output, run, runLen, stepSize, gridsize, entryexitpoints, totalLen) = (testmat, 0, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+                   while ( run < runLen ) do
+                       let step = if (run+1)*stepSize >= totalLen then totalLen - run*stepSize else stepSize
+                       let partmatrix = map(\(ent,ext) -> (flatten(map (\i ->
+                                 calculate_weight ent ext i gridsize
+                            )(-halfgridsize...halfgridsize-1)))) (entryexitpoints[run*stepSize:run*stepSize+step])
+                       let partresult = notSparseMatMult partmatrix voxels
+                       in ((output with [run*stepSize:run*stepSize+step] <- partresult), run+1, runLen, stepSize, gridsize, entryexitpoints, totalLen)
+               in (tail testmat)
 
      let projection_difference_base [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: [p]f32): [p]f32 =
           map2 (-) projections (forwardprojection_doubleparallel angles rhos (flatten(img)) n)
+
+     let SIRT [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: []f32) (iterations: i32): [n][n]f32 =
+          let res = loop (img) = (img) for iter < iterations do
+               let diff = projection_difference_base angles rhos img projections
+               -- use stepsize = n for now (i.e one angle at a time)
+               let bp = backprojection angles rhos diff n n
+               in (map(\i -> (unsafe (map2 (+) (unsafe img[i]) (unsafe bp[i*n:(i+1)*n]))))(iota n))
+          in res
+
+
 }
