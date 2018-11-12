@@ -113,16 +113,16 @@ module Matrix =
           let cosflatmin = f32.sqrt(2)/2
           in flatten((map(\i ->
                (map(\j->
-                    let a = unsafe angles[j]
-                    let sin = f32.sin(a)
-                    let cos = f32.cos(a)
+                    let ang = unsafe angles[j]
+                    let sin = f32.sin(ang)
+                    let cos = f32.cos(ang)
                     let flat = f32.abs(cos) >= cosflatmin
                     -- transpose image (rotate) so that when taking a row of the matrix its actually a column when need be
                     let imrot = if flat then (transpose img) else img
-                    let p = (unsafe projections[j*r+i+halfsize])
-                    let prods = (map(\r -> calculate_product sin cos r halfsize i flat (unsafe imrot[i+halfsize]))(rhos[0:halfsize]))
+                    let proj = (unsafe projections[j*r+i+halfsize])
+                    let prods = (map(\o -> calculate_product sin cos o halfsize i flat (unsafe imrot[i+halfsize])) rhos)
                     let fp = reduce (+) 0 prods
-                    in (p - fp)
+                    in (proj - fp)
                ) (iota(a))))
           )((-halfsize)...(halfsize-1)))
 }
