@@ -15,10 +15,10 @@ module Lines = {
           let p_bottom = (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval)) -- check if x is in grid
           let p_top = (find_x maxval ray cost sint, maxval) -- check if x is in grid
           let p_right = (maxval, find_y maxval ray cost sint) -- check if y is in grid
-          let points = [p_left,p_bottom,p_top,p_right]
-          let isingrid = [(f32.abs(p_left.2) <= maxval), (f32.abs(p_bottom.1) <= maxval), (f32.abs(p_top.1) <= maxval), (f32.abs(p_right.2) <= maxval)]
-          let (truepoints, _) = unsafe unzip( filter (\(_, x) -> x) (zip points isingrid) )
-          in unsafe if sint == 0 then ((ray,-maxval),(ray,maxval)) else if sint == 1 then ((-maxval,ray),(maxval,ray)) else if truepoints[0].1 < truepoints[1].1 then (truepoints[0],truepoints[1]) else (truepoints[1], truepoints[0])
+          --let points = [p_left,p_bottom,p_top,p_right]
+          --let isingrid = [(f32.abs(p_left.2) <= maxval), (f32.abs(p_bottom.1) <= maxval), (f32.abs(p_top.1) <= maxval), (f32.abs(p_right.2) <= maxval)]
+          --let (truepoints, _) = unsafe unzip( filter (\(_, x) -> x) (zip points isingrid) )
+          in (p_right, p_left)--unsafe if sint == 0 then ((ray,-maxval),(ray,maxval)) else if sint == 1 then ((-maxval,ray),(maxval,ray)) else if truepoints[0].1 < truepoints[1].1 then (truepoints[0],truepoints[1]) else (truepoints[1], truepoints[0])
 
      -- convertion to sin/cos arrays of array of radians
      let convert2sincos (angles: []f32) : []point =

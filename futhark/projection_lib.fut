@@ -145,7 +145,7 @@ module Projection = {
 
      let SIRT [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: []f32) (iterations: i32): [n][n]f32 =
           let res = loop (img) = (img) for iter < iterations do
-               let diff = projection_difference_base angles rhos img projections
+               let diff = projection_difference angles rhos img projections
                -- use stepsize = n for now (i.e one angle at a time)
                let bp = backprojection angles rhos diff n n
                in (map(\i -> (unsafe (map2 (+) (unsafe img[i]) (unsafe bp[i*n:(i+1)*n]))))(iota n))
