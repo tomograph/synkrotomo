@@ -102,28 +102,31 @@ module Matrix =
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
           --let pixnon = if -- find pixel that is not crossed by line
-          let min = (if pixmin >= 0 && pixmin < size**2 then lmin*vct[pixmin] else 0)
-          let plus = (if pixplus >= 0 && pixplus < size**2 then lplus*vct[pixplus] else 0)
+          let min = (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
+          let plus = (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
      -- loops are intechanged and no matrix values are saved
      -- in future only do half of the rhos by mirroring but concept needs more work.
-     let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: [p]f32): [p]f32 =
+     -- problem with copying of arrays causes memory issues. Don't copy stuff
+     let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: *[p]f32): [p]f32 =
           let halfsize = r/2
           let cosflatmin = f32.sqrt(2)/2
-          in flatten((map(\i ->
+          --let transposedimg = transpose img
+          let im = flatten(img)
+          in projections with [0:a*r] <-flatten((map(\i ->
                (map(\j->
                     let ang = unsafe angles[j]
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
                     let flat = f32.abs(cos) >= cosflatmin
                     -- transpose image (rotate) so that when taking a row of the matrix its actually a column when need be
-                    let imrot = if flat then (transpose img) else img
-                    let proj = (unsafe projections[j*r+i+halfsize])
-                    let prods = (map(\o -> calculate_product sin cos o halfsize i flat (unsafe imrot[i+halfsize])) rhos)
+                    --let imrow = unsafe(if flat then (transposedimg[i+halfsize]) else img[i+halfsize])
+                    let proj = (unsafe projections[j*r+i+halfsize])-- secial case of r = n, then i+halfsize is also index for ray
+                    let prods = (map(\o -> calculate_product sin cos o halfsize i flat (im)) rhos)
                     let fp = reduce (+) 0 prods
                     in (proj - fp)
-               ) (iota(a))))
+               ) (iota a)))
           )((-halfsize)...(halfsize-1)))
 }
 
