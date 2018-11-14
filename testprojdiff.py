@@ -5,7 +5,7 @@ import dataprint_lib
 import sys
 
 def main(argv):
-    size = 256
+    size = 64
     theta_deg = tomo_lib.get_angles(size)
     theta_rad = tomo_lib.get_angles(size, degrees=False)
     rays = tomo_lib.get_rays(size)
@@ -14,6 +14,7 @@ def main(argv):
 
     pd = projdiff.projdiff()
     result = pd.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), 32).get()
+    np.savetxt("projdifftest.txt", np.array(result), delimiter="," )
     tomo_lib.savesinogram("output//sinogram_projdiff.png",result, numrays=len(rays), numangles=len(theta_rad))
 
 

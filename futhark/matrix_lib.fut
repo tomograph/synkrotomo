@@ -50,9 +50,7 @@ module Matrix =
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 
      -- integrated version, i.e no matrix storage
-     let intersect_steep (rho: f32) (i: i32) (sin: f32) (cos: f32) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
-          let (ent,ext) = entryexitPoint sin cos rho (r32(Nhalf))
-          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+     let intersect_steep (rho: f32) (i: i32) (k: f32) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
           let Xpixmin = t32(f32.floor(xmin))
@@ -68,10 +66,7 @@ module Matrix =
           let y = i+Nhalf
           in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
 
-     let intersect_flat (rho: f32) (i: i32) (sin: f32) (cos: f32) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
-          let (ent,ext) = entryexitPoint sin cos rho (r32(Nhalf))
-          -- could be done for all rays of same angle at once
-          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+     let intersect_flat (rho: f32) (i: i32) (k: f32) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
           let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(Nhalf))
           let Ypixmin = t32(f32.floor(ymin))
@@ -87,7 +82,7 @@ module Matrix =
           let lyplus = yplusfact*baselength
           let x = i+Nhalf
           -- return with x, y switched since image has been transposed
-          in ((lymin, Ypixmin, x), (lyplus, Ypixplus, x))
+          in ((lymin, x, Ypixmin), (lyplus, x, Ypixplus))
 
      -- mareika from Hamburg says they have special implementation of cone beam FDK from astra for GPU as it can not handle large datasets
      let calculate_product [n](sin: f32)
@@ -95,39 +90,37 @@ module Matrix =
                (rho: f32)
                (i: i32)
                (halfsize: i32)
-               (flat: bool)
                (vct: [n]f32) : f32 =
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i sin cos halfsize else intersect_steep rho i sin cos halfsize
+          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          -- could be done for all rays of same angle at once
+          let vertical = (ext.1 - ent.1) == 0
+          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let flat = f32.abs(k) < 1
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i k ent halfsize else intersect_steep rho i k ent halfsize
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
           --let pixnon = if -- find pixel that is not crossed by line
-          let min = (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
-          let plus = (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
+          let min = if vertical then unsafe vct[(t32(f32.floor(rho)))+(i+halfsize)*size] else (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
+          let plus = if vertical then 0 else (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
      -- loops are intechanged and no matrix values are saved
      -- in future only do half of the rhos by mirroring but concept needs more work.
      -- problem with copying of arrays causes memory issues. Don't copy stuff
-     let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n][n]f32) (projections: *[p]f32): [p]f32 =
+     -- let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n]f32) (projections: *[p]f32): [p]f32 =
+     let projection_difference [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n]f32) : []f32 =
           let halfsize = r/2
-          let cosflatmin = f32.sqrt(2)/2
           --let transposedimg = transpose img
-          let im = flatten(img)
-          in projections with [0:a*r] <-flatten((map(\i ->
-               (map(\j->
-                    let ang = unsafe angles[j]
+          in flatten(
+               (map(\ang->
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
-                    let flat = f32.abs(cos) >= cosflatmin
                     -- transpose image (rotate) so that when taking a row of the matrix its actually a column when need be
                     --let imrow = unsafe(if flat then (transposedimg[i+halfsize]) else img[i+halfsize])
-                    let proj = (unsafe projections[j*r+i+halfsize])-- secial case of r = n, then i+halfsize is also index for ray
-                    let prods = (map(\o -> calculate_product sin cos o halfsize i flat (im)) rhos)
-                    let fp = reduce (+) 0 prods
-                    in (proj - fp)
-               ) (iota a)))
-          )((-halfsize)...(halfsize-1)))
+                    --let proj = (unsafe projections[j*r+i+halfsize])-- secial case of r = n, then i+halfsize is also index for ray
+                    in (map(\o -> reduce (+) 0 <| map(\i -> calculate_product sin cos o i halfsize img)((-halfsize)...(halfsize-1))) rhos)
+               ) (angles)))
 }
 
 -- open Matrix
