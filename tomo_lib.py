@@ -8,9 +8,9 @@ import scipy.misc
 def get_angles(size, degrees=True):
     num_angles = 30#math.ceil(size*math.pi/2)
     if degrees:
-        return np.linspace(180/4, 3*180/4, num_angles, False)
+        return np.linspace(180/4, 180/2, num_angles, False)
     else:
-        return np.linspace((np.pi/4),(3*np.pi/4), num_angles,False)
+        return np.linspace((np.pi/4+0.00001),(np.pi/2), num_angles,False)
 
 def sinogram(image, theta):
     sinogram = np.zeros((len(theta), max(image.shape)))
