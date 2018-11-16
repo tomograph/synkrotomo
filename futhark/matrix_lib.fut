@@ -49,7 +49,7 @@ module Matrix =
                     calculate_weight ent ext i gridsize
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 
-     -- integrated version, i.e no matrix storage
+     -- integrated version, i.e no matrix storage - probably not working
      let intersect_steep (rho: f32) (i: i32) (k: f32) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
@@ -108,17 +108,13 @@ module Matrix =
      -- loops are intechanged and no matrix values are saved
      -- in future only do half of the rhos by mirroring but concept needs more work.
      -- problem with copying of arrays causes memory issues. Don't copy stuff
-     -- let projection_difference [a][r][n][p](angles: [a]f32) (rhos: [r]f32) (img: [n]f32) (projections: *[p]f32): [p]f32 =
+     -- this is not currently the difference but simply the forward projection - see earlier version to convert to diff
      let projection_difference [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n]f32) : []f32 =
           let halfsize = r/2
-          --let transposedimg = transpose img
           in flatten(
                (map(\ang->
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
-                    -- transpose image (rotate) so that when taking a row of the matrix its actually a column when need be
-                    --let imrow = unsafe(if flat then (transposedimg[i+halfsize]) else img[i+halfsize])
-                    --let proj = (unsafe projections[j*r+i+halfsize])-- secial case of r = n, then i+halfsize is also index for ray
                     in (map(\o -> reduce (+) 0 <| map(\i -> calculate_product sin cos o i halfsize img)((-halfsize)...(halfsize-1))) rhos)
                ) (angles)))
 }
