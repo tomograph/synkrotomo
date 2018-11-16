@@ -1,3 +1,4 @@
+-- currently does a forwardprojection using what will become calculation of the differnece between the projections and the forwardprojection
 import "matrix_lib"
 open Matrix
 let main  [n](angles : []f32)
