@@ -50,7 +50,8 @@ module Matrix =
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 
      -- integrated version, i.e no matrix storage - probably not working
-     let intersect_steep (rho: f32) (i: i32) (k: f32) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+     let intersect_steep (rho: f32) (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+          let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
           let Xpixmin = t32(f32.floor(xmin))
@@ -66,7 +67,8 @@ module Matrix =
           let y = i+Nhalf
           in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
 
-     let intersect_flat (rho: f32) (i: i32) (k: f32) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+     let intersect_flat (rho: f32) (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
           let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(Nhalf))
           let Ypixmin = t32(f32.floor(ymin))
@@ -92,17 +94,17 @@ module Matrix =
                (halfsize: i32)
                (vct: [n]f32) : f32 =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          -- could be done for all rays of same angle at once
-          let vertical = (ext.1 - ent.1) == 0
-          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let flat = f32.abs(k) < 1
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i k ent halfsize else intersect_steep rho i k ent halfsize
+          let vertical = f32.abs((ext.1 - ent.1)) < 0.0000000001f32
+          let horizontal = f32.abs((ext.2 - ent.2)) < 0.0000000001f32
+          let flat = sin > cos
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i ext ent halfsize else intersect_steep rho i ext ent halfsize
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
-          --let pixnon = if -- find pixel that is not crossed by line
-          let min = if vertical then unsafe vct[(t32(f32.floor(rho)))+(i+halfsize)*size] else (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
-          let plus = if vertical then 0 else (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
+          let rhopixindex = (t32(f32.floor(rho))) + halfsize
+          let ipixindex = i + halfsize
+          let min = if vertical then unsafe vct[rhopixindex+ipixindex*size] else if horizontal then unsafe vct[rhopixindex*size+ipixindex] else (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
+          let plus = if vertical || horizontal then 0 else (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
      -- loops are intechanged and no matrix values are saved
