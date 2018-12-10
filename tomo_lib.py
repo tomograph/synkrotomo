@@ -8,9 +8,9 @@ import scipy.misc
 def get_angles(size, degrees=True):
     num_angles = math.ceil(size*math.pi/2)
     if degrees:
-        return np.linspace(0, 22.5, num_angles, False)
+        return np.linspace(0, 180, num_angles, False)
     else:
-        return np.linspace(0,np.pi/8, num_angles,False)
+        return np.linspace(0, np.pi, num_angles,False)
 
 def sinogram(image, theta):
     sinogram = np.zeros((len(theta), max(image.shape)))
@@ -20,7 +20,8 @@ def sinogram(image, theta):
     return sinogram
 
 def get_rays(size):
-    startvalue = (size-1)/2.0
+    numrays = np.sqrt(2*(size**2))
+    startvalue = (numrays-1)/2.0
     return np.linspace((-(1.0)*startvalue), startvalue, size).astype(np.float32)
 
 def savesinogram(filename, data, numrays, numangles):
