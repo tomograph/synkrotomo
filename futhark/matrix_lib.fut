@@ -96,7 +96,7 @@ module Matrix =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let vertical = f32.abs((ext.1 - ent.1)) < 0.0000000001f32
           let horizontal = f32.abs((ext.2 - ent.2)) < 0.0000000001f32
-          let flat = sin > cos
+          let flat = sin >= f32.abs(cos)
           let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i ext ent halfsize else intersect_steep rho i ext ent halfsize
           let size = halfsize*2
           let pixmin = xmin+ymin*size
