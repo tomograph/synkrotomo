@@ -16,13 +16,15 @@ module Lines = {
           let p_top = (find_x maxval ray cost sint, maxval) -- check if x is in grid
           let p_right = (maxval, find_y maxval ray cost sint) -- check if y is in grid
 
-          let point1 = if sint==0 then (ray,-maxval) else if sint == 1 then (-maxval,ray)
+          let horizontal = sint == 1
+          let vertical = sint == 0
+          let point1 = if vertical then (ray,-maxval) else if horizontal then (-maxval,ray)
                else if (f32.abs(p_left.2) <= maxval) then p_left
                else if (f32.abs(p_bottom.1) <= maxval) then p_bottom
                else if (f32.abs(p_top.1) <= maxval) then p_top
                else p_right
 
-          let point2 = if sint==0 then (ray,maxval) else if sint == 1 then (maxval,ray)
+          let point2 = if vertical then (ray,maxval) else if horizontal then (maxval,ray)
                else if (f32.abs(p_right.2) <= maxval) then p_right
                else if (f32.abs(p_top.1) <= maxval) then p_top
                else if (f32.abs(p_bottom.1) <= maxval) then p_bottom
