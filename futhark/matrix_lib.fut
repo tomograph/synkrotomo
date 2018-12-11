@@ -110,26 +110,4 @@ module Matrix =
 
      let projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
           reduce (+) 0 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
-
-     -- loops are intechanged and no matrix values are saved
-     -- in future only do half of the rhos by mirroring but concept needs more work.
-     -- problem with copying of arrays causes memory issues. Don't copy stuff
-     -- this is not currently the difference but simply the forward projection - see earlier version to convert to diff
-     let projection_difference [a][r][n](angles: [a]f32) (rhos: [r]f32) (halfsize: i32) (img: [n]f32): []f32 =
-          flatten(
-               (map(\i->
-                    let ang = unsafe angles[i]
-                    let sin = f32.sin(ang)
-                    let cos = f32.cos(ang)
-                    in (map(\j -> projection_value sin cos (unsafe rhos[j]) halfsize img) (iota r))
-               ) (iota a)))
 }
-
--- open Matrix
--- let main  (x1:f32)
---           (y1: f32)
---           (x2: f32)
---           (y2: f32)
---           (i: i32)
---           (N: i32): ([]f32, []i32) =
---           unzip(calculate_weight (x1,y1) (x2,y2) i N)
