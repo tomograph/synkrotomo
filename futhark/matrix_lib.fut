@@ -94,6 +94,7 @@ module Matrix =
                (halfsize: i32)
                (vct: [n]f32) : f32 =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          -- this limit is somewhat arbitrary. How can we make it better?
           let vertical = f32.abs((ext.1 - ent.1)) < 0.0000000001f32
           let horizontal = f32.abs((ext.2 - ent.2)) < 0.0000000001f32
           let flat = is_flat cos sin
