@@ -20,8 +20,8 @@ def sinogram(image, theta):
     return sinogram
 
 def get_rays(size):
-    numrays = np.sqrt(2*(size**2))
-    startvalue = (numrays-1)/2.0
+    #numrays = np.sqrt(2*(size**2))
+    startvalue = (size-1)/2.0
     return np.linspace((-(1.0)*startvalue), startvalue, size).astype(np.float32)
 
 def savesinogram(filename, data, numrays, numangles):

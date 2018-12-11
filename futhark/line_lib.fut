@@ -9,6 +9,9 @@ module Lines = {
      let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           if sint == 0 then ray else (ray-x*cost)/sint
 
+     let is_flat (cos: f32) (sin: f32): bool =
+          sin >= f32.abs(cos)
+
      -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
      let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
           let p_left = ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint) -- check if y is in grid
@@ -18,9 +21,10 @@ module Lines = {
 
           let horizontal = sint == 1
           let vertical = sint == 0
-          let point1 = if vertical then (ray,-maxval) else if horizontal then (-maxval,ray) else if sint < 0.5 then p_bottom else p_left
+          let flat = is_flat cost sint
+          let point1 = if vertical then (ray,-maxval) else if horizontal then (-maxval,ray) else if flat then p_left else p_bottom
 
-          let point2 = if vertical then (ray,maxval) else if horizontal then (maxval,ray) else if sint < 0.5 then p_top else p_right
+          let point2 = if vertical then (ray,maxval) else if horizontal then (maxval,ray) else if flat then p_right else p_top
 
           in (point1, point2)
 
