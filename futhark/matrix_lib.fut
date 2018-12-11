@@ -108,18 +108,21 @@ module Matrix =
           let plus = if vertical || horizontal then 0 else (if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
+     let projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
+          reduce (+) 0 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
+
      -- loops are intechanged and no matrix values are saved
      -- in future only do half of the rhos by mirroring but concept needs more work.
      -- problem with copying of arrays causes memory issues. Don't copy stuff
      -- this is not currently the difference but simply the forward projection - see earlier version to convert to diff
-     let projection_difference [a][r][n](angles: [a]f32) (rhos: [r]f32) (img: [n]f32) : []f32 =
-          let halfsize = r/2
-          in flatten(
-               (map(\ang->
+     let projection_difference [a][r][n](angles: [a]f32) (rhos: [r]f32) (halfsize: i32) (img: [n]f32): []f32 =
+          flatten(
+               (map(\i->
+                    let ang = unsafe angles[i]
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
-                    in (map(\o -> reduce (+) 0 <| map(\i -> calculate_product sin cos o i halfsize img)((-halfsize)...(halfsize-1))) rhos)
-               ) (angles)))
+                    in (map(\j -> projection_value sin cos (unsafe rhos[j]) halfsize img) (iota r))
+               ) (iota a)))
 }
 
 -- open Matrix
