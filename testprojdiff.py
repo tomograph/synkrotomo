@@ -20,7 +20,7 @@ def main(argv):
     tomo_lib.savesinogram("output//sinogram_standard.png",tomo_lib.sinogram(phantom, theta_deg), numrays=len(rays), numangles=len(theta_deg))
 
     pd = projdiff.projdiff()
-    result = pd.main( theta_rad.astype(np.float32), rays.astype(np.float32), phantom.flatten().astype(np.float32), 32).get()
+    result = pd.main( theta_rad.astype(np.float32), rays.astype(np.float32), size, phantom.flatten().astype(np.float32), 32).get()
     result = rescale(result)
     np.savetxt("projdifftest.txt", np.array(result), delimiter="," )
     tomo_lib.savesinogram("output//sinogram_projdiff.png",result, numrays=len(rays), numangles=len(theta_rad))
