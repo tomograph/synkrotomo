@@ -96,15 +96,15 @@ module Matrix =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let vertical = f32.abs((ext.1 - ent.1)) < 0.0000000001f32
           let horizontal = f32.abs((ext.2 - ent.2)) < 0.0000000001f32
-          let flat = sin >= f32.abs(cos)
+          let flat = is_flat cos sin
           let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i ext ent halfsize else intersect_steep rho i ext ent halfsize
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
           let rhopixindex = (t32(f32.floor(rho))) + halfsize
           let ipixindex = i + halfsize
-          let min = if vertical then unsafe vct[rhopixindex+ipixindex*size] else if horizontal then unsafe vct[rhopixindex*size+ipixindex] else (if pixmin >= 0 && pixmin < size**2 then (unsafe lmin*vct[pixmin]) else 0)
-          let plus = if vertical || horizontal then 0 else (if pixplus >= 0 && pixplus < size**2 then (unsafe lplus*vct[pixplus]) else 0)
+          let min = if vertical then unsafe vct[rhopixindex+ipixindex*size] else if horizontal then unsafe vct[rhopixindex*size+ipixindex] else (if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*vct[pixmin]) else 0)
+          let plus = if vertical || horizontal then 0 else (if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
      -- loops are intechanged and no matrix values are saved
