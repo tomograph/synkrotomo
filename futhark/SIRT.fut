@@ -12,7 +12,7 @@ let main  [n][p](angles : []f32)
           (projections: [p]f32)
           (iterations : i32) : [n]f32 =
           let rhozero = unsafe rhos[0]
-          let deltarho = unsafe rhos[1]-rhoszero
+          let deltarho = unsafe rhos[1]-rhozero
           let size = t32(f32.sqrt(r32(n)))
           let halfsize = size/2
           let inverserowsums = map2 (/) (replicate p 1) (forward_projection angles rhos halfsize (replicate (size**2) 1))

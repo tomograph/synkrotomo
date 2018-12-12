@@ -93,12 +93,15 @@ module Lines = {
           let rho2 = cost*p2.1+sint*p2.2
           let rhominfloat = if rho1 < rho2 then rho1 else rho2
           let s = f32.ceil((rhominfloat-rhozero)/deltarho)
-          in rhozero+s*rhominfloat
+          in rhozero+s*deltarho
 
      let pixelcenter (pix: i32) (size: i32): point=
-          let y = pix/size - size/2
-          let x = pix-y*size - size/2
+          let loweryidx = pix/size
+          let lowerxidx = pix - size*loweryidx
+          let x = lowerxidx - size/2
+          let y = loweryidx - size/2
           in (r32(x)+0.5,r32(y)+0.5)
+
      -- Check whether a point is within the grid.
      let isInGrid (halfsize : f32) (y_step_dir : f32) ((x, y) : point) : bool =
           x >= -1f32*halfsize && x < halfsize && (
