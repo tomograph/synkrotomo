@@ -3,6 +3,9 @@
 -- input@../data/bpinputf32rad128
 -- input@../data/bpinputf32rad256
 -- input@../data/bpinputf32rad512
+-- input@../data/bpinputf32rad1024
+-- input@../data/bpinputf32rad2048
+-- input@../data/bpinputf32rad4096
 import "projection_lib"
 open Projection
 
