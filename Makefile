@@ -11,3 +11,10 @@ runopencl: opencl
 
 runpytest: lib
 	python testsirt.py
+
+databp:
+	python testsirtdata.py
+
+bench:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut
