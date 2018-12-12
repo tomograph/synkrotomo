@@ -5,14 +5,38 @@ import numpy as np
 import tomo_lib
 import dataprint_lib
 import sys
+import astra
 
 def rescale(values):
     minimum = np.min(values)
     maximum = np.max(values)
     return (values - minimum)/(maximum-minimum)
 
+def astra_BP(projgeom, sinogram, volgeom):
+    # Create projection data
+    proj_id = astra.data2d.create('-sino', projgeom, sinogram)
+
+    # Create a data object for the reconstruction
+    rec_id = astra.data2d.create('-vol', volgeom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict("BP_CUDA")
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id)
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    astra.algorithm.delete(alg_id)
+    astra.data2d.delete(rec_id)
+    astra.data2d.delete(proj_id)
+
+    return result
+
 def main(argv):
-    size = 64
+    size = 256
     theta_deg = tomo_lib.get_angles(size)
     theta_rad = tomo_lib.get_angles(size, degrees=False)
     rays = tomo_lib.get_rays(size)
@@ -35,9 +59,14 @@ def main(argv):
     tomo_lib.savebackprojection("output//original.png",phantom, size)
 
     sirt = SIRT.SIRT()
-    result = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 10).get()
+    result = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 1).get()
     result = rescale(result)
     tomo_lib.savebackprojection("output//sirt.png",result, size)
+
+    proj_geom =astra.create_proj_geom('parallel', 1.0, size, theta_rad)
+    vol_geom = astra.create_vol_geom(size)
+    astrabp = astra_BP(proj_geom, sinogram, vol_geom)
+    tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
 
 
 if __name__ == '__main__':

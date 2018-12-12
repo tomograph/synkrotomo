@@ -44,18 +44,19 @@ module Lines = {
           let p_top = (find_x ymax ray cost sint, ymax) -- check if x is in grid
           let p_right = (xmax, find_y xmax ray cost sint) -- check if y is in grid
 
-          let horizontal = sint == 1
-          let vertical = sint == 0
-
           let point1 = if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
-                         else p_top
+                         else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
+                         else if p_right.2 <= ymax && p_right.2 >= ymin then p_right
+                         else (0,0)
 
           let point2 = if p_right.2 <= ymax && p_right.2 >= ymin then p_right
                          else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
-                         else p_bottom
+                         else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
+                         else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
+                         else (0,0)
 
-          in (if vertical || horizontal then 1 else distance point1 point2)
+          in (distance point1 point2)
 
      -- convertion to sin/cos arrays of array of radians
      let convert2sincos (angles: []f32) : []point =
