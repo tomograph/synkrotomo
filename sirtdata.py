@@ -12,7 +12,7 @@ def main(argv):
         f = open(filename,"w+")
         angles = tomo_lib.get_angles(i, False)
         rays = tomo_lib.get_rays(i)
-        initialimg = np.zeros((i,i))
+        initialimg = np.zeros(i*i)
         phantom = tomo_lib.get_phantom(i)
         sino = tomo_lib.sinogram(phantom,tomo_lib.get_angles(i, True)).flatten()
         f.write(dataprint_lib.print_f32array(angles)+" "+dataprint_lib.print_f32array(rays)+" "+dataprint_lib.print_f32matrix(initialimg)+" "+dataprint_lib.print_f32array(sino)+" "+str(iterations))
