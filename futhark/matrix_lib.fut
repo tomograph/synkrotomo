@@ -49,7 +49,7 @@ module Matrix =
                     calculate_weight ent ext i gridsize
                )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
 
-     -- integrated version, i.e no matrix storage - probably not working
+     -- integrated version, i.e no matrix storage
      let intersect_steep (rho: f32) (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
@@ -83,10 +83,8 @@ module Matrix =
           let lymin = yminfact*baselength
           let lyplus = yplusfact*baselength
           let x = i+Nhalf
-          -- return with x, y switched since image has been transposed
           in ((lymin, x, Ypixmin), (lyplus, x, Ypixplus))
 
-     -- mareika from Hamburg says they have special implementation of cone beam FDK from astra for GPU as it can not handle large datasets
      let calculate_product [n](sin: f32)
                (cos: f32)
                (rho: f32)
@@ -108,6 +106,6 @@ module Matrix =
           let plus = if vertical || horizontal then 0 else (if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
-     let projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
+     let forward_projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
           reduce (+) 0 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
 }

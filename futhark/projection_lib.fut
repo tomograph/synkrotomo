@@ -52,8 +52,29 @@ module Projection = {
                     let ang = unsafe angles[i]
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
-                    in (map(\j -> projection_value sin cos (unsafe rhos[j]) halfsize img) (iota r))
+                    in (map(\r -> forward_projection_value sin cos r halfsize img) rhos)
                ) (iota a)))
+
+     let getprojectionindex (angleindex: i32) (rhovalue: f32) (deltarho: f32) (rhozero: f32) (numrhos: i32): i32 =
+          angleindex*numrhos+t32((rhovalue-rhozero)/deltarho)
+
+     let back_projection [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
+          let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+          in map(\pix ->
+               let pixcenter = pixelcenter pix size
+               in reduce (+) 0 <| (flatten(map(\i ->
+                    let ang = unsafe angles[i]
+                    let sin = f32.sin(ang)
+                    let cos = f32.cos(ang)
+                    let minrho = rhomin cos sin pixcenter rhozero deltarho
+                    let rhos = getrhos minrho deltarho rhosforpixel
+                    in (map(\rho->
+                              let l = intersectiondistance sin cos rho pixcenter
+                              let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
+                              in l*(unsafe projections[projectionidx])
+                         ) rhos)
+               ) (iota a)))
+          )(iota (size**2))
 
 
 }
