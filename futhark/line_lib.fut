@@ -1,5 +1,6 @@
 module Lines = {
      type point  = ( f32, f32 )
+     let stddev = 0.0000005f32
 
      -- find x given y
      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
@@ -56,7 +57,7 @@ module Lines = {
                          else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else (0,0)
 
-          in if (f32.abs(sint) - 1.0) < 0.0005 || (f32.abs(cost) - 1.0) < 0.0005 then 1.0 else (distance point1 point2)
+          in if (f32.abs(sint) - 1.0) < stddev || (f32.abs(cost) - 1.0) < stddev then 1.0 else (distance point1 point2)
 
      -- convertion to sin/cos arrays of array of radians
      let convert2sincos (angles: []f32) : []point =
