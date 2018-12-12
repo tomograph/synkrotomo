@@ -39,13 +39,21 @@ def main(argv):
     # size = 256
     sizes = [64,128,256,512,1024,2048,4096]
     for i in sizes:
+        print("working on size " + str(i))
         filename = "data//bpinputf32rad"+str(i)
+        print("getting angles degrees")
         theta_deg = tomo_lib.get_angles(i)
+        print("getting angles radians")
         theta_rad = tomo_lib.get_angles(i, degrees=False)
+        print("getting rays")
         rays = tomo_lib.get_rays(i)
+        print("getting phantom")
         phantom = tomo_lib.get_phantom(i)
+        print("getting sinogram")
         sinogram = tomo_lib.sinogram(phantom, theta_deg)
+        print("rescaling sinogram")
         sinogram = rescale(sinogram)
+        print("rescaling phantom")
         phantom = rescale(phantom.flatten().astype(np.float32))
 
 
@@ -56,6 +64,8 @@ def main(argv):
 
     # back = backprojection.backprojection()
     # filename = "testdata"
+        print("writing to file")
+
         f = open(filename,"w+")
         f.write(dataprint_lib.print_f32array(theta_rad)+" "+dataprint_lib.print_f32array(rays)+" "+dataprint_lib.print_f32array(phantom)+" "+dataprint_lib.print_f32array(sinogram.flatten()))
     # print(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32))
