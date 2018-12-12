@@ -36,14 +36,17 @@ def rescale(values):
 #     return result
 
 def main(argv):
-    size = 64
-    theta_deg = tomo_lib.get_angles(size)
-    theta_rad = tomo_lib.get_angles(size, degrees=False)
-    rays = tomo_lib.get_rays(size)
-    phantom = tomo_lib.get_phantom(size)
-    sinogram = tomo_lib.sinogram(phantom, theta_deg)
-    sinogram = rescale(sinogram)
-    phantom = rescale(phantom.flatten().astype(np.float32))
+    # size = 256
+    sizes = [64,128,256,512,1024,2048,4096]
+    for i in sizes:
+        filename = "data//bpinputf32rad"+str(i)
+        theta_deg = tomo_lib.get_angles(i)
+        theta_rad = tomo_lib.get_angles(i, degrees=False)
+        rays = tomo_lib.get_rays(i)
+        phantom = tomo_lib.get_phantom(i)
+        sinogram = tomo_lib.sinogram(phantom, theta_deg)
+        sinogram = rescale(sinogram)
+        phantom = rescale(phantom.flatten().astype(np.float32))
 
 
     # forward = forwardprojection.forwardprojection()
@@ -52,9 +55,9 @@ def main(argv):
     # tomo_lib.savesinogram("output//forwardprojection.png",result, len(rays), len(theta_rad))
 
     # back = backprojection.backprojection()
-    filename = "testdata"
-    f = open(filename,"w+")
-    f.write(dataprint_lib.print_f32array(theta_rad)+" "+dataprint_lib.print_f32array(rays)+" "+dataprint_lib.print_f32array(phantom)+" "+dataprint_lib.print_f32array(sinogram.flatten()))
+    # filename = "testdata"
+        f = open(filename,"w+")
+        f.write(dataprint_lib.print_f32array(theta_rad)+" "+dataprint_lib.print_f32array(rays)+" "+dataprint_lib.print_f32array(phantom)+" "+dataprint_lib.print_f32array(sinogram.flatten()))
     # print(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32))
     # result = rescale(result)
     # tomo_lib.savebackprojection("output//backprojection.png",result, size)

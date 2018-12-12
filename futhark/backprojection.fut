@@ -1,8 +1,8 @@
 -- ==
--- input@../data/sirtinputf32rad64
--- input@../data/sirtinputf32rad128
--- input@../data/sirtinputf32rad256
--- input@../data/sirtinputf32rad512
+-- input@../data/bpinputf32rad64
+-- input@../data/bpinputf32rad128
+-- input@../data/bpinputf32rad256
+-- input@../data/bpinputf32rad512
 import "projection_lib"
 open Projection
 
