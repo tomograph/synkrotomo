@@ -3,6 +3,8 @@
 -- input@../data/sirtinputf32rad128
 -- input@../data/sirtinputf32rad256
 -- input@../data/sirtinputf32rad512
+-- input@../data/sirtinputf32rad1024
+-- input@../data/sirtinputf32rad2056
 import "projection_lib"
 open Projection
 

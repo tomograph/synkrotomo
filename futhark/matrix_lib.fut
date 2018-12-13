@@ -2,7 +2,7 @@ import "line_lib"
 open Lines
 module Matrix =
 {
-     -- integrated version, i.e no matrix storage
+     -- calculate intersection length for all intersecting pixels in grid row i with line with slope >= 1
      let intersect_steep (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
@@ -20,6 +20,7 @@ module Matrix =
           let y = i+Nhalf
           in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
 
+     -- calculate intersection length for all intersecting pixels in grid row i with line with slope <= 1
      let intersect_flat (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
@@ -38,6 +39,7 @@ module Matrix =
           let x = i+Nhalf
           in ((lymin, x, Ypixmin), (lyplus, x, Ypixplus))
 
+     -- calculate the sum of products for intersections between lines of type rho = cos*x+y*sin on row or column i
      let calculate_product [n](sin: f32)
                (cos: f32)
                (rho: f32)
@@ -45,9 +47,8 @@ module Matrix =
                (halfsize: i32)
                (vct: [n]f32) : f32 =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          -- this limit is somewhat arbitrary. How can we make it better?
-          let vertical = f32.abs((ext.1 - ent.1)) <= stddev
-          let horizontal = f32.abs((ext.2 - ent.2)) <= stddev
+          let horizontal = is_horizontal(sin)
+          let vertical = is_vertical(cos)
           let flat = is_flat cos sin
           let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat i ext ent halfsize else intersect_steep i ext ent halfsize
           let size = halfsize*2
@@ -59,6 +60,7 @@ module Matrix =
           let plus = if vertical || horizontal then 0 else (if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0)
           in (min+plus)
 
+     -- calculate one value in the forward projection vector
      let forward_projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
           reduce (+) 0 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
 }

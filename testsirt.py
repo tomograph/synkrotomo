@@ -47,12 +47,12 @@ def main(argv):
 
 
     forward = forwardprojection.forwardprojection()
-    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32)).get()
+    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32), 1).get()
     fpresult = rescale(fpresult)
     tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
 
     back = backprojection.backprojection()
-    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, fpresult.flatten().astype(np.float32)).get()
+    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, fpresult.flatten().astype(np.float32), 1).get()
     bpresult = rescale(bpresult)
     tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
 
