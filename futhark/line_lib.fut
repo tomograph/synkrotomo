@@ -4,11 +4,11 @@ module Lines = {
 
      -- find x given y
      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          if cost == 0 then ray else (ray-y*sint)/cost
+          if f32.abs(cost)-stddev <= 0 then ray else (ray-y*sint)/cost
 
      -- find y given x
      let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          if sint == 0 then ray else (ray-x*cost)/sint
+          if f32.abs(sint)-stddev <= 0 then ray else (ray-x*cost)/sint
 
      let is_flat (cos: f32) (sin: f32): bool =
           sin >= f32.abs(cos)
@@ -24,8 +24,9 @@ module Lines = {
      let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
           let (p_left,p_bottom,p_top,p_right) = getintersections sint cost ray maxval
 
-          let horizontal = sint == 1
-          let vertical = sint == 0
+          let horizontal = f32.abs(sint) - 1 + stddev >= 0
+          let vertical = f32.abs(cost) - 1 + stddev >= 0
+
           let flat = is_flat cost sint
           let point1 = if vertical then (ray,-maxval) else if horizontal then (-maxval,ray) else if flat then p_left else p_bottom
           let point2 = if vertical then (ray,maxval) else if horizontal then (maxval,ray) else if flat then p_right else p_top
@@ -45,40 +46,28 @@ module Lines = {
           let p_top = (find_x ymax ray cost sint, ymax) -- check if x is in grid
           let p_right = (xmax, find_y xmax ray cost sint) -- check if y is in grid
 
-          let point1 = if p_left.2 <= ymax && p_left.2 >= ymin then p_left
+          let horizontal = f32.abs(sint) - 1 + stddev >= 0
+          let vertical = f32.abs(cost) - 1 + stddev >= 0
+
+          let point1 = if horizontal && ray >= ymin && ray <= ymax then (xmin, ray)
+                         else if vertical && ray >= xmin && ray <= xmax then (ray,ymin)
+                         else if vertical || horizontal then (0,0)
+                         else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
                          else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
                          else if p_right.2 <= ymax && p_right.2 >= ymin then p_right
                          else (0,0)
 
-          let point2 = if p_right.2 <= ymax && p_right.2 >= ymin then p_right
+          let point2 = if horizontal && ray >= ymin && ray <= ymax then (xmax, ray)
+                         else if vertical && ray >= xmin && ray <= xmax then (ray,ymax)
+                         else if vertical || horizontal then (0,0)
+                         else if p_right.2 <= ymax && p_right.2 >= ymin then p_right
                          else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
                          else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
                          else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else (0,0)
 
-          in if (f32.abs(sint) - 1.0) < stddev || (f32.abs(cost) - 1.0) < stddev then 1.0 else (distance point1 point2)
-
-     -- convertion to sin/cos arrays of array of radians
-     let convert2sincos (angles: []f32) : []point =
-          map (\t -> (f32.sin(t),f32.cos(t))) angles
-
-     --convert to entry and exit point
-     let convert2entryexit (angles: []f32) (rays: []f32) (maxval: f32): [] (point, point) =
-          let sincos = convert2sincos angles
-          let anglesrays = flatten(map (\t -> map(\r -> (t.1,t.2,r)) rays) sincos)
-          in map(\(s,c,r) -> entryexitPoint s c r maxval) anglesrays
-
-     -- entry point from sin/cos some points may be outside grid!
-     let entryPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : point =
-          let (p_left,p_bottom,p_top,p_right) = getintersections sint cost ray maxval
-          in if f32.abs(p_left.2) <= maxval && sint != 0 then p_left else if p_bottom.1 <= p_top.1 then p_bottom else p_top
-
-     --convert to entry points !!!SHOULD ALSO return cost sint
-     let convert2entry (angles: []f32) (rays: []f32) (maxval: f32): [] (point, point) =
-          let sincos = convert2sincos angles
-          let anglesrays = flatten(map (\t -> map(\r -> (t.1,t.2,r)) rays) sincos)
-          in map(\(s,c,r) -> ((entryPoint s c r maxval), (s,c))) anglesrays
+          in distance point1 point2
 
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
           let rhomins = replicate numrhos rhomin
@@ -103,13 +92,4 @@ module Lines = {
           let x = lowerxidx - size/2
           let y = loweryidx - size/2
           in (r32(x)+0.5,r32(y)+0.5)
-
-     -- Check whether a point is within the grid.
-     let isInGrid (halfsize : f32) (y_step_dir : f32) ((x, y) : point) : bool =
-          x >= -1f32*halfsize && x < halfsize && (
-               if y_step_dir == -1f32
-               then (-1f32*halfsize < y && y <= halfsize)
-               else (-1f32*halfsize <= y && y < halfsize)
-          )
-
  }

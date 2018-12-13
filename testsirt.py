@@ -47,25 +47,25 @@ def main(argv):
 
 
     forward = forwardprojection.forwardprojection()
-    result = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32)).get()
-    result = rescale(result)
-    tomo_lib.savesinogram("output//forwardprojection.png",result, len(rays), len(theta_rad))
+    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32)).get()
+    fpresult = rescale(fpresult)
+    tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
 
     back = backprojection.backprojection()
-    result = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32)).get()
-    result = rescale(result)
-    tomo_lib.savebackprojection("output//backprojection.png",result, size)
+    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, fpresult.flatten().astype(np.float32)).get()
+    bpresult = rescale(bpresult)
+    tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
 
     tomo_lib.savebackprojection("output//original.png",phantom, size)
 
     sirt = SIRT.SIRT()
-    result = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 1).get()
-    result = rescale(result)
-    tomo_lib.savebackprojection("output//sirt.png",result, size)
+    sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), fpresult.flatten().astype(np.float32), 200).get()
+    sirtresult = rescale(sirtresult)
+    tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
 
     proj_geom =astra.create_proj_geom('parallel', 1.0, size, theta_rad)
     vol_geom = astra.create_vol_geom(size)
-    astrabp = astra_BP(proj_geom, sinogram, vol_geom)
+    astrabp = astra_BP(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
     tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
 
 

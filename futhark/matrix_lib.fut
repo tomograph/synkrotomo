@@ -2,55 +2,8 @@ import "line_lib"
 open Lines
 module Matrix =
 {
-     --- DOUBLE PARALLEL
-     -- function which computes the weight of pixels in grid_column for ray with entry/exit p
-     let calculate_weight(ent: point)
-               (ext: point)
-               (i: i32)
-               (N: i32) : [](f32,i32) =
-          let Nhalf = N/2
-          -- handle all lines as slope < 1 reverse the others
-          let slope = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let reverse = f32.abs(slope) > 1
-          let gridentry = if reverse then (if slope < 0 then (-ent.2,ent.1) else (-ext.2,ext.1)) else ent
-          let k = if reverse then (-1/slope) else slope
-
-          --- calculate stuff
-          let ymin = k*(r32(i) - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let yplus = k*(r32(i) + 1 - gridentry.1) + gridentry.2 + r32(Nhalf)
-          let Ypixmin = t32(f32.floor(ymin))
-          let Ypixplus = t32(f32.floor(yplus))
-          let baselength = f32.sqrt(1+k*k)
-          -- in [(baselength,Ypixmin),(baselength,Ypixplus)]
-          let Ypixmax = i32.max Ypixmin Ypixplus
-          let ydiff = yplus - ymin
-          let yminfact = (r32(Ypixmax) - ymin)/ydiff
-          let yplusfact = (yplus - r32(Ypixmax))/ydiff
-          let lymin = yminfact*baselength
-          let lyplus = yplusfact*baselength
-          let iindex = i+Nhalf
-          -- index calculated wrong for reversed lines i think
-          let pixmin = if reverse then (N-iindex-1)*N+Ypixmin else iindex+Ypixmin*N
-          let pixplus = if reverse then (N-iindex-1)*N+Ypixplus else iindex+Ypixplus*N
-          --let pixnon = if -- find pixel that is not crossed by line
-          let min = if (pixmin >= 0 && pixmin < N ** 2) then
-               (if Ypixmin == Ypixplus then (baselength,pixmin) else (lymin,pixmin))
-               else (-1f32,-1i32)
-          let plus = if (pixplus >= 0 && pixplus < N ** 2) then
-               (if Ypixmin == Ypixplus then (-1f32,-1i32) else (lyplus,pixplus))
-               else (-1f32,-1i32)
-          in [min,plus]
-
-     -- assuming  gridsize even
-     let weights_doublepar(angles: []f32) (rays: []f32) (gridsize: i32): [][](f32,i32) =
-          let halfgridsize = gridsize/2
-          let entryexitpoints =  convert2entryexit angles rays (r32(halfgridsize))
-          in map(\(ent,ext) -> (flatten(map (\i ->
-                    calculate_weight ent ext i gridsize
-               )((-halfgridsize)...(halfgridsize-1))))) entryexitpoints
-
      -- integrated version, i.e no matrix storage
-     let intersect_steep (rho: f32) (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+     let intersect_steep (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
@@ -67,7 +20,7 @@ module Matrix =
           let y = i+Nhalf
           in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
 
-     let intersect_flat (rho: f32) (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
+     let intersect_flat (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(Nhalf))
           let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(Nhalf))
@@ -93,10 +46,10 @@ module Matrix =
                (vct: [n]f32) : f32 =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           -- this limit is somewhat arbitrary. How can we make it better?
-          let vertical = f32.abs((ext.1 - ent.1)) < 0.0000000001f32
-          let horizontal = f32.abs((ext.2 - ent.2)) < 0.0000000001f32
+          let vertical = f32.abs((ext.1 - ent.1)) <= stddev
+          let horizontal = f32.abs((ext.2 - ent.2)) <= stddev
           let flat = is_flat cos sin
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat rho i ext ent halfsize else intersect_steep rho i ext ent halfsize
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat i ext ent halfsize else intersect_steep i ext ent halfsize
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
