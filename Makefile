@@ -25,4 +25,4 @@ benchbp:
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
-	futhark-bench --runs=10 --skip-compilation ./futhark/SIRT.fut
+	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut

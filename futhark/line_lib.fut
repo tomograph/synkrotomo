@@ -1,7 +1,7 @@
 module Lines = {
      type point  = ( f32, f32 )
      -- error margin
-     let stddev = 0.0000005f32
+     let stddev = 0.000000005f32
 
      -- find x given y
      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
@@ -16,10 +16,10 @@ module Lines = {
           f32.abs(sin) >= f32.abs(cos)
 
      let is_vertical (cos: f32): bool =
-          f32.abs(cos) - 1 + stddev >= 0
+          f32.abs(cos) >= 1.0-stddev
 
      let is_horizontal (sin: f32): bool =
-          f32.abs(sin) - 1 + stddev >= 0
+          f32.abs(sin) >= 1.0-stddev
 
      --calculate the intersection points between line rho = x*cost+y*sint and grid with -maval<=x<=maxval, -maxval <=y<=maxval
      let getintersections (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point,point,point) =
