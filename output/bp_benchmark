@@ -1,0 +1,5 @@
+Results for ./futhark/backprojection.fut:
+dataset ../data/sirtinputf32rad64:     1217.40μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:    8640.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   10770.70μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/sirtinputf32rad512:   63906.00μs (avg. of 10 runs; RSD: 0.06)

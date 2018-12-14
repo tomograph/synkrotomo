@@ -35,6 +35,29 @@ def astra_BP(projgeom, sinogram, volgeom):
 
     return result
 
+def astra_reconstruction(projgeom, sinogram, volgeom, algorithm = "SIRT_CUDA"):
+    # Create projection data
+    proj_id = astra.data2d.create('-sino', projgeom, sinogram)
+
+    # Create a data object for the reconstruction
+    rec_id = astra.data2d.create('-vol', volgeom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict(algorithm)
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id, 200)
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    astra.algorithm.delete(alg_id)
+    astra.data2d.delete(rec_id)
+    astra.data2d.delete(proj_id)
+
+    return result
+
 def main(argv):
     size = 256
     theta_deg = tomo_lib.get_angles(size)
@@ -67,6 +90,12 @@ def main(argv):
     vol_geom = astra.create_vol_geom(size)
     astrabp = astra_BP(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
     tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
+
+    astrasirt = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
+    tomo_lib.savebackprojection("output//astrasirt.png",astrasirt, size)
+
+    astrafbp = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom, "FBP_CUDA")
+    tomo_lib.savebackprojection("output//astrasfbp.png",astrafbp, size)
 
 
 if __name__ == '__main__':
