@@ -17,12 +17,12 @@ data:
 
 benchfp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/forwardprojection.fut
-	futhark-bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut > ./output/fp_benchmark
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
-	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/bp_benchmark
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut
+	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/sirt_benchmark
