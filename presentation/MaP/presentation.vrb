@@ -1,0 +1,18 @@
+\begin{figure}[!h]
+\begin{lstlisting}[frame=single]
+unsigned int blockStart = 0;
+unsigned int blockEnd = 0;
+bool blockVertical = false;
+for (unsigned int a = 0; a <= dims.iProjAngles; ++a) {
+  bool vertical = false;
+  if (a != dims.iProjAngles)
+    vertical = (fabsf(angles[a].fRayX) <= fabsf(angles[a].fRayY));
+  if (a == dims.iProjAngles || vertical != blockVertical) {
+
+    blockEnd = a;
+    if (blockStart != blockEnd) {
+      dim3 dimGrid((blockEnd-blockStart+g_anglesPerBlock-1)/g_anglesPerBlock,
+                   (dims.iProjDets+g_detBlockSize-1)/g_detBlockSize); // angle blocks, detector blocks...
+\end{lstlisting}
+  \caption{Example of CUDA implementation}
+\end{figure}

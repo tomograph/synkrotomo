@@ -3,10 +3,6 @@ import numpy as np
 import pylab
 import time
 import sys
-from futhark import backprojection_doubleparallel
-from futhark import forwardprojection_doubleparallel
-from futhark import backprojection_dpintegrated
-from futhark import forwardprojection_dpintegrated
 from skimage.transform import rotate
 from skimage.draw import random_shapes
 from matplotlib import pyplot
@@ -71,7 +67,7 @@ def get_phantom(size):
     return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]
 
 def get_angles(size, degrees=True):
-    num_angles = 30#math.ceil(size*math.pi/2)
+    num_angles = math.ceil(size*math.pi/2)
     if degrees:
         return np.linspace(0, 180, num_angles, False).astype(np.float32)
     else:
@@ -149,6 +145,39 @@ def astra_SIRT(cfg):
 
     return result
 
+def astra_SIRT3D():
+    vol_geom = astra.create_vol_geom(2048, 2048, 2048)
+
+    angles = get_angles(2048, False)
+    proj_geom = astra.create_proj_geom('parallel3d', 1.0, 1.0, 2048, 2048, angles)
+
+    # Create a simple hollow cube phantom
+    cube = np.zeros((2048,2048,2048))
+    cube[256:1790,256:1790,256:1790] = 1
+    cube[512:1534,512:1534,512:1534] = 0
+
+    # Create projection data from this
+    proj_id, proj_data = astra.create_sino3d_gpu(cube, proj_geom, vol_geom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict("SIRT3D_CUDA")
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id, 200)
+
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    # Clean up. Note that GPU memory is tied up in the algorithm object,
+    # and main RAM in the data objects.
+    astra.data3d.delete(proj_id)
+    astra.data3d.delete(rec_id)
+
+    return result
+
 
 def astra_FP(cfg):
     # Create projection data
@@ -194,14 +223,32 @@ def main(argv):
     # figBP, axBP, resultsBP = plot_times(BPs, configs)
     # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
     # figBP.savefig("BPplot.png")
-    config = Config(512)
+    sizes = [64,128,256,512,1024,2048,4096]
+    for size in sizes:
+        config = Config(size)
+        start = time.time()
+        result = astra_SIRT(config)
+        end = time.time()
+        elapsed = (end-start)
+        print("It took %dus to run astras SIRT for size %d" % (elapsed*1000000, size))
+
+        start = time.time()
+        result = astra_BP(config)
+        end = time.time()
+        elapsed = (end-start)
+        print("It took %d micro seconds to run astras BP for size %d" % (elapsed*1000000, size))
+
+        start = time.time()
+        result = astra_SIRT(config)
+        end = time.time()
+        elapsed = (end-start)
+        print("It took %d micro seconds to run astras FP for size %d" % (elapsed*1000000, size))
+
     start = time.time()
-    result = astra_SIRT(config)
+    result = astra_SIRT3D()
     end = time.time()
-    elapsed = end-start
-    print("It took %d seconds to run astras SIRT",elapsed)
-
-
+    elapsed = (end-start)
+    print("It took %d micro seconds to run astras SIRT for size 2048" % (elapsed*1000000))
 
 if __name__ == '__main__':
     main(sys.argv)
