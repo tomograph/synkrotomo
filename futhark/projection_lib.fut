@@ -19,19 +19,20 @@ module Projection = {
      -- calculate back_projection
      let back_projection [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
           let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+          let rhomax = rhozero + deltarho*r32((p/a)) - 1.0
           in map(\pix ->
                let pixcenter = pixelcenter pix size
-               in reduce (+) 0 <| (flatten(map(\i ->
+               in reduce (+) 0 <| map(\i ->
                     let ang = unsafe angles[i]
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
                     let minrho = rhomin cos sin pixcenter rhozero deltarho
                     let rhos = getrhos minrho deltarho rhosforpixel
-                    in (map(\rho->
+                    in reduce (+) 0 <| (map(\rho->
                               let l = intersectiondistance sin cos rho pixcenter
                               let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
-                              in l*(unsafe projections[projectionidx])
+                              in if rho >= rhozero && rho <= rhomax then l*(unsafe projections[projectionidx]) else 0.0
                          ) rhos)
-               ) (iota a)))
+               ) (iota a)
           )(iota (size**2))
 }

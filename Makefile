@@ -3,6 +3,11 @@ lib:
 	futhark-pyopencl --library ./futhark/backprojection.fut
 	futhark-pyopencl --library ./futhark/forwardprojection.fut
 
+libc:
+	futhark-c --library ./futhark/SIRT.fut
+	futhark-c --library ./futhark/backprojection.fut
+	futhark-c --library ./futhark/forwardprojection.fut
+
 opencl:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
 
@@ -10,6 +15,9 @@ runopencl: opencl
 	./SIRT
 
 runpytest: lib
+	python testsirt.py
+
+runpytest-c: lib
 	python testsirt.py
 
 data:
