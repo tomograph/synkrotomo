@@ -1,0 +1,5 @@
+It took 104071us (avg. ) to run astras FBP for size 64
+It took 102756us (avg. ) to run astras FBP for size 128
+It took 101405us (avg. ) to run astras FBP for size 256
+It took 99488us (avg. ) to run astras FBP for size 512
+It took 99168us (avg. ) to run astras FBP for size 1024

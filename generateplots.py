@@ -36,7 +36,6 @@ def main(argv):
     sizes = [64,128,256,512]
     plot_times(["output\\sirt_benchmark"], sizes, "presentation\\MaP\\images\\sirt_bench.png")
     plot_times(["output\\bp_benchmark"], sizes, "presentation\\MaP\\images\\bp_bench.png")
-    sizes = [64,128,256,512,1024,2048]
     plot_times(["output\\fp_benchmark"], sizes, "presentation\\MaP\\images\\fp_bench.png")
 
 if __name__ == '__main__':

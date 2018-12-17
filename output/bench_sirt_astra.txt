@@ -1,0 +1,5 @@
+It took 111025us (avg. ) to run astras SIRT for size 64
+It took 150912us (avg. ) to run astras SIRT for size 128
+It took 235002us (avg. ) to run astras SIRT for size 256
+It took 850383us (avg. ) to run astras SIRT for size 512
+It took 5609580us (avg. ) to run astras SIRT for size 1024

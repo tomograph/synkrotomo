@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  15 DEC 2018 21:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.29)  17 DEC 2018 08:57
 entering extended mode
 **./presentation.tex
 (presentation.tex
@@ -1761,40 +1761,36 @@ on input line 186.
 
  <./images/Original_vs_150_random_angles_FBP.png> <./images/Original_vs_150_ran
 dom_angles_SIRT.png>]
-LaTeX Font Info:    Try loading font information for U+msa on input line 200.
+<images/"bench".png, id=102, 462.528pt x 346.896pt>
+File: images/"bench".png Graphic file (type png)
+<use images/"bench".png>
+Package pdftex.def Info: images/"bench".png  used on input line 191.
+(pdftex.def)             Requested size: 230.46739pt x 172.85472pt.
+ [4
+
+ <./images/bench.png>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 205.
 
 ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 200.
+LaTeX Font Info:    Try loading font information for U+msb on input line 205.
  ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd
 "
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 200.
+line 205.
 
 ("C:\Users\zgb585\AppData\Local\Programs\MiKTeX 2.9\tex\latex\sansmathaccent\ot
 1mathkerncmss.fd"
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
-) [4
-
-] (figures/weightings.tex
-<images/original_gs.png, id=134, 462.528pt x 338.2236pt>
-File: images/original_gs.png Graphic file (type png)
-<use images/original_gs.png>
-Package pdftex.def Info: images/original_gs.png  used on input line 6.
-(pdftex.def)             Requested size: 462.52686pt x 338.22278pt.
 ) [5
 
- <./images/original_gs.png>]
-[6
+] [6
 
-]
-\openout4 = `presentation.vrb'.
-
- (presentation.vrb) [7
+] [7
 
 ]
 \openout4 = `presentation.vrb'.
@@ -1805,38 +1801,73 @@ Package pdftex.def Info: images/original_gs.png  used on input line 6.
 \openout4 = `presentation.vrb'.
 
  (presentation.vrb)
-Overfull \vbox (4.79782pt too high) detected at line 281
+Overfull \vbox (4.79782pt too high) detected at line 264
  []
 
 [9
 
+] (figures/weightings.tex
+<images/original_gs.png, id=264, 462.528pt x 338.2236pt>
+File: images/original_gs.png Graphic file (type png)
+<use images/original_gs.png>
+Package pdftex.def Info: images/original_gs.png  used on input line 6.
+(pdftex.def)             Requested size: 462.52686pt x 338.22278pt.
+) [10
+
+ <./images/original_gs.png>] [11
+
 ]
-<images/"fp_bench".png, id=265, 462.528pt x 346.896pt>
+<images/"intersectionpoints".png, id=317, 325.71687pt x 142.03062pt>
+File: images/"intersectionpoints".png Graphic file (type png)
+<use images/"intersectionpoints".png>
+Package pdftex.def Info: images/"intersectionpoints".png  used on input line 28
+7.
+(pdftex.def)             Requested size: 245.83282pt x 107.19885pt.
+<images/"forwardillustration".png, id=318, 318.69063pt x 149.05687pt>
+File: images/"forwardillustration".png Graphic file (type png)
+<use images/"forwardillustration".png>
+Package pdftex.def Info: images/"forwardillustration".png  used on input line 2
+87.
+(pdftex.def)             Requested size: 245.83282pt x 114.97884pt.
+ [12
+
+ <./images/intersectionpoints.png> <./images/forwardillustration.png>]
+<images/"pixelparallel".png, id=346, 963.6pt x 722.7pt>
+File: images/"pixelparallel".png Graphic file (type png)
+<use images/"pixelparallel".png>
+Package pdftex.def Info: images/"pixelparallel".png  used on input line 292.
+(pdftex.def)             Requested size: 245.83282pt x 184.36876pt.
+ [13
+
+ <./images/pixelparallel.png>]
+<images/"fp_bench".png, id=374, 462.528pt x 346.896pt>
 File: images/"fp_bench".png Graphic file (type png)
 <use images/"fp_bench".png>
-Package pdftex.def Info: images/"fp_bench".png  used on input line 288.
+Package pdftex.def Info: images/"fp_bench".png  used on input line 301.
 (pdftex.def)             Requested size: 122.91406pt x 92.18106pt.
-<images/"bp_bench".png, id=266, 462.528pt x 346.896pt>
+<images/"bp_bench".png, id=375, 462.528pt x 346.896pt>
 File: images/"bp_bench".png Graphic file (type png)
 <use images/"bp_bench".png>
-Package pdftex.def Info: images/"bp_bench".png  used on input line 288.
+Package pdftex.def Info: images/"bp_bench".png  used on input line 301.
 (pdftex.def)             Requested size: 122.91406pt x 92.18106pt.
-<images/"sirt_bench".png, id=267, 462.528pt x 346.896pt>
+<images/"sirt_bench".png, id=376, 462.528pt x 346.896pt>
 File: images/"sirt_bench".png Graphic file (type png)
 <use images/"sirt_bench".png>
-Package pdftex.def Info: images/"sirt_bench".png  used on input line 288.
+Package pdftex.def Info: images/"sirt_bench".png  used on input line 301.
 (pdftex.def)             Requested size: 122.91406pt x 92.18106pt.
- [10
+ [14
 
  <./images/fp_bench.png> <./images/bp_bench.png> <./images/sirt_bench.png>]
-<images/"sirt".png, id=296, 963.6pt x 722.7pt>
+<images/"sirt".png, id=405, 963.6pt x 722.7pt>
 File: images/"sirt".png Graphic file (type png)
 <use images/"sirt".png>
-Package pdftex.def Info: images/"sirt".png  used on input line 293.
+Package pdftex.def Info: images/"sirt".png  used on input line 307.
 (pdftex.def)             Requested size: 307.28987pt x 230.46371pt.
- [11
+ [15
 
- <./images/sirt.png>] (presentation.bbl) [12
+ <./images/sirt.png>] [16
+
+] (presentation.bbl) [17
 
  <C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/tex/latex/beamer/beamericon
 article.pdf>]
@@ -1849,23 +1880,22 @@ article.pdf>]
 \tf@snm=\write11
 \openout11 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 301.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 301.
-
-(presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 301.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 301.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
+ (presentation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 39474 strings out of 493305
- 801483 string characters out of 3129367
+ 39479 strings out of 493305
+ 801699 string characters out of 3129367
  1037457 words of memory out of 3000000
- 42200 multiletter control sequences out of 15000+200000
- 555795 words of font info for 93 fonts, out of 3000000 for 9000
+ 42201 multiletter control sequences out of 15000+200000
+ 547386 words of font info for 68 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 58i,14n,75p,781b,1168s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 58i,14n,75p,781b,1158s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
 \ecso0800.pk> <C:\Users\zgb585\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
 n\ec\dpi657\ecso1000.pk><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/font
@@ -1882,9 +1912,9 @@ a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/
 zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.p
 fb><C:/Users/zgb585/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/symbols/msam10.pfb>
-Output written on presentation.pdf (12 pages, 776689 bytes).
+Output written on presentation.pdf (17 pages, 951615 bytes).
 PDF statistics:
- 413 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
- 88 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 551 PDF objects out of 1000 (max. 8388607)
+ 39 named destinations out of 1000 (max. 500000)
+ 108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
