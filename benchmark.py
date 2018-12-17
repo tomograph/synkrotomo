@@ -145,6 +145,29 @@ def astra_SIRT(cfg):
 
     return result
 
+def astra_FBP(cfg):
+    # Create projection data
+    proj_id = astra.data2d.create('-sino', cfg.proj_geom, cfg.sinogram)
+
+    # Create a data object for the reconstruction
+    rec_id = astra.data2d.create('-vol', cfg.vol_geom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict("FBP_CUDA")
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id, 200)
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    astra.algorithm.delete(alg_id)
+    astra.data2d.delete(rec_id)
+    astra.data2d.delete(proj_id)
+
+    return result
+
 def astra_SIRT3D():
     vol_geom = astra.create_vol_geom(2048, 2048, 2048)
 
@@ -161,6 +184,39 @@ def astra_SIRT3D():
 
     # Set up the parameters for a reconstruction algorithm using the GPU
     cfg = astra.astra_dict("SIRT3D_CUDA")
+    cfg['ReconstructionDataId'] = rec_id
+    cfg['ProjectionDataId'] = proj_id
+
+    # Create the algorithm object from the configuration structure
+    alg_id = astra.algorithm.create(cfg)
+    astra.algorithm.run(alg_id, 200)
+
+    # Get the result
+    result = astra.data2d.get(rec_id)
+
+    # Clean up. Note that GPU memory is tied up in the algorithm object,
+    # and main RAM in the data objects.
+    astra.data3d.delete(proj_id)
+    astra.data3d.delete(rec_id)
+
+    return result
+
+def astra_FBP3D():
+    vol_geom = astra.create_vol_geom(2048, 2048, 2048)
+
+    angles = get_angles(2048, False)
+    proj_geom = astra.create_proj_geom('parallel3d', 1.0, 1.0, 2048, 2048, angles)
+
+    # Create a simple hollow cube phantom
+    cube = np.zeros((2048,2048,2048))
+    cube[256:1790,256:1790,256:1790] = 1
+    cube[512:1534,512:1534,512:1534] = 0
+
+    # Create projection data from this
+    proj_id, proj_data = astra.create_sino3d_gpu(cube, proj_geom, vol_geom)
+
+    # Set up the parameters for a reconstruction algorithm using the GPU
+    cfg = astra.astra_dict("FBP3D_CUDA")
     cfg['ReconstructionDataId'] = rec_id
     cfg['ProjectionDataId'] = proj_id
 
@@ -223,32 +279,27 @@ def main(argv):
     # figBP, axBP, resultsBP = plot_times(BPs, configs)
     # pickle.dump(resultsBP, open("resultsBP.p", "wb"))
     # figBP.savefig("BPplot.png")
-    sizes = [64,128,256,512,1024,2048,4096]
-    for size in sizes:
-        config = Config(size)
-        start = time.time()
-        result = astra_SIRT(config)
-        end = time.time()
-        elapsed = (end-start)
-        print("It took %dus to run astras SIRT for size %d" % (elapsed*1000000, size))
-
-        start = time.time()
-        result = astra_BP(config)
-        end = time.time()
-        elapsed = (end-start)
-        print("It took %d micro seconds to run astras BP for size %d" % (elapsed*1000000, size))
-
-        start = time.time()
-        result = astra_SIRT(config)
-        end = time.time()
-        elapsed = (end-start)
-        print("It took %d micro seconds to run astras FP for size %d" % (elapsed*1000000, size))
+    # sizes = [32,64,128,256,512,1024]
+    # for size in sizes:
+    #     config = Config(size)
+    #     start = time.time()
+    #     result = astra_SIRT(config)
+    #     end = time.time()
+    #     elapsed = (end-start)
+    #     print("It took %dus (avg. ) to run astras SIRT for size %d" % (elapsed*1000000, size))
+    #
+    # for size in sizes:
+    #     start = time.time()
+    #     result = astra_FBP(config)
+    #     end = time.time()
+    #     elapsed = (end-start)
+    #     print("It took %dus (avg. ) to run astras FBP for size %d" % (elapsed*1000000, size))
 
     start = time.time()
-    result = astra_SIRT3D()
+    result = astra_FBP3D()
     end = time.time()
     elapsed = (end-start)
-    print("It took %d micro seconds to run astras SIRT for size 2048" % (elapsed*1000000))
+    print("It took %d micro seconds to run astras FBP for size 2048" % (elapsed*1000000))
 
 if __name__ == '__main__':
     main(sys.argv)

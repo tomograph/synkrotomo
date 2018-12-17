@@ -186,6 +186,11 @@ University of Copenhagen\\ % Your institution for the title page
 \end{frame}
 
 \begin{frame}
+\centering
+\includegraphics[width=0.75\linewidth]{images/"bench".png}
+\end{frame}
+
+\begin{frame}
 \frametitle{SIRT}
 Solve the problem:
 \begin{align}
@@ -200,48 +205,26 @@ where $\mat{C}$ and $\mat{R}$ are the diagonal matrices containing the inverse c
 \end{frame}
 
 \begin{frame}
-\frametitle{The system matrix}
-\inputTikZ{0.6}{figures/weightings.tex}
+\frametitle{When is something parallel?}
+Consider a loop. This loop is parallel if there are no two iterations of the loop $i$ and $j$, where $i<j$ such that the computations of iteration $j$:
+\begin{itemize}
+\item[RAW]{read data from a memory location written to during iteration $i$}
+\item[WAR]{write a value to a memory location read during iteration $i$}
+\item[WAW]{write data to a memory location written to during iteration $i$}
+\end{itemize}
+Simply put: The computation of each iteration is independent of the computations performed during previous iterations.
 \end{frame}
 
 \begin{frame}
-\frametitle{The problem is in the size}
+\frametitle{Why implement our own in Futhark?}
 \begin{itemize}
-\item{Consider reconstructing a single slice of a volume from a detector of size $n\times n$}
-\item{The number of rays is $n$}
-\item{The number of angles is $\frac{n\cdot\pi}{2}$}
-\item{A typical value for $n$ is 2048 }
-\item{In semi sparse format the matrix will take up $2\cdot4\cdot2048\cdot\lceil\frac{2048\cdot\pi}{2}\rceil\cdot (2\cdot2048-1)\approx 216GB$}
+\item{Hardware agnostic}
+\item{Highlevel language}
+\item{MemoryError}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{System matrix computation}
-\begin{figure}[!h]
-\begin{lstlisting}[frame=single]
-for ray in rays
-  for i=-halfsize; i < halfsize; i++
-        (l1,pixel1) = intersection1 ray i
-        (l2,pixel2) = intersection2 ray i
-        A[ray][pixel1] = l1
-        A[ray][pixel2] = l2
-\end{lstlisting}
-  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(1)$}
-\end{figure}
-\begin{figure}[!h]
-\begin{lstlisting}[frame=single]
-for pixel in pixels:
-  for angle in angles:
-    rays = rays that are within pixel
-    for ray in rays:
-        l = intersection ray pixel
-\end{lstlisting}
-  \caption{$W(r,n)=O(r\cdot n)$, $D(r,n)=O(1)$}
-\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Benefits of Futhark}
 \begin{figure}[!h]
 \begin{lstlisting}[frame=single]
 % Input: sparse system matrix A, data b.
@@ -281,6 +264,36 @@ for (unsigned int a = 0; a <= dims.iProjAngles; ++a) {
 \end{frame}
 
 \begin{frame}
+\frametitle{The system matrix}
+\inputTikZ{0.6}{figures/weightings.tex}
+\end{frame}
+
+\begin{frame}
+\frametitle{The problem is in the size}
+\begin{itemize}
+\item{Consider reconstructing a single slice of a volume from a detector of size $n\times n$}
+\item{The number of rays is $n$}
+\item{The number of angles is $\frac{n\cdot\pi}{2}$}
+\item{A typical value for $n$ is 2048 }
+\item{In semi sparse format the matrix will take up $2\cdot4\cdot2048\cdot\lceil\frac{2048\cdot\pi}{2}\rceil\cdot (2\cdot2048-1)\approx 216GB$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{System matrix computation}
+\centering
+\includegraphics[width=0.8\linewidth]{images/"intersectionpoints".png}
+\includegraphics[width=0.8\linewidth]{images/"forwardillustration".png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transposed system matrix computation}
+\includegraphics[width=0.8\linewidth]{images/"pixelparallel".png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Status}
 \centering
 \includegraphics[width=0.4\linewidth]{images/"fp_bench".png}
 \includegraphics[width=0.4\linewidth]{images/"bp_bench".png}
@@ -288,8 +301,23 @@ for (unsigned int a = 0; a <= dims.iProjAngles; ++a) {
 \end{frame}
 
 \begin{frame}
+\frametitle{Status}
 \centering
 \includegraphics[width=1\linewidth]{images/"sirt".png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Future plan}
+\begin{itemize}
+\item{Fix the bug in backprojection}
+\item{Ask our expert for obvious improvements}
+\item{Bachelor project aimed at solving memory issues during the spring}
+\item{Optimizing matrix computation based on symmetries}
+\item{Implementing for cone beams}
+\item{Extending to 3D}
+\item{Running on the image cluster and comparing to ASTRA toolbox}
+\item{Use as part of joint reconstruction and motion estimation algorithm}
+\end{itemize}
 \end{frame}
 
  \begin{frame}
