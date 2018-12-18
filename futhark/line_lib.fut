@@ -1,15 +1,65 @@
+-- ==
+-- compiled input {
+--    1
+--    0.0f32
+-- }
+-- output {
+--    [1.0f32, 0.0f32]
+-- }
+-- compiled input {
+--    5
+--    1.57079632679f32
+-- }
+-- output {
+--    [1.0f32, 0.0f32]
+-- }
+-- compiled input {
+--    15
+--    0.78539816339f32
+-- }
+-- output {
+--    [0.17157287525f32, 0.65685424949f32]
+-- }
+-- compiled input {
+--    10
+--    0.78539816339f32
+-- }
+-- output {
+--    [1.0f32, 0.0f32]
+-- }
+-- compiled input {
+--    5
+--    0.78539816339f32
+-- }
+-- output {
+--    [1.0f32, 0.0f32]
+-- }
+-- compiled input {
+--    12
+--    2.35619449019f32
+-- }
+-- output {
+--    [0.17157287525f32, 0.65685424949f32]
+-- }
+-- compiled input {
+--    3
+--    2.35619449019f32
+-- }
+-- output {
+--    [0.65685424949f32, 0.17157287525f32]
+-- }
+-- compiled input {
+--    0
+--    0.78539816339f32
+-- }
+-- output {
+--    [0.65685424949f32, 0.17157287525f32]
+-- }
+
 module Lines = {
      type point  = ( f32, f32 )
      -- error margin
      let stddev = 0.000000005f32
-
-     -- find x given y
-     let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          if f32.abs(cost)-stddev <= 0 then ray else (ray-y*sint)/cost
-
-     -- find y given x
-     let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          if f32.abs(sint)-stddev <= 0 then ray else (ray-x*cost)/sint
 
      -- determine if slope of line rho = x*cost+y*sint returning is less than 0
      let is_flat (cos: f32) (sin: f32): bool =
@@ -21,6 +71,14 @@ module Lines = {
      let is_horizontal (sin: f32): bool =
           f32.abs(sin) >= 1.0-stddev
 
+     -- find x given y - not designed for vertical lines
+     let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+          (ray-y*sint)/cost
+
+     -- find y given x - not for horizontal lines
+     let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+          (ray-x*cost)/sint
+
      --calculate the intersection points between line rho = x*cost+y*sint and grid with -maval<=x<=maxval, -maxval <=y<=maxval
      let getintersections (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point,point,point) =
           let p_left = ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint)
@@ -31,14 +89,9 @@ module Lines = {
 
      -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
      let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
-          let (p_left,p_bottom,p_top,p_right) = getintersections sint cost ray maxval
-
-          let horizontal = is_horizontal(sint)
-          let vertical = is_vertical(cost)
-
           let flat = is_flat cost sint
-          let point1 = if vertical then (ray,-maxval) else if horizontal then (-maxval,ray) else if flat then p_left else p_bottom
-          let point2 = if vertical then (ray,maxval) else if horizontal then (maxval,ray) else if flat then p_right else p_top
+          let point1 = if flat then ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint) else (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval))
+          let point2 = if flat then (maxval, find_y maxval ray cost sint) else (find_x maxval ray cost sint, maxval)
 
           in (point1, point2)
 
@@ -57,28 +110,19 @@ module Lines = {
           let p_top = (find_x ymax ray cost sint, ymax)
           let p_right = (xmax, find_y xmax ray cost sint)
 
-          let horizontal = is_horizontal(sint)
-          let vertical = is_vertical(cost)
-
-          let point1 = if horizontal && ray >= ymin && ray <= ymax then (xmin, ray)
-                         else if vertical && ray >= xmin && ray <= xmax then (ray,ymin)
-                         else if vertical || horizontal then pixelcenter
-                         else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
+          let point1 = if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
                          else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
                          else if p_right.2 <= ymax && p_right.2 >= ymin then p_right
                          else pixelcenter
 
-          let point2 = if horizontal && ray >= ymin && ray <= ymax then (xmax, ray)
-                         else if vertical && ray >= xmin && ray <= xmax then (ray,ymax)
-                         else if vertical || horizontal then pixelcenter
-                         else if p_right.2 <= ymax && p_right.2 >= ymin then p_right
+          let point2 = if p_right.2 <= ymax && p_right.2 >= ymin then p_right
                          else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
                          else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
                          else if p_left.2 <= ymax && p_left.2 >= ymin then p_left
                          else pixelcenter
 
-          in if point1.1 == pixelcenter.1 || point2.1 == pixelcenter.1 then 0 else distance point1 point2
+          in distance point1 point2
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
@@ -106,3 +150,14 @@ module Lines = {
           let y = loweryidx - size/2
           in (r32(x)+0.5,r32(y)+0.5)
  }
+
+ open Lines
+
+ let main  (pixel : i32)
+           (angle: f32): [2]f32 =
+           let center = pixelcenter pixel 4
+           let cost = f32.cos(angle)
+           let sint = f32.sin(angle)
+           let min = rhomin cost sint center (-3.5) 1
+           let rhos = getrhos min 1 2
+           in map(\r -> intersectiondistance sint cost r center)rhos
