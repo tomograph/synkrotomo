@@ -21,15 +21,15 @@ module Projection = {
           let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
           let rhomax = rhozero + deltarho*r32((p/a)) - 1.0
           in map(\pix ->
-               let pixcenter = pixelcenter pix size
+               let lowerleft = lowerleftpixelpoint pix size
                in reduce (+) 0 <| map(\i ->
                     let ang = unsafe angles[i]
                     let sin = f32.sin(ang)
                     let cos = f32.cos(ang)
-                    let minrho = rhomin cos sin pixcenter rhozero deltarho
+                    let minrho = rhomin cos sin lowerleft rhozero deltarho
                     let rhos = getrhos minrho deltarho rhosforpixel
                     in reduce (+) 0 <| (map(\rho->
-                              let l = intersectiondistance sin cos rho pixcenter
+                              let l = intersectiondistance sin cos rho lowerleft
                               let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
                               in if rho >= rhozero && rho <= rhomax then l*(unsafe projections[projectionidx]) else 0.0
                          ) rhos)
