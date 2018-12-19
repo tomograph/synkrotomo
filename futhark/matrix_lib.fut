@@ -47,8 +47,6 @@ module Matrix =
                (halfsize: i32)
                (vct: [n]f32) : f32 =
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          let horizontal = is_horizontal(sin)
-          let vertical = is_vertical(cos)
           let flat = is_flat cos sin
           let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat i ext ent halfsize else intersect_steep i ext ent halfsize
           let size = halfsize*2
@@ -56,8 +54,8 @@ module Matrix =
           let pixplus = xplus+yplus*size
           let rhopixindex = (t32(f32.floor(rho))) + halfsize
           let ipixindex = i + halfsize
-          let min = if vertical then unsafe vct[rhopixindex+ipixindex*size] else if horizontal then unsafe vct[rhopixindex*size+ipixindex] else (if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*vct[pixmin]) else 0)
-          let plus = if vertical || horizontal then 0 else (if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0)
+          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*vct[pixmin]) else 0.0f32
+          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0.0f32
           in (min+plus)
 
      -- calculate one value in the forward projection vector
