@@ -58,18 +58,10 @@
 
 module Lines = {
      type point  = ( f32, f32 )
-     -- error margin
-     let stddev = 0.000000005f32
 
      -- determine if slope of line rho = x*cost+y*sint returning is less than 0
      let is_flat (cos: f32) (sin: f32): bool =
           f32.abs(sin) >= f32.abs(cos)
-
-     let is_vertical (cos: f32): bool =
-          f32.abs(cos) >= 1.0-stddev
-
-     let is_horizontal (sin: f32): bool =
-          f32.abs(sin) >= 1.0-stddev
 
      -- find x given y - not designed for vertical lines
      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
@@ -132,26 +124,6 @@ module Lines = {
                else distance ent ext
 
           in distance
-          -- let xmin = pixelcenter.1-0.5f32
-          -- let xmax = pixelcenter.1+0.5f32
-          -- let ymin = pixelcenter.2-0.5f32
-          -- let ymax = pixelcenter.2+0.5f32
-          -- let p_left = (xmin, find_y xmin ray cost sint)
-          -- let p_bottom = (find_x ymin ray cost sint, ymin)
-          -- let p_top = (find_x ymax ray cost sint, ymax)
-          -- let p_right = (xmax, find_y xmax ray cost sint)
-          --
-          -- let point1 = if p_left.2 <= ymax && p_left.2 >= ymin then p_left
-          --                else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
-          --                else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
-          --                else p_right
-          --
-          -- let point2 = if p_right.2 <= ymax && p_right.2 >= ymin then p_right
-          --                else if p_top.1 <= xmax && p_top.1 >= xmin then p_top
-          --                else if p_bottom.1 <= xmax && p_bottom.1 >= xmin then p_bottom
-          --                else p_left
-          --
-          -- in distance point1 point2
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
