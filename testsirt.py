@@ -59,18 +59,15 @@ def astra_reconstruction(projgeom, sinogram, volgeom, algorithm = "SIRT_CUDA"):
     return result
 
 def main(argv):
-    size = 256
-    theta_deg = tomo_lib.get_angles(size)
-    theta_rad = tomo_lib.get_angles(size, degrees=False)
+    size = 64
+    theta_rad = tomo_lib.get_angles(size)
     rays = tomo_lib.get_rays(size)
     phantom = tomo_lib.get_phantom(size)
-    sinogram = tomo_lib.sinogram(phantom, theta_deg)
-    sinogram = rescale(sinogram)
     phantom = rescale(phantom.flatten().astype(np.float32))
 
 
     forward = forwardprojection.forwardprojection()
-    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, sinogram.flatten().astype(np.float32), 1).get()
+    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
     fpresult = rescale(fpresult)
     tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
 
@@ -86,16 +83,24 @@ def main(argv):
     sirtresult = rescale(sirtresult)
     tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
 
-    proj_geom =astra.create_proj_geom('parallel', 1.0, size, theta_rad)
+    proj_geom =astra.create_proj_geom('parallel', 1.0, len(rays), theta_rad)
     vol_geom = astra.create_vol_geom(size)
     astrabp = astra_BP(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
+    astrabp = rescale(astrabp)
     tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
 
     astrasirt = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
+    astrasirt = rescale(astrasirt)
     tomo_lib.savebackprojection("output//astrasirt.png",astrasirt, size)
 
     astrafbp = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom, "FBP_CUDA")
+    astrafbp = rescale(astrafbp)
     tomo_lib.savebackprojection("output//astrasfbp.png",astrafbp, size)
+
+    for i in range(0,size*size):
+        diff = abs(astrabp.flatten()[i] - bpresult[i])
+        if diff >= 0.05:
+            print(str(i)+": "+str(diff))
 
 
 if __name__ == '__main__':

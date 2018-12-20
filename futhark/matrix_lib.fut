@@ -52,8 +52,6 @@ module Matrix =
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
-          let rhopixindex = (t32(f32.floor(rho))) + halfsize
-          let ipixindex = i + halfsize
           let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*vct[pixmin]) else 0.0f32
           let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0.0f32
           in (min+plus)
