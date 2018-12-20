@@ -106,6 +106,7 @@ module Lines = {
           let distance =
           -- if both points outside then distance is zero (they can not be outside on each side of pixel because of the way they get calculated above)
                if (ent.1 < xmin && ext.1 < xmin) || (ent.1 > xmax && ext.1 > xmax) || (ent.2 < ymin && ext.2 < ymin) ||  (ent.2 > ymax && ext.2 > ymax) then 0.0
+               else if (ent.1 < xmin && ext.1 > xmax) || (ext.1 < xmin && ent.1 > xmax) || (ent.2 < ymin && ext.2 > ymax)  || (ext.2 < ymin && ent.2 > ymax) then  distance ent ext
           -- if only one point is outside its neither vertical or horizontal and we may safely determine the point in between
           -- if ent.1 < xmin then slope positive and new entry is p_left
                else if ent.1 < xmin then distance (xmin, find_y xmin ray cost sint) ext
@@ -127,21 +128,15 @@ module Lines = {
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
-          let rhomins = replicate numrhos rhomin
-          let iot = map(\r -> r32(r))(iota numrhos)
-          let deltas = replicate numrhos deltarho
-          in map2 (+) rhomins (map2 (*) iot deltas)
+          map(\s -> rhomin+(r32(s))*deltarho)(iota numrhos)
 
      -- get minimum rho value of a line on the form rho = x cost + y sint passing through circle with center=center and radius=factor
      let rhomin (cost: f32) (sint: f32) (lowerleft: point) (rhozero: f32) (deltarho: f32): f32 =
-          let factor = f32.sqrt(2)/2
+          let factor = f32.sqrt(2.0f32)/2.0f32
           let center = (lowerleft.1+0.5f32, lowerleft.2+0.5f32)
-          let p1 = (center.1+factor*cost, center.2+factor*sint)
-          let p2 = (center.1-factor*cost, center.2-factor*sint)
-          let rho1 = cost*p1.1+sint*p1.2
-          let rho2 = cost*p2.1+sint*p2.2
-          let rhominfloat = if rho1 < rho2 then rho1 else rho2
-          let s = f32.ceil((rhominfloat-rhozero)/deltarho)
+          let p = (center.1-factor*cost, center.2-factor*sint)
+          let rho = cost*p.1+sint*p.2
+          let s = f32.ceil((rho-rhozero)/deltarho)
           in rhozero+s*deltarho
 
      -- get the center coordinate of a pixel
