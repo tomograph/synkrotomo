@@ -61,4 +61,10 @@ module Matrix =
      -- calculate one value in the forward projection vector
      let forward_projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
           reduce (+) 0 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
+
+     let intersectionlength (sin: f32) (cos: f32) (rho: f32) (lowerleft: point) (halfsize: i32): f32 =
+          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          let flat = is_flat cos sin
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = if flat then intersect_flat (t32(lowerleft.1)) ext ent halfsize else intersect_steep (t32(lowerleft.2)) ext ent halfsize
+          in if (t32(lowerleft.1)+halfsize) == xmin && (t32(lowerleft.2)+halfsize) == ymin then lmin else if (t32(lowerleft.1)+halfsize) == xplus && (t32(lowerleft.2)+halfsize) == yplus then lplus else 0.0
 }
