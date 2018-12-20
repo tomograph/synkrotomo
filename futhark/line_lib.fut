@@ -133,8 +133,7 @@ module Lines = {
      -- get minimum rho value of a line on the form rho = x cost + y sint passing through circle with center=center and radius=factor
      let rhomin (cost: f32) (sint: f32) (lowerleft: point) (rhozero: f32) (deltarho: f32): f32 =
           let factor = f32.sqrt(2.0f32)/2.0f32
-          let center = (lowerleft.1+0.5f32, lowerleft.2+0.5f32)
-          let p = (center.1-factor*cost, center.2-factor*sint)
+          let p = (lowerleft.1+0.5f32-factor*cost, lowerleft.2+0.5f32-factor*sint)
           let rho = cost*p.1+sint*p.2
           let s = f32.ceil((rho-rhozero)/deltarho)
           in rhozero+s*deltarho
