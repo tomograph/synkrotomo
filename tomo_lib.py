@@ -18,10 +18,8 @@ def savesinogram(filename, data, numrays, numangles):
     reshaped = data.reshape((numangles,numrays))
     scipy.misc.toimage(reshaped).save(filename)
 
-def savebackprojection(filename, data, size, flip = False):
+def savebackprojection(filename, data, size):
     reshaped = data.reshape((size,size))
-    if flip :
-        reshaped = np.flip(reshaped,1)
     scipy.misc.toimage(reshaped).save(filename)
 
 def get_phantom(size):

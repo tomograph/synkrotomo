@@ -1,55 +1,55 @@
 -- ==
 -- compiled input {
---    1
+--    19
 --    0.0f32
 -- }
 -- output {
 --    [1.0f32, 0.0f32]
 -- }
 -- compiled input {
---    5
+--    27
 --    1.57079632679f32
 -- }
 -- output {
 --    [1.0f32, 0.0f32]
 -- }
 -- compiled input {
---    15
+--    45
 --    0.78539816339f32
 -- }
 -- output {
 --    [0.17157287525f32, 0.65685424949f32]
 -- }
 -- compiled input {
---    10
+--    36
 --    0.78539816339f32
 -- }
 -- output {
 --    [1.0f32, 0.0f32]
 -- }
 -- compiled input {
---    5
+--    27
 --    0.78539816339f32
 -- }
 -- output {
 --    [1.0f32, 0.0f32]
 -- }
 -- compiled input {
---    12
+--    42
 --    2.35619449019f32
 -- }
 -- output {
 --    [0.17157287525f32, 0.65685424949f32]
 -- }
 -- compiled input {
---    3
+--    21
 --    2.35619449019f32
 -- }
 -- output {
 --    [0.65685424949f32, 0.17157287525f32]
 -- }
 -- compiled input {
---    0
+--    18
 --    0.78539816339f32
 -- }
 -- output {
@@ -151,9 +151,9 @@ module Lines = {
 
  let main  (pixel : i32)
            (angle: f32): [2]f32 =
-           let lowerleft = lowerleftpixelpoint pixel 4
+           let lowerleft = lowerleftpixelpoint pixel 8
            let cost = f32.cos(angle)
            let sint = f32.sin(angle)
-           let min = rhomin cost sint lowerleft (-3.5) 1
+           let min = rhomin cost sint lowerleft (-5.5) 1
            let rhos = getrhos min 1 2
            in map(\r -> intersectiondistance sint cost r lowerleft)rhos
