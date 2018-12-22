@@ -5,8 +5,10 @@ import numpy as np
 import scipy.io
 import scipy.misc
 
-def get_angles(size):
+def get_angles(size, degrees = False):
     num_angles = math.ceil(size*math.pi/2)
+    if degrees:
+        return np.linspace(0, 180, num_angles,False)
     return np.linspace(0, np.pi, num_angles,False)
 
 def get_rays(size):

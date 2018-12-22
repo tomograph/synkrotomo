@@ -1,11 +1,14 @@
 from futhark import SIRT
 from futhark import backprojection
 from futhark import forwardprojection
+from futhark import adjointsystemmatrix
 import numpy as np
 import tomo_lib
 import dataprint_lib
 import sys
 import astra
+import paralleltomo
+from scipy.sparse import csr_matrix
 
 def rescale(values):
     minimum = np.min(values)
@@ -58,12 +61,66 @@ def astra_reconstruction(projgeom, sinogram, volgeom, algorithm = "SIRT_CUDA"):
 
     return result
 
+def astra_projectionmatrix(proj_geom, vol_geom):
+    # For CPU-based algorithms, a "projector" object specifies the projection
+    # model used. In this case, we use the "line" model.
+    proj_id = astra.create_projector('line', proj_geom, vol_geom)
+
+    # Generate the projection matrix for this projection model.
+    # This creates a matrix W where entry w_{i,j} corresponds to the
+    # contribution of volume element j to detector element i.
+    matrix_id = astra.projector.matrix(proj_id)
+
+    # Get the projection matrix as a Scipy sparse matrix.
+    W = astra.matrix.get(matrix_id)
+    astra.projector.delete(proj_id)
+    astra.matrix.delete(matrix_id)
+
+    return W
+
 def main(argv):
     size = 256
     theta_rad = tomo_lib.get_angles(size)
     rays = tomo_lib.get_rays(size)
     phantom = tomo_lib.get_phantom(size)
     phantom = rescale(phantom.flatten().astype(np.float32))
+
+    #A = paralleltomo.line_paralleltomo(tomo_lib.get_angles(size, True),rays,size)
+    # proj_geom = astra.create_proj_geom('parallel', 1.0, len(rays), theta_rad)
+    # vol_geom = astra.create_vol_geom(size)
+    # A = astra_projectionmatrix(proj_geom, vol_geom)
+    # matrix_reference_adjoint = np.zeros((size**2,len(theta_rad)*len(rays)))
+    # matrix_reference = np.zeros((len(theta_rad)*len(rays),size**2))
+    # A.transpose().todense(out=matrix_reference_adjoint)
+    # A.todense(out=matrix_reference)
+
+    #adjoint = adjointsystemmatrix.adjointsystemmatrix()
+    #AT = adjoint.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
+
+    #forward = forwardprojection.forwardprojection()
+    #fpresult = A.dot(phantom.flatten())#forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
+    #tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
+    #fpresult = rescale(fpresult)
+
+    #bpresult = matrix_reference_adjoint.dot(np.array(fpresult))
+    #bpresult = rescale(bpresult)
+    #tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
+    #
+    #
+    # for i in range(0, size**2):
+    #     for j in range(0, len(theta_rad)*len(rays)):
+    #         diff = abs(matrix_reference_adjoint[i][j] - AT[i][j])
+    #         if diff > 0.00005:
+    #             angleindex = int(np.floor(j/len(rays)))
+    #             angle = theta_rad[angleindex]
+    #             rhoindex = j-angleindex*len(rays)
+    #             print("pixel: " + str(i))
+    #             print("proj_index: " + str(j))
+    #             print("angle: " + str(angle))
+    #             print("rho: " + str(rays[rhoindex]))
+    #             print("diff: " + str(diff))
+    #             print("reference value: " + str(matrix_reference_adjoint[i][j]))
+    #             print("my value: " + str(AT[i][j]) + "\n")
 
     forward = forwardprojection.forwardprojection()
     fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
