@@ -8,6 +8,7 @@ def main(argv):
     sizes = [64,128,256,512,1024,2048,4096]
     iterations = 200
     for i in sizes:
+        print("working on data for size "+str(i))
         filenamesirt = "data//sirtinputf32rad"+str(i)
         filenamebp = "data//bpinputf32rad"+str(i)
         filenamefp = "data//fpinputf32rad"+str(i)
@@ -16,7 +17,7 @@ def main(argv):
         rays = tomo_lib.get_rays(i)
         initialimg = np.zeros(i*i)
         phantom = tomo_lib.get_phantom(i)
-        sino = tomo_lib.get_sinogram(phantom,tomo_lib.get_angles(i, True)).flatten()
+        sino = tomo_lib.get_sinogram(phantom,rays,angles).flatten()
         phantom = phantom.flatten()
         f = open(filenamesirt,"w+")
         f.write(dataprint_lib.print_f32array(angles)+" "+dataprint_lib.print_f32array(rays)+" "+dataprint_lib.print_f32array(initialimg)+" "+dataprint_lib.print_f32array(sino)+" "+str(iterations))

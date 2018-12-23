@@ -1,0 +1,8 @@
+Results for ./futhark/forwardprojection.fut:
+dataset ../data/fpinputf32rad64:       235.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad128:      803.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad256:     4940.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad512:    38138.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024:  265692.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad2048: 2375836.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad4096: 21146648.00μs (avg. of 1 runs; RSD: 0.00)
