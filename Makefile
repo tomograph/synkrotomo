@@ -34,3 +34,11 @@ benchbp:
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
 	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/sirt_benchmark
+
+benchall:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/forwardprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
+	futhark-bench --runs=1 --skip-compilation ./futhark/forwardprojection.fut > ./output/forwardprojection_benchmark
+	futhark-bench --runs=1 --skip-compilation ./futhark/backprojection.fut > ./output/backprojection_benchmark
+	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/sirt_benchmark
