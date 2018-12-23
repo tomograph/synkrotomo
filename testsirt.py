@@ -84,6 +84,7 @@ def main(argv):
     rays = tomo_lib.get_rays(size)
     phantom = tomo_lib.get_phantom(size)
     phantom = rescale(phantom.flatten().astype(np.float32))
+    sinogram = rescale(tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad))
 
     #A = paralleltomo.line_paralleltomo(tomo_lib.get_angles(size, True),rays,size)
     # proj_geom = astra.create_proj_geom('parallel', 1.0, len(rays), theta_rad)
@@ -123,19 +124,19 @@ def main(argv):
     #             print("my value: " + str(AT[i][j]) + "\n")
 
     forward = forwardprojection.forwardprojection()
-    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
+    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom).get()
     fpresult = rescale(fpresult)
     tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
 
     back = backprojection.backprojection()
-    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, fpresult.flatten().astype(np.float32), 1).get()
+    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), size, sinogram.flatten().astype(np.float32)).get()
     bpresult = rescale(bpresult)
     tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
 
     tomo_lib.savebackprojection("output//original.png",phantom, size)
 
     sirt = SIRT.SIRT()
-    sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), fpresult.flatten().astype(np.float32), 200).get()
+    sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 200).get()
     sirtresult = rescale(sirtresult)
     tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
 
@@ -145,11 +146,11 @@ def main(argv):
     astrabp = np.flip(rescale(astrabp), 0)
     tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
 
-    astrasirt = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
+    astrasirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
     astrasirt = np.flip(rescale(astrasirt), 0)
     tomo_lib.savebackprojection("output//astrasirt.png",astrasirt, size)
 
-    astrafbp = astra_reconstruction(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom, "FBP_CUDA")
+    astrafbp = astra_reconstruction(proj_geom, sinogram, vol_geom, "FBP_CUDA")
     astrafbp = np.flip(rescale(astrafbp), 0)
     tomo_lib.savebackprojection("output//astrasfbp.png",astrafbp, size)
 
