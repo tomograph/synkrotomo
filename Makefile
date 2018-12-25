@@ -33,7 +33,7 @@ benchbp:
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/sirt_benchmark
+	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/sirt_benchmark &
 
 benchall:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
