@@ -5,6 +5,7 @@ import numpy as np
 import scipy.io
 import scipy.misc
 import astra
+from scipy import ndimage
 
 def get_sinogram(phantom, rays, angles):
     proj_geom =astra.create_proj_geom('parallel', 1.0, len(rays), angles)
@@ -53,5 +54,10 @@ def savebackprojection(filename, data, size):
     reshaped = data.reshape((size,size))
     scipy.misc.toimage(reshaped).save(filename)
 
+
 def get_phantom(size):
-    return random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0)[0]/255
+    full_image = random_shapes((size, size), min_shapes=5, max_shapes=10, multichannel=False, random_seed=0, allow_overlap=True)[0]/255
+    #Fit within unit disk
+    r = size/2;
+    y,x = np.ogrid[-r: r, -r: r]
+    return np.where(x**2+y**2 <= r**2, full_image,0.0);
