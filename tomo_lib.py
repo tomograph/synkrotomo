@@ -99,3 +99,13 @@ def get_phantom3D(size):
     cube[size/8:size-size/8,size/8:size-size/8,size/8:size-size/8] = 1
     cube[size/4:size-size/4,size/4:size-size/4,size/4:size-size/4] = 0
     return cube;
+
+def save_3D_slices(volume, directory, size, num_slices):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    max = np.amax(volume)
+    for i in np.nditer(np.linspace(0.,size,num_slices,endpoint=False)):
+        i = int(i)
+        scipy.misc.toimage(volume[i,:,:], cmin=0, cmax=max).save(directory+"reconstructionx"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,i,:], cmin=0, cmax=max).save(directory+"reconstructiony"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,:,i], cmin=0, cmax=max).save(directory+"reconstructionz"+ format(i,'03d') + ".png")
