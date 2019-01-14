@@ -9,9 +9,6 @@
 import "projection_lib"
 open Projection
 
-let inverse [n](values: [n]f32) : [n]f32 =
-     map(\v -> if v == 0.0 then 0.0 else 1/v) values
-
 let main  [n][p][a][r](angles : [a]f32)
           (rhos : [r]f32)
           (volume : *[n]f32)
