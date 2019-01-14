@@ -12,7 +12,7 @@ open Projection
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let main  [n][p](angles : []f32)
+let SIRT [n][p](angles : []f32)
           (rhos : []f32)
           (image : *[n]f32)
           (projections: [p]f32)
@@ -26,3 +26,10 @@ let main  [n][p](angles : []f32)
           let res = loop (image) = (image) for iter < iterations do
                (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
           in res
+
+let main  [n][p](angles : []f32)
+          (rhos : []f32)
+          (image : *[n]f32)
+          (projections: [p]f32)
+          (iterations : i32) : [n]f32 =
+          SIRT angles rhos image projections iterations

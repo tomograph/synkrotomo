@@ -37,15 +37,16 @@ def get_sinogram(phantom, rays, angles):
     return result
 
 def get_sinogram3D(phantom, rays, angles):
-    vol_geom = astra.create_vol_geom(phantom.shape)
     proj_geom =astra.create_proj_geom('parallel3d', 1.0, 1.0, len(rays), len(rays), angles)
+    vol_geom = astra.create_vol_geom(phantom.shape)
+    # Create projection data
     proj_id, proj_data = astra.create_sino3d_gpu(phantom, proj_geom, vol_geom)
 
     # Create a data object for the reconstruction
     volume_id = astra.data3d.create('-vol', vol_geom, phantom)
 
     # Set up the parameters for a reconstruction algorithm using the GPU
-    cfg = astra.astra_dict("FP_CUDA")
+    cfg = astra.astra_dict("FP3D_CUDA")
     cfg['VolumeDataId'] = volume_id
     cfg['ProjectionDataId'] = proj_id
     # Create the algorithm object from the configuration structure
