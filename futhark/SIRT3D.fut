@@ -12,10 +12,10 @@ open Projection
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let main  [n][p](angles : []f32)
-          (rhos : []f32)
+let main  [n][p][a][r](angles : [a]f32)
+          (rhos : [r]f32)
           (volume : *[n]f32)
           (projections: [p]f32)
           (iterations : i32)
           (size: i32) : [n]f32 =
-          map(\image -> SIRT angles rhos image projections iterations) (unflatten volume n/size size)
+          map(\i -> SIRT angles rhos image[i*size*size:(i+1)*size*size] projections[i*r*a:(i+1)*r*a] iterations) (iota size)
