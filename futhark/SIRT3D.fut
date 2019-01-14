@@ -6,8 +6,7 @@
 -- input@../data/sirtinputf32rad1024
 -- input@../data/sirtinputf32rad2048
 -- input@../data/sirtinputf32rad4096
-import "projection_lib"
-open Projection
+import "SIRT"
 
 let main  [n][p][a][r](angles : [a]f32)
           (rhos : [r]f32)
@@ -15,4 +14,10 @@ let main  [n][p][a][r](angles : [a]f32)
           (projections: [p]f32)
           (iterations : i32)
           (size: i32) : [n]f32 =
-          map(\i -> SIRT angles rhos image[i*size*size:(i+1)*size*size] projections[i*r*a:(i+1)*r*a] iterations) (iota size)
+          flatten(
+               (unsafe map(\i ->
+                    let image = copy (unsafe volume[i*size*size:(i+1)*size*size])
+                    let proj = (unsafe projections[i*r*a:(i+1)*r*a])
+                    in unsafe(SIRT angles rhos image proj iterations)
+               ) (iota size))
+          )

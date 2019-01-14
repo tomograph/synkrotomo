@@ -1,5 +1,6 @@
 lib:
 	futhark-pyopencl --library ./futhark/SIRT.fut
+	futhark-pyopencl --library ./futhark/SIRT3D.fut
 	futhark-pyopencl --library ./futhark/backprojection.fut
 	futhark-pyopencl --library ./futhark/forwardprojection.fut
 
@@ -16,6 +17,9 @@ runopencl: opencl
 
 runpytest: lib
 	python testsirt.py
+
+runpytest3D: lib
+	python testsirt3D.py
 
 runpytest-c: lib
 	python testsirt.py
