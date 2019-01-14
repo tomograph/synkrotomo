@@ -1,6 +1,7 @@
 import math
 from skimage.transform import rotate
 from skimage.draw import random_shapes
+from skimage.util import random_noise
 import numpy as np
 import scipy.io
 import scipy.misc
@@ -53,6 +54,9 @@ def savesinogram(filename, data, numrays, numangles):
 def savebackprojection(filename, data, size):
     reshaped = data.reshape((size,size))
     scipy.misc.toimage(reshaped).save(filename)
+
+def add_noise(image):
+    return random_noise(image, mode='poisson', seed=None, clip=True)
 
 
 def get_phantom(size):
