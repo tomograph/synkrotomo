@@ -1,7 +1,4 @@
-from futhark import SIRT
-from futhark import backprojection
-from futhark import forwardprojection
-from futhark import adjointsystemmatrix
+from futhark import SIRT3D
 import numpy as np
 import tomo_lib
 import dataprint_lib
@@ -79,84 +76,17 @@ def astra_projectionmatrix(proj_geom, vol_geom):
     return W
 
 def main(argv):
-    size = 256
+    size = 128
     theta_rad = tomo_lib.get_angles(size)
     rays = tomo_lib.get_rays(size)
-    phantom = tomo_lib.get_phantom(size)
-    phantom = rescale(phantom.flatten().astype(np.float32))
-    sinogram = rescale(tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad))
+    phantom = tomo_lib.get_phantom3D(size)
+    phantom = phantom.flatten().astype(np.float32)
+    sinogram = rescale(tomo_lib.get_sinogram3D(phantom.reshape(size,size,size), rays,theta_rad))
 
-    #A = paralleltomo.line_paralleltomo(tomo_lib.get_angles(size, True),rays,size)
-    # proj_geom = astra.create_proj_geom('parallel', 1.0, len(rays), theta_rad)
-    # vol_geom = astra.create_vol_geom(size)
-    # A = astra_projectionmatrix(proj_geom, vol_geom)
-    # matrix_reference_adjoint = np.zeros((size**2,len(theta_rad)*len(rays)))
-    # matrix_reference = np.zeros((len(theta_rad)*len(rays),size**2))
-    # A.transpose().todense(out=matrix_reference_adjoint)
-    # A.todense(out=matrix_reference)
-
-    #adjoint = adjointsystemmatrix.adjointsystemmatrix()
-    #AT = adjoint.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
-
-    #forward = forwardprojection.forwardprojection()
-    #fpresult = A.dot(phantom.flatten())#forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom, np.zeros(len(theta_rad)*len(rays)).astype(np.float32), 1).get()
-    #tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
-    #fpresult = rescale(fpresult)
-
-    #bpresult = matrix_reference_adjoint.dot(np.array(fpresult))
-    #bpresult = rescale(bpresult)
-    #tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
-    #
-    #
-    # for i in range(0, size**2):
-    #     for j in range(0, len(theta_rad)*len(rays)):
-    #         diff = abs(matrix_reference_adjoint[i][j] - AT[i][j])
-    #         if diff > 0.00005:
-    #             angleindex = int(np.floor(j/len(rays)))
-    #             angle = theta_rad[angleindex]
-    #             rhoindex = j-angleindex*len(rays)
-    #             print("pixel: " + str(i))
-    #             print("proj_index: " + str(j))
-    #             print("angle: " + str(angle))
-    #             print("rho: " + str(rays[rhoindex]))
-    #             print("diff: " + str(diff))
-    #             print("reference value: " + str(matrix_reference_adjoint[i][j]))
-    #             print("my value: " + str(AT[i][j]) + "\n")
-
-    forward = forwardprojection.forwardprojection()
-    fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom).get()
-    fpresult = rescale(fpresult)
-    tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
-
-    back = backprojection.backprojection()
-    bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), size, sinogram.flatten().astype(np.float32)).get()
-    bpresult = rescale(bpresult)
-    tomo_lib.savebackprojection("output//backprojection.png",bpresult, size)
-
-    tomo_lib.savebackprojection("output//original.png",phantom, size)
-
-    sirt = SIRT.SIRT()
-    sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 200).get()
+    sirt = SIRT3D.SIRT3D()
+    sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 200, size).get()
     sirtresult = rescale(sirtresult)
-    tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
-
-    proj_geom =astra.create_proj_geom('parallel', 1.0, len(rays), theta_rad)
-    vol_geom = astra.create_vol_geom(size)
-    astrabp = astra_BP(proj_geom, fpresult.reshape(len(theta_rad),(len(rays))), vol_geom)
-    astrabp = np.flip(rescale(astrabp), 0)
-    tomo_lib.savebackprojection("output//astrabp.png",astrabp, size)
-
-    astrasirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
-    astrasirt = np.flip(rescale(astrasirt), 0)
-    tomo_lib.savebackprojection("output//astrasirt.png",astrasirt, size)
-
-    astrafbp = astra_reconstruction(proj_geom, sinogram, vol_geom, "FBP_CUDA")
-    astrafbp = np.flip(rescale(astrafbp), 0)
-    tomo_lib.savebackprojection("output//astrasfbp.png",astrafbp, size)
-
-    # for i in range(0,size*size):
-    #     diff = abs(astrabp.flatten()[i] - bpresult[i])
-    #     print(str(i)+"::diff: "+str(diff)+" astra:"+str(astrabp.flatten()[i])+" mine:"+str(bpresult[i])
+    tomo_lib.save_3D_slices(sirtresult.reshape(size,size,size),"/output", size, 5);
 
 
 if __name__ == '__main__':
