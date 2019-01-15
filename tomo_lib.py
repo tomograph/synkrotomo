@@ -37,7 +37,7 @@ def get_sinogram(phantom, rays, angles):
     return result
 
 def get_sinogram3D(phantom, rays, angles):
-    proj_geom =astra.create_proj_geom('parallel3d', 1.0, 1.0, len(rays), len(rays), angles)
+    proj_geom =astra.create_proj_geom('parallel3d', 1.0, 1.0, phantom.shape[0], len(rays), angles)
     vol_geom = astra.create_vol_geom(phantom.shape)
     # Create projection data
     proj_id, proj_data = astra.create_sino3d_gpu(phantom, proj_geom, vol_geom)
@@ -95,18 +95,15 @@ def get_phantom(size):
     return np.where(x**2+y**2 <= r**2, full_image,0.0);
 
 def get_phantom3D(size):
-    #hollow cube
+    #phantom
     cube = np.zeros((size,size,size))
-    cube[size/8:size-size/8,size/8:size-size/8,size/8:size-size/8] = 1
-    cube[size/4:size-size/4,size/4:size-size/4,size/4:size-size/4] = 0
+    cube[size/3:size-size/3,size/3:size-size/3,size/3:size-size/3] = 1
+    cube[size/3+size/10:size-size/3+size/10,size/3+size/10:size-size/3+size/10,:] = 0
     return cube;
 
 def save_3D_slices(volume, directory, size, num_slices):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    max = np.amax(volume)
     for i in np.nditer(np.linspace(0.,size,num_slices,endpoint=False)):
         i = int(i)
-        scipy.misc.toimage(volume[i,:,:], cmin=0, cmax=max).save(directory+"reconstructionx"+ format(i,'03d') + ".png")
-        scipy.misc.toimage(volume[:,i,:], cmin=0, cmax=max).save(directory+"reconstructiony"+ format(i,'03d') + ".png")
-        scipy.misc.toimage(volume[:,:,i], cmin=0, cmax=max).save(directory+"reconstructionz"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[i,:,:]).save(directory+"reconstructionx"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,i,:]).save(directory+"reconstructiony"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,:,i]).save(directory+"reconstructionz"+ format(i,'03d') + ".png")
