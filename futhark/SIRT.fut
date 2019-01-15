@@ -24,6 +24,7 @@ let SIRT [n][p](angles : []f32)
           let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
           let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
           let res = loop (image) = (image) for iter < iterations do
+               --(image with [0:n] = map(\v -> f32.min 1.0 v)(map(\v -> f32.max 0.0 v)(map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image))))))))
                (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
           in res
 
