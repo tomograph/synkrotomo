@@ -1,0 +1,6 @@
+The samples in this file are to verify different parts of the system can run and produce a correct output
+
+The files preceded by "futhark" test different part of the futhark implementation
+
+The files "s..." are astra files slightly modified to save output in the correct location
+
