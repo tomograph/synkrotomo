@@ -8,6 +8,11 @@ import scipy.misc
 import astra
 from scipy import ndimage
 
+def rescale(values):
+    minimum = np.min(values)
+    maximum = np.max(values)
+    return (values - minimum)/(maximum-minimum)
+
 def get_sinogram(phantom, rays, angles):
     proj_geom =astra.create_proj_geom('parallel', 1.0, len(rays), angles)
     vol_geom = astra.create_vol_geom(phantom.shape[0])
@@ -104,6 +109,6 @@ def get_phantom3D(size):
 def save_3D_slices(volume, directory, size, num_slices):
     for i in np.nditer(np.linspace(0.,size,num_slices,endpoint=False)):
         i = int(i)
-        scipy.misc.toimage(volume[i,:,:]).save(directory+"reconstructionx"+ format(i,'03d') + ".png")
-        scipy.misc.toimage(volume[:,i,:]).save(directory+"reconstructiony"+ format(i,'03d') + ".png")
-        scipy.misc.toimage(volume[:,:,i]).save(directory+"reconstructionz"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[i,:,:]).save(directory+"_x_slice_"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,i,:]).save(directory+"_y_slice_"+ format(i,'03d') + ".png")
+        scipy.misc.toimage(volume[:,:,i]).save(directory+"_z_slice_"+ format(i,'03d') + ".png")
