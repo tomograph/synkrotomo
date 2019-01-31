@@ -5,10 +5,10 @@ lib:
 	futhark pyopencl --library ./futhark/forwardprojection.fut
 
 libc:
-	futhark-c --library ./futhark/SIRT.fut
-	futhark-c --library ./futhark/SIRT3D.fut
-	futhark-c --library ./futhark/backprojection.fut
-	futhark-c --library ./futhark/forwardprojection.fut
+	futhark c --library ./futhark/SIRT.fut
+	futhark c --library ./futhark/SIRT3D.fut
+	futhark c --library ./futhark/backprojection.fut
+	futhark c --library ./futhark/forwardprojection.fut
 
 opencl:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
@@ -24,26 +24,22 @@ runpytest: lib
 
 benchfp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/forwardprojection.fut
-	futhark-bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp
+	nohup futhark-bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp &>/dev/null &
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
-	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
+	nohup futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp &>/dev/null &
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/benchmarks/sirt &
+	nohup futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/benchmarks/sirt &>/dev/null &
 
 benchsirt3d:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT3D.fut
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d &
+	nohup futhark-bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d &>/dev/null &
 
 benchall:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT.fut
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/forwardprojection.fut
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/SIRT3D.fut
-	futhark-bench --runs=1 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp
-	futhark-bench --runs=1 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/benchmarks/sirt
-	futhark-bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
+	benchfp
+	benchbp
+	benchsirt
+	benchsirt3d

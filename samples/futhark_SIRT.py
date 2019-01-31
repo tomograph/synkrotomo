@@ -1,6 +1,7 @@
 from futhark import SIRT
 import numpy as np
 import tomo_lib
+import sys
 
 def main(argv):
     size = 256
@@ -12,11 +13,10 @@ def main(argv):
 
     sirt = SIRT.SIRT()
     sirtresult = sirt.main(theta_rad.astype(np.float32), rays.astype(np.float32), np.zeros(size*size).flatten().astype(np.float32), sinogram.flatten().astype(np.float32), 200).get()
-    sirtresult = rescale(sirtresult)
-    tomo_lib.savebackprojection("..//output//samples//futhark_sirt.png",sirtresult, size)
+    tomo_lib.savebackprojection("//output//samples//futhark_sirt.png",sirtresult, size)
 
     #savebackprojection essentially just saves size x size image from data
-    tomo_lib.savebackprojection("..//output//samples//futhark_sirt_phantom.png",phantom, size)
+    tomo_lib.savebackprojection("//output//samples//futhark_sirt_phantom.png",phantom, size)
 
 if __name__ == '__main__':
     main(sys.argv)
