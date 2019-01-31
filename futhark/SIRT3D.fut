@@ -1,11 +1,11 @@
 -- ==
--- input@../data/sirtinputf32rad64
--- input@../data/sirtinputf32rad128
--- input@../data/sirtinputf32rad256
--- input@../data/sirtinputf32rad512
--- input@../data/sirtinputf32rad1024
--- input@../data/sirtinputf32rad2048
--- input@../data/sirtinputf32rad4096
+-- input@../data/sirt3Dinputf32rad64
+-- input@../data/sirt3Dinputf32rad128
+-- input@../data/sirt3Dinputf32rad256
+-- input@../data/sirt3Dinputf32rad512
+-- input@../data/sirt3Dinputf32rad1024
+-- input@../data/sirt3Dinputf32rad2048
+-- input@../data/sirt3Dinputf32rad4096
 import "SIRT"
 
 let main  [p][a][r](angles : [a]f32)

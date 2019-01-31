@@ -1,8 +1,0 @@
-*/__pycache__/*
-*.actual
-*.expected
-.remote-sync.json
-*.pyc
-*.c
-sysmatas/
-data/*
