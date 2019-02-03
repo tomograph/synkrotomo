@@ -7,4 +7,4 @@ dist/*
 *.c
 *.h
 futhark/*.py
-output/
+data/
