@@ -6,4 +6,7 @@ setup(name='synkrotomo',
         version='1.0',
         url='https://github.com/tomograph/beatingastra',
         packages=['futhark'],
+        install_requires=[
+          'pyopencl'
+         ]
      )
