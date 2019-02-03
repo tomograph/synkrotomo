@@ -28,3 +28,13 @@ Distribute and install synkrotomo
 
 Install pyopencl: (might not be needed, has been added to setup.py, but check it's installed)
 1. $ conda install -n tomography -c conda-forge pyopencl
+
+To permanently add something to PATH ect. use echo "export PATH=$PATH:/path/to/dir" >> /home/KUID/.bash_profile
+
+1. echo 'export LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH' >> ~/.bashrc
+2. echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+3. echo 'export CPATH=/usr/local/cuda/include:$CPATH' >> ~/.bashrc
+4. echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
+
+To see ~/.bashrc file and check things are ok, write $ vi ~/.bashrc. To edit type c. To exit with no changes :q!+enter, to exit and save :x+enter, to see all environment variables $ env
+To find stuff:  find / -iname filename  2>/dev/null
