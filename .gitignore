@@ -1,0 +1,10 @@
+# Distribution    #
+###################
+dist/*
+
+# Compiled source #
+###################
+*.c
+*.h
+futhark/*.py
+output/
