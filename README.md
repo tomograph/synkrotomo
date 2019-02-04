@@ -26,6 +26,14 @@ Distribute and install synkrotomo
 9. Deactivate the tomography environment if you don't need it anymore $ source deactivate tomography
 10. Remember to activate it when you want to use it
 
+Guide for installing needed python packages
+1. Download latest anaconda here: https://www.anaconda.com/download/#linux
+2. Copy the downloaded file (AnacondaXXX) to your home folder on the cluster (from windows you can do this using WinSCP)
+3. Install it using $ bash AnacondaXXX
+4. Add to path $ export PATH=~/anaconda3/bin:$PATH
+5. Update conda update -n base -c defaults conda
+6. Permanently add conda to path: in the home directory execute $  echo 'export PATH=~/anaconda3/bin:$PATH' >> ~/.bashrc
+
 Install pyopencl: (might not be needed, has been added to setup.py, but check it's installed)
 1. $ conda install -n tomography -c conda-forge pyopencl
 
