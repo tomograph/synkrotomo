@@ -43,6 +43,7 @@
 -- input@../data/fpinputf32rad_angles_fixed3000
 -- input@../data/fpinputf32rad_angles_fixed3500
 -- input@../data/fpinputf32rad_angles_fixed4000
+import "projection_lib"
 open Projection
 
 let main  [n](angles : []f32)
