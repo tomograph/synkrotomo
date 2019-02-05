@@ -12,11 +12,11 @@ libc:
 
 benchfp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/forwardprojection.fut
-	futhark bench --runs=1 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp
+	futhark bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
-	futhark bench --runs=1 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
