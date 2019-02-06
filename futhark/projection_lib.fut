@@ -40,7 +40,7 @@
 --    5
 -- }
 
-
+import "lib/github.com/diku-dk/segmented/segmented"
 import "matrix_lib"
 open Matrix
 
@@ -64,19 +64,40 @@ module Projection = {
   --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
   in map(\pix ->
    let lowerleft = lowerleftpixelpoint pix size
-   in reduce (+) 0.0f32 <| flatten <| map(\i ->
+   in reduce (+) 0.0f32 <| map(\i ->
         let ang = unsafe angles[i]
         let sin = f32.sin(ang)
         let cos = f32.cos(ang)
         let minrho = rhomin cos sin lowerleft rhozero deltarho
         let rhos = getrhos minrho deltarho rhosforpixel
-        in (map(\rho->
+        in reduce (+) 0.0f32 <| (map(\rho->
                   let l = intersectiondistance sin cos rho lowerleft
                   let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
                   in l*(unsafe projections[projectionidx])
              ) rhos)
    ) (iota a)
   )(iota (size**2))
+
+  -- calculate back_projection
+let back_projection_expand [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
+  let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+ --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
+  let get_val (row:i32) (row_ind:i32) =
+    let lowerleft = (r32(row_ind-size/2), r32(row - size/2))
+    let pa = p/a
+    let vs = map (\i ->
+      let ang = unsafe angles[i]
+      let sin = f32.sin(ang)
+      let cos = f32.cos(ang)
+      let rhos = getrhos (rhomin cos sin lowerleft rhozero deltarho) deltarho rhosforpixel
+      in map (\rho ->
+        let l = intersectiondistance sin cos rho lowerleft
+        let projectionidx = getprojectionindex i rho deltarho rhozero pa
+        in l*(unsafe projections[projectionidx])
+       ) rhos
+    ) (iota a)
+    in reduce (+) 0.0f32 <| flatten vs
+  in expand (\_ -> size) get_val (iota size)
 }
 
 open Projection
