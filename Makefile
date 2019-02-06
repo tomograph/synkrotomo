@@ -17,9 +17,7 @@ benchfp:
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
-	cat output/benchmarks/bestbp
-	cat output/benchmarks/bp
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
