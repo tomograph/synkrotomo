@@ -18,6 +18,7 @@ benchfp:
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
+	cat output/benchmarks/bestbp
 	cat output/benchmarks/bp
 
 benchsirt:
@@ -27,3 +28,6 @@ benchsirt:
 benchsirt3d:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT3D.fut
 	futhark bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
+
+bpbetter:
+	cp output/benchmarks/bp output/benchmarks/bestbp
