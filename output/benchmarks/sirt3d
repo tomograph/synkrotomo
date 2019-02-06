@@ -1,0 +1,19 @@
+Results for ./futhark/SIRT3D.fut:
+dataset ../data/sirt3Dinputf32rad64:   7888756.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirt3Dinputf32rad128:  87079567.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirt3Dinputf32rad256:  ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:4226: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
+dataset ../data/sirt3Dinputf32rad512:  12654383010.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirt3Dinputf32rad1024: ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:4226: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
+dataset ../data/sirt3Dinputf32rad2048: ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:4226: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -4 (Memory object allocation failure)
+
