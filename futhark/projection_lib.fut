@@ -79,7 +79,7 @@ module Projection = {
     )(iota (size**2))
 
   -- calculate back_projection
-  let back_projection [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
+  let back_projection_testbed [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
     let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
     --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
     in map(\pix ->
@@ -119,7 +119,7 @@ module Projection = {
       in reduce (+) 0.0f32 vs
     in expand (\_ -> size) get_val (iota size)
 
-  let back_projection_expand [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
+  let back_projection_test [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
     back_projection_expand angles rhozero deltarho size projections
 }
 
