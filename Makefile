@@ -23,6 +23,14 @@ benchbp_test:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
 
+bench_cur_best:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_cur_best.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_cur_best.fut
+
+lbench_cur_best:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection_cur_best.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection_cur_best.fut
+
 lbenchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
 	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut
@@ -31,8 +39,8 @@ lbenchbp_test:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection_test.fut
 	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
 
-lcompare: lbenchbp lbenchbp_test
-compare: benchbp benchbp_test
+lcompare: lbench_cur_best lbenchbp_test
+compare: bench_cur_best benchbp_test
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
