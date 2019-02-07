@@ -2,9 +2,15 @@
 ###################
 dist/*
 
+#futhark pkg library#
+#####################
+futhark/lib/*
+
 # Compiled source #
 ###################
 *.c
 *.h
 futhark/*.py
 data/
+futhark/backprojection
+futhark/backprojection_test
