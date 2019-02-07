@@ -90,13 +90,13 @@ let back_projection_expand [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32
       let sin = f32.sin(ang)
       let cos = f32.cos(ang)
       let rhos = getrhos (rhomin cos sin lowerleft rhozero deltarho) deltarho rhosforpixel
-      in map (\rho ->
+      in reduce (+) 0.0f32 <| map (\rho ->
         let l = intersectiondistance sin cos rho lowerleft
         let projectionidx = getprojectionindex i rho deltarho rhozero pa
         in l*(unsafe projections[projectionidx])
        ) rhos
     ) (iota a)
-    in reduce (+) 0.0f32 <| flatten vs
+    in reduce (+) 0.0f32 vs
   in expand (\_ -> size) get_val (iota size)
 }
 
