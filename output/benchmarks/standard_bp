@@ -6,3 +6,21 @@ dataset ../data/bpinputf32rad512:    69780.40μs (avg. of 10 runs; RSD: 0.06)
 dataset ../data/bpinputf32rad1024:  585997.30μs (avg. of 10 runs; RSD: 0.01)
 dataset ../data/bpinputf32rad2048: 5442811.30μs (avg. of 10 runs; RSD: 0.00)
 dataset ../data/bpinputf32rad4096: 45611703.70μs (avg. of 10 runs; RSD: 0.01)
+
+Results for ./futhark/backprojection_cur_best.fut:
+dataset ../data/bpinputf32rad64:        472.70μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad128:      1833.80μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256:      9545.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad512:     56138.90μs (avg. of 10 runs; RSD: 0.06)
+dataset ../data/bpinputf32rad1024:   407530.70μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048:  3263570.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 27476613.80μs (avg. of 10 runs; RSD: 0.03)
+
+Results for ./futhark/backprojection_expand.fut:
+dataset ../data/bpinputf32rad64:        567.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128:      1912.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256:      9468.80μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad512:     54448.60μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/bpinputf32rad1024:   399403.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad2048:  3152607.60μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 26509513.60μs (avg. of 10 runs; RSD: 0.04)
