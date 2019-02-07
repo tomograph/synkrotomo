@@ -16,4 +16,4 @@ let main  [p](angles : []f32)
           (projections: [p]f32): []f32 =
           let rhozero = unsafe rhos[0]
           let deltarho = unsafe rhos[1]-rhozero
-          in back_projection angles rhozero deltarho size projections
+          in back_projection_expand angles rhozero deltarho size projections
