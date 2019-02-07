@@ -105,12 +105,12 @@ module Projection = {
     let get_val (row:i32) (row_ind:i32) =
       let lowerleft = (r32(row_ind-size/2), r32(row - size/2))
       let pa = p/a
-      let vs = map (\i ->
+      let vs =flatten <| map (\i ->
         let ang = unsafe angles[i]
         let sin = f32.sin(ang)
         let cos = f32.cos(ang)
         let rhos = getrhos (rhomin cos sin lowerleft rhozero deltarho) deltarho rhosforpixel
-        in reduce (+) 0.0f32 <| map (\rho ->
+        in map (\rho ->
           let l = intersectiondistance_o sin cos rho lowerleft
           let projectionidx = getprojectionindex i rho deltarho rhozero pa
           in l*(unsafe projections[projectionidx])
