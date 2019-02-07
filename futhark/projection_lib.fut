@@ -99,6 +99,27 @@ module Projection = {
     )(iota (size**2))
 
   -- calculate back_projection
+  let cur_best [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
+    let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+    --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
+    in map(\pix ->
+    let lowerleft = lowerleftpixelpoint pix size
+    in reduce (+) 0.0f32 <| map(\i ->
+      let ang = unsafe angles[i]
+      let sin = f32.sin(ang)
+      let cos = f32.cos(ang)
+      let minrho = rhomin cos sin lowerleft rhozero deltarho
+      let rhos = getrhos minrho deltarho rhosforpixel
+      in reduce (+) 0.0f32 <| (map(\rho->
+        let l = intersectiondistance_o sin cos rho lowerleft
+        let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
+        in l*(unsafe projections[projectionidx])
+        ) rhos)
+      ) (iota a)
+    )(iota (size**2))
+
+
+  -- calculate back_projection
   let back_projection_expand [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
     let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
     --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
@@ -121,6 +142,9 @@ module Projection = {
 
   let back_projection_test [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
     back_projection_expand angles rhozero deltarho size projections
+
+  let back_projection_cur_best [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
+    cur_best angles rhozero deltarho size projections
 }
 
 open Projection
