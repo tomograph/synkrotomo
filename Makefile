@@ -19,11 +19,20 @@ benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut
 
-benchbp_e:
+benchbp_test:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
 
-compare: benchbp benchbp_e
+lbenchbp:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection.fut
+
+lbenchbp_test:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark-opencl ./futhark/backprojection_test.fut
+	futhark-bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
+
+lcompare: lbenchbp lbenchbp_test
+compare: benchbp benchbp_test
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
