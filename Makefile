@@ -20,8 +20,8 @@ benchbp:
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut
 
 benchbp_e:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_e.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_e.fut
 
 compare: benchbp benchbp_e
 
