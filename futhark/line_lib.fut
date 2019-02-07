@@ -104,28 +104,28 @@ module Lines = {
           -- if flat p_right else p_top (avoid problems with vertical and horizontal lines this way)
           let ext = if flat then (xmax, find_y xmax ray cost sint) else (find_x ymax ray cost sint, ymax)
 
-          let distance =
+          let (p1, p2) =
           -- if both points outside then distance is zero (they can not be outside on each side of pixel because of the way they get calculated above)
-               if (ent.1 < xmin && ext.1 < xmin) || (ent.1 > xmax && ext.1 > xmax) || (ent.2 < ymin && ext.2 < ymin) ||  (ent.2 > ymax && ext.2 > ymax) then 0.0
+               if (ent.1 < xmin && ext.1 < xmin) || (ent.1 > xmax && ext.1 > xmax) || (ent.2 < ymin && ext.2 < ymin) ||  (ent.2 > ymax && ext.2 > ymax) then ((0.0f32,0.0f32), (0.0f32,0.0f32))
                --else if (ent.1 < xmin && ext.1 > xmax) || (ext.1 < xmin && ent.1 > xmax) || (ent.2 < ymin && ext.2 > ymax)  || (ext.2 < ymin && ent.2 > ymax) then  distance ent ext
           -- if only one point is outside its neither vertical or horizontal and we may safely determine the point in between
           -- if ent.1 < xmin then slope positive and new entry is p_left
-               else if ent.1 < xmin then distance (xmin, find_y xmin ray cost sint) ext
+               else if ent.1 < xmin then ((xmin, find_y xmin ray cost sint), ext)
           -- if ext.1 < xmin then slope negative and new exit is p_left
-               else if ext.1 < xmin then distance (xmin, find_y xmin ray cost sint) ent
+               else if ext.1 < xmin then ((xmin, find_y xmin ray cost sint), ent)
           -- same on other side
-               else if ent.1 > xmax then distance (xmax, find_y xmax ray cost sint) ext
-               else if ext.1 > xmax then distance (xmax, find_y xmax ray cost sint) ent
+               else if ent.1 > xmax then ((xmax, find_y xmax ray cost sint), ext)
+               else if ext.1 > xmax then ((xmax, find_y xmax ray cost sint), ent)
           -- same for y points outside
-               else if ent.2 < ymin then distance (find_x ymin ray cost sint, ymin) ext
+               else if ent.2 < ymin then ((find_x ymin ray cost sint, ymin), ext)
           -- if ext.1 < xmin then slope negative and new exit is p_left
-               else if ext.2 < ymin then distance (find_x ymin ray cost sint, ymin) ent
+               else if ext.2 < ymin then ((find_x ymin ray cost sint, ymin), ent)
           -- same on other side
-               else if ent.2 > ymax then distance (find_x ymax ray cost sint, ymax) ext
-               else if ext.2 > ymax then distance (find_x ymax ray cost sint, ymax) ent
-               else distance ent ext
+               else if ent.2 > ymax then ((find_x ymax ray cost sint, ymax), ext)
+               else if ext.2 > ymax then ((find_x ymax ray cost sint, ymax), ent)
+               else (ent, ext)
 
-          in distance
+          in distance p1 p2
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
