@@ -49,4 +49,12 @@ benchsirt3dcb:
 bpbetter:
 	cp output/benchmarks/bp output/benchmarks/bestbp
 
-benchall: benchfp benchbp benchbp_test bench_cur_best benchsirt benchsirt3d benchsirtcb benchsirt3dcb
+benchall:
+	-benchfp 
+	-benchbp 
+	-benchbp_test 
+	-bench_cur_best 
+	-benchsirt 
+	-benchsirt3d 
+	-benchsirtcb 
+	-benchsirt3dcb
