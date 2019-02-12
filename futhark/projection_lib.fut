@@ -141,7 +141,7 @@ module Projection = {
     in expand (\_ -> size) get_val (iota size)
 
   let back_projection_test [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
-    back_projection_testbed angles rhozero deltarho size projections
+    back_projection_expand angles rhozero deltarho size projections
 
   let back_projection_cur_best [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32 =
     cur_best angles rhozero deltarho size projections
