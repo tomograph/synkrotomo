@@ -27,6 +27,7 @@ bench_cur_best:
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_cur_best.fut > ./output/benchmarks/bp_cur_best
 
 compare: bench_cur_best benchbp_test
+compare_orig: bench_cur_best benchbp
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
