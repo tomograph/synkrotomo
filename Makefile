@@ -49,8 +49,17 @@ benchsirt3dcb:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT3Dcb.fut
 	-futhark bench --runs=1 --skip-compilation ./futhark/SIRT3Dcb.fut > ./output/benchmarks/sirt3dcb
 
+benchsirt_expand:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_expand.fut
+	-futhark bench --runs=1 --skip-compilation ./futhark/SIRT_expand.fut > ./output/benchmarks/sirt_expand
+
+benchsirt3d_expand:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT3D_expand.fut
+	-futhark bench --runs=1 --skip-compilation ./futhark/SIRT3D_expand.fut > ./output/benchmarks/sirt3d_expand
 
 bpbetter:
 	cp output/benchmarks/bp output/benchmarks/bestbp
 
 benchall: benchfp benchbp benchbp_test bench_cur_best benchsirt benchsirt3d benchsirtcb benchsirt3dcb
+
+bench_expand: benchbp_expand benchsirt_expand benchsirt3d_expand
