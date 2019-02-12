@@ -33,4 +33,4 @@ let main  [n][p](angles : []f32)
           (image : *[n]f32)
           (projections: [p]f32)
           (iterations : i32) : [n]f32 =
-          SIRTcb angles rhos image projections iterations
+          SIRT_expand angles rhos image projections iterations
