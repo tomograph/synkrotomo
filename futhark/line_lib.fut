@@ -92,33 +92,17 @@ module Lines = {
      let distance ((x1, y1) : point) ((x2, y2) : point): f32 =
           f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
 
-     let intersectflat (left: point) (right: point) (ymin: f32) (ymax: f32): f32=
-          let yplus = f32.max left.2 right.2
-          let yminus = f32.min left.2 right.2
-          -- is zero if both y values are below minum else the positive difference between ymin and yplus
-          let b = f32.max (yplus-ymin) 0.0f32
-          -- is zero if both y values are above maximum else the positive difference between ymin and yplus
-          let a = f32.max (ymax-yminus) 0.0f32
-          let l = distance left right
-          let dy = yplus-yminus
+     let intersect (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
+          -- is zero if both values are below minimum else the positive difference between minus and yplus
+          let b = f32.max (plus-mini) 0.0f32
+          -- is zero if both values are above maximum else the positive difference between minus and yplus
+          let a = f32.max (maxi-minus) 0.0f32
+          -- let l = distance left right
+          let d = plus-minus
           let minab = f32.min a b
-          let u = if minab == 0.0f32 then 0.0f32 else minab/dy
+          let u = if minab == 0.0f32 then 0.0f32 else minab/d
           let fact = f32.min u 1
-          in fact*l
-
-     let intersectsteep (bottom: point) (top: point) (xmin: f32) (xmax: f32): f32=
-          let xplus = f32.max bottom.1 top.1
-          let xminus = f32.min bottom.1 top.1
-          -- is zero if both y values are below minum else the positive difference between ymin and yplus
-          let b = f32.max (xplus-xmin) 0.0f32
-          -- is zero if both y values are above maximum else the positive difference between ymin and yplus
-          let a = f32.max (xmax-xminus) 0.0f32
-          let l = distance bottom top
-          let dx = xplus-xminus
-          let minab = f32.min a b
-          let u = if minab == 0.0f32 then 0.0f32 else minab/dx
-          let fact = f32.min u 1
-          in fact*l
+          in fact*f32.sqrt(1.0+d**2.0f32)
 
      --calculate the intersection lengths between line rho = x*cost+y*sint returning zero if there is no intersection
      let intersectiondistance (sint : f32) (cost: f32) (ray: f32) (lowerleft: point) : f32 =
@@ -126,10 +110,15 @@ module Lines = {
           let xmax = lowerleft.1 + 1.0f32
           let ymin = lowerleft.2
           let ymax = lowerleft.2 + 1.0f32
+          let y_left =  find_y xmin ray cost sint
+          let x_bottom = find_x ymin ray cost sint
+          let x_top = find_x ymax ray cost sint
+          let y_right = find_y xmax ray cost sint
           let flat = is_flat cost sint
-
-          in if flat then intersectflat (xmin, find_y xmin ray cost sint) (xmax, find_y xmax ray cost sint) ymin ymax
-               else intersectsteep (find_x ymin ray cost sint, ymin) (find_x ymax ray cost sint, ymax) xmin xmax
+          let plus = if flat then f32.max y_left y_right else f32.max x_bottom x_top
+          let minus = if flat then f32.min y_left y_right else f32.min x_bottom x_top
+          let mini = if flat then ymin else xmin
+          in intersect plus minus mini (mini+1.0)
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
