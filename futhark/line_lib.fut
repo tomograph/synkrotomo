@@ -93,21 +93,34 @@ module Lines = {
           f32.sqrt( (x2 - x1) ** 2.0f32 + (y2 - y1) ** 2.0f32 )
 
      let intersectflat (left: point) (right: point) (ymin: f32) (ymax: f32): f32=
+          let yplus = f32.max left.2 right.2
+          let yminus = f32.min left.2 right.2
+          -- is zero if both y values are below minum else the positive difference between ymin and yplus
+          let b = f32.max (yplus-ymin) 0.0f32
+          -- is zero if both y values are above maximum else the positive difference between ymin and yplus
+          let a = f32.max (ymax-yminus) 0.0f32
           let l = distance left right
-          let ymid = f32.max (f32.floor(f32.max left.2 right.2)) (f32.min left.2 right.2)
-          let dy = left.2-right.2
-          let y1 = f32.min (f32.max left.2 ymin) ymax
-          let y2 = f32.min (f32.max right.2 ymin) ymax
-          in f32.max (((ymid-y1)/dy)*l) (((y2-ymid)/dy)*l)
+          --let ymid = f32.max (f32.floor(f32.max left.2 right.2)) (f32.min left.2 right.2)
+          let dy = yplus-yminus
+          let minab = f32.min a b
+          let u = if minab == 0.0f32 then 0.0f32 else minab/dy
+          let fact = f32.min u 1
+          in fact*l
 
      let intersectsteep (bottom: point) (top: point) (xmin: f32) (xmax: f32): f32=
+          let xplus = f32.max bottom.1 top.1
+          let xminus = f32.min bottom.1 top.1
+          -- is zero if both y values are below minum else the positive difference between ymin and yplus
+          let b = f32.max (xplus-xmin) 0.0f32
+          -- is zero if both y values are above maximum else the positive difference between ymin and yplus
+          let a = f32.max (xmax-xminus) 0.0f32
           let l = distance bottom top
-          let xmid = f32.max (f32.floor(f32.max bottom.1 top.1)) (f32.min bottom.1 top.1)
-          let dx = bottom.1-top.1
-          let x1 = f32.min (f32.max bottom.1 xmin) xmax
-          let x2 = f32.min (f32.max top.1 xmin) xmax
-          in f32.max (((xmid-x1)/dx)*l) (((x2-xmid)/dx)*l)
-
+          --let ymid = f32.max (f32.floor(f32.max left.2 right.2)) (f32.min left.2 right.2)
+          let dx = xplus-xminus
+          let minab = f32.min a b
+          let u = if minab == 0.0f32 then 0.0f32 else minab/dx
+          let fact = f32.min u 1
+          in fact*l
 
      --calculate the intersection lengths between line rho = x*cost+y*sint returning zero if there is no intersection
      let intersectiondistance (sint : f32) (cost: f32) (ray: f32) (lowerleft: point) : f32 =
@@ -119,33 +132,6 @@ module Lines = {
 
           in if flat then intersectflat (xmin, find_y xmin ray cost sint) (xmax, find_y xmax ray cost sint) ymin ymax
                else intersectsteep (find_x ymin ray cost sint, ymin) (find_x ymax ray cost sint, ymax) xmin xmax
-          -- if flat p_left else p_bottom (avoid problems with vertical and horizontal lines this way)
-          -- let ent = if flat then in (xmin, find_y xmin ray cost sint) else (find_x ymin ray cost sint, ymin)
-          -- -- if flat p_right else p_top (avoid problems with vertical and horizontal lines this way)
-          -- let ext = if flat then (xmax, find_y xmax ray cost sint) else (find_x ymax ray cost sint, ymax)
-          --
-          -- let distance = if flat then intersectflat ent ext xmin xmax else intersectsteep ent ext xmin xmax
-          -- -- if both points outside then distance is zero (they can not be outside on each side of pixel because of the way they get calculated above)
-          --      if (ent.1 < xmin && ext.1 < xmin) || (ent.1 > xmax && ext.1 > xmax) || (ent.2 < ymin && ext.2 < ymin) ||  (ent.2 > ymax && ext.2 > ymax) then 0.0
-          --      --else if (ent.1 < xmin && ext.1 > xmax) || (ext.1 < xmin && ent.1 > xmax) || (ent.2 < ymin && ext.2 > ymax)  || (ext.2 < ymin && ent.2 > ymax) then  distance ent ext
-          -- -- if only one point is outside its neither vertical or horizontal and we may safely determine the point in between
-          -- -- if ent.1 < xmin then slope positive and new entry is p_left
-          --      else if ent.1 < xmin then distance (xmin, find_y xmin ray cost sint) ext
-          -- -- if ext.1 < xmin then slope negative and new exit is p_left
-          --      else if ext.1 < xmin then distance (xmin, find_y xmin ray cost sint) ent
-          -- -- same on other side
-          --      else if ent.1 > xmax then distance (xmax, find_y xmax ray cost sint) ext
-          --      else if ext.1 > xmax then distance (xmax, find_y xmax ray cost sint) ent
-          -- -- same for y points outside
-          --      else if ent.2 < ymin then distance (find_x ymin ray cost sint, ymin) ext
-          -- -- if ext.1 < xmin then slope negative and new exit is p_left
-          --      else if ext.2 < ymin then distance (find_x ymin ray cost sint, ymin) ent
-          -- -- same on other side
-          --      else if ent.2 > ymax then distance (find_x ymax ray cost sint, ymax) ext
-          --      else if ext.2 > ymax then distance (find_x ymax ray cost sint, ymax) ent
-          --      else distance ent ext
-
-          --in distance
 
      -- get numrhos values starting at rhomin and spaced by deltarho
      let getrhos (rhomin: f32) (deltarho: f32) (numrhos: i32): []f32 =
