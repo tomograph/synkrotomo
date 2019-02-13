@@ -100,10 +100,9 @@ module Lines = {
           -- is zero if both y values are above maximum else the positive difference between ymin and yplus
           let a = f32.max (ymax-yminus) 0.0f32
           let l = distance left right
-          --let ymid = f32.max (f32.floor(f32.max left.2 right.2)) (f32.min left.2 right.2)
           let dy = yplus-yminus
           let minab = f32.min a b
-          let u = if minab == 0.0f32 then 0.0f32 else if dy == 0.0f32 then 1.0f32 else minab/dy
+          let u = if minab == 0.0f32 then 0.0f32 else minab/dy
           let fact = f32.min u 1
           in fact*l
 
@@ -115,10 +114,9 @@ module Lines = {
           -- is zero if both y values are above maximum else the positive difference between ymin and yplus
           let a = f32.max (xmax-xminus) 0.0f32
           let l = distance bottom top
-          --let ymid = f32.max (f32.floor(f32.max left.2 right.2)) (f32.min left.2 right.2)
           let dx = xplus-xminus
           let minab = f32.min a b
-          let u = if minab == 0.0f32 then 0.0f32 else if dx == 0.0f32 then 1.0f32 else minab/dx
+          let u = if minab == 0.0f32 then 0.0f32 else minab/dx
           let fact = f32.min u 1
           in fact*l
 
