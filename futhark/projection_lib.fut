@@ -77,6 +77,28 @@ module Projection = {
                          ) rhos)
                ) (iota a)
           )(iota (size**2))
+
+     -- -- get numrhos values starting at rhomin and spaced by deltarho
+     -- let getrho (rhomin: f32) (deltarho: f32) (s: i32): f32 =
+     --      rhomin+(r32(s))*deltarho
+     --
+     -- let back_projection_cos [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
+     --      let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+     --      --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
+     --      in map(\pix ->
+     --           let lowerleft = lowerleftpixelpoint pix size
+     --           in reduce (+) 0.0f32 <| map(\ij ->
+     --                let (i,j) = (ij / rhosforpixel, ij % rhosforpixel)
+     --                let ang = unsafe angles[i]
+     --                let sin = f32.sin(ang)
+     --                let cos = f32.cos(ang)
+     --                let minrho = rhomin cos sin lowerleft rhozero deltarho
+     --                let rho = getrho minrho deltarho j
+     --                let l = intersectiondistance sin cos rho lowerleft
+     --                let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
+     --                in l*(unsafe projections[projectionidx])
+     --           ) (iota (a*rhosforpixel))
+     --      )(iota (size**2))
 }
 
 open Projection

@@ -45,6 +45,17 @@
 -- input@../data/bpinputf32rad_angles_fixed4000
 -- input@../data/bpinputf32rad_angles_fixed4500
 -- input@../data/bpinputf32rad_angles_fixed5000
+-- input@../data/bpinputf32rad_scale_12
+-- input@../data/bpinputf32rad_scale_16
+-- input@../data/bpinputf32rad_scale_20
+-- input@../data/bpinputf32rad_scale_24
+-- input@../data/bpinputf32rad_scale_28
+-- input@../data/bpinputf32rad_scale_32
+-- input@../data/bpinputf32rad_scale_36
+-- input@../data/bpinputf32rad_scale_40
+-- input@../data/bpinputf32rad_scale_44
+-- input@../data/bpinputf32rad_scale_48
+-- input@../data/bpinputf32rad_scale_52
 
 import "projection_lib"
 open Projection
