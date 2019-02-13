@@ -1,8 +1,8 @@
 lib:
-	futhark pyopencl --library ./futhark/SIRT.fut
-	futhark pyopencl --library ./futhark/SIRT3D.fut
-	futhark pyopencl --library ./futhark/backprojection.fut
-	futhark pyopencl --library ./futhark/forwardprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/SIRT.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/SIRT3D.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/forwardprojection.fut
 
 libc:
 	futhark c --library ./futhark/SIRT.fut
