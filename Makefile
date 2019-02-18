@@ -30,8 +30,7 @@ bench_cur_best:
 	futhark opencl ./futhark/backprojection_cur_best.fut
 	-futhark bench --runs=10 --skip-compilation ./futhark/backprojection_cur_best.fut > ./output/benchmarks/bp_cur_best
 
-compare: bench_cur_best benchbp_test
-compare_orig: bench_cur_best benchbp
+smallbench: benchbp benchbp_test benchbp_expand bench_cur_best
 
 benchsirt:
 	futhark opencl ./futhark/SIRT.fut
