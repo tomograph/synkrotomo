@@ -110,7 +110,7 @@ module Projection = {
       let cos = f32.cos(ang)
       let rhos = getrhos (rhomin cos sin lowerleft rhozero deltarho) deltarho rhosforpixel
       in map (\rho ->
-        let l = intersectiondistance_o sin cos rho lowerleft
+        let l = intersectiondistance sin cos rho lowerleft
         let projectionidx = getprojectionindex i rho deltarho rhozero pa
         in l*(unsafe projections[projectionidx])
         ) rhos
@@ -131,7 +131,7 @@ module Projection = {
       let minrho = rhomin cos sin lowerleft rhozero deltarho
       let rhos = getrhos minrho deltarho rhosforpixel
       in reduce (+) 0.0f32 <| (map(\rho->
-        let l = intersectiondistance_o sin cos rho lowerleft
+        let l = intersectiondistance sin cos rho lowerleft
         let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
         in l*(unsafe projections[projectionidx])
         ) rhos)
@@ -152,7 +152,7 @@ module Projection = {
         let cos = f32.cos(ang)
         let rhos = getrhos (rhomin cos sin lowerleft rhozero deltarho) deltarho rhosforpixel
         in reduce (+) 0.0f32 <| map (\rho ->
-          let l = intersectiondistance_o sin cos rho lowerleft
+          let l = intersectiondistance sin cos rho lowerleft
           let projectionidx = getprojectionindex i rho deltarho rhozero pa
           in l*(unsafe projections[projectionidx])
           ) rhos
