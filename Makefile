@@ -3,11 +3,6 @@ lib:
 	futhark pyopencl --library ./futhark/SIRT3D.fut
 	futhark pyopencl --library ./futhark/backprojection.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
-	futhark pyopencl --library ./futhark/SIRT_expand.fut
-	futhark pyopencl --library ./futhark/SIRT3D_expand.fut
-	futhark pyopencl --library ./futhark/backprojection_expand.fut
-
-
 
 libc:
 	futhark c --library ./futhark/SIRT.fut
@@ -62,9 +57,4 @@ benchsirt3d_expand:
 	futhark opencl ./futhark/SIRT3D_expand.fut
 	-futhark bench --runs=1 --skip-compilation ./futhark/SIRT3D_expand.fut > ./output/benchmarks/sirt3d_expand
 
-bpbetter:
-	cp output/benchmarks/bp output/benchmarks/bestbp
-
-benchall: benchfp benchbp benchbp_test bench_cur_best benchsirt benchsirt3d benchsirtcb benchsirt3dcb
-
-bench_expand: benchbp_expand benchsirt_expand benchsirt3d_expand
+benchall: benchfp benchbp benchbp_test bench_cur_best benchsirt benchsirt3d benchsirtcb benchsirt3dcb benchbp_expand benchsirt_expand benchsirt3d_expand
