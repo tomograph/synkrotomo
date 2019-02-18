@@ -58,5 +58,8 @@ benchsirt3d_expand:
 
 benchall: benchfp benchbp benchbp_test bench_cur_best benchsirt benchsirt3d benchsirtcb benchsirt3dcb benchbp_expand benchsirt_expand benchsirt3d_expand
 
+benchold: benchfp benchbp benchbp_test bench_cur_best
+
+
 clean:
 	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/backprojection_test ./futhark/backprojection_cur_best ./futhark/backprojection_expand ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRTcb ./futhark/SIRT_expand ./futhark/SIRT3D ./futhark/SIRT3Dcb ./futhark/SIRT3D_expand
