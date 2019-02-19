@@ -25,4 +25,4 @@ benchsirt3d:
 benchall: benchfp benchbp benchsirt benchsirt3d
 
 clean:
-	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D
+	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D ./futhark/sanityCheck
