@@ -1,8 +1,0 @@
-Results for ./futhark/SIRT.fut:
-dataset ../data/sirtinputf32rad64:     36918.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad128:   157509.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad256:   492692.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad512:  3186503.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad1024: 30726798.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad2048: 309899923.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad4096: 2770483607.00μs (avg. of 1 runs; RSD: 0.00)
