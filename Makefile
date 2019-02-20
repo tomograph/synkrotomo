@@ -24,6 +24,14 @@ benchbptest2:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
 
+benchbptest3:
+	futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test.fut
+
+benchbptest4:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
+	futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test_2.fut
+
+
 benchsirt:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut
 
