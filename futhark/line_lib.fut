@@ -60,17 +60,17 @@ module Lines = {
   type point  = ( f32, f32 )
   let factor = f32.sqrt(2.0f32)/2.0f32
 
-  -- determine if slope of line rho = x*cost+y*sint returning is less than 0
-  let is_flat (cos: f32) (sin: f32): bool =
+     -- determine if slope of line rho = x*cost+y*sint is less than 1
+     let is_flat (cos: f32) (sin: f32): bool =
           f32.abs(sin) >= f32.abs(cos)
 
-  -- find x given y - not designed for vertical lines
   let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           (ray-y*sint)/cost
+     -- find x given y - not designed for horizontal lines
 
-  -- find y given x - not for horizontal lines
   let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           (ray-x*cost)/sint
+     -- find y given x - not for vertical lines
 
      --calculate the intersection points between line rho = x*cost+y*sint and grid with -maval<=x<=maxval, -maxval <=y<=maxval
      let getintersections (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point,point,point) =
@@ -131,7 +131,7 @@ module Lines = {
           let s = f32.ceil((rho-rhozero)/deltarho)
           in rhozero+s*deltarho
 
-     -- get the center coordinate of a pixel
+     -- get the lowerleft coordinate of a pixel
      let lowerleftpixelpoint (pix: i32) (size: i32): point=
           let loweryidx = pix/size
           let lowerxidx = pix - size*loweryidx

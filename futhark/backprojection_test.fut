@@ -9,10 +9,13 @@
 import "projection_lib"
 open Projection
 
-let main  [p](angles : []f32)
-          (rhos : []f32)
+let main  [p][r](angles : []f32)
+          (rhos : [r]f32)
           (size : i32)
           (projections: [p]f32): []f32 =
           let rhozero = unsafe rhos[0]
           let deltarho = unsafe rhos[1]-rhozero
-          in back_projection angles rhozero deltarho size projections
+          let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+          let halfsize = size/2
+          let lines = preprocess angles
+          in back_projection_met lines rhozero deltarho rhosprpixel r halfsize projections

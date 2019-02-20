@@ -16,8 +16,20 @@ benchfp:
 benchbp:
 	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut > ./output/benchmarks/bp
 
+benchbptest:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
+
+benchbptest2:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
+
 benchsirt:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut > ./output/benchmarks/sirt
+
+benchsirttest:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
+	futhark bench --runs=1 --skip-compilation ./futhark/SIRT_test.fut
 
 benchsirt3d:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
