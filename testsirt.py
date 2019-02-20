@@ -1,5 +1,5 @@
 from futhark import SIRT
-from futhark import backprojection_test
+from futhark import backprojection_test_2
 from futhark import backprojection
 from futhark import forwardprojection
 import numpy as np
@@ -33,7 +33,7 @@ def main(argv):
     fpresult = rescale(fpresult)
     tomo_lib.savesinogram("output//forwardprojection.png",fpresult, len(rays), len(theta_rad))
 
-    back = backprojection_test.backprojection_test()
+    back = backprojection_test_2.backprojection_test_2()
     bpresult = back.main(theta_rad.astype(np.float32), rays.astype(np.float32), size, sinogram.flatten().astype(np.float32)).get()
     bpresult = rescale(bpresult)
     savebackprojection("output//backprojectiontest.png",bpresult, size)
