@@ -78,27 +78,59 @@ module Projection = {
                ) (iota a)
           )(iota (size**2))
 
-     -- -- get numrhos values starting at rhomin and spaced by deltarho
-     -- let getrho (rhomin: f32) (deltarho: f32) (s: i32): f32 =
-     --      rhomin+(r32(s))*deltarho
-     --
-     -- let back_projection_cos [a][p] (angles: [a]f32) (rhozero: f32) (deltarho: f32) (size: i32) (projections: [p]f32): []f32=
-     --      let rhosforpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
-     --      --let rhomax = rhozero + deltarho*r32((p/a)) - 1.0f32
-     --      in map(\pix ->
-     --           let lowerleft = lowerleftpixelpoint pix size
-     --           in reduce (+) 0.0f32 <| map(\ij ->
-     --                let (i,j) = (ij / rhosforpixel, ij % rhosforpixel)
-     --                let ang = unsafe angles[i]
-     --                let sin = f32.sin(ang)
-     --                let cos = f32.cos(ang)
-     --                let minrho = rhomin cos sin lowerleft rhozero deltarho
-     --                let rho = getrho minrho deltarho j
-     --                let l = intersectiondistance sin cos rho lowerleft
-     --                let projectionidx = getprojectionindex i rho deltarho rhozero (p/a)
-     --                in l*(unsafe projections[projectionidx])
-     --           ) (iota (a*rhosforpixel))
-     --      )(iota (size**2))
+     let preprocess [a](angles: [a]f32): ([](f32,f32,i32),[](f32,f32,i32)) =
+          let cossin = map(\i -> let angle = angles[i]
+               let cos= f32.cos(angle)
+               let sin = f32.sin(angle)
+               in (cos, sin, i))
+          (iota(a))
+          in partition(\(c,s,_) -> is_flat c s  )cossin
+
+     let back_projection_met [p] (lines: ([](f32,f32,i32),[](f32,f32,i32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
+           let fact = f32.sqrt(2.0f32)/2.0f32
+           in flatten (map(\irow ->
+               map(\icolumn ->
+                    let xmin = r32(icolumn)
+                    let ymin = r32(irow)
+                    let flat = reduce (+) 0.0f32 <| map(\(cost,sint,angleidx) ->
+                         let cott = cost/sint
+                         let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
+                         let rho = cost*p.1+sint*p.2
+                         let s = f32.ceil((rho-rhozero)/deltarho)
+                         let ybase = xmin*cott
+                         in reduce (+) 0.0f32 <| map(\i ->
+                                   let sprime = s+(r32(i))
+                                   let r = sprime*deltarho+rhozero
+                                   let y_left = (r/sint)-ybase
+                                   let y_right = y_left-cott
+                                   let maxy = f32.max y_left y_right
+                                   let miny = f32.min y_left y_right
+                                   let l = intersect maxy miny ymin (ymin+1.0)
+                                   let projectionidx = angleidx*numrhos+(t32(sprime))
+                                   in l*(unsafe projections[projectionidx])
+                              )(iota rhosprpixel)
+                         )lines.1
+                    let steep = reduce (+) 0.0f32 <| map(\(cost,sint,angleidx) ->
+                         let tant = sint/cost
+                         let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
+                         let rho = cost*p.1+sint*p.2
+                         let s = f32.ceil((rho-rhozero)/deltarho)
+                         let xbase = ymin*tant
+                         in reduce (+) 0.0f32 <| map(\i ->
+                                   let sprime = s+(r32(i))
+                                   let r = sprime*deltarho+rhozero
+                                   let x_bot = (r/cost)-xbase
+                                   let x_top = x_bot-tant
+                                   let maxx = f32.max x_bot x_top
+                                   let minx = f32.min x_bot x_top
+                                   let l = intersect maxx minx xmin (xmin+1.0)
+                                   let projectionidx = angleidx*numrhos+(t32(sprime))
+                                   in l*(unsafe projections[projectionidx])
+                              )(iota rhosprpixel)
+                         )lines.2
+                    in flat + steep
+               )((-halfsize)...(halfsize-1))
+          )((-halfsize)...(halfsize-1)))
 }
 
 open Projection

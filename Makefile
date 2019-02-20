@@ -1,7 +1,8 @@
 lib:
 	futhark pyopencl --library ./futhark/SIRT.fut
 	futhark pyopencl --library ./futhark/SIRT3D.fut
-	futhark pyopencl --library ./futhark/backprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection_test.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
 
 libc:
@@ -16,12 +17,24 @@ benchfp:
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut > ./output/benchmarks/bp
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection.fut
+
+benchbptest:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
+
+benchbptest2:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
+	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
 
 benchsirt:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT.fut
-	futhark bench --runs=1 --skip-compilation ./futhark/SIRT.fut > ./output/benchmarks/sirt
+	futhark bench --runs=1 --skip-compilation ./futhark/SIRT.fut
+
+benchsirttest:
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
+	futhark bench --runs=1 --skip-compilation ./futhark/SIRT_test.fut
 
 benchsirt3d:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT3D.fut
-	futhark bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
+	futhark bench --runs=1 --skip-compilation ./futhark/SIRT3D.fut
