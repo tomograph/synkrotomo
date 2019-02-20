@@ -1,0 +1,56 @@
+regular bp
+futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut
+Compiling ./futhark/backprojection.fut...
+Results for ./futhark/backprojection.fut:
+dataset ../data/bpinputf32rad64:       217.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128:      480.60μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256:     3148.90μs (avg. of 10 runs; RSD: 0.07)
+dataset ../data/bpinputf32rad512:    21110.90μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/bpinputf32rad1024:  127925.80μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/bpinputf32rad2048: 1003086.70μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 9614820.80μs (avg. of 10 runs; RSD: 0.07)
+Incremental flattening test
+FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
+futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
+Results for ./futhark/backprojection_test.fut:
+dataset ../data/bpinputf32rad64:       217.90μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/bpinputf32rad128:      800.30μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad256:     1813.60μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/bpinputf32rad512:    14533.00μs (avg. of 10 runs; RSD: 0.06)
+dataset ../data/bpinputf32rad1024:   82982.10μs (avg. of 10 runs; RSD: 0.07)
+dataset ../data/bpinputf32rad2048:  635272.60μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 6038985.20μs (avg. of 10 runs; RSD: 0.06)
+Incremental flattening test2
+FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
+futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
+Results for ./futhark/backprojection_test_2.fut:
+dataset ../data/bpinputf32rad64:       220.20μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/bpinputf32rad128:      896.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256:     1250.90μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad512:     9687.20μs (avg. of 10 runs; RSD: 0.09)
+dataset ../data/bpinputf32rad1024:   55675.60μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/bpinputf32rad2048:  408358.20μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 3822395.60μs (avg. of 10 runs; RSD: 0.08)
+Test
+futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test.fut
+Compiling ./futhark/backprojection_test.fut...
+Results for ./futhark/backprojection_test.fut:
+dataset ../data/bpinputf32rad64:       207.30μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad128:      372.20μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad256:     1777.40μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512:    14154.30μs (avg. of 10 runs; RSD: 0.06)
+dataset ../data/bpinputf32rad1024:   83599.80μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/bpinputf32rad2048:  641174.80μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad4096: 6072028.00μs (avg. of 10 runs; RSD: 0.06)
+Test2
+FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
+futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test_2.fut
+Compiling ./futhark/backprojection_test_2.fut...
+Results for ./futhark/backprojection_test_2.fut:
+dataset ../data/bpinputf32rad64:       185.10μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad128:      309.60μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad256:     1254.10μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad512:     9923.60μs (avg. of 10 runs; RSD: 0.10)
+dataset ../data/bpinputf32rad1024:   55677.40μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/bpinputf32rad2048:  408132.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 3831411.70μs (avg. of 10 runs; RSD: 0.08)
