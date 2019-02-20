@@ -11,10 +11,10 @@ libc:
 	futhark c --library ./futhark/forwardprojection.fut
 
 benchfp:
-	-futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection.fut > ./output/benchmarks/fp
+	-futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection.fut
 
 benchbp:
-	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut > ./output/benchmarks/bp
+	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut
 
 benchbptest:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
@@ -25,14 +25,14 @@ benchbptest2:
 	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
 
 benchsirt:
-	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut > ./output/benchmarks/sirt
+	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut
 
 benchsirttest:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
 	futhark bench --runs=1 --skip-compilation ./futhark/SIRT_test.fut
 
 benchsirt3d:
-	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
+	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut
 
 benchall: benchfp benchbp benchsirt benchsirt3d
 
