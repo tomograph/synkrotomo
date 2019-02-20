@@ -12,4 +12,4 @@ dataset ../data/sirtinputf32rad2500: 809074870.00μs (avg. of 1 runs; RSD: 0.00)
 dataset ../data/sirtinputf32rad3000: 1357998477.00μs (avg. of 1 runs; RSD: 0.00)
 dataset ../data/sirtinputf32rad3500: 2319085249.00μs (avg. of 1 runs; RSD: 0.00)
 dataset ../data/sirtinputf32rad4000: 3083455134.00μs (avg. of 1 runs; RSD: 0.00)
-dataset ../data/sirtinputf32rad4096: 
+dataset ../data/sirtinputf32rad4096: 3051281021.00μs (avg. of 1 runs; RSD: 0.00)
