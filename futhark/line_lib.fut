@@ -104,6 +104,18 @@ module Lines = {
           let fact = f32.min u 1
           in fact*f32.sqrt(1.0+d**2.0f32)
 
+     let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
+          -- is zero if both values are below minimum else the positive difference between minus and yplus
+          let b = f32.max (plus-mini) 0.0f32
+          -- is zero if both values are above maximum else the positive difference between minus and yplus
+          let a = f32.max (maxi-minus) 0.0f32
+          -- let l = distance left right
+          let d = plus-minus
+          let minab = f32.min a b
+          let u = if minab == 0.0f32 then 0.0f32 else minab/d
+          let fact = f32.min u 1
+          in fact
+
      --calculate the intersection lengths between line rho = x*cost+y*sint returning zero if there is no intersection
      let intersectiondistance (sint : f32) (cost: f32) (ray: f32) (lowerleft: point) : f32 =
           let xmin = lowerleft.1

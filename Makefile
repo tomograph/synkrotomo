@@ -2,7 +2,7 @@ lib:
 	futhark pyopencl --library ./futhark/SIRT.fut
 	futhark pyopencl --library ./futhark/SIRT3D.fut
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection.fut
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection_test.fut
+	FUTHARK_INCREMENTAL_FLATTENING=1 futhark pyopencl --library ./futhark/backprojection_test_2.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
 
 libc:
@@ -13,7 +13,7 @@ libc:
 
 benchfp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/forwardprojection.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut > ./output/benchmarks/fp
+	futhark bench --runs=10 --skip-compilation ./futhark/forwardprojection.fut
 
 benchbp:
 	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection.fut
