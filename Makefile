@@ -11,16 +11,16 @@ libc:
 	futhark c --library ./futhark/forwardprojection.fut
 
 benchfp:
-	-futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection.fut > ./output/benchmarks/fp
+	-futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection.fut
 
 benchbp:
-	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut > ./output/benchmarks/bp
+	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut
 
 benchsirt:
-	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut > ./output/benchmarks/sirt
+	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut
 
 benchsirt3d:
-	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut > ./output/benchmarks/sirt3d
+	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut
 
 benchall: benchfp benchbp benchsirt benchsirt3d
 
