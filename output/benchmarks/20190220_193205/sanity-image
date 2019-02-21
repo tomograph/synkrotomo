@@ -1,0 +1,8 @@
+cat slurm-795967.out
+a00757.science.domain
+0
+The code is sane:
+false
+
+
+should probably echo the progs and file
