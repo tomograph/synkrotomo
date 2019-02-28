@@ -46,3 +46,6 @@ To permanently add something to PATH ect. use echo "export PATH=$PATH:/path/to/d
 
 To see ~/.bashrc file and check things are ok, write $ vi ~/.bashrc. To edit type c. To exit with no changes :q!+enter, to exit and save :x+enter, to see all environment variables $ env
 To find stuff:  find / -iname filename  2>/dev/null
+
+The full dataset can be found in the dev branch in the folder zipped data. It is a split archive, extract with the command $ zip -F source-data.zip --out tmp.zip && unzip tmp.zip && rm tmp.zip
+or use the bash script
