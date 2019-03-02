@@ -72,8 +72,6 @@ module Projection = {
           let Xpixmax = f32.max Xpixmin Xpixplus
           let xdiff = xplus - xmin
 
-          let
-
           let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
           let bmin = if  Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32) then true else false
           let bplus = if (!b) && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32) then true else false
