@@ -72,8 +72,10 @@ module Projection = {
           let Xpixmax = f32.max Xpixmin Xpixplus
           let xdiff = xplus - xmin
 
+          let
+
           let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
-          let bmin = if Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32) then true else false
+          let bmin = if  Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32) then true else false
           let bplus = if (!b) && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32) then true else false
 
           let xminfacttmp = (Xpixmax - xmin)/xdiff
@@ -83,14 +85,14 @@ module Projection = {
           let lxmin = xminfact*lbase
           let lxplus = xplusfact*lbase
 
-          let pixminval = lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
-          let pixplusval = lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+          -- let pixminval = lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
+          -- let pixplusval = lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+          --
+          -- let min = if bmin then pixminval else 0.0f32
+          -- let plus = if bplus then pixplusval else 0.0f32
 
-          let min = if bmin then pixminval else 0.0f32
-          let plus = if bplus then pixplusval else 0.0f32
-
-          -- let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
-          -- let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
+          let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
+          let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
 
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
@@ -117,8 +119,8 @@ module Projection = {
         let Ypixmax = f32.max Ypixmin Ypixplus
         let ydiff = yplus - ymin
 
-        let t1 = (i+halfsize)+t32(Ypixmin)*size >= 0 && (i+halfsize)+t32(Ypixmin)*size < n
-        let t2 = (i+halfsize)+t32(Ypixplus)*size >= 0 && (i+halfsize)+t32(Ypixplus)*size < n
+        let t1 = (i+halfsize) >= 0 && (i+halfsize) < size
+        let t2 = (i+halfsize) >= 0 && (i+halfsize) < size
 
         let b = f32.abs(Ypixmin - Ypixplus) < 0.4f32
         let bmin = t1 && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
