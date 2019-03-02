@@ -75,8 +75,8 @@ module Projection = {
           let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
           let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
-          let bmin = bounds && Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32)
-          let bplus = (!b) && bounds && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32)
+          let bmin = bounds && Xpixmin >= (-0.0f32) && Xpixmin < r32(size)
+          let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
 
           let xminfacttmp = (Xpixmax - xmin)/xdiff
           let xminfact = if b then 1 else xminfacttmp
