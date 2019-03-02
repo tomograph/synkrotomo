@@ -46,7 +46,10 @@ benchall: benchfp benchbp benchsirt benchsirt3d
 
 test:
 	futhark opencl ./futhark/forwardprojection_test.fut
-	# ./futhark/forwardprojection_test < data/fpinputf32rad256 >test
+	./futhark/forwardprojection_test < data/fpinputf32rad256 >out
+
+benchtest:
+	futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection_test.fut
 
 clean:
-	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D ./futhark/sanityCheck ./futhark/forwardprojection_test
+	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D ./futhark/sanityCheck ./futhark/forwardprojection_test out

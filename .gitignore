@@ -10,6 +10,7 @@ futhark/lib/*
 ###################
 data/
 /sd/*
+out
 
 # Compiled source #
 ###################
