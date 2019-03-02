@@ -98,7 +98,6 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
       let ydiff = yplus - ymin
 
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
-
       let b = f32.abs(Ypixmin - Ypixplus) < 0.0005f32
 
       let min = if bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
