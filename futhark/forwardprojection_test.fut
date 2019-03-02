@@ -11,7 +11,7 @@ open Projection
 
 let main  [n][r] (angles : []f32)
           (rhos : [r]f32)
-          (image : *[n]f32) =
+          (image : [n]f32) =
           let size = t32(f32.sqrt(r32(n)))
           let halfsize = size/2
           let rhozero = unsafe rhos[0]
