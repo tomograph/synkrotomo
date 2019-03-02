@@ -15,3 +15,5 @@ data/
 futhark/backprojection
 futhark/backprojection_test
 /sd/*
+futhark/SIRT_test
+futhark/forwardprojection_test
