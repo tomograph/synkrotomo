@@ -83,11 +83,14 @@ module Projection = {
           let lxmin = xminfact*lbase
           let lxplus = xplusfact*lbase
 
-          let pixminval = lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
-          let pixplusval = lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+          -- let pixminval = lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
+          -- let pixplusval = lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+          --
+          -- let min = if bmin then pixminval else 0.0f32
+          -- let plus = if bplus then pixplusval else 0.0f32
 
-          let min = if bmin then pixminval else 0.0f32
-          let plus = if bplus then pixplusval else 0.0f32
+          let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
+          let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
 
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
@@ -125,11 +128,14 @@ module Projection = {
         let lymin = yminfact*lbase
         let lyplus = yplusfact*lbase
 
-        let pixminval = lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
-        let pixplusval = lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
+        -- let pixminval = lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
+        -- let pixplusval = lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
+        --
+        -- let min = if bmin then pixminval else 0.0f32
+        -- let plus = if bplus then pixplusval else 0.0f32
 
-        let min = if bmin then pixminval else 0.0f32
-        let plus = if bplus then pixplusval else 0.0f32
+        let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
+        let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
