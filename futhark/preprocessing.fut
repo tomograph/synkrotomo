@@ -15,8 +15,8 @@ let main [a][r] (angles : [a]f32)
           let parts = partition (\(c, s, _, _, _) -> is_flat c s ) cossin
           let p1 = map (\(cos, sin, lcot, _, i) -> (cos, sin, lcot, i)) parts.1
           let p2 = map (\(cos, sin, _, ltan, i) -> (cos, sin, ltan, i)) parts.2
-          let lines = (p1, p2)
+          -- let lines = (p1, p2)
           let rhozero = rhos[0]
           let deltarho = rhos[1] - rhozero
           let numrhos = r
-          in (lines, rhozero, deltarho, numrhos, img)
+          in (p1, p2, rhozero, deltarho, numrhos, img)
