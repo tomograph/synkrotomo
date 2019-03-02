@@ -46,7 +46,7 @@ benchall: benchfp benchbp benchsirt benchsirt3d
 
 test:
 	futhark opencl ./futhark/forwardprojection_test.fut
-	./futhark/forwardprojection_test < data/fpinputf32rad256 >test.out
+	./futhark/forwardprojection_test < data/fpinputf32rad512 >test.out
 
 benchtest:
 	futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection_test.fut
