@@ -54,12 +54,27 @@ module Projection = {
       ) angles))
 
   let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, ltan, i) ->
+    flatten <| map (\(cos, sin, lbase, ind) ->
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
         let fpv = map (\i ->
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = intersect_steep i ext ent halfsize
+          let k = (ext.1 - ent.1)/(ext.2 - ent.2)
+          let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(halfsize))
+          let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(halfsize))
+          let Xpixmin = t32(f32.floor(xmin))
+          let Xpixplus = t32(f32.floor(xplus))
+          let baselength = lbase
+          let Xpixmax = i32.max Xpixmin Xpixplus
+          let xdiff = xplus - xmin
+          -- if both equal then l is baselength and we only want one l
+          let xminfact = if Xpixmin == Xpixplus then 1 else (r32(Xpixmax) - xmin)/xdiff
+          let xplusfact = if Xpixmin == Xpixplus then 0 else (xplus - r32(Xpixmax))/xdiff
+          let lxmin = xminfact*baselength
+          let lxplus = xplusfact*baselength
+          let y = i+halfsize
+          -- FIX this is just renaming
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
@@ -67,17 +82,33 @@ module Projection = {
           let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
-        in ((reduce (+) 0.0f32 fpv), i*numrhos + r)
+        in ((reduce (+) 0.0f32 fpv), ind*numrhos + r)
       ) (iota numrhos)
     ) lines
 
     let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, ltan, i) ->
+    flatten <| map (\(cos, sin, lbase, ind) ->
       map (\r ->
         let rho = rhozero + r32(r)*deltarho
         let fpv = map (\i ->
           let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = intersect_flat i ext ent halfsize
+          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+          let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(halfsize))
+          let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(halfsize))
+          let Ypixmin = t32(f32.floor(ymin))
+          let Ypixplus = t32(f32.floor(yplus))
+          -- could be done for all rays of same angle at once
+          let baselength = lbase
+          let Ypixmax = i32.max Ypixmin Ypixplus
+          let ydiff = yplus - ymin
+          -- if both equal then l is baselength and we only want one l
+          let yminfact = if Ypixmin == Ypixplus then 1 else (r32(Ypixmax) - ymin)/ydiff
+          let yplusfact = if Ypixmin == Ypixplus then 0 else (yplus - r32(Ypixmax))/ydiff
+          let lymin = yminfact*baselength
+          let lyplus = yplusfact*baselength
+          let x = i+halfsize
+          -- FIX this is just renaming
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = ((lymin, x, Ypixmin), (lyplus, x, Ypixplus))
           let size = halfsize*2
           let pixmin = xmin+ymin*size
           let pixplus = xplus+yplus*size
@@ -85,7 +116,7 @@ module Projection = {
           let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
-        in ((reduce (+) 0.0f32 fpv), i*numrhos + r)
+        in ((reduce (+) 0.0f32 fpv), ind*numrhos + r)
       ) (iota numrhos)
     ) lines
 
