@@ -53,6 +53,42 @@ module Projection = {
         in (map(\r -> forward_projection_value sin cos r halfsize img) rhos)
       ) angles))
 
+  let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
+    flatten <| map (\(cos, sin, ltan, i) ->
+      map (\r ->
+        let rho = (rhozero + r32(r)*deltarho)
+        let fpv = map (\i ->
+          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = intersect_steep i ext ent halfsize
+          let size = halfsize*2
+          let pixmin = xmin+ymin*size
+          let pixplus = xplus+yplus*size
+          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*img[pixmin]) else 0.0f32
+          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
+          in (min+plus)
+        ) ((-halfsize)...(halfsize-1))
+        in ((reduce (+) 0.0f32 fpv), i*numrhos + r)
+      ) (iota numrhos)
+    ) lines
+
+    let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
+    flatten <| map (\(cos, sin, ltan, i) ->
+      map (\r ->
+        let rho = rhozero + r32(r)*deltarho
+        let fpv = map (\i ->
+          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = intersect_flat i ext ent halfsize
+          let size = halfsize*2
+          let pixmin = xmin+ymin*size
+          let pixplus = xplus+yplus*size
+          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*img[pixmin]) else 0.0f32
+          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
+          in (min+plus)
+        ) ((-halfsize)...(halfsize-1))
+        in ((reduce (+) 0.0f32 fpv), i*numrhos + r)
+      ) (iota numrhos)
+    ) lines
+
   -- get the index into the projection vector based on rho and angleindex
   let getprojectionindex (angleindex: i32) (rhovalue: f32) (deltarho: f32) (rhozero: f32) (numrhos: i32): i32 =
     angleindex*numrhos+(t32(f32.round((rhovalue-rhozero)/deltarho)))
@@ -93,8 +129,8 @@ module Projection = {
                let ltan = f32.sqrt(1.0+(sin/cos)**2.0f32)
                in (cos, sin, lcot,ltan, i))
           (iota(a))
-          let parts = partition(\(c,s,_,_,_) -> is_flat c s  )cossin
-          in ((map(\(cos, sin, lcot,_, i)-> (cos,sin,lcot,i))parts.1),(map(\(cos, sin, _,ltan, i)-> (cos,sin,ltan,i))parts.2))
+          let parts = partition(\(c,s,_,_,_) -> is_flat c s )cossin
+          in ((map (\(cos, sin, lcot,_, i)-> (cos,sin,lcot,i)) parts.1), (map(\(cos, sin, _,ltan, i)-> (cos,sin,ltan,i)) parts.2))
 
      let back_projection_met [p] (lines: ([](f32,f32,i32),[](f32,f32,i32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
            let fact = f32.sqrt(2.0f32)/2.0f32
