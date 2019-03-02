@@ -1,7 +1,7 @@
 let is_flat (cos: f32) (sin: f32): bool =
      f32.abs(sin) >= f32.abs(cos)
 
-let preprocessing [a][r] (angles : [a]f32)
+let main [a][r] (angles : [a]f32)
           (rhos : [r]f32)
           (img:[]f32)=
           let cossin = map(\i -> let angle = angles[i]
