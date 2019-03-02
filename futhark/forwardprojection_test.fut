@@ -22,6 +22,5 @@ let main  [n][r] (angles : []f32)
           let flat = forwardprojection_flat lines.1 rhozero deltarho r halfsize image
           let dat = steep ++ flat
           let vals = map (\(v, _) -> v) dat
-          -- let inds = map (\(_, i) -> i) dat
-          in vals
-          -- in scatter (replicate ((length steep) + (length flat)) 0.0f32) inds vals
+          let inds = map (\(_, i) -> i) dat
+          in scatter (replicate ((length steep) + (length flat)) 0.0f32) inds vals
