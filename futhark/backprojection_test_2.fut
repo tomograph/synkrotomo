@@ -1,10 +1,16 @@
 -- ==
 -- input@../data/bpinputf32rad64
+-- output@../sd/sanity-bpinputf32rad64
 -- input@../data/bpinputf32rad128
+-- output@../sd/sanity-bpinputf32rad128
 -- input@../data/bpinputf32rad256
+-- output@../sd/sanity-bpinputf32rad256
 -- input@../data/bpinputf32rad512
+-- output@../sd/sanity-bpinputf32rad512
 -- input@../data/bpinputf32rad1024
+-- output@../sd/sanity-bpinputf32rad1024
 -- input@../data/bpinputf32rad2048
+-- output@../sd/sanity-bpinputf32rad2048
 
 
 import "projection_lib"

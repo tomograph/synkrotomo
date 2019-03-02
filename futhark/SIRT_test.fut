@@ -1,9 +1,16 @@
 -- ==
 -- input@../data/sirtinputf32rad64
+-- output@../sd/sanity-sirtinputf32rad64
 -- input@../data/sirtinputf32rad128
+-- output@../sd/sanity-sirtinputf32rad128
 -- input@../data/sirtinputf32rad256
+-- output@../sd/sanity-sirtinputf32rad256
 -- input@../data/sirtinputf32rad512
+-- output@../sd/sanity-sirtinputf32rad512
 -- input@../data/sirtinputf32rad1024
+-- output@../sd/sanity-sirtinputf32rad1024
+-- input@../data/sirtinputf32rad2048
+-- output@../sd/sanity-sirtinputf32rad2048
 
 import "projection_lib"
 open Projection
