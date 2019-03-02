@@ -82,7 +82,7 @@ module Projection = {
           let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
-        in ((reduce (+) 0.0f32 fpv), ind*numrhos + r)
+        in (reduce (+) 0.0f32 fpv)
       ) (iota numrhos)
     ) lines
 
@@ -116,7 +116,7 @@ module Projection = {
           let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
-        in ((reduce (+) 0.0f32 fpv), ind*numrhos + r)
+        in (reduce (+) 0.0f32 fpv)
       ) (iota numrhos)
     ) lines
 
