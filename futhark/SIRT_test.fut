@@ -23,10 +23,21 @@ let SIRT [n][p][r](angles : []f32)
           let halfsize = size/2
           let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
           let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
-          let lines = preprocess angles
+          let lines = preprocess_2 angles
           let res = loop (image) = (image) for iter < iterations do
-               --(image with [0:n] = map(\v -> f32.min 1.0 v)(map(\v -> f32.max 0.0 v)(map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image))))))))
-               (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection_met lines rhozero deltarho rhosprpixel r halfsize (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
+               let fp = forward_projection angles rhos halfsize image
+               let fp_diff = map2 (-) projections fp
+               let fp_weighted = map2 (*) inverserowsums fp_diff
+               let steep = bp_steep lines.2 rhozero deltarho rhosprpixel r halfsize fp_weighted
+               let flat = bp_flat lines.1 rhozero deltarho rhosprpixel r halfsize fp_weighted
+               let bp = map2 (+) steep flat
+               let bp_weighted = map2 (*) inversecolumnsums bp
+               in image with [0:n] = map2 (+) image bp_weighted
+
+
+
+
+               -- (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection_met lines rhozero deltarho rhosprpixel r halfsize (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
           in res
 
 let main  [n][p](angles : []f32)
