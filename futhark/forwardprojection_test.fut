@@ -9,14 +9,17 @@
 
 import "projection_lib"
 open Projection
-import "preprocessing"
+-- import "preprocessing"
 
 let main  [n][r] (angles : []f32)
           (rhos : [r]f32)
           (image : *[n]f32) =
           let size = t32(f32.sqrt(r32(n)))
           let halfsize = size/2
-          let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
+          let rhozero = unsafe rhos[0]
+          let deltarho = unsafe rhos[1]-rhozero
+          let lines = preprocess_2 angles
+          -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
           let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
           let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
           in steep ++ flat
