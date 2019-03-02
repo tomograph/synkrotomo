@@ -143,8 +143,8 @@ module Projection = {
         -- let min = if bmin then pixminval else 0.0f32
         -- let plus = if bplus then pixplusval else 0.0f32
 
-        let min = if t1 && bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
-        let plus = if t2 && bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+        let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
+        let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
