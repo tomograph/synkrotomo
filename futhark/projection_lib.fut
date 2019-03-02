@@ -122,7 +122,7 @@ module Projection = {
 
         let b = f32.abs(Ypixmin - Ypixplus) < 0.4f32
         let bmin = t1 && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
-        let bplus = (!b) && t2 && Ypixplus >= (-0.0f32) && Ypixplus < r32(size) 
+        let bplus = (!b) && t2 && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
 
         let yminfacttmp = (Ypixmax - ymin)/ydiff
         let yminfact = if b then 1 else yminfacttmp
