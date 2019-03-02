@@ -10,7 +10,7 @@ futhark/lib/*
 ###################
 data/
 /sd/*
-out
+*.out
 
 # Compiled source #
 ###################
@@ -23,3 +23,5 @@ futhark/SIRT
 futhark/SIRT_test
 futhark/forwardprojection_test
 futhark/forwardprojection
+futhark/sanityCheck
+futhark/mse
