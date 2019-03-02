@@ -117,6 +117,7 @@ module Projection = {
         let Ypixmax = f32.max Ypixmin Ypixplus
         let ydiff = yplus - ymin
 
+
         let b = if f32.abs(Ypixmin - Ypixplus) < 0.4f32 then true else false
         let bmin = if Ypixmin >= (-0.0f32) && Ypixmin < r32(size) then true else false
         let bplus = if (!b) && Ypixplus >= (-0.0f32) && Ypixplus < r32(size) then true else false
@@ -125,20 +126,22 @@ module Projection = {
         let yminfact = if b then 1 else yminfacttmp
         let yplusfact = (yplus - Ypixmax)/ydiff
 
-        let lymin = yminfact*lbase
-        let lyplus = yplusfact*lbase
+        let lymin = yminfact*(f32.sqrt(1+k*k))
+        let lyplus = yplusfact*(f32.sqrt(1+k*k))
 
-        let pixminval = lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
-        let pixplusval = lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
+        -- let pixminval = lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
+        -- let pixplusval = lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
 
         -- let pixminval = (i+halfsize)+t32(Ypixmin)*size
         -- let pixplusval = (i+halfsize)+t32(Ypixplus)*size
 
-        let min = if bmin then pixminval else 0.0f32
-        let plus = if bplus then pixplusval else 0.0f32
+        -- let min = if bmin then pixminval else 0.0f32
+        -- let plus = if bplus then pixplusval else 0.0f32
+        let t1 = if (i+halfsize)+t32(Ypixmin)*size >= 0 && (i+halfsize)+t32(Ypixmin)*size < n then true else false
+        let t2 = if (i+halfsize)+t32(Ypixplus)*size >= 0 && (i+halfsize)+t32(Ypixplus)*size < n then true else false
 
-        -- let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
-        -- let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+        let min = if t1 && bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
+        let plus = if t2 && bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
