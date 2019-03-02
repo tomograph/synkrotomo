@@ -60,8 +60,8 @@ module Projection = {
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
         let fpv = map (\i ->
-          let ent = (find_x (-fhalfsize) rho cos sin, (-fhalfsize))
-          let ext = (find_x fhalfsize rho cos sin, fhalfsize)
+          let ent = ((rho - (-fhalfsize)*sin)/cos, (-fhalfsize))
+          let ext = ((rho - fhalfsize*sin)/cos, fhalfsize)
 
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
@@ -74,7 +74,7 @@ module Projection = {
 
           let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
-          let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
+          let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
           let bmin = bounds && Xpixmin >= (-0.0f32) && Xpixmin < r32(size)
           let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
 
@@ -107,8 +107,8 @@ module Projection = {
     map (\r ->
       let rho = rhozero + r32(r)*deltarho
       let fpv = map (\i ->
-        let ent = ((-fhalfsize), find_y (-fhalfsize) rho cos sin)
-        let ext = (fhalfsize, find_y fhalfsize rho cos sin)
+        let ent = ((-fhalfsize), (rho - (-fhalfsize)*cos)/sin)
+        let ext = (fhalfsize, (rho - fhalfsize*cos)/sin)
 
         let k = (ext.2 - ent.2)/(ext.1 - ent.1)
         let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
