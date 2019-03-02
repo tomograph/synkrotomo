@@ -55,7 +55,7 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
 
         let minind = if bmin then t32(Xpixmin)+(i+halfsize)*size else 0
-        let plusind = if bplus then t32(Xpixplus)+(i+halfsize)*size
+        let plusind = if bplus then t32(Xpixplus)+(i+halfsize)*size else 0
 
         let xminfacttmp = (Xpixmax - xmin)/xdiff
         let xminfact = if b then 1 else xminfacttmp
@@ -107,6 +107,9 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
       let bmin = bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
       let bplus = (!b) && bounds && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
 
+      let minind = if bmin then (i+halfsize)+t32(Ypixmin)*size else 0
+      let plusind = if bplus then (i+halfsize)+t32(Ypixplus)*size else 0
+
       let yminfacttmp = (Ypixmax - ymin)/ydiff
       let yminfact = if b then 1 else yminfacttmp
       let yplusfact = (yplus - Ypixmax)/ydiff
@@ -114,8 +117,14 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
       let lymin = yminfact*lbase
       let lyplus = yplusfact*lbase
 
-      let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
-      let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+      -- let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
+      -- let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+
+      let minpixval = lymin*(unsafe img[minind])
+      let pluspixval = lyplus*(unsafe img[plusind])
+
+      let min = if bmin then minpixval else 0.0f32
+      let plus = if bplus then pluspixval else 0.0f32
 
       in (min+plus)
     ) ((-halfsize)...(halfsize-1))
