@@ -1,0 +1,63 @@
+regular SIRT
+Compiling ./futhark/SIRT.fut...
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:     62101.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   162809.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1154899.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  8859272.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78535925.00μs (avg. of 1 runs; RSD: 0.00)
+
+regular SIRT - Incremental flattening
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:     62431.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   233753.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1157675.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  10005863.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78555205.00μs (avg. of 1 runs; RSD: 0.00)
+
+regular SIRT - prettyfied
+Compiling ./futhark/SIRT_pretty.fut...
+Failed:
+
+Error at ./futhark/SIRT_pretty.fut:36:11-12: Parse error.
+If you find this error message confusing, uninformative, or wrong, please open an issue at https://github.com/diku-dk/futhark/issues.
+
+
+regular SIRT - prettyfied and Incremental flattening
+./futhark/SIRT_pretty does not exist, but --skip-compilation passed.
+
+met SIRT
+Compiling ./futhark/SIRT_met.fut...
+Failed:
+
+Error at ./futhark/SIRT_met.fut:37:101-105:
+Couldn't match expected type `(f32, f32, i32)' with actual type `(f32, f32, f32, i32)'.
+When matching types of record field `1`.
+When matching type
+  ([](f32, f32, i32), [](f32, f32, i32))
+with
+  ([](f32, f32, f32, i32), [](f32, f32, f32, i32))
+
+If you find this error message confusing, uninformative, or wrong, please open an issue at https://github.com/diku-dk/futhark/issues.
+
+
+met SIRT - Incremental flattening
+./futhark/SIRT_met does not exist, but --skip-compilation passed.
+
+split backprojection SIRT
+Compiling ./futhark/SIRT_test.fut...
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:     46274.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   107898.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   648681.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  5915421.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 46391910.00μs (avg. of 1 runs; RSD: 0.00)
+
+split backprojection SIRT - prettyfied and Incremental flattening
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:     73951.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   257464.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   652086.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  5839805.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 46406067.00μs (avg. of 1 runs; RSD: 0.00)
+
