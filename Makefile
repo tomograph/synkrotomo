@@ -68,4 +68,4 @@ compareTest: comdat tools
 	# data/fpinputf32rad64
 
 clean:
-	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D ./futhark/sanityCheck ./futhark/forwardprojection_test out
+	rm -f ./futhark/*.c ./futhark/backprojection ./futhark/forwardprojection ./futhark/SIRT ./futhark/SIRT3D ./futhark/sanityCheck ./futhark/forwardprojection_test out ./futhark/mse

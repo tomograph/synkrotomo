@@ -35,10 +35,6 @@ let SIRT [n][p][r](angles : []f32)
                let bp_weighted = map2 (*) inversecolumnsums bp
                in image with [0:n] = map2 (+) image bp_weighted
 
-
-
-
-               -- (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection_met lines rhozero deltarho rhosprpixel r halfsize (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
           in res
 
 let main  [n][p](angles : []f32)
