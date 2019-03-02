@@ -58,8 +58,8 @@ module Projection = {
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
         let fpv = map (\i ->
-          let ent = (find_x (-1.0*(r32(halfsize))) rho cost sint, (-1.0*(r32(halfsize))))
-          let ext = (find_x (r32(halfsize)) rho cost sint, (r32(halfsize)))
+          let ent = (find_x (-1.0*(r32(halfsize))) rho cos sin, (-1.0*(r32(halfsize))))
+          let ext = (find_x (r32(halfsize)) rho cos sin, (r32(halfsize)))
 
           -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
@@ -94,8 +94,8 @@ module Projection = {
       map (\r ->
         let rho = rhozero + r32(r)*deltarho
         let fpv = map (\i ->
-          let ent = ((-1.0*(r32(halfsize))), find_y (-1.0*(r32(halfsize))) rho cost sint)
-          let ext = ((r32(halfsize)), find_y (r32(halfsize)) rho cost sint)
+          let ent = ((-1.0*(r32(halfsize))), find_y (-1.0*(r32(halfsize))) rho cos sin)
+          let ext = ((r32(halfsize)), find_y (r32(halfsize)) rho cos sin)
           -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(halfsize))
