@@ -28,11 +28,13 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
   let fhalfsize = r32(halfsize)
   let size = halfsize*2
   in flatten <| map (\(cos, sin, lbase, _) ->
-    map (\r ->
+    let entBase = ((-fhalfsize)*sin)/cos
+    let extBase = (fhalfsize*sin)/cos
+    in map (\r ->
       let rho = (rhozero + r32(r)*deltarho)
       let fpv = map (\i ->
-        let ent = ((rho - (-fhalfsize)*sin)/cos, (-fhalfsize))
-        let ext = ((rho - fhalfsize*sin)/cos, fhalfsize)
+        let ent = (rho - entBase, (-fhalfsize))
+        let ext = (rho - extBase, fhalfsize)
 
         let k = (ext.1 - ent.1)/(ext.2 - ent.2)
         let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
@@ -69,11 +71,13 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
   let fhalfsize = r32(halfsize)
   let size = halfsize*2
   in flatten <| map (\(cos, sin, lbase, _) ->
-  map (\r ->
+  let entBase = ((-fhalfsize)*cos)/sin
+  let extBase = (fhalfsize*cos)/sin
+  in map (\r ->
     let rho = rhozero + r32(r)*deltarho
     let fpv = map (\i ->
-      let ent = ((-fhalfsize), (rho - (-fhalfsize)*cos)/sin)
-      let ext = (fhalfsize, (rho - fhalfsize*cos)/sin)
+      let ent = ((-fhalfsize), rho - entBase)
+      let ext = (fhalfsize, rho - extBase)
 
       let k = (ext.2 - ent.2)/(ext.1 - ent.1)
       let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
