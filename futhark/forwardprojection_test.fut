@@ -18,6 +18,7 @@ let main  [n][r] (angles : []f32)
           let halfsize = size/2
           let rhozero = unsafe rhos[0]
           let deltarho = unsafe rhos[1]-rhozero
+          let numrhos = r
           let lines = preprocess_2 angles
           -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
           let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
