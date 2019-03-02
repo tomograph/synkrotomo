@@ -1,5 +1,4 @@
 -- ==
--- input@../data/fpinputf32rad64
 -- input@../data/fpinputf32rad128
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
