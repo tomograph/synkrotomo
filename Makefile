@@ -45,18 +45,53 @@ benchsirt3d:
 benchall: benchfp benchbp benchsirt benchsirt3d
 
 preprocess:
-	futhark opencl ./futhark/preprocessing.fut
-	# ./futhark/preprocessing < data/fpinputf32rad64 > data/prefpinputf32rad64
-	./futhark/preprocessing < data/fpinputf32rad128 > data/prefpinputf32rad128
-	./futhark/preprocessing < data/fpinputf32rad256 > data/prefpinputf32rad256
-	./futhark/preprocessing < data/fpinputf32rad512 > data/prefpinputf32rad512
-	./futhark/preprocessing < data/fpinputf32rad1024 > data/prefpinputf32rad1024
-	./futhark/preprocessing < data/fpinputf32rad2048 > data/prefpinputf32rad2048
-	./futhark/preprocessing < data/fpinputf32rad4096 > data/prefpinputf32rad4096
+	futhark opencl ./futhark/preprocessing_p1.fut
+	futhark opencl ./futhark/preprocessing_p2.fut
+	futhark opencl ./futhark/preprocessing_p3.fut
+	futhark opencl ./futhark/preprocessing_p4.fut
+	futhark opencl ./futhark/preprocessing_p5.fut
+	futhark opencl ./futhark/preprocessing_p6.fut
+	./futhark/preprocessing_p1 < data/fpinputf32rad128 > data/prefpinputf32rad128
+	./futhark/preprocessing_p2 < data/fpinputf32rad128 >> data/prefpinputf32rad128
+	./futhark/preprocessing_p3 < data/fpinputf32rad128 >> data/prefpinputf32rad128
+	./futhark/preprocessing_p4 < data/fpinputf32rad128 >> data/prefpinputf32rad128
+	./futhark/preprocessing_p5 < data/fpinputf32rad128 >> data/prefpinputf32rad128
+	./futhark/preprocessing_p6 < data/fpinputf32rad128 >> data/prefpinputf32rad128
+	./futhark/preprocessing_p1 < data/fpinputf32rad256 > data/prefpinputf32rad256
+	./futhark/preprocessing_p2 < data/fpinputf32rad256 >> data/prefpinputf32rad256
+	./futhark/preprocessing_p3 < data/fpinputf32rad256 >> data/prefpinputf32rad256
+	./futhark/preprocessing_p4 < data/fpinputf32rad256 >> data/prefpinputf32rad256
+	./futhark/preprocessing_p5 < data/fpinputf32rad256 >> data/prefpinputf32rad256
+	./futhark/preprocessing_p6 < data/fpinputf32rad256 >> data/prefpinputf32rad256
+	./futhark/preprocessing_p1 < data/fpinputf32rad512 > data/prefpinputf32rad512
+	./futhark/preprocessing_p2 < data/fpinputf32rad512 >> data/prefpinputf32rad512
+	./futhark/preprocessing_p3 < data/fpinputf32rad512 >> data/prefpinputf32rad512
+	./futhark/preprocessing_p4 < data/fpinputf32rad512 >> data/prefpinputf32rad512
+	./futhark/preprocessing_p5 < data/fpinputf32rad512 >> data/prefpinputf32rad512
+	./futhark/preprocessing_p6 < data/fpinputf32rad512 >> data/prefpinputf32rad512
+	./futhark/preprocessing_p1 < data/fpinputf32rad1024 > data/prefpinputf32rad1024
+	./futhark/preprocessing_p2 < data/fpinputf32rad1024 >> data/prefpinputf32rad1024
+	./futhark/preprocessing_p3 < data/fpinputf32rad1024 >> data/prefpinputf32rad1024
+	./futhark/preprocessing_p4 < data/fpinputf32rad1024 >> data/prefpinputf32rad1024
+	./futhark/preprocessing_p5 < data/fpinputf32rad1024 >> data/prefpinputf32rad1024
+	./futhark/preprocessing_p6 < data/fpinputf32rad1024 >> data/prefpinputf32rad1024
+	./futhark/preprocessing_p1 < data/fpinputf32rad2048 > data/prefpinputf32rad2048
+	./futhark/preprocessing_p2 < data/fpinputf32rad2048 >> data/prefpinputf32rad2048
+	./futhark/preprocessing_p3 < data/fpinputf32rad2048 >> data/prefpinputf32rad2048
+	./futhark/preprocessing_p4 < data/fpinputf32rad2048 >> data/prefpinputf32rad2048
+	./futhark/preprocessing_p5 < data/fpinputf32rad2048 >> data/prefpinputf32rad2048
+	./futhark/preprocessing_p6 < data/fpinputf32rad2048 >> data/prefpinputf32rad2048
+	./futhark/preprocessing_p1 < data/fpinputf32rad4096 > data/prefpinputf32rad4096
+	./futhark/preprocessing_p2 < data/fpinputf32rad4096 >> data/prefpinputf32rad4096
+	./futhark/preprocessing_p3 < data/fpinputf32rad4096 >> data/prefpinputf32rad4096
+	./futhark/preprocessing_p4 < data/fpinputf32rad4096 >> data/prefpinputf32rad4096
+	./futhark/preprocessing_p5 < data/fpinputf32rad4096 >> data/prefpinputf32rad4096
+	./futhark/preprocessing_p6 < data/fpinputf32rad4096 >> data/prefpinputf32rad4096
 
 test:
 	futhark opencl ./futhark/forwardprojection_test.fut
-	./futhark/forwardprojection_test -D --dump-opencl dumpcl.out < data/fpinputf32rad512 1>test.out 2>dump.out
+	./futhark/forwardprojection_test < data/fpinputf32rad64 1>test.out
+	# ./futhark/forwardprojection_test -D --dump-opencl dumpcl.out < data/fpinputf32rad512 1>test.out 2>dump.out
 
 benchtest:
 	futhark bench --runs=10 --backend=opencl ./futhark/forwardprojection_test.fut
