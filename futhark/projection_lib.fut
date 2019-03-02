@@ -72,9 +72,11 @@ module Projection = {
           let Xpixmax = f32.max Xpixmin Xpixplus
           let xdiff = xplus - xmin
 
+          let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
+
           let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
-          let bmin = if  Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32) then true else false
-          let bplus = if (!b) && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32) then true else false
+          let bmin = bounds && Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32)
+          let bplus = (!b) && bounds && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32)
 
           let xminfacttmp = (Xpixmax - xmin)/xdiff
           let xminfact = if b then 1 else xminfacttmp
@@ -117,12 +119,11 @@ module Projection = {
         let Ypixmax = f32.max Ypixmin Ypixplus
         let ydiff = yplus - ymin
 
-        let t1 = (i+halfsize) >= 0 && (i+halfsize) < size
-        let t2 = (i+halfsize) >= 0 && (i+halfsize) < size
+        let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
         let b = f32.abs(Ypixmin - Ypixplus) < 0.4f32
-        let bmin = t1 && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
-        let bplus = (!b) && t2 && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
+        let bmin = bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
+        let bplus = (!b) && bounds && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
 
         let yminfacttmp = (Ypixmax - ymin)/ydiff
         let yminfact = if b then 1 else yminfacttmp
