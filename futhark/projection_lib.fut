@@ -54,11 +54,14 @@ module Projection = {
       ) angles))
 
   let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, lbase, ind) ->
+    flatten <| map (\(cos, sin, lbase, _) ->
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
         let fpv = map (\i ->
-          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          let ent = (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval))
+          let ext = (find_x maxval ray cost sint, maxval)
+
+          -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
           let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(halfsize))
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(halfsize))
@@ -87,11 +90,13 @@ module Projection = {
     ) lines
 
     let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, lbase, ind) ->
+    flatten <| map (\(cos, sin, lbase, _) ->
       map (\r ->
         let rho = rhozero + r32(r)*deltarho
         let fpv = map (\i ->
-          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
+          let ent = ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint)
+          let ext = (maxval, find_y maxval ray cost sint)
+          -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let k = (ext.2 - ent.2)/(ext.1 - ent.1)
           let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(halfsize))
           let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(halfsize))
