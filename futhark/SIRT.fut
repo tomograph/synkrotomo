@@ -4,14 +4,7 @@
 -- input@../data/sirtinputf32rad256
 -- input@../data/sirtinputf32rad512
 -- input@../data/sirtinputf32rad1024
--- input@../data/sirtinputf32rad1500
--- input@../data/sirtinputf32rad2000
 -- input@../data/sirtinputf32rad2048
--- input@../data/sirtinputf32rad2500
--- input@../data/sirtinputf32rad3000
--- input@../data/sirtinputf32rad3500
--- input@../data/sirtinputf32rad4000
--- input@../data/sirtinputf32rad4096
 
 import "projection_lib"
 open Projection
