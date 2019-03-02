@@ -29,8 +29,7 @@ let SIRT [n][p](angles : []f32)
                let fp_res = map2 (*) inverserowsums fp_diff
                let bp = back_projection angles rhozero deltarho size fp_res
                let bpw = map2 (*) inversecolumnsums bp
-               in image with [0:n] = (map2 (+) image bpw
-
+               in image with [0:n] = map2 (+) image bpw
 
                -- (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
           in res
