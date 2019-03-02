@@ -35,11 +35,11 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
     let extBase = (fhalfsize*sin)/cos
     in map (\r ->
       let rho = (rhozero + r32(r)*deltarho)
-      let fpv = map (\i ->
-        let ent = (rho - entBase, (-fhalfsize))
-        let ext = (rho - extBase, fhalfsize)
+      let ent = (rho - entBase, (-fhalfsize))
+      let ext = (rho - extBase, fhalfsize)
+      let k = (ext.1 - ent.1)/(ext.2 - ent.2)
 
-        let k = (ext.1 - ent.1)/(ext.2 - ent.2)
+      let fpv = map (\i ->
         let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
         let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (fhalfsize)
         let Xpixmin = f32.floor(xmin)
@@ -61,6 +61,7 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let lxmin = xminfact*lbase
         let lxplus = xplusfact*lbase
 
+        -- test manipulating the index and always reading a value, maybe on index 0 if out of bounds
         let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
         let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
 
@@ -78,11 +79,11 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
   let extBase = (fhalfsize*cos)/sin
   in map (\r ->
     let rho = rhozero + r32(r)*deltarho
-    let fpv = map (\i ->
-      let ent = ((-fhalfsize), rho - entBase)
-      let ext = (fhalfsize, rho - extBase)
+    let ent = ((-fhalfsize), rho - entBase)
+    let ext = (fhalfsize, rho - extBase)
+    let k = (ext.2 - ent.2)/(ext.1 - ent.1)
 
-      let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+    let fpv = map (\i ->
       let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
       let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + fhalfsize
       let Ypixmin = f32.floor(ymin)
