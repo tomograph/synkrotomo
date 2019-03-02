@@ -42,17 +42,20 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
       let fpv = map (\i ->
         let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
         let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (fhalfsize)
-        let Xpixmin = f32.floor(xmin)
-        let Xpixplus = f32.floor(xplus)
-
-        let Xpixmax = f32.max Xpixmin Xpixplus
         let xdiff = xplus - xmin
 
-        let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
+        let Xpixmin = f32.floor(xmin)
+        let Xpixplus = f32.floor(xplus)
+        let Xpixmax = f32.max Xpixmin Xpixplus
 
+        let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
         let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
+
         let bmin = bounds && Xpixmin >= (-0.0f32) && Xpixmin < r32(size)
         let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
+
+        let minind = if bmin then t32(Xpixmin)+(i+halfsize)*size else 0
+        let plusind = if bplus then t32(Xpixplus)+(i+halfsize)*size
 
         let xminfacttmp = (Xpixmax - xmin)/xdiff
         let xminfact = if b then 1 else xminfacttmp
@@ -62,8 +65,14 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let lxplus = xplusfact*lbase
 
         -- test manipulating the index and always reading a value, maybe on index 0 if out of bounds
-        let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
-        let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
+        -- let min = if bmin then lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size]) else 0.0f32
+        -- let plus = if bplus then lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size]) else 0.0f32
+
+        let minpixval = lxmin*(unsafe img[minind])
+        let pluspixval = lxplus*(unsafe img[plusind])
+
+        let min = if bmin then minpixval else 0.0f32
+        let plus = if bplus then pluspixval else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
@@ -86,11 +95,11 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
     let fpv = map (\i ->
       let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
       let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + fhalfsize
+      let ydiff = yplus - ymin
+
       let Ypixmin = f32.floor(ymin)
       let Ypixplus = f32.floor(yplus)
-
       let Ypixmax = f32.max Ypixmin Ypixplus
-      let ydiff = yplus - ymin
 
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
