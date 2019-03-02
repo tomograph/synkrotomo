@@ -59,11 +59,11 @@ module Projection = {
     in flatten <| map (\(cos, sin, lbase, _) ->
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
-        let fpv = map (\i ->
-          let ent = ((rho - (-fhalfsize)*sin)/cos, (-fhalfsize))
-          let ext = ((rho - fhalfsize*sin)/cos, fhalfsize)
+        let ent = ((rho - (-fhalfsize)*sin)/cos, (-fhalfsize))
+        let ext = ((rho - fhalfsize*sin)/cos, fhalfsize)
+        let k = (ext.1 - ent.1)/(ext.2 - ent.2)
 
-          let k = (ext.1 - ent.1)/(ext.2 - ent.2)
+        let fpv = map (\i ->
           let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
           let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (fhalfsize)
           let Xpixmin = f32.floor(xmin)
@@ -106,11 +106,11 @@ module Projection = {
     in flatten <| map (\(cos, sin, lbase, _) ->
     map (\r ->
       let rho = rhozero + r32(r)*deltarho
-      let fpv = map (\i ->
-        let ent = ((-fhalfsize), (rho - (-fhalfsize)*cos)/sin)
-        let ext = (fhalfsize, (rho - fhalfsize*cos)/sin)
+      let ent = ((-fhalfsize), (rho - (-fhalfsize)*cos)/sin)
+      let ext = (fhalfsize, (rho - fhalfsize*cos)/sin)
+      let k = (ext.2 - ent.2)/(ext.1 - ent.1)
 
-        let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+      let fpv = map (\i ->
         let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
         let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + fhalfsize
         let Ypixmin = f32.floor(ymin)

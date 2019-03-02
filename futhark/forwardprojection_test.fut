@@ -11,18 +11,21 @@
 -- import "preprocessing"
 
 let is_flat (cos: f32) (sin: f32): bool =
-     f32.abs(sin) >= f32.abs(cos)
+  f32.abs(sin) >= f32.abs(cos)
 
-let preprocess_2 [a](angles: [a]f32): ([](f32,f32,f32,i32),[](f32,f32,f32,i32)) =
-     let cossin = map(\i -> let angle = angles[i]
-          let cos= f32.cos(angle)
-          let sin = f32.sin(angle)
-          let lcot  = f32.sqrt(1.0+(cos/sin)**2.0f32)
-          let ltan = f32.sqrt(1.0+(sin/cos)**2.0f32)
-          in (cos, sin, lcot,ltan, i))
-     (iota(a))
-     let parts = partition(\(c,s,_,_,_) -> is_flat c s )cossin
-     in ((map (\(cos, sin, lcot,_, i)-> (cos,sin,lcot,i)) parts.1), (map(\(cos, sin, _,ltan, i)-> (cos,sin,ltan,i)) parts.2))
+let preprocess_2 [a] (angles: [a]f32): ([](f32, f32, f32, i32), [](f32, f32, f32, i32)) =
+  let cossin = map (\i ->
+    let angle = angles[i]
+    let cos= f32.cos(angle)
+    let sin = f32.sin(angle)
+    let lcot  = f32.sqrt(1.0 + (cos/sin)**2.0f32)
+    let ltan = f32.sqrt(1.0 + (sin/cos)**2.0f32)
+    in (cos, sin, lcot, ltan, i)
+  ) (iota(a))
+  let parts = partition (\(c, s, _, _, _) -> is_flat c s ) cossin
+  let p1 = map (\(cos, sin, lcot, _, i) -> (cos, sin, lcot, i)) parts.1
+  let p2 = map (\(cos, sin, _, ltan, i)-> (cos, sin, ltan, i)) parts.2
+  in (p1, p2)
 
 let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
   let fhalfsize = r32(halfsize)
@@ -90,7 +93,7 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
 
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
-      let b = f32.abs(Ypixmin - Ypixplus) < 0.4f32
+      let b = f32.abs(Ypixmin - Ypixplus) < 0.0005f32
       let bmin = bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
       let bplus = (!b) && bounds && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
 
@@ -113,17 +116,13 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
 let main  [n][r] (angles : []f32)
           (rhos : [r]f32)
           (image : *[n]f32) =
-          let size = t32(f32.sqrt(r32(n)))
-          let halfsize = size/2
-          let rhozero = unsafe rhos[0]
-          let deltarho = unsafe rhos[1]-rhozero
-          let numrhos = r
-          let lines = preprocess_2 angles
-          -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
-          let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
-          let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
-          in steep ++ flat
-          -- let dat = steep ++ flat
-          -- let vals = map (\(v, _) -> v) dat
-          -- let inds = map (\(_, i) -> i) dat
-          -- in scatter (replicate ((length steep) + (length flat)) 0.0f32) inds vals
+  let size = t32(f32.sqrt(r32(n)))
+  let halfsize = size/2
+  let rhozero = unsafe rhos[0]
+  let deltarho = unsafe rhos[1]-rhozero
+  let numrhos = r
+  let lines = preprocess_2 angles
+  -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
+  let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
+  let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
+  in steep ++ flat
