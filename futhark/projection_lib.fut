@@ -54,76 +54,89 @@ module Projection = {
       ) angles))
 
   let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, lbase, _) ->
+    let fhalfsize = r32(halfsize)
+    let size = halfsize*2
+    in flatten <| map (\(cos, sin, lbase, _) ->
       map (\r ->
         let rho = (rhozero + r32(r)*deltarho)
         let fpv = map (\i ->
-          let ent = (find_x (-1.0*(r32(halfsize))) rho cos sin, (-1.0*(r32(halfsize))))
-          let ext = (find_x (r32(halfsize)) rho cos sin, (r32(halfsize)))
+          let ent = (find_x (-fhalfsize) rho cos sin, (-fhalfsize))
+          let ext = (find_x fhalfsize rho cos sin, fhalfsize)
 
-          -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
-          let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(halfsize))
-          let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(halfsize))
-          let Xpixmin = t32(f32.floor(xmin))
-          let Xpixplus = t32(f32.floor(xplus))
-          let baselength = lbase
-          let Xpixmax = i32.max Xpixmin Xpixplus
+          let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
+          let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (fhalfsize)
+          let Xpixmin = f32.floor(xmin)
+          let Xpixplus = f32.floor(xplus)
+
+          let Xpixmax = f32.max Xpixmin Xpixplus
           let xdiff = xplus - xmin
-          -- if both equal then l is baselength and we only want one l
-          let xminfact = if Xpixmin == Xpixplus then 1 else (r32(Xpixmax) - xmin)/xdiff
-          let xplusfact = if Xpixmin == Xpixplus then 0 else (xplus - r32(Xpixmax))/xdiff
-          let lxmin = xminfact*baselength
-          let lxplus = xplusfact*baselength
-          let y = i+halfsize
-          -- FIX this is just renaming
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
-          let size = halfsize*2
-          let pixmin = xmin+ymin*size
-          let pixplus = xplus+yplus*size
-          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*img[pixmin]) else 0.0f32
-          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
+
+          let b = if f32.abs(Xpixmin - Xpixplus) < 0.4f32 then true else false
+          let bmin = if Xpixmin >= (-0.4f32) && Xpixmin < (r32(size) + 0.4f32) then true else false
+          let bplus = if (not b) && Xpixplus >= (-0.4f32) && Xpixplus < (r32(size) + 0.4f32) then true else false
+
+          let xminfacttmp = (Xpixmax - xmin)/xdiff
+          let xminfact = if b then 1 else xminfacttmp
+          let xplusfact = (xplus - Xpixmax)/xdiff
+
+          let lxmin = xminfact*lbase
+          let lxplus = xplusfact*lbase
+
+          let pixminval = lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
+          let pixplusval = lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+
+          let min = if bmin then pixminval else 0.0f32
+          let plus = if bplus then pixplusval else 0.0f32
+
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
         in (reduce (+) 0.0f32 fpv)
       ) (iota numrhos)
     ) lines
 
-    let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    flatten <| map (\(cos, sin, lbase, _) ->
-      map (\r ->
-        let rho = rhozero + r32(r)*deltarho
-        let fpv = map (\i ->
-          let ent = ((-1.0*(r32(halfsize))), find_y (-1.0*(r32(halfsize))) rho cos sin)
-          let ext = ((r32(halfsize)), find_y (r32(halfsize)) rho cos sin)
-          -- let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          let k = (ext.2 - ent.2)/(ext.1 - ent.1)
-          let ymin = k*(r32(i) - ent.1) + ent.2 + (r32(halfsize))
-          let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + (r32(halfsize))
-          let Ypixmin = t32(f32.floor(ymin))
-          let Ypixplus = t32(f32.floor(yplus))
-          -- could be done for all rays of same angle at once
-          let baselength = lbase
-          let Ypixmax = i32.max Ypixmin Ypixplus
-          let ydiff = yplus - ymin
-          -- if both equal then l is baselength and we only want one l
-          let yminfact = if Ypixmin == Ypixplus then 1 else (r32(Ypixmax) - ymin)/ydiff
-          let yplusfact = if Ypixmin == Ypixplus then 0 else (yplus - r32(Ypixmax))/ydiff
-          let lymin = yminfact*baselength
-          let lyplus = yplusfact*baselength
-          let x = i+halfsize
-          -- FIX this is just renaming
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = ((lymin, x, Ypixmin), (lyplus, x, Ypixplus))
-          let size = halfsize*2
-          let pixmin = xmin+ymin*size
-          let pixplus = xplus+yplus*size
-          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*img[pixmin]) else 0.0f32
-          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*img[pixplus]) else 0.0f32
-          in (min+plus)
-        ) ((-halfsize)...(halfsize-1))
-        in (reduce (+) 0.0f32 fpv)
-      ) (iota numrhos)
-    ) lines
+  let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
+    let fhalfsize = r32(halfsize)
+    let size = halfsize*2
+    in flatten <| map (\(cos, sin, lbase, _) ->
+    map (\r ->
+      let rho = rhozero + r32(r)*deltarho
+      let fpv = map (\i ->
+        let ent = ((-fhalfsize), find_y (-fhalfsize) rho cos sin)
+        let ext = (fhalfsize, find_y fhalfsize rho cos sin)
+
+        let k = (ext.2 - ent.2)/(ext.1 - ent.1)
+        let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
+        let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + fhalfsize
+        let Ypixmin = f32.floor(ymin)
+        let Ypixplus = f32.floor(yplus)
+
+        let Ypixmax = f32.max Ypixmin Ypixplus
+        let ydiff = yplus - ymin
+
+        let b = if f32.abs(Ypixmin - Ypixplus) < 0.4f32 then true else false
+        let bmin = if Ypixmin >= (-0.4f32) && Ypixmin < (r32(size) + 0.4f32) then true else false
+        let bplus = if (not b) && Ypixplus >= (-0.4f32) && Ypixplus < (r32(size) + 0.4f32) then true else false
+
+        let yminfacttmp = (r32(Ypixmax) - ymin)/ydiff
+        let yminfact = if b then 1 else xminfacttmp
+        let yplusfact = (yplus - Ypixmax)/ydiff
+
+        let lymin = yminfact*lbase
+        let lyplus = yplusfact*lbase
+
+        let pixminval = lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
+        let pixplusval = lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
+
+        let min = if bmin then pixminval else 0.0f32
+        let plus = if bplus then pixplusval else 0.0f32
+
+        in (min+plus)
+      ) ((-halfsize)...(halfsize-1))
+      in (reduce (+) 0.0f32 fpv)
+    ) (iota numrhos)
+  ) lines
+
 
   -- get the index into the projection vector based on rho and angleindex
   let getprojectionindex (angleindex: i32) (rhovalue: f32) (deltarho: f32) (rhozero: f32) (numrhos: i32): i32 =
