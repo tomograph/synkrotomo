@@ -3,7 +3,7 @@ let is_flat (cos: f32) (sin: f32): bool =
 
 let preprocessing [a][r] (angles : [a]f32)
           (rhos : [r]f32)
-          img =
+          (img:[]f32)=
           let cossin = map(\i -> let angle = angles[i]
                let cos= f32.cos(angle)
                let sin = f32.sin(angle)
