@@ -1,0 +1,21 @@
+
+regular fp
+Compiling ./futhark/forwardprojection.fut...
+Results for ./futhark/forwardprojection.fut:
+dataset ../data/fpinputf32rad64:        98.00μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad128:      267.50μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad256:     1834.00μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:    14544.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024:  101991.10μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad2048: 1508611.30μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad4096: 10148739.80μs (avg. of 10 runs; RSD: 0.01)
+testing fp - scatter, calling functions
+Compiling ./futhark/forwardprojection_test.fut...
+Results for ./futhark/forwardprojection_test.fut:
+dataset ../data/fpinputf32rad64:       201.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad128:      404.40μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad256:     2072.70μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:    14568.10μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad1024:   98417.50μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad2048: 1956218.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4096: 10462631.40μs (avg. of 10 runs; RSD: 0.01)
