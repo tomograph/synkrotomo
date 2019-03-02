@@ -188,6 +188,7 @@
 
 
 
+-- SIRT 3D does not have sanity data yet
 -- input@../data/sirt3Dinputf32rad64
 -- output@../sd/sanity-sirt3Dinputf32rad64
 -- input@../data/sirt3Dinputf32rad128
