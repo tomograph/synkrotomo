@@ -129,8 +129,8 @@ module Projection = {
         let yminfact = if b then 1 else yminfacttmp
         let yplusfact = (yplus - Ypixmax)/ydiff
 
-        let lymin = yminfact*(f32.sqrt(1+k*k))
-        let lyplus = yplusfact*(f32.sqrt(1+k*k))
+        let lymin = yminfact*lbase
+        let lyplus = yplusfact*lbase
 
         -- let ind1 = if t1 then (i+halfsize)+t32(Ypixmin)*size else 0
         -- let ind2 = if t2 then (i+halfsize)+t32(Ypixplus)*size else 0
