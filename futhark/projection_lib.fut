@@ -131,20 +131,20 @@ module Projection = {
         let lymin = yminfact*(f32.sqrt(1+k*k))
         let lyplus = yplusfact*(f32.sqrt(1+k*k))
 
-        let ind1 = if t1 then (i+halfsize)+t32(Ypixmin)*size else 0
-        let ind2 = if t2 then (i+halfsize)+t32(Ypixplus)*size else 0
+        -- let ind1 = if t1 then (i+halfsize)+t32(Ypixmin)*size else 0
+        -- let ind2 = if t2 then (i+halfsize)+t32(Ypixplus)*size else 0
+        --
+        -- let pixminval = lymin*(unsafe img[ind1])
+        -- let pixplusval = lyplus*(unsafe img[ind2])
+        --
+        -- -- let pixminval = (i+halfsize)+t32(Ypixmin)*size
+        -- -- let pixplusval = (i+halfsize)+t32(Ypixplus)*size
+        --
+        -- let min = if bmin then pixminval else 0.0f32
+        -- let plus = if bplus then pixplusval else 0.0f32
 
-        let pixminval = lymin*(unsafe img[ind1])
-        let pixplusval = lyplus*(unsafe img[ind2])
-
-        -- let pixminval = (i+halfsize)+t32(Ypixmin)*size
-        -- let pixplusval = (i+halfsize)+t32(Ypixplus)*size
-
-        let min = if bmin then pixminval else 0.0f32
-        let plus = if bplus then pixplusval else 0.0f32
-
-        -- let min = if t1 && bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
-        -- let plus = if t2 && bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+        let min = if t1 && bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
+        let plus = if t2 && bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
