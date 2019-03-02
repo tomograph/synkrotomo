@@ -23,7 +23,7 @@ let SIRT [n][p][r](angles : []f32)
           let halfsize = size/2
           let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
           let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
-          let lines = preprocess_2 angles
+          let lines = preprocess angles
           let res = loop (image) = (image) for iter < iterations do
                -- let fp = forward_projection angles rhos halfsize image
                -- let fp_diff = map2 (-) projections fp
