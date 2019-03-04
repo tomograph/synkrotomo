@@ -29,6 +29,7 @@ let preprocess_2 [a] (angles: [a]f32): ([](f32, f32, f32, i32), [](f32, f32, f32
 let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
   let fhalfsize = r32(halfsize)
   let size = halfsize*2
+  let fsize = r32(size)
   in flatten <| map (\(cos, sin, lbase, _) ->
     let entBase = ((-fhalfsize)*sin)/cos
     let extBase = (fhalfsize*sin)/cos
@@ -48,11 +49,10 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let Xpixmax = f32.max Xpixmin Xpixplus
 
         let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
-        let b = t32(Xpixmin) == t32(Xpixplus)
-        -- let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
+        let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
 
-        let bmin = bounds && Xpixmin >= 0.0f32 && Xpixmin < r32(size)
-        let bplus = (!b) && bounds && Xpixplus >= 0.0f32 && Xpixplus < r32(size)
+        let bmin = bounds && Xpixmin >= 0.0f32 && Xpixmin < fsize
+        let bplus = (!b) && bounds && Xpixplus >= 0.0f32 && Xpixplus < fsize
 
         let xminfacttmp = (Xpixmax - xmin)/xdiff
         let xminfact = if b then 1 else xminfacttmp
@@ -74,6 +74,7 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
 let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
   let fhalfsize = r32(halfsize)
   let size = halfsize*2
+  let fsize = r32(size)
   in flatten <| map (\(cos, sin, lbase, _) ->
   let entBase = ((-fhalfsize)*cos)/sin
   let extBase = (fhalfsize*cos)/sin
@@ -94,9 +95,9 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
 
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
-      let b = t32(Ypixmin) == t32(Ypixplus)
-      let bmin = bounds && Ypixmin >= 0.0f32 && Ypixmin < r32(size)
-      let bplus = (!b) && bounds && Ypixplus >= 0.0f32 && Ypixplus < r32(size)
+      let b = f32.abs(Ypixmin - Ypixplus) < 0.0005f32
+      let bmin = bounds && Ypixmin >= 0.0f32 && Ypixmin < fsize
+      let bplus = (!b) && bounds && Ypixplus >= 0.0f32 && Ypixplus < fsize
 
       let yminfacttmp = (Ypixmax - ymin)/ydiff
       let yminfact = if b then 1 else yminfacttmp
