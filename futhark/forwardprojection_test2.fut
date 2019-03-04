@@ -59,7 +59,8 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
-      in (v, ind*numrhos+r)
+      -- in (v, ind*numrhos+r)
+      in v
     ) (iota numrhos)
   ) lines
 
@@ -102,7 +103,8 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
         in (min+plus)
 
         )((-halfsize)...(halfsize-1))
-      in (v, ind*numrhos + r)
+      -- in (v, ind*numrhos+r)
+      in v
   ) (iota numrhos)
 ) lines
 
