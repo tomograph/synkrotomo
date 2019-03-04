@@ -89,7 +89,7 @@ module Projection = {
 
           in (min+plus)
         ) ((-halfsize)...(halfsize-1))
-        in (v, ind*numrhos+r)
+        in v
       ) (iota numrhos)
     ) lines
 
@@ -132,7 +132,7 @@ module Projection = {
           in (min+plus)
 
           )((-halfsize)...(halfsize-1))
-        in (v, ind*numrhos + r)
+        in v
     ) (iota numrhos)
   ) lines
 
@@ -228,13 +228,14 @@ module Projection = {
                )((-halfsize)...(halfsize-1))
           )((-halfsize)...(halfsize-1)))
 
-     let bp_steep [p] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
+     let bp_steep [p] [l] (lines: ([l](f32,f32,f32,i32))) (offset:i32) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
           let fact = f32.sqrt(2.0f32)/2.0f32
           in flatten (map(\irow ->
                   map(\icolumn ->
                         let xmin = r32(icolumn)
                         let ymin = r32(irow)
-                        in reduce (+) 0.0f32 <| map(\(cost,sint,lbase,angleidx) ->
+                        in reduce (+) 0.0f32 <| map(\ln ->
+                             let (cost,sint,lbase,angleidx) = unsafe lines[ln]
                              let tant = sint/cost
                              let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
                              let rho = cost*p.1+sint*p.2
@@ -248,20 +249,21 @@ module Projection = {
                                        let maxx = f32.max x_bot x_top
                                        let minx = f32.min x_bot x_top
                                        let l = (intersect_fact maxx minx xmin (xmin+1.0))*(lbase)
-                                       let projectionidx = angleidx*numrhos+(t32(sprime))
+                                       let projectionidx = (ln+offset)*numrhos+(t32(sprime))
                                        in l*(unsafe projections[projectionidx])
                                   )(iota rhosprpixel)
-                        )lines
+                        ) (iota l)
               )((-halfsize)...(halfsize-1))
          )((-halfsize)...(halfsize-1)))
 
-        let bp_flat [p] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
+        let bp_flat [p][l] (lines: ([l](f32,f32,f32,i32))) (offset:i32) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
               let fact = f32.sqrt(2.0f32)/2.0f32
               in flatten (map(\irow ->
                  map(\icolumn ->
                       let xmin = r32(icolumn)
                       let ymin = r32(irow)
-                      in reduce (+) 0.0f32 <| map(\(cost,sint,lbase,angleidx) ->
+                      in reduce (+) 0.0f32 <| map(\ln ->
+                           let (cost,sint,lbase,angleidx) = unsafe lines[ln]
                            let cott = cost/sint
                            let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
                            let rho = cost*p.1+sint*p.2
@@ -275,10 +277,10 @@ module Projection = {
                                      let maxy = f32.max y_left y_right
                                      let miny = f32.min y_left y_right
                                      let l = (intersect_fact maxy miny ymin (ymin+1.0))*lbase
-                                     let projectionidx = angleidx*numrhos+(t32(sprime))
+                                     let projectionidx = (ln+offset)*numrhos+(t32(sprime))
                                      in l*(unsafe projections[projectionidx])
                                 )(iota rhosprpixel)
-                           )lines
+                           ) (iota l)
                       )((-halfsize)...(halfsize-1))
                  )((-halfsize)...(halfsize-1)))
 }
