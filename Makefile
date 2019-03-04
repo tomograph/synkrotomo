@@ -20,8 +20,8 @@ benchsirt:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut
 
 benchsirttest:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
-	futhark bench --runs=1 --skip-compilation ./futhark/SIRT_test.fut
+	# FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
+	futhark bench --runs=1 --backend=opencl ./futhark/SIRT_test.fut
 
 benchsirt3d:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut
