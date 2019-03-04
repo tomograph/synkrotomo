@@ -63,8 +63,8 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let tmpind1 = t32(Xpixmin)+(i+halfsize)*size
         let tmpind2 = t32(Xpixplus)+(i+halfsize)*size
 
-        let ind1 = if tmpind1 < 0 then 0 else if tmpind1 >= n then n else tmpind1
-        let ind2 = if tmpind2 < 0 then 0 else if tmpind1 >= n then n else tmpind1
+        let ind1 = if tmpind1 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
+        let ind2 = if tmpind2 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
 
         let pixvalmin = lxmin*(unsafe img[ind1])
         let pixvalplus = lxplus*(unsafe img[ind2])
