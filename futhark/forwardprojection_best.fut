@@ -34,8 +34,8 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
     let extBase = (fhalfsize*sin)/cos
     in map (\r ->
       let rho = (rhozero + r32(r)*deltarho)
-      let ent = (rho - entBase, (-fhalfsize))
-      let ext = (rho - extBase, fhalfsize)
+      let ent = ((rho-(-fhalfsize)*sin)/cos, (-fhalfsize))
+      let ext = ((rho-fhalfsize*sin)/cos, fhalfsize)
       let k = (ext.1 - ent.1)/(ext.2 - ent.2)
 
       let fpv = map (\i ->
@@ -78,8 +78,8 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
   let extBase = (fhalfsize*cos)/sin
   in map (\r ->
     let rho = rhozero + r32(r)*deltarho
-    let ent = ((-fhalfsize), rho - entBase)
-    let ext = (fhalfsize, rho - extBase)
+    let ent = ((-fhalfsize), (rho-(-fhalfsize)*cos)/sin)
+    let ext = (fhalfsize, (rho-fhalfsize*cos)/sin)
     let k = (ext.2 - ent.2)/(ext.1 - ent.1)
 
     let fpv = map (\i ->
