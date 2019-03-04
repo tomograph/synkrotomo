@@ -1,5 +1,4 @@
 -- ==
--- input@../preproc/fpinputf32rad64
 -- input@../preproc/fpinputf32rad128
 -- input@../preproc/fpinputf32rad256
 -- input@../preproc/fpinputf32rad512
@@ -109,23 +108,23 @@ let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (delt
   ) (iota numrhos)
 ) lines
 
-let main [n]  (lines1:[]f32)
-              (lines2:[]f32)
+let main [n]  (lines1:[](f32,f32,f32))
+              (lines2:[](f32,f32,f32))
               (rhozero:f32)
               (deltarho:f32)
               (numrhos:i32)
               (image : *[n]f32) =
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
-  let l1 = map (\i -> (unsafe lines1[i*3], unsafe lines1[i*3+1], unsafe lines1[i*3+2]) ) (iota (length lines1))
-  let l2 = map (\i -> (unsafe lines2[i*3], unsafe lines2[i*3+1], unsafe lines2[i*3+2]) ) (iota (length lines2))
+  -- let l1 = map (\i -> (unsafe lines1[i*3], unsafe lines1[i*3+1], unsafe lines1[i*3+2]) ) (iota (length lines1))
+  -- let l2 = map (\i -> (unsafe lines2[i*3], unsafe lines2[i*3+1], unsafe lines2[i*3+2]) ) (iota (length lines2))
   -- let rhozero = unsafe rhos[0]
   -- let deltarho = unsafe rhos[1]-rhozero
   -- let numrhos = r
   -- let lines = preprocess_2 angles
   -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
-  let steep = forwardprojection_steep l2 rhozero deltarho numrhos halfsize image
-  let flat = forwardprojection_flat l1 rhozero deltarho numrhos halfsize image
+  let steep = forwardprojection_steep lines2 rhozero deltarho numrhos halfsize image
+  let flat = forwardprojection_flat lines1 rhozero deltarho numrhos halfsize image
   in steep ++ flat
   -- let arr = steep ++ flat
   -- let vals = map (\(v, _) -> v) arr
