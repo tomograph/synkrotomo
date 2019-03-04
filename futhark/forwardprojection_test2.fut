@@ -48,7 +48,7 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let Xpixmax = f32.max Xpixmin Xpixplus
 
         let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
-        let b = t32(Ypixmin) == t32(Ypixplus)
+        let b = t32(Xpixmin) == t32(Xpixplus)
         -- let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
 
         let bmin = bounds && Xpixmin >= 0.0f32 && Xpixmin < r32(size)
