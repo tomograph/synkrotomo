@@ -1,0 +1,34 @@
+regular fp
+Compiling ./futhark/forwardprojection.fut...
+Results for ./futhark/forwardprojection.fut:
+dataset ../data/fpinputf32rad64:        97.60μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad128:      266.80μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad256:     1841.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:    14019.80μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/fpinputf32rad1024:  101233.70μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad1500:  683257.50μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad2000: 1099423.80μs (avg. of 10 runs; RSD: 0.07)
+dataset ../data/fpinputf32rad2048: 1554045.30μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/fpinputf32rad2500: 2567421.30μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad3000: 4400824.60μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad3500: 7588903.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4000: 10402922.30μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4096: 10185013.70μs (avg. of 10 runs; RSD: 0.01)
+
+
+testing fp - partially sane
+Compiling ./futhark/forwardprojection_test.fut...
+Results for ./futhark/forwardprojection_test.fut:
+dataset ../data/fpinputf32rad64:       189.70μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/fpinputf32rad128:      343.20μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/fpinputf32rad256:     1711.10μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:    11211.80μs (avg. of 10 runs; RSD: 0.06)
+dataset ../data/fpinputf32rad1024:   79896.80μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad1500:  756811.30μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad2000: 1393597.30μs (avg. of 10 runs; RSD: 0.12)
+dataset ../data/fpinputf32rad2048: 1986583.90μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad2500: 2966744.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad3000: 4646957.20μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad3500: 7428686.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4000: 9478977.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4096: 9089460.80μs (avg. of 10 runs; RSD: 0.01)
