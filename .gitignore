@@ -25,3 +25,6 @@ futhark/forwardprojection_test
 futhark/forwardprojection
 futhark/sanityCheck
 futhark/mse
+futhark/diff
+futhark/forwardprojection_test2
+futhark/forwardprojection_best
