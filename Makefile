@@ -16,22 +16,6 @@ benchfp:
 benchbp:
 	-futhark bench --runs=10 --backend=opencl ./futhark/backprojection.fut
 
-benchbptest:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test.fut
-
-benchbptest2:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
-	futhark bench --runs=10 --skip-compilation ./futhark/backprojection_test_2.fut
-
-benchbptest3:
-	futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test.fut
-
-benchbptest4:
-	FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/backprojection_test_2.fut
-	futhark bench --runs=10 --backend=opencl ./futhark/backprojection_test_2.fut
-
-
 benchsirt:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT.fut
 
@@ -55,16 +39,20 @@ benchtest:
 comdat:
 	futhark opencl ./futhark/forwardprojection.fut
 	./futhark/forwardprojection < data/fpinputf32rad256 >sanity.out
-	futhark opencl ./futhark/forwardprojection_test.fut
-	./futhark/forwardprojection_test < data/fpinputf32rad256 >>sanity.out
+	futhark opencl ./futhark/forwardprojection_test2.fut
+	./futhark/forwardprojection_test2 < data/fpinputf32rad256 >>sanity.out
+	# futhark opencl ./futhark/forwardprojection_best.fut
+	# ./futhark/forwardprojection_best < data/fpinputf32rad256 >>sanity.out
 
 tools:
 	futhark opencl ./futhark/sanityCheck.fut
 	futhark opencl ./futhark/mse.fut
+	futhark opencl ./futhark/diff.fut
 
-compareTest: comdat tools
-	./futhark/sanityCheck < sanity.out
-	./futhark/mse < sanity.out
+compareTest: comdat
+	./futhark/sanityCheck < sanity.out > compare.out
+	./futhark/mse < sanity.out >> compare.out
+	./futhark/diff < sanity.out >> compare.out
 	rm -f sanity.out
 	# data/fpinputf32rad64
 
