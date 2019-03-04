@@ -11,6 +11,7 @@ futhark/lib/*
 data/
 /sd/*
 *.out
+/preproc/*
 
 # Compiled source #
 ###################
