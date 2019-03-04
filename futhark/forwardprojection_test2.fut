@@ -38,7 +38,7 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
       let ext = (rho - extBase, fhalfsize)
       let k = (ext.1 - ent.1)/(ext.2 - ent.2)
 
-      in (reduce (+) 0.0f32 fpv) <| map (\i ->
+      in reduce (+) 0.0f32 <| map (\i ->
         let xmin = k*(r32(i) - ent.2) + ent.1 + (fhalfsize)
         let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (fhalfsize)
         let xdiff = xplus - xmin
@@ -81,7 +81,7 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
     let ext = (fhalfsize, rho - extBase)
     let k = (ext.2 - ent.2)/(ext.1 - ent.1)
 
-    in (reduce (+) 0.0f32 fpv) <| map (\i ->
+    in reduce (+) 0.0f32 <| map (\i ->
       let ymin = k*(r32(i) - ent.1) + ent.2 + fhalfsize
       let yplus = k*(r32(i) + 1 - ent.1) + ent.2 + fhalfsize
       let ydiff = yplus - ymin
