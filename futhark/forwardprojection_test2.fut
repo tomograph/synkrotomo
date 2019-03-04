@@ -3,6 +3,8 @@
 -- input@../preproc/fpinputf32rad128
 -- input@../preproc/fpinputf32rad256
 -- input@../preproc/fpinputf32rad512
+-- input@../preproc/fpinputf32rad1024
+-- input@../preproc/fpinputf32rad2048
 
 -- import "projection_lib"
 -- open Projection
