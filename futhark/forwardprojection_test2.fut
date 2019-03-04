@@ -112,9 +112,18 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
 
       let lymin = yminfact*lbase
       let lyplus = yplusfact*lbase
+      
+      let tmpind1 = (i+halfsize)+t32(Ypixmin)*size
+      let tmpind2 = (i+halfsize)+t32(Ypixplus)*size
 
-      let min = if bmin then lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size]) else 0.0f32
-      let plus = if bplus then lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size]) else 0.0f32
+      let ind1 = if tmpind1 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
+      let ind2 = if tmpind2 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
+
+      let pixvalmin = lxmin*(unsafe img[ind1])
+      let pixvalplus = lxplus*(unsafe img[ind2])
+
+      let min = if bmin then pixvalmin else 0.0f32
+      let plus = if bplus then pixvalplus else 0.0f32
 
       in (min+plus)
     ) ((-halfsize)...(halfsize-1))
