@@ -21,7 +21,9 @@ benchsirt:
 
 benchsirttest:
 	# FUTHARK_INCREMENTAL_FLATTENING=1 futhark opencl ./futhark/SIRT_test.fut
-	futhark bench --runs=1 --backend=opencl ./futhark/SIRT_test.fut
+	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT_test.fut
+
+comparesirt: benchsirttest benchsirt
 
 benchsirt3d:
 	-futhark bench --runs=1 --backend=opencl ./futhark/SIRT3D.fut
