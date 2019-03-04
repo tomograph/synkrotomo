@@ -50,8 +50,8 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
         let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
 
-        let bmin = bounds && Xpixmin >= (-0.0f32) && Xpixmin < r32(size)
-        let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
+        let bmin = bounds && Xpixmin >= 0.0f32 && Xpixmin < r32(size)
+        let bplus = (!b) && bounds && Xpixplus >= 0.0f32 && Xpixplus < r32(size)
 
         let xminfacttmp = (Xpixmax - xmin)/xdiff
         let xminfact = if b then 1 else xminfacttmp
@@ -94,8 +94,8 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
       let b = f32.abs(Ypixmin - Ypixplus) < 0.0005f32
-      let bmin = bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
-      let bplus = (!b) && bounds && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
+      let bmin = bounds && Ypixmin >= 0.0f32 && Ypixmin < r32(size)
+      let bplus = (!b) && bounds && Ypixplus >= 0.0f32 && Ypixplus < r32(size)
 
       let yminfacttmp = (Ypixmax - ymin)/ydiff
       let yminfact = if b then 1 else yminfacttmp

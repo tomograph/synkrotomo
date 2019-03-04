@@ -4,6 +4,7 @@
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
 -- input@../data/fpinputf32rad2048
+-- input@../data/fpinputf32rad4096
 
 -- import "projection_lib"
 -- open Projection
@@ -50,28 +51,28 @@ let forwardprojection_steep [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (d
         let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
         let b = f32.abs(Xpixmin - Xpixplus) < 0.0005f32
 
-        let bmin = bounds && Xpixmin >= (-0.0f32) && Xpixmin < r32(size)
-        let bplus = (!b) && bounds && Xpixplus >= (-0.0f32) && Xpixplus < r32(size)
+        let bmin = bounds && Xpixmin >= 0.0f32 && Xpixmin < r32(size)
+        let bplus = (!b) && bounds && Xpixplus >= 0.0f32 && Xpixplus < r32(size)
 
-        let xminfacttmp = (Xpixmax - xmin)/xdiff
-        let xminfact = if b then 1 else xminfacttmp
-        let xplusfact = (xplus - Xpixmax)/xdiff
+        let min = if bmin
+        then
+          let xminfacttmp = (Xpixmax - xmin)/xdiff
+          let xminfact = if b then 1 else xminfacttmp
+          let lxmin = xminfact*lbase
+          in lxmin*(unsafe img[t32(Xpixmin)+(i+halfsize)*size])
+        else 0.0f32
 
-        let lxmin = xminfact*lbase
-        let lxplus = xplusfact*lbase
 
-        let tmpind1 = t32(Xpixmin)+(i+halfsize)*size
-        let tmpind2 = t32(Xpixplus)+(i+halfsize)*size
+        let plus = if bplus
+        then
+          let xplusfact = (xplus - Xpixmax)/xdiff
+          let lxplus = xplusfact*lbase
+          in lxplus*(unsafe img[t32(Xpixplus)+(i+halfsize)*size])
+        else 0.0f32
 
-        let ind1 = if tmpind1 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
-        let ind2 = if tmpind2 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
 
-        let pixvalmin = lxmin*(unsafe img[ind1])
-        let pixvalplus = lxplus*(unsafe img[ind2])
 
         -- test manipulating the index and always reading a value, maybe on index 0 if out of bounds
-        let min = if bmin then pixvalmin else 0.0f32
-        let plus = if bplus then pixvalplus else 0.0f32
 
         in (min+plus)
       ) ((-halfsize)...(halfsize-1))
@@ -103,27 +104,26 @@ let forwardprojection_flat [n] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (de
       let bounds = (i+halfsize) >= 0 && (i+halfsize) < size
 
       let b = f32.abs(Ypixmin - Ypixplus) < 0.0005f32
-      let bmin = bounds && Ypixmin >= (-0.0f32) && Ypixmin < r32(size)
-      let bplus = (!b) && bounds && Ypixplus >= (-0.0f32) && Ypixplus < r32(size)
+      let bmin = bounds && Ypixmin >= 0.0f32 && Ypixmin < r32(size)
+      let bplus = (!b) && bounds && Ypixplus >= 0.0f32 && Ypixplus < r32(size)
 
-      let yminfacttmp = (Ypixmax - ymin)/ydiff
-      let yminfact = if b then 1 else yminfacttmp
+      let min = if bmin
+      then
+        let yminfacttmp = (Ypixmax - ymin)/ydiff
+        let yminfact = if b then 1 else yminfacttmp
+        let lymin = yminfact*lbase
+        in lymin*(unsafe img[(i+halfsize)+t32(Ypixmin)*size])
+      else 0.0f32
+
+      let plus = if bplus
+      then
       let yplusfact = (yplus - Ypixmax)/ydiff
-
-      let lymin = yminfact*lbase
       let lyplus = yplusfact*lbase
+      in lyplus*(unsafe img[(i+halfsize)+t32(Ypixplus)*size])
+      else 0.0f32
 
-      let tmpind1 = (i+halfsize)+t32(Ypixmin)*size
-      let tmpind2 = (i+halfsize)+t32(Ypixplus)*size
 
-      let ind1 = if tmpind1 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
-      let ind2 = if tmpind2 < 0 then 0 else if tmpind1 >= n then n-1 else tmpind1
 
-      let pixvalmin = lymin*(unsafe img[ind1])
-      let pixvalplus = lyplus*(unsafe img[ind2])
-
-      let min = if bmin then pixvalmin else 0.0f32
-      let plus = if bplus then pixvalplus else 0.0f32
 
       in (min+plus)
     ) ((-halfsize)...(halfsize-1))
