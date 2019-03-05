@@ -8,8 +8,8 @@
 -- input@../data/sirtinputf32rad4049
 
 
-import "projection_lib"
-open Projection
+import "testlib"
+open testlib
 
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
@@ -24,9 +24,17 @@ let SIRT [n] [p] [r] (angles : []f32)
   let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
-  let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
-  let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
-  let lines = preprocess_2 angles
+
+  let lines = preprocess angles
+
+  let rowsums_steep = forwardprojection_steep lines.2 rhozero deltarho r halfsize (replicate n 1)
+  let rowsums_flat = forwardprojection_steep lines.2 rhozero deltarho r halfsize (replicate n 1)
+  let inverserowsums = inverse (rowsums_steep ++ rowsums_flat)
+
+  let colsums_steep = bp_steep lines.2 0 rhozero deltarho rhosprpixel r halfsize (replicate p 1)
+  let colsums_flat = bp_flat lines.1 (length lines.2) rhozero deltarho rhosprpixel r halfsize (replicate p 1)
+  let inversecolumnsums = inverse <| map2 (+) colsums_steep colsums_flat
+
   let res = loop (image) = (image) for iter < iterations do
     let steep = forwardprojection_steep lines.2 rhozero deltarho r halfsize image
     let flat = forwardprojection_flat lines.1 rhozero deltarho r halfsize image
