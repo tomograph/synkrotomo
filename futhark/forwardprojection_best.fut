@@ -1,13 +1,17 @@
 -- ==
+-- input@../data/fpinputf32rad64
+-- input@../data/fpinputf32rad128
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
+-- input@../data/fpinputf32rad1500
+-- input@../data/fpinputf32rad2000
 -- input@../data/fpinputf32rad2048
-
-
--- import "projection_lib"
--- open Projection
--- import "preprocessing"
+-- input@../data/fpinputf32rad2500
+-- input@../data/fpinputf32rad3000
+-- input@../data/fpinputf32rad3500
+-- input@../data/fpinputf32rad4000
+-- input@../data/fpinputf32rad4096
 
 let is_flat (cos: f32) (sin: f32): bool =
   f32.abs(sin) >= f32.abs(cos)

@@ -12,8 +12,9 @@
 -- input@../data/bpinputf32rad2048
 -- output@../sd/sanity-bpinputf32rad2048
 
-import "projection_lib"
-open Projection
+
+import "testlib"
+open testlib
 
 let main  [p][r](angles : []f32)
           (rhos : [r]f32)
@@ -24,4 +25,6 @@ let main  [p][r](angles : []f32)
           let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
           let halfsize = size/2
           let lines = preprocess angles
-          in back_projection_met lines rhozero deltarho rhosprpixel r halfsize projections
+          let steep = bp_steep lines.2 rhozero deltarho rhosprpixel r halfsize projections
+          let flat = bp_flat lines.1 rhozero deltarho rhosprpixel r halfsize projections
+          in map2 (+) steep flat
