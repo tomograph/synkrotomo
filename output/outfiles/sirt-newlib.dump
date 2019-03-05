@@ -1,0 +1,136 @@
+Using platform: NVIDIA CUDA
+Using device: GeForce GTX TITAN X
+Lockstep width: 32
+Default group size: 256
+Default number of groups: 256
+Created kernel map_20270.
+Created kernel map_20280.
+Created kernel map_20303.
+Created kernel map_20400.
+Created kernel map_20426.
+Created kernel map_20523.
+Created kernel map_20536.
+Created kernel map_20585.
+Created kernel map_20724.
+Created kernel map_20827.
+Created kernel map_20856.
+Created kernel map_20958.
+Created kernel map_20984.
+Created kernel map_21087.
+Created kernel map_21100.
+Created kernel map_21150.
+Created kernel map_21293.
+Created kernel map_21401.
+Created kernel scan1_20164.
+Created kernel scan2_20230.
+Allocated 3220 bytes for arr->mem in space 'device' (now allocated: 3220 bytes) (new peak).
+Allocated 2896 bytes for arr->mem in space 'device' (now allocated: 6116 bytes) (new peak).
+Allocated 1048576 bytes for arr->mem in space 'device' (now allocated: 1054692 bytes) (new peak).
+Allocated 2331280 bytes for arr->mem in space 'device' (now allocated: 3385972 bytes) (new peak).
+Allocated 3220 bytes for mem_21610 in space 'device' (now allocated: 3389192 bytes) (new peak).
+Allocated 3220 bytes for mem_21613 in space 'device' (now allocated: 3392412 bytes) (new peak).
+Allocated 3220 bytes for mem_21616 in space 'device' (now allocated: 3395632 bytes) (new peak).
+Allocated 3220 bytes for mem_21619 in space 'device' (now allocated: 3398852 bytes) (new peak).
+Allocated 3220 bytes for mem_21622 in space 'device' (now allocated: 3402072 bytes) (new peak).
+Allocated 3220 bytes for mem_21625 in space 'device' (now allocated: 3405292 bytes) (new peak).
+Allocated 3220 bytes for mem_21628 in space 'device' (now allocated: 3408512 bytes) (new peak).
+Allocated 16 bytes for mem_21637 in space 'device' (now allocated: 3408528 bytes) (new peak).
+Allocated 16 bytes for mem_21640 in space 'device' (now allocated: 3408544 bytes) (new peak).
+Launching scan1_20164 with global work size [1024] and local work size [256].
+kernel scan1_20164 runtime: 41us
+Allocated 16 bytes for mem_21649 in space 'device' (now allocated: 3408560 bytes) (new peak).
+Allocated 16 bytes for mem_21652 in space 'device' (now allocated: 3408576 bytes) (new peak).
+Launching scan2_20230 with global work size [4] and local work size [4].
+kernel scan2_20230 runtime: 17us
+Unreferencing block mem_21637 (allocated as mem_21637) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 3408560 bytes)
+Unreferencing block mem_21640 (allocated as mem_21640) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 3408544 bytes)
+Allocated 3220 bytes for mem_21655 in space 'device' (now allocated: 3411764 bytes) (new peak).
+Allocated 3220 bytes for mem_21658 in space 'device' (now allocated: 3414984 bytes) (new peak).
+Launching map_20270 with global work size [1024] and local work size [256].
+kernel map_20270 runtime: 16us
+Unreferencing block mem_21610 (allocated as mem_21610) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3411764 bytes)
+Unreferencing block mem_21613 (allocated as mem_21613) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3408544 bytes)
+Unreferencing block mem_21649 (allocated as mem_21649) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 3408528 bytes)
+Unreferencing block mem_21652 (allocated as mem_21652) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 3408512 bytes)
+Allocated 3220 bytes for mem_21661 in space 'device' (now allocated: 3411732 bytes).
+Allocated 3220 bytes for mem_21664 in space 'device' (now allocated: 3414952 bytes).
+Allocated 3220 bytes for mem_21667 in space 'device' (now allocated: 3418172 bytes) (new peak).
+Allocated 3220 bytes for mem_21670 in space 'device' (now allocated: 3421392 bytes) (new peak).
+Launching map_20280 with global work size [1024] and local work size [256].
+kernel map_20280 runtime: 18us
+Unreferencing block mem_21616 (allocated as mem_21616) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3418172 bytes)
+Unreferencing block mem_21619 (allocated as mem_21619) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3414952 bytes)
+Unreferencing block mem_21622 (allocated as mem_21622) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3411732 bytes)
+Unreferencing block mem_21625 (allocated as mem_21625) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3408512 bytes)
+Unreferencing block mem_21628 (allocated as mem_21628) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3405292 bytes)
+Unreferencing block mem_21655 (allocated as mem_21655) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3402072 bytes)
+Unreferencing block mem_21658 (allocated as mem_21658) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3398852 bytes)
+Allocated 1612 bytes for mem_21673 in space 'device' (now allocated: 3400464 bytes).
+Allocated 1612 bytes for mem_21676 in space 'device' (now allocated: 3402076 bytes).
+Launching map_20400 with global work size [512] and local work size [256].
+kernel map_20400 runtime: 14us
+Allocated 1167088 bytes for mem_21680 in space 'device' (now allocated: 4569164 bytes) (new peak).
+Launching map_20303 with global work size [291840] and local work size [256].
+kernel map_20303 runtime: 3171us
+Unreferencing block mem_21673 (allocated as mem_21673) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 4567552 bytes)
+Unreferencing block mem_21676 (allocated as mem_21676) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 4565940 bytes)
+Allocated 1612 bytes for mem_21683 in space 'device' (now allocated: 4567552 bytes).
+Allocated 1612 bytes for mem_21686 in space 'device' (now allocated: 4569164 bytes).
+Launching map_20523 with global work size [512] and local work size [256].
+kernel map_20523 runtime: 14us
+Allocated 1167088 bytes for mem_21690 in space 'device' (now allocated: 5736252 bytes) (new peak).
+Launching map_20426 with global work size [291840] and local work size [256].
+kernel map_20426 runtime: 3197us
+Unreferencing block mem_21683 (allocated as mem_21683) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 5734640 bytes)
+Unreferencing block mem_21686 (allocated as mem_21686) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 5733028 bytes)
+Allocated 2334176 bytes for mem_21693 in space 'device' (now allocated: 8067204 bytes) (new peak).
+Launching map_20536 with global work size [583680] and local work size [256].
+kernel map_20536 runtime: 33us
+Unreferencing block mem_21680 (allocated as mem_21680) in space 'device': 0 references remaining.
+1167088 bytes freed (now allocated: 6900116 bytes)
+Unreferencing block mem_21690 (allocated as mem_21690) in space 'device': 0 references remaining.
+1167088 bytes freed (now allocated: 5733028 bytes)
+Allocated 1048576 bytes for mem_21697 in space 'device' (now allocated: 6781604 bytes).
+Launching map_20585 with global work size [262144] and local work size [256].
+kernel map_20585 runtime: 6370us
+Allocated 1048576 bytes for mem_21701 in space 'device' (now allocated: 7830180 bytes).
+Launching map_20724 with global work size [262144] and local work size [256].
+kernel map_20724 runtime: 6420us
+Allocated 1048576 bytes for mem_21704 in space 'device' (now allocated: 8878756 bytes) (new peak).
+Launching map_20827 with global work size [262144] and local work size [256].
+kernel map_20827 runtime: 27us
+Unreferencing block mem_21697 (allocated as mem_21697) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 7830180 bytes)
+Unreferencing block mem_21701 (allocated as mem_21701) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 6781604 bytes)
+Unreferencing block mem_21704 (allocated as mem_21704) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 5733028 bytes)
+Unreferencing block mem_21693 (allocated as mem_21693) in space 'device': 0 references remaining.
+2334176 bytes freed (now allocated: 3398852 bytes)
+Unreferencing block mem_21670 (allocated as mem_21670) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3395632 bytes)
+Unreferencing block mem_21667 (allocated as mem_21667) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3392412 bytes)
+Unreferencing block mem_21664 (allocated as mem_21664) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3389192 bytes)
+Unreferencing block mem_21661 (allocated as mem_21661) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3385972 bytes)
+./futhark/SIRT_test: Error at futhark/SIRT_test.fut:52:1-57:55 -> futhark/SIRT_test.fut:57:11-55 -> futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape

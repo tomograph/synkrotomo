@@ -1,0 +1,52 @@
+Using platform: NVIDIA CUDA
+Using device: GeForce GTX TITAN X
+Lockstep width: 32
+Default group size: 256
+Default number of groups: 256
+Created kernel map_7591.
+Created kernel map_7768.
+Allocated 12868 bytes for arr->mem in space 'device' (now allocated: 12868 bytes) (new peak).
+Allocated 11584 bytes for arr->mem in space 'device' (now allocated: 24452 bytes) (new peak).
+Allocated 16777216 bytes for arr->mem in space 'device' (now allocated: 16801668 bytes) (new peak).
+Allocated 12868 bytes for mem_7794 in space 'device' (now allocated: 16814536 bytes) (new peak).
+Allocated 12868 bytes for mem_7797 in space 'device' (now allocated: 16827404 bytes) (new peak).
+Allocated 3217 bytes for mem_7799 in space 'device' (now allocated: 16830621 bytes) (new peak).
+Allocated 12868 bytes for mem_7802 in space 'device' (now allocated: 16843489 bytes) (new peak).
+Allocated 12868 bytes for mem_7805 in space 'device' (now allocated: 16856357 bytes) (new peak).
+Allocated 12868 bytes for mem_7808 in space 'device' (now allocated: 16869225 bytes) (new peak).
+Allocated 12868 bytes for mem_7811 in space 'device' (now allocated: 16882093 bytes) (new peak).
+Launching map_7768 with global work size [3328] and local work size [256].
+kernel map_7768 runtime: 44us
+Allocated 37265728 bytes for mem_7815 in space 'device' (now allocated: 54147821 bytes) (new peak).
+Launching map_7591 with global work size [9316608] and local work size [256].
+kernel map_7591 runtime: 1446417us
+Unreferencing block mem_7794 (allocated as mem_7794) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54134953 bytes)
+Unreferencing block mem_7797 (allocated as mem_7797) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54122085 bytes)
+Unreferencing block mem_7799 (allocated as mem_7799) in space 'device': 0 references remaining.
+3217 bytes freed (now allocated: 54118868 bytes)
+Unreferencing block mem_7802 (allocated as mem_7802) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54106000 bytes)
+Unreferencing block mem_7805 (allocated as mem_7805) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54093132 bytes)
+Unreferencing block mem_7808 (allocated as mem_7808) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54080264 bytes)
+Unreferencing block mem_7811 (allocated as mem_7811) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54067396 bytes)
+Unreferencing block mem_7815 (allocated as mem_7815) in space 'device': 2 references remaining.
+Unreferencing block out_mem_7818 (allocated as mem_7815) in space 'device': 1 references remaining.
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+12868 bytes freed (now allocated: 54054528 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+11584 bytes freed (now allocated: 54042944 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+16777216 bytes freed (now allocated: 37265728 bytes)
+Unreferencing block arr->mem (allocated as mem_7815) in space 'device': 0 references remaining.
+37265728 bytes freed (now allocated: 0 bytes)
+Peak memory usage for space 'device': 54147821 bytes.
+Peak memory usage for space 'local': 0 bytes.
+Peak memory usage for default space: 0 bytes.
+Kernel map_7591 executed      1 times, with average runtime: 1446417us	and total runtime: 1446417us
+Kernel map_7768 executed      1 times, with average runtime:     44us	and total runtime:     44us
+Ran 2 kernels with cumulative runtime: 1446461us
