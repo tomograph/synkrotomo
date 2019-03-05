@@ -4,13 +4,7 @@
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
--- input@../data/fpinputf32rad1500
--- input@../data/fpinputf32rad2000
 -- input@../data/fpinputf32rad2048
--- input@../data/fpinputf32rad2500
--- input@../data/fpinputf32rad3000
--- input@../data/fpinputf32rad3500
--- input@../data/fpinputf32rad4000
 -- input@../data/fpinputf32rad4096
 
 let is_flat (cos: f32) (sin: f32): bool =
@@ -121,7 +115,7 @@ let main  [n][r][a] (angles : [a]f32)
   let rhozero = unsafe rhos[0]
   let deltarho = unsafe rhos[1]-rhozero
   let numrhos = r
-  let lines = preprocess_2 angles
+  let lines = preprocess angles
   -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
   let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
   let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
