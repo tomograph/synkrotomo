@@ -10,7 +10,7 @@
 let is_flat (cos: f32) (sin: f32): bool =
   f32.abs(sin) >= f32.abs(cos)
 
-let preprocess_3 [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
+let preprocess [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
   let cossin = map(\angle ->
     let cos= f32.cos(angle)
     let sin = f32.sin(angle)
