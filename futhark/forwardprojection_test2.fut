@@ -106,7 +106,6 @@ let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (delt
 
         in (min+plus)
         )((-halfsize)...(halfsize-1))
-      -- in (v, ind*numrhos+r)
   ) (iota numrhos)
 ) lines
 
