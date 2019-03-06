@@ -5,7 +5,6 @@
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
 -- input@../data/fpinputf32rad2048
--- input@../data/fpinputf32rad4096
 
 let is_flat (cos: f32) (sin: f32): bool =
   f32.abs(sin) >= f32.abs(cos)
