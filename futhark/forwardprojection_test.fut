@@ -1,11 +1,9 @@
 -- ==
--- input@../data/fpinputf32rad64
 -- input@../data/fpinputf32rad128
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
 -- input@../data/fpinputf32rad2048
--- input@../data/fpinputf32rad4096
 
 let is_flat (cos: f32) (sin: f32): bool =
   f32.abs(sin) >= f32.abs(cos)
@@ -118,8 +116,8 @@ let main  [n][r][a] (angles : [a]f32)
   let lines = preprocess angles
   -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
   let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
-  let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
-  in steep ++ flat
+  -- let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
+  in steep
   -- let arr = steep ++ flat
   -- let vals = map (\(v, _) -> v) arr
   -- let inds = map (\(_, i) -> i) arr
