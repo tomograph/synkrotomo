@@ -28,7 +28,7 @@ let SIRT [n] [p] [r] (angles : []f32)
   let lines = preprocess angles
 
   let rowsums_steep = forwardprojection_steep lines.2 rhozero deltarho r halfsize (replicate n 1)
-  let rowsums_flat = forwardprojection_steep lines.2 rhozero deltarho r halfsize (replicate n 1)
+  let rowsums_flat = forwardprojection_flat lines.1 rhozero deltarho r halfsize (replicate n 1)
   let inverserowsums = inverse (rowsums_steep ++ rowsums_flat)
 
   let colsums_steep = bp_steep lines.2 0 rhozero deltarho rhosprpixel r halfsize (replicate p 1)
