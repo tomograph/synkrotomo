@@ -1,11 +1,11 @@
 -- ==
+-- input@../data/fpinputf32rad64
 -- input@../data/fpinputf32rad128
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
 -- input@../data/fpinputf32rad1024
 -- input@../data/fpinputf32rad2048
-
-
+-- input@../data/fpinputf32rad4096
 
 let is_flat (cos: f32) (sin: f32): bool =
   f32.abs(sin) >= f32.abs(cos)
@@ -64,14 +64,9 @@ let forwardprojection_steep [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (del
     ) (iota numrhos)
   ) lines
 
-let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img1: [n]f32) =
-  let size = halfsize*2
-
-  let img = if (size < 10000)
-            then flatten <| transpose <| (unflatten size size img1)
-            else img1
-
+let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
   let fhalfsize = r32(halfsize)
+  let size = halfsize*2
   in flatten <| map (\(cos, sin, lbase) ->
     map (\r ->
       let rho = rhozero + r32(r)*deltarho
@@ -101,10 +96,8 @@ let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (delt
         let lymin = if eq then lbase else lyminfac*lbase
         let lyplus = ((yplus - Ypixmax)/ydiff)*lbase
 
-        let pixmin = Ypixmin+ih*size
-        let pixplus = Ypixplus+ih*size
-        -- let pixmin = ih+Ypixmin*size
-        -- let pixplus = ih+Ypixplus*size
+        let pixmin = ih+Ypixmin*size
+        let pixplus = ih+Ypixplus*size
 
         let min = if bmin then (unsafe lymin*img[pixmin]) else 0.0f32
         let plus = if bplus then (unsafe lyplus*img[pixplus]) else 0.0f32
@@ -124,9 +117,9 @@ let main  [n][r][a] (angles : [a]f32)
   let numrhos = r
   let lines = preprocess angles
   -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
-  -- let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
+  let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
   let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
-  in flat
+  in steep ++ flat
   -- let arr = steep ++ flat
   -- let vals = map (\(v, _) -> v) arr
   -- let inds = map (\(_, i) -> i) arr

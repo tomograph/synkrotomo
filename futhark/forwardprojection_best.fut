@@ -3,6 +3,9 @@
 -- input@../data/fpinputf32rad128
 -- input@../data/fpinputf32rad256
 -- input@../data/fpinputf32rad512
+-- input@../data/fpinputf32rad1024
+-- input@../data/fpinputf32rad2048
+
 
 import "testlib"
 open testlib
