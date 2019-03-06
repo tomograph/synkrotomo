@@ -55,7 +55,7 @@ module testlib = {
       ) (iota numrhos)
     ) lines
 
-  let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
+  let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img1: [n]f32) =
     let fhalfsize = r32(halfsize)
     let size = halfsize*2
     let img = if (size < 10000)
