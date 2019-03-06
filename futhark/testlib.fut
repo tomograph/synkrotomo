@@ -81,7 +81,6 @@ module testlib = {
       let k = cos/sin
       in map (\r ->
         let rho = rhozero + r32(r)*deltarho
-        let ent = ((-fhalfsize), (rho-(-fhalfsize)*cos)/sin)
         let base = rho/sin
 
         in reduce (+) 0.0f32 <| map(\i ->

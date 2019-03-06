@@ -41,7 +41,7 @@ let SIRT [n] [p] [r] (angles : []f32)
   let res_steep = loop (image) = (image) for iter < iterations do
     let fp_steep = forwardprojection_steep lines.2 rhozero deltarho r halfsize image
     let fp_diff = map2 (-) proj_steep fp_steep
-    let fp_weighted = map2 (*) inverserowsums fp_diff
+    let fp_weighted = map2 (*) rowsums_steep fp_diff
     let bp_steep = bp_steep lines.2 rhozero deltarho rhosprpixel r halfsize    fp_weighted
     let bp_weighted = map2 (*) inversecolumnsums bp_steep
     in image with [0:n] = map2 (+) image bp_weighted
@@ -49,7 +49,7 @@ let SIRT [n] [p] [r] (angles : []f32)
   let res_flat = loop (imgT) = (imgT) for iter < iterations do
     let fp_flat = forwardprojection_flat lines.1 rhozero deltarho r halfsize imgT
     let fp_diff = map2 (-) proj_flat fp_flat
-    let fp_weighted = map2 (*) inverserowsums fp_diff
+    let fp_weighted = map2 (*) rowsums_flat fp_diff
     let bp_flat = bp_flat lines.1 rhozero deltarho rhosprpixel r halfsize    fp_weighted
     let bp_weighted = map2 (*) inversecolumnsums bp_flat
     in imgT with [0:n] = map2 (+) imgT bp_weighted
