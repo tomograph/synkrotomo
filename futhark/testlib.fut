@@ -105,8 +105,8 @@ module testlib = {
           let lymin = if eq then lbase else lyminfac*lbase
           let lyplus = ((yplus - Ypixmax)/ydiff)*lbase
 
-          let pixmin = ih+ Ypixmin *size
-          let pixplus = ih+ Ypixplus *size
+          let pixmin = Ypixmin+ih*size
+          let pixplus = Ypixplus+ih*size
 
           let min = if bmin then (unsafe lymin*img[pixmin]) else 0.0f32
           let plus = if bplus then (unsafe lyplus*img[pixplus]) else 0.0f32
