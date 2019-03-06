@@ -1,6 +1,22 @@
+
+
 module testlib = {
   let is_flat (cos: f32) (sin: f32): bool =
     f32.abs(sin) >= f32.abs(cos)
+
+  let fix_projections [a] (proj:[]f32) (angles:[a]f32) (numrhos:i32) :([]f32,[]f32) =
+    let flats = flatten <| map (\angle ->
+      let cos= f32.cos(angle)
+      let sin = f32.sin(angle)
+      let flat = is_flat cos sin
+      in replicate numrhos flat
+      ) angles
+    let zipped = zip proj flats
+    let parts = partition(\(_,f) -> f ) zipped
+    let (flat, _) = unzip parts.1
+    let (steep, _) = unzip parts.2
+    in (flat, steep)
+
 
   let preprocess [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
     let cossin = map(\angle ->
@@ -113,7 +129,6 @@ module testlib = {
     in fact
 
   let bp_steep [p] [l] (lines: [l](f32, f32, f32))
-    (offset:i32)
     (rhozero: f32)
     (deltarho: f32)
     (rhosprpixel: i32)
@@ -140,7 +155,7 @@ module testlib = {
             let maxx = f32.max x_bot x_top
             let minx = f32.min x_bot x_top
             let l = (intersect_fact maxx minx xmin (xmin+1.0))*(lbase)
-            let projectionidx = (ln+offset)*numrhos+(t32(sprime))
+            let projectionidx = ln*numrhos+(t32(sprime))
             in l*(unsafe projections[projectionidx])
           )(iota rhosprpixel)
         ) (iota l)
@@ -148,7 +163,6 @@ module testlib = {
     )((-halfsize)...(halfsize-1)))
 
   let bp_flat [p][l] (lines: [l](f32, f32, f32))
-    (offset:i32)
     (rhozero: f32)
     (deltarho: f32)
     (rhosprpixel: i32)
@@ -175,7 +189,7 @@ module testlib = {
               let maxy = f32.max y_left y_right
               let miny = f32.min y_left y_right
               let l = (intersect_fact maxy miny ymin (ymin+1.0))*lbase
-              let projectionidx = (ln+offset)*numrhos+(t32(sprime))
+              let projectionidx = ln*numrhos+(t32(sprime))
               in l*(unsafe projections[projectionidx])
             )(iota rhosprpixel)
           ) (iota l)
