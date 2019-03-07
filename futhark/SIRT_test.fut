@@ -14,7 +14,7 @@ open testlib
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let SIRT [n] [p] [r] (angles : []f32)
+let SIRT [n] [p] (angles : []f32)
   (rhozero : f32)
   (deltaho: f32)
   (image : *[n]f32)
@@ -61,8 +61,10 @@ let SIRT [n] [p] [r] (angles : []f32)
   in map2 (+) res_steep imageUT
 
 let main  [n][p](angles : []f32)
-          (rhos : []f32)
+          (rhozero : f32)
+          (deltaho: f32)
+          (numrhos:i32)
           (image : *[n]f32)
           (projections: [p]f32)
           (iterations : i32) : [n]f32 =
-          SIRT angles rhos image projections iterations
+          SIRT angles rhozero deltaho numrhos image projections iterations
