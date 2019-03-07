@@ -108,29 +108,20 @@ let preprocess [a](angles: [a]f32): ([](f32, f32, f32, i32), [](f32, f32, f32, i
 --   ) (iota numrhos)
 -- ) lines
 
-
 let forwardprojection_steep [n] (lines: ([](f32, f32, f32, i32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
   let fhalfsize = r32(halfsize)
   let size = halfsize*2
   in flatten <| map (\(cos, sin, lbase, ind) ->
-    let k = f32.abs(sin/cos)
+    let k = sin/cos
     in map (\r ->
       let rho = rhozero + r32(r)*deltarho
-      -- let rho = rhozero + r32(r)*deltarho
-      let ent = ((rho-(-fhalfsize)*sin)/cos, (-fhalfsize))
-      let ext = ((rho-fhalfsize*sin)/cos, fhalfsize)
-      let k = (ext.1 - ent.1)/(ext.2 - ent.2)
-      let kbase = ent.1 + fhalfsize
       let base = rho/cos
 
       let v = reduce (+) 0.0f32 <| map(\i ->
         let ih = i+halfsize
 
-        -- let xmin = k*r32(i) - base
-        -- let xplus = xmin-k
-
-        let xmin = k*(r32(i) - ent.2) + kbase
-        let xplus = k*(r32(i) + 1 - ent.2) + kbase
+        let xmin = k*r32(i) - base
+        let xplus = xmin-k
 
         let Xpixmin = t32(f32.floor(xmin))
         let Xpixplus = t32(f32.floor(xplus))
@@ -167,24 +158,16 @@ let forwardprojection_flat [n] (lines: ([](f32, f32, f32, i32))) (rhozero: f32) 
             then flatten <| transpose <| (unflatten size size img1)
             else img1
   in flatten <| map (\(cos, sin, lbase, ind) ->
-    let k = f32.abs(cos/sin)
+    let k = cos/sin
     in map (\r ->
       let rho = rhozero + r32(r)*deltarho
-      -- let ent = ((-fhalfsize), (rho-(-fhalfsize)*cos)/sin)
       let base = rho/sin
-      let ent = ((-fhalfsize), (rho-(-fhalfsize)*cos)/sin)
-      let ext = (fhalfsize, (rho-fhalfsize*cos)/sin)
-      let k = (ext.2 - ent.2)/(ext.1 - ent.1)
-      let kbase = ent.2 + fhalfsize
 
       let v = reduce (+) 0.0f32 <| map(\i ->
         let ih = i+halfsize
 
-        -- let ymin = k*r32(i) - base
-        -- let yplus = ymin-k
-
-        let ymin = k*(r32(i) - ent.1) + kbase
-        let yplus = k*(r32(i) + 1 - ent.1) + kbase
+        let ymin = k*r32(i) - base
+        let yplus = ymin-k
 
         let Ypixmin = t32(f32.floor(ymin))
         let Ypixplus = t32(f32.floor(yplus))
@@ -208,8 +191,8 @@ let forwardprojection_flat [n] (lines: ([](f32, f32, f32, i32))) (rhozero: f32) 
         let plus = if bplus then (unsafe lyplus*img[pixplus]) else 0.0f32
 
         in (min+plus)
-      )((-halfsize)...(halfsize-1))
-      in (v, ind*numrhos+r)
+        )((-halfsize)...(halfsize-1))
+        in (v, ind*numrhos+r)
   ) (iota numrhos)
 ) lines
 
