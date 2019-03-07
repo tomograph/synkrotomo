@@ -61,8 +61,8 @@ module testlib = {
           let lxmin = if eq then lbase else lxminfac*lbase
           let lxplus = ((xplus - Xpixmax)/xdiff)*lbase
 
-          let pixmin = Xpixmin+ ih*size
-          let pixplus = Xpixplus +ih*size
+          let pixmin = Xpixmin+ih*size
+          let pixplus = Xpixplus+ih*size
 
           let min = if bmin then (unsafe lxmin*img[pixmin]) else 0.0f32
           let plus = if bplus then (unsafe lxplus*img[pixplus]) else 0.0f32
