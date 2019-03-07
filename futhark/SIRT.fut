@@ -8,8 +8,8 @@
 -- input@../data/sirtinputf32rad4049
 
 
-import "testlib"
-open testlib
+import "sirtlib"
+open sirtlib
 
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values

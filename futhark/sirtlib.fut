@@ -1,6 +1,6 @@
 
 
-module testlib = {
+module sirtlib = {
   let is_flat (cos: f32) (sin: f32): bool =
     f32.abs(sin) >= f32.abs(cos)
 
