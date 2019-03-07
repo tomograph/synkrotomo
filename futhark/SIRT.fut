@@ -39,7 +39,7 @@ let SIRT [n] [p] (angles : []f32)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
 
-  let res_steep = loop (image) = (image) for iter < iterations do
+  let res_steep = loop (image) = (copy image) for iter < iterations do
     let fp = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
     let fp_diff = map2 (-) proj_steep fp
     let fp_weighted = map2 (*) rowsums_steep fp_diff
