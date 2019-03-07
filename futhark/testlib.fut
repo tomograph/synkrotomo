@@ -27,9 +27,10 @@ module testlib = {
       in (cos, sin, lcot, ltan)
     ) angles
     let parts = partition(\(c,s,_,_) -> is_flat c s ) cossin
-    in (map (\(cos, sin, lcot, _)-> (cos, sin, lcot)) parts.1, map(\(cos, sin, _, ltan)-> (cos, sin, ltan)) parts.2)
+    -- rotate flat angles 90 degrees counter clockwise (add pi/2) to make them steep
+    in (map (\(cos, sin, lcot, _)-> (-sin, cos, lcot)) parts.1, map(\(cos, sin, _, ltan)-> (cos, sin, ltan)) parts.2)
 
-  let forwardprojection_steep [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
+  let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
     let fhalfsize = r32(halfsize)
     let size = halfsize*2
     in flatten <| map (\(cos, sin, lbase) ->
@@ -60,8 +61,8 @@ module testlib = {
           let lxmin = if eq then lbase else lxminfac*lbase
           let lxplus = ((xplus - Xpixmax)/xdiff)*lbase
 
-          let pixmin = Xpixmin+ ih*size
-          let pixplus = Xpixplus +ih*size
+          let pixmin = Xpixmin+ih*size
+          let pixplus = Xpixplus+ih*size
 
           let min = if bmin then (unsafe lxmin*img[pixmin]) else 0.0f32
           let plus = if bplus then (unsafe lxplus*img[pixplus]) else 0.0f32
@@ -70,50 +71,6 @@ module testlib = {
         ) ((-halfsize)...(halfsize-1))
       ) (iota numrhos)
     ) lines
-
-  let forwardprojection_flat [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img1: [n]f32) =
-    let fhalfsize = r32(halfsize)
-    let size = halfsize*2
-    let img = if (size < 10000)
-              then flatten <| transpose <| (unflatten size size img1)
-              else img1
-    in flatten <| map (\(cos, sin, lbase) ->
-      let k = cos/sin
-      in map (\r ->
-        let rho = rhozero + r32(r)*deltarho
-        let base = rho/sin
-
-        in reduce (+) 0.0f32 <| map(\i ->
-          let ih = i+halfsize
-
-          let ymin = k*r32(i) - base
-          let yplus = ymin-k
-
-          let Ypixmin = t32(f32.floor(ymin))
-          let Ypixplus = t32(f32.floor(yplus))
-          let Ypixmax = r32(i32.max Ypixmin Ypixplus)
-          let ydiff = yplus - ymin
-
-          -- bools
-          let bounds = ih >= 0 && ih < size
-          let eq = Ypixmin == Ypixplus
-          let bmin = bounds && Ypixmin >=0 && Ypixmin < size
-          let bplus = (!eq) && bounds && Ypixplus >=0 && Ypixplus < size
-
-          let lyminfac = ((Ypixmax - ymin)/ydiff)
-          let lymin = if eq then lbase else lyminfac*lbase
-          let lyplus = ((yplus - Ypixmax)/ydiff)*lbase
-
-          let pixmin = Ypixmin+ih*size
-          let pixplus = Ypixplus+ih*size
-
-          let min = if bmin then (unsafe lymin*img[pixmin]) else 0.0f32
-          let plus = if bplus then (unsafe lyplus*img[pixplus]) else 0.0f32
-
-          in (min+plus)
-          )((-halfsize)...(halfsize-1))
-    ) (iota numrhos)
-  ) lines
 
   let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
     -- is zero if both values are below minimum else the positive difference between minus and yplus
@@ -127,7 +84,7 @@ module testlib = {
     let fact = f32.min u 1
     in fact
 
-  let bp_steep [p] [l] (lines: [l](f32, f32, f32))
+  let bp [p] [l] (lines: [l](f32, f32, f32))
     (rhozero: f32)
     (deltarho: f32)
     (rhosprpixel: i32)
@@ -160,39 +117,4 @@ module testlib = {
         ) (iota l)
       )((-halfsize)...(halfsize-1))
     )((-halfsize)...(halfsize-1)))
-
-  let bp_flat [p][l] (lines: [l](f32, f32, f32))
-    (rhozero: f32)
-    (deltarho: f32)
-    (rhosprpixel: i32)
-    (numrhos: i32)
-    (halfsize: i32)
-    (projections: [p]f32): []f32 =
-    let fact = f32.sqrt(2.0f32)/2.0f32
-      in flatten (map(\irow ->
-        map(\icolumn ->
-          let xmin = r32(icolumn)
-          let ymin = r32(irow)
-          in reduce (+) 0.0f32 <| map(\ln ->
-            let (cost, sint, lbase) = unsafe lines[ln]
-            let cott = cost/sint
-            let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
-            let rho = cost*p.1+sint*p.2
-            let s = f32.ceil((rho-rhozero)/deltarho)
-            let ybase = xmin*cott
-            in reduce (+) 0.0f32 <| map(\i ->
-              let sprime = s+(r32(i))
-              let r = sprime*deltarho+rhozero
-              let y_left = (r/sint)-ybase
-              let y_right = y_left-cott
-              let maxy = f32.max y_left y_right
-              let miny = f32.min y_left y_right
-              let l = (intersect_fact maxy miny ymin (ymin+1.0))*lbase
-              let projectionidx = ln*numrhos+(t32(sprime))
-              in l*(unsafe projections[projectionidx])
-            )(iota rhosprpixel)
-          ) (iota l)
-        )((-halfsize)...(halfsize-1))
-      )((-halfsize)...(halfsize-1)))
-
 }
