@@ -5,33 +5,78 @@
 -- input@../data/sirtinputf32rad512
 -- input@../data/sirtinputf32rad1024
 -- input@../data/sirtinputf32rad2048
--- input@../data/sirtinputf32rad4096
+-- input@../data/sirtinputf32rad4049
 
-import "projection_lib"
-open Projection
+
+import "testlib"
+open testlib
 
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let SIRT [n][p](angles : []f32)
-          (rhos : []f32)
-          (image : *[n]f32)
-          (projections: [p]f32)
-          (iterations : i32) : [n]f32 =
-          let rhozero = unsafe rhos[0]
-          let deltarho = unsafe rhos[1]-rhozero
-          let size = t32(f32.sqrt(r32(n)))
-          let halfsize = size/2
-          let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
-          let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
-          let res = loop (image) = (image) for iter < iterations do
-               --(image with [0:n] = map(\v -> f32.min 1.0 v)(map(\v -> f32.max 0.0 v)(map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image))))))))
-               (image with [0:n] = (map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image)))))))
-          in res
+let SIRT [n] [p] (angles : []f32)
+  (rhozero : f32)
+  (deltarho: f32)
+  (numrhos: i32)
+  (image : *[n]f32)
+  (projections: [p]f32)
+  (iterations : i32) : []f32 =
+  let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+  let size = t32(f32.sqrt(r32(n)))
+  let halfsize = size/2
 
-let main  [n][p](angles : []f32)
-          (rhos : []f32)
+  let (proj_flat, proj_steep) = fix_projections projections angles numrhos
+  let lines = preprocess angles
+
+  let rowsums_steep = inverse (forwardprojection lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32))
+  let rowsums_flat = inverse (forwardprojection lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32))
+
+  let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32))
+  let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32))
+
+  -- hack to always do this!
+  let imageT =  if (size < 10000)
+                then flatten <| transpose <| copy (unflatten size size image)
+                else (replicate n 1.0f32)
+
+  let res_steep = loop (image) = (image) for iter < iterations do
+    let fp = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
+    let fp_diff = map2 (-) proj_steep fp
+    let fp_weighted = map2 (*) rowsums_steep fp_diff
+    let bp = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
+    let bp_weighted = map2 (*) colsums_steep bp
+    in image with [0:n] = map2 (+) image bp_weighted
+
+  let res_flat = loop (imageT) = (imageT) for iter < iterations do
+    let fp = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
+    let fp_diff = map2 (-) proj_flat fp
+    let fp_weighted = map2 (*) rowsums_flat fp_diff
+    let bp = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
+    let bp_weighted = map2 (*) colsums_flat bp
+    in imageT with [0:n] = map2 (+) imageT bp_weighted
+
+  let imageUT = if (size < 10000)
+                then flatten <| transpose <| copy (unflatten size size res_flat)
+                else (replicate n 1.0f32)
+
+  in map2 (+) res_steep imageUT
+  -- in rowsums_flat
+--
+-- let main  [n][p](angles : []f32)
+--           (rhozero : f32)
+--           (deltarho: f32)
+--           (numrhos:i32)
+--           (image : *[n]f32)
+--           (projections: [p]f32)
+--           (iterations : i32) : []f32 =
+--           SIRT angles rhozero deltarho numrhos image projections iterations
+let main  [n][p][r](angles : []f32)
+          (rhos : [r]f32)
           (image : *[n]f32)
           (projections: [p]f32)
-          (iterations : i32) : [n]f32 =
-          SIRT angles rhos image projections iterations
+          (iterations : i32) : []f32 =
+          let rhozero = rhos[0]
+          let deltarho = rhos[1]-rhozero
+          in SIRT angles rhozero deltarho r image projections iterations
+
+          -- SIRT angles rhos image projections iterations
