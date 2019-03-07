@@ -28,18 +28,18 @@ let SIRT [n] [p] (angles : []f32)
   let (proj_flat, proj_steep) = fix_projections projections angles numrhos
   let lines = preprocess angles
 
-  let rowsums_steep = forwardprojection lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
-  let rowsums_flat = forwardprojection lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
+  let rowsums_steep = inverse (forwardprojection lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32))
+  let rowsums_flat = inverse (forwardprojection lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32))
 
-  let colsums_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32)
-  let colsums_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32)
+  let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32))
+  let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate p 1.0f32))
 
   -- hack to always do this!
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
 
-  let res_steep = loop (image) = (image) for iter < 2 do
+  let res_steep = loop (image) = (image) for iter < iterations do
     let fp = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
     let fp_diff = map2 (-) proj_steep fp
     let fp_weighted = map2 (*) rowsums_steep fp_diff
@@ -47,7 +47,7 @@ let SIRT [n] [p] (angles : []f32)
     let bp_weighted = map2 (*) colsums_steep bp
     in image with [0:n] = map2 (+) image bp_weighted
 
-  let res_flat = loop (imageT) = (imageT) for iter < 2 do
+  let res_flat = loop (imageT) = (imageT) for iter < iterations do
     let fp = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
     let fp_diff = map2 (-) proj_flat fp
     let fp_weighted = map2 (*) rowsums_flat fp_diff
@@ -60,7 +60,7 @@ let SIRT [n] [p] (angles : []f32)
                 else (replicate n 1.0f32)
 
   in map2 (+) res_steep imageUT
-  -- in res_steep
+  -- in rowsums_flat
 --
 -- let main  [n][p](angles : []f32)
 --           (rhozero : f32)
