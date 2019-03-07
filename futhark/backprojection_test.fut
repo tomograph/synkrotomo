@@ -20,6 +20,6 @@ let main  [p][r](angles : []f32)
           let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
           let halfsize = size/2
           let lines = preprocess angles
-          let steep = bp_steep lines.2 0 rhozero deltarho rhosprpixel r halfsize projections
-          let flat = bp_flat lines.1 (length lines.2) rhozero deltarho rhosprpixel r halfsize projections
+          let steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize projections
+          let flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize projections
           in map2 (+) steep flat

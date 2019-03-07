@@ -120,8 +120,8 @@ let main  [n][r][a] (angles : [a]f32)
   let numrhos = r
   let lines = preprocess angles
   -- let (lines, rhozero, deltarho, numrhos) = preprocessing angles rhos
-  let steep = forwardprojection_steep lines.2 rhozero deltarho numrhos halfsize image
-  let flat = forwardprojection_flat lines.1 rhozero deltarho numrhos halfsize image
+  let steep = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
+  let flat = forwardprojection lines.1 rhozero deltarho numrhos halfsize image
   in steep ++ flat
   -- let arr = steep ++ flat
   -- let vals = map (\(v, _) -> v) arr
