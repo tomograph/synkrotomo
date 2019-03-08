@@ -4,6 +4,7 @@ module sirtlib = {
   let is_flat (cos: f32) (sin: f32): bool =
     f32.abs(sin) >= f32.abs(cos)
 
+   -- divides data into flat and steep parts
   let fix_projections [a] (proj:[]f32) (angles:[a]f32) (numrhos:i32) :([]f32,[]f32) =
     let flats = flatten <| map (\angle ->
       let cos= f32.cos(angle)
@@ -17,19 +18,32 @@ module sirtlib = {
     let (steep, _) = unzip parts.2
     in (flat, steep)
 
+-- reasembles forwardprojection to match input parameter
+let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (numrhos: i32) =
+ let ordering = map(\i ->
+   let cos= f32.cos(angle)
+   let sin = f32.sin(angle)
+   in (cos, sin, i)
+ ) (iota a)
+ let flat_steep = unzip3 (partition(\(c,s,_) -> is_flat c s ) cossin
+ let (flat_indexes,_,_) = unzip3 flat_steep.1
+ let (steep_indexes,_,_) = unzip3 flat_steep.2
+ let result_flat = scatter (replicate (a*numrhos) 0.0) flat_indexes val_flat
+ in scatter result_flat steep_indexes val_steep
 
+ -- divides in flat and steep and transposes lines
   let preprocess [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
     let cossin = map(\angle ->
       let cos= f32.cos(angle)
       let sin = f32.sin(angle)
-      let lcot = f32.sqrt(1.0+(cos/sin)**2.0f32)
-      let ltan = f32.sqrt(1.0+(sin/cos)**2.0f32)
-      in (cos, sin, lcot, ltan)
+      let l = f32.sqrt(1.0+(sin/cos)**2.0f32)
+      in (cos, sin, l)
     ) angles
-    let parts = partition(\(c,s,_,_) -> is_flat c s ) cossin
-    -- rotate flat angles 90 degrees counter clockwise (add pi/2) to make them steep
-    in (map (\(cos, sin, lcot, _)-> (-sin, cos, lcot)) parts.1, map(\(cos, sin, _, ltan)-> (cos, sin, ltan)) parts.2)
+    let flat_steep = partition(\(c,s,_) -> is_flat c s ) cossin
+    -- transpose flat lines to make them steep
+    in (map (\(cos, sin, l)-> (sin, cos, l)) parts.1, map(\(cos, sin, l)-> (cos, sin, l)) parts.2)
 
+-- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
   let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
     let fhalfsize = r32(halfsize)
     let size = halfsize*2
@@ -84,6 +98,7 @@ module sirtlib = {
     let fact = f32.min u 1
     in fact
 
+-- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
   let bp [p] [l] (lines: [l](f32, f32, f32))
     (rhozero: f32)
     (deltarho: f32)
