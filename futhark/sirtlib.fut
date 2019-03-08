@@ -19,7 +19,7 @@ module sirtlib = {
     in (flat, steep)
 
 -- reasembles forwardprojection to match input parameter
-let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f32) (numrhos: i32): [f+s]f32 =
+let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f32) (numrhos: i32): []f32 =
  let ordering = map(\i ->
    let angle = angles[i]
    let cos= f32.cos(angle)
