@@ -14,7 +14,7 @@ open sirtlib
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let SIRT [n] [p] (angles : []f32)
+let SIRT [n][p](angles : []f32)
   (rhozero : f32)
   (deltarho: f32)
   (numrhos: i32)
