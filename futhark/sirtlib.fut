@@ -19,7 +19,7 @@ module sirtlib = {
     in (flat, steep)
 
 -- reasembles forwardprojection to match input parameter
-let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (numrhos: i32) =
+let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (numrhos: i32): []f32 =
  let ordering = map(\i ->
    let angle = angles[i]
    let cos= f32.cos(angle)
@@ -27,8 +27,8 @@ let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (num
    in (cos, sin, i)
  ) (iota a)
  let flat_steep = unzip3 (partition(\(c,s,_) -> is_flat c s ) ordering)
- let (flat_indexes,_,_) = unzip3 flat_steep.1
- let (steep_indexes,_,_) = unzip3 flat_steep.2
+ let (flat_indexes,_) = unzip3 flat_steep.1
+ let (steep_indexes,_) = unzip3 flat_steep.2
  let result_flat = scatter (replicate (a*numrhos) 0.0) flat_indexes val_flat
  in scatter result_flat steep_indexes val_steep
 
