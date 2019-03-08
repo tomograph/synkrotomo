@@ -23,7 +23,7 @@ let main  [p][a](angles : [a]f32)
           let steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize projections
           let flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize projections
           --untranspose in flat case
-          let flatT =  if (size < 10000)
-                        then flatten <| transpose <| copy (unflatten size size flat)
-                        else (replicate (size**2) 1.0f32)
+          --let flatT =  if (size < 10000)
+          --              then flatten <| transpose <| copy (unflatten size size flat)
+          --              else (replicate (size**2) 1.0f32)
           in map2 (+) steep flatT
