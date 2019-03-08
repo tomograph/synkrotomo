@@ -17,9 +17,6 @@ let main  [n][r][a] (angles : [a]f32)
           (image : *[n]f32) =
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
-  let rhozero = unsafe rhos[0]
-  let deltarho = unsafe rhos[1]-rhozero
-  let numrhos = r
 
   let lines = preprocess angles
   -- hack to always do this!
