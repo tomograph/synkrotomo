@@ -26,4 +26,4 @@ let main  [n][a] (angles : [a]f32)
 
   let steep = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
   let flat = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
-  in flat ++ steep--postprocess_fp angles flat steep numrhos
+  in postprocess_fp angles flat steep numrhos
