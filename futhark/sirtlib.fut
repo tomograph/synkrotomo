@@ -46,7 +46,6 @@ let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (num
 
 -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
   let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
-    let fhalfsize = r32(halfsize)
     let size = halfsize*2
     in flatten <| map (\(cos, sin, lbase) ->
       let k = sin/cos
