@@ -26,7 +26,7 @@ let postprocess_fp [a](angles: [a]f32) (val_flat: []f32) (val_steep: []f32) (num
    let sin = f32.sin(angle)
    in (cos, sin, i)
  ) (iota a)
- let flat_steep = unzip3 (partition(\(c,s,_) -> is_flat c s ) cossin)
+ let flat_steep = unzip3 (partition(\(c,s,_) -> is_flat c s ) ordering)
  let (flat_indexes,_,_) = unzip3 flat_steep.1
  let (steep_indexes,_,_) = unzip3 flat_steep.2
  let result_flat = scatter (replicate (a*numrhos) 0.0) flat_indexes val_flat
