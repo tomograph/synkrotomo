@@ -39,12 +39,13 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
     let cossin = map(\angle ->
       let cos= f32.cos(angle)
       let sin = f32.sin(angle)
-      let l = f32.sqrt(1.0+(sin/cos)**2.0f32)
-      in (cos, sin, l)
+      let lsteep = f32.sqrt(1.0+(sin/cos)**2.0f32)
+      let lflat = f32.sqrt(1.0+(cos/sin)**2.0f32)
+      in (cos, sin, lflat, lsteep)
     ) angles
-    let flat_steep = partition(\(c,s,_) -> is_flat c s ) cossin
+    let flat_steep = partition(\(c,s,_,_) -> is_flat c s ) cossin
     -- transpose flat lines to make them steep
-    in (map (\(cos, sin, l)-> (sin, cos, l)) flat_steep.1, map(\(cos, sin, l)-> (cos, sin, l)) flat_steep.2)
+    in (map (\(cos, sin, lflat, _)-> (sin, cos, lflat)) flat_steep.1, map(\(cos, sin, l)-> (cos, sin,_, lsteep)) flat_steep.2)
 
 -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
   let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
