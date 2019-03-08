@@ -10,7 +10,7 @@
 import "sirtlib"
 open sirtlib
 
-let main  [n][r][a] (angles : [a]f32)
+let main  [n][a] (angles : [a]f32)
           (rhozero : f32)
           (deltarho : f32)
           (numrhos : i32)
