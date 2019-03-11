@@ -78,12 +78,12 @@ def main(argv):
     phantom = tomo_lib.get_phantom(size)
     phantom = phantom.flatten().astype(np.float32)
     sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
-    rhozero = rays.astype(np.float32)[0]
+    rhozero = -180.5
     deltarho = 1.0
     numrhos = len(rays)
     emptyimage = np.zeros(size*size).flatten().astype(np.float32)
 
-    proj_geom =astra.create_proj_geom('parallel', 1.0, numrhos, theta_rad)
+    proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
     vol_geom = astra.create_vol_geom(size,)
     astra_bp = astra_BP(proj_geom, sinogram, vol_geom)
     scipy.misc.toimage(astra_bp).save('astra_bp.png')
