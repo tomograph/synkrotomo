@@ -96,12 +96,6 @@ def main(argv):
     bpresult = bp.main(theta_rad, rhozero, deltarho, size, sinogram.flatten().astype(np.float32)).get()
     tomo_lib.savebackprojection("bp.png",bpresult, size)
     tomo_lib.savebackprojection("phantom.png",phantom, size)
-    print(len(theta_rad))
-    print((len(sinogram.flatten())/len(theta_rad)))
-    print(sinogram.shape)
-    print(numrhos)
-    print(rhozero)
-    print(deltarho)
 
     sirt = SIRT.SIRT()
     sirtresult = sirt.main(theta_rad, rhozero, deltarho, emptyimage, sinogram.flatten().astype(np.float32), 200).get()
