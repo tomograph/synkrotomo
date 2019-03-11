@@ -48,7 +48,7 @@ let SIRT [n][p][a](angles : [a]f32)
   let res = loop (image) = (image) for iter < iterations do
       let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
       let fp_flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
-      let fp = postprocess_fp angles flat steep numrhos
+      let fp = postprocess_fp angles fp_steep fp_flat numrhos
       let fp_diff = = map2 (-) projections fp
       let fp_weighted = map2 (*) inverserowsums fp_diff
       let (flat_proj, steep_proj) = fix_projections fp_weighted angles r
