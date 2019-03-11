@@ -95,6 +95,11 @@ type point  = ( f32, f32 )
                     ) (iota numrhos)
            ) lines
 
+     let forwardprojection (steep_lines: []f32) (flat_lines: []f32) (projection_indexes: i32[])(rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
+           let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
+           let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
+           in postprocess_fp projection_indexes fp_steep fp_flat
+
      let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
           -- is zero if both values are below minimum else the positive difference between minus and yplus
           let b = f32.max (plus-mini) 0.0f32
@@ -106,6 +111,8 @@ type point  = ( f32, f32 )
           let u = if minab == 0.0f32 then 0.0f32 else minab/d
           let fact = f32.min u 1
           in fact
+
+
 
      -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
      let bp [p] [l] (lines: [l](f32, f32, f32))
@@ -141,4 +148,14 @@ type point  = ( f32, f32 )
                               ) (iota l)
                          )((-halfsize)...(halfsize-1))
                     )((-halfsize)...(halfsize-1))
+
+     let backprojection (steep_projections: []f32) (flat_projections: []f32) (is_flat: []bool) (steep_lines: []f32) (flat_lines: []f32) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
+           let (steep_projections, flat_projections) = fix_projections fp_weighted is_flat
+           let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
+           let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
+           --untranspose in flat case
+           let bp_flatT =  if (size < 10000)
+                        then flatten <| transpose <| unflatten size size bp_flat
+                        else (replicate (size**2) 1.0f32)
+           let bp = map2 (+) bp_steep bp_flatT
 }

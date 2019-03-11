@@ -22,10 +22,4 @@ let main  [p][a](angles : [a]f32)
           let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
 
 	     let (steep_proj, flat_proj) = fix_projections projections is_flat
-          let steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_proj
-          let flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_proj
-          --untranspose in flat case
-          let flatT =  if (size < 10000)
-                       then flatten <| transpose <| unflatten size size flat
-                       else (replicate (size**2) 1.0f32)
-          in map2 (+) steep flatT
+          in backprojection steep_proj flat_proj is_flat steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize
