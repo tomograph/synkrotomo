@@ -9,6 +9,10 @@ let is_flat (cos: f32) (sin: f32): bool =
   let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           (ray-x*cost)/sint
 
+          let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+                  (ray-y*sint)/cost
+             -- find x given y - not designed for horizontal lines
+
 -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
 let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
      let flat = is_flat cost sint
