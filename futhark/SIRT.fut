@@ -14,13 +14,13 @@ open sirtlib
 let inverse [n](values: [n]f32) : [n]f32 =
      map(\v -> if v == 0.0 then 0.0 else 1/v) values
 
-let SIRT [n][p](angles : []f32)
+let SIRT [n][p][a](angles : [a]f32)
   (rhozero : f32)
   (deltarho: f32)
   (numrhos: i32)
   (image : *[n]f32)
   (projections: [p]f32)
-  (iterations : i32) : []f32 =
+  (iterations : i32) : [n]f32 =
   let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
@@ -61,7 +61,7 @@ let SIRT [n][p](angles : []f32)
 
   in map2 (+) (reverse res_steep) imageUT
 
-let main  [n][p](angles : []f32)
+let main  [n][p][a](angles : [a]f32)
            (rhozero : f32)
            (deltarho: f32)
            (numrhos:i32)
