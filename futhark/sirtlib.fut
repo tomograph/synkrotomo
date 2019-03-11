@@ -33,7 +33,6 @@ type point  = ( f32, f32 )
 
      -- divides in flat and steep and transposes lines
      let preprocess [a](angles: [a]f32) (numrhos: i32): ([](f32, f32, f32), [](f32, f32, f32), []bool, []i32) =
-     let numrhos
      let cossin = map(\i ->
           let angle = angles[i]
           let cos= f32.cos(angle)
