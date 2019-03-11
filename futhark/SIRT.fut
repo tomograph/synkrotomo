@@ -27,7 +27,7 @@ let SIRT [n][p][a](angles : [a]f32)
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
   let numrhos = p/a
-  let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
+  let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
   let (steep_proj, flat_proj) = fix_projections projections is_flat
 
   let rowsums_steep = inverse (fp steep_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32))
@@ -35,12 +35,10 @@ let SIRT [n][p][a](angles : [a]f32)
 
   let inversecolumnsums = inverse (backprojection (replicate (length steep_proj) 1.0f32) (replicate (length flat_proj) 1.0f32) steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize)
 
-  -- hack to always do this!
-  let imageT =  if (size < 10000)
-                then flatten <| transpose <| copy (unflatten size size image)
-                else (replicate n 1.0f32)
-
   let res = loop (image) = (image) for iter < iterations do
+      let imageT =  if (size < 10000)
+                     then flatten <| transpose <| unflatten size size image
+                     else (replicate n 1.0f32)
       let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
       let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
       let fp_diff_steep = map2 (-) steep_proj fp_steep
