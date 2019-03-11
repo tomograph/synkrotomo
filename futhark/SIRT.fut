@@ -70,7 +70,7 @@ let SIRT [n][p][a](angles : [a]f32)
                    else (replicate (size**2) 1.0f32)
       let bp = map2 (+) bp_steep bp_flatT
       let bp_weighted = map2(*) inversecolumnsums bp
-      in image with [0:n] = map2 (+) image bp
+      in image with [0:n] = map2 (+) image bp_weighted
 
   -- let res_steep = loop (image) = (image) for iter < iterations do
   --    let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
