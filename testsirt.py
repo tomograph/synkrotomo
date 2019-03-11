@@ -79,7 +79,7 @@ def main(argv):
     phantom = phantom.flatten().astype(np.float32)
     sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
     rhozero = rays.astype(np.float32)[0]
-    deltarho = np.abs(rays.astype(np.float32)[1]-rays.astype(np.float32)[0])
+    deltarho = 1.0
     numrhos = len(rays)
     emptyimage = np.zeros(size*size).flatten().astype(np.float32)
 
@@ -96,6 +96,7 @@ def main(argv):
     tomo_lib.savebackprojection("bp.png",bpresult, size)
     tomo_lib.savebackprojection("phantom.png",phantom, size)
     print(len(theta_rad))
+    print((len(sinogram.flatten())/len(theta_rad)))
     print(sinogram.shape)
     print(numrhos)
     print(rhozero)
