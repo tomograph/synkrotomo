@@ -60,9 +60,9 @@ let SIRT [n][p][a](angles : [a]f32)
       let fp = postprocess_fp projection_indexes fp_steep fp_flat
       let fp_diff = map2 (-) projections fp
       let fp_weighted = map2 (*) inverserowsums fp_diff
-      let (flat_proj, steep_proj) = fix_projections fp_weighted is_flat
-      let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_proj
-      let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_proj
+      let (fl_p, st_p) = fix_projections fp_weighted is_flat
+      let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize fl_p
+      let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize st_p
       --untranspose in flat case
       let bp_flatT =  if (size < 10000)
                    then flatten <| transpose <| unflatten size size bp_flat
