@@ -106,7 +106,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
     let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32): []f32 =
       flatten <| map(\(cos, sin, _)->
                let k = sin/cos
-               in map(\r
+               in map(\r -> 
                     let rho = rhozero + r32(r)*deltarho
                     in forward_projection_value sin cos rho halfsize img
                     ) (iota numrhos)
