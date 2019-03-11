@@ -105,7 +105,17 @@ def main(argv):
     sirt = SIRT.SIRT()
     sirtresult = sirt.main(theta_rad, rhozero, deltarho, emptyimage, sinogram.flatten().astype(np.float32), 200).get()
     tomo_lib.savebackprojection("sirt.png",sirtresult, size)
-    astra_sirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
+
+    theta_rad = np.linspace(-np.pi/4, np.pi/4,  num_angles,False)
+    sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
+    proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
+    astra_sirt_steep = astra_reconstruction(proj_geom, sinogram, vol_geom)
+
+    theta_rad = np.linspace(np.pi/4, 3*np.pi/4,  num_angles,False)
+    sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
+    proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
+    astra_sirt_flat = astra_reconstruction(proj_geom, sinogram, vol_geom)
+    astra_sirt = astra_sirt_steep.flatten() + astra_sirt_steep.flatten()
     tomo_lib.savebackprojection("astra_sirt.png",astra_sirt, size)
 if __name__ == '__main__':
     main(sys.argv)
