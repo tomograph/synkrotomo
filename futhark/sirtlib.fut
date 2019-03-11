@@ -52,7 +52,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
  -- let steep_indexes = flatten <| map(\a -> map(\r -> a*numrhos+r)(iota numrhos))steep_angle_indexes
  -- let result_flat = scatter (replicate (f+s) 0.0) flat_indexes val_flat
  -- in scatter result_flat steep_indexes val_steep
- val_steep ++ val_flat
+ reverse(val_steep) ++ val_flat
 
  -- divides in flat and steep and transposes lines
   let preprocess [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
@@ -106,7 +106,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
     let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32): []f32 =
       flatten <| map(\(cos, sin, _)->
                let k = sin/cos
-               in map(\r -> 
+               in map(\r ->
                     let rho = rhozero + r32(r)*deltarho
                     in forward_projection_value sin cos rho halfsize img
                     ) (iota numrhos)
