@@ -30,11 +30,11 @@ let SIRT [n][p][a](angles : [a]f32)
   let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
   let (steep_proj, flat_proj) = fix_projections projections is_flat
 
-  let rowsums_steep = fp lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
-  let rowsums_flat = fp lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
+  let rowsums_steep = fp steep_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32)
+  let rowsums_flat = fp flat_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32)
 
-  let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length steep_proj) 1.0f32))
-  let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length flat_proj) 1.0f32))
+  let colsums_steep = inverse (bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize (replicate (length steep_proj) 1.0f32))
+  let colsums_flat = inverse (bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize (replicate (length flat_proj) 1.0f32))
   -- let rowsums_steep = fp steep_lines rhozero deltarho numrhos halfsize (replicate n 1)
   -- let rowsums_flat = fp flat_lines rhozero deltarho numrhos halfsize (replicate n 1)
   -- let rowsums = postprocess_fp projection_indexes rowsums_steep rowsums_flat
