@@ -52,7 +52,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
  -- let steep_indexes = flatten <| map(\a -> map(\r -> a*numrhos+r)(iota numrhos))steep_angle_indexes
  -- let result_flat = scatter (replicate (f+s) 0.0) flat_indexes val_flat
  -- in scatter result_flat steep_indexes val_steep
- reverse(val_steep) ++ val_flat
+ val_steep ++ val_flat
 
  -- divides in flat and steep and transposes lines
   let preprocess [a](angles: [a]f32): ([](f32, f32, f32), [](f32, f32, f32)) =
