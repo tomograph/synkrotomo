@@ -36,9 +36,19 @@ let SIRT [n][p][a](angles : [a]f32)
 
   --let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_steep) 1.0f32))
   --let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_flat) 1.0f32))
+  let rowsums_steep = fp lines.2 rhozero deltarho numrhos halfsize (replicate n 1)
+  let rowsums_flat = fp lines.1 rhozero deltarho numrhos halfsize (replicate n 1)
+  let rowsums = postprocess_fp angles rowsums_steep rowsums_flat numrhos
 
-  let inverserowsums = inverse (forward_projection angles rhos halfsize (replicate n 1))
-  let inversecolumnsums = inverse (back_projection angles rhozero deltarho size (replicate p 1))
+  let inverserowsums = inverse rowsums
+
+  let colsums_steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize (replicate (length proj_steep) 1.0f32)
+  let colsums_flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize  (replicate (length proj_flat) 1.0f32)
+  let colsums_flatT =  if (size < 10000)
+               then flatten <| transpose <| unflatten size size colsums_flat
+               else (replicate (size**2) 1.0f32)
+  let colsums = map2 (+) colsums_steep colsums_flatT
+  let inversecolumnsums = inverse colsums
 
   -- hack to always do this!
   let imageT =  if (size < 10000)
