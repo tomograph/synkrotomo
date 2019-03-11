@@ -103,7 +103,7 @@ def main(argv):
     print(deltarho)
 
     sirt = SIRT.SIRT()
-    sirtresult = sirt.main(theta_rad, rhozero, deltarho, numrhos, emptyimage, sinogram, 200).get()
+    sirtresult = sirt.main(theta_rad, rhozero, deltarho, numrhos, emptyimage, sinogram.flatten().astype(np.float32), 200).get()
     tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
     astra_sirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
     tomo_lib.savebackprojection("astra_sirt.png",astra_sirt, size)
