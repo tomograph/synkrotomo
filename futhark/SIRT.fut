@@ -43,7 +43,7 @@ let SIRT [n][p][a](angles : [a]f32)
     let fp = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
     let fp_diff = map2 (-) proj_steep fp
     let fp_weighted = map2 (*) rowsums_steep fp_diff
-    let bp = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp
+    let bp = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
     --let bp_weighted = map2 (*) colsums_steep bp
     in image with [0:n] = map2 (+) image bp
 
@@ -51,7 +51,7 @@ let SIRT [n][p][a](angles : [a]f32)
     let fp = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
     let fp_diff = map2 (-) proj_flat fp
     let fp_weighted = map2 (*) rowsums_flat fp_diff
-    let bp = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp
+    let bp = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
     --let bp_weighted = map2 (*) colsums_flat bp
     in imageT with [0:n] = map2 (+) imageT bp
 
