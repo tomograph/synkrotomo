@@ -104,14 +104,13 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
          reduce (+) 0.0f32 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
 
     let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32): []f32 =
-      flatten(
-           map(\(cos, sin, _)->
-               map(\r
+      flatten <| map(\(cos, sin, _)->
+               let k = sin/cos
+               in map(\r
                     let rho = rhozero + r32(r)*deltarho
                     in forward_projection_value sin cos rho halfsize img
                     ) (iota numrhos)
            ) lines
-      )
 
 -- -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
 --   let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
