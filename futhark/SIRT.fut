@@ -53,9 +53,9 @@ let SIRT [n][p][a](angles : [a]f32)
   let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
      let fp_flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
      let fp_diff = map2 (-) proj_flat fp_flat
-     let fp_weighted = map2 (*) inverserowsums fp_diff
+     let fp_weighted = map2 (*) rowsums_flat fp_diff
      let bp_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
-     let bp_weighted = map2 (*) inversecolumnsums bp_flat
+     let bp_weighted = map2 (*) colsums_flat bp_flat
      in imageT with [0:n] = map2 (+) imageT bp_weighted
   --
   let imageUT = if (size < 10000)
