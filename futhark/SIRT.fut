@@ -99,4 +99,4 @@ let main  [n][p][a](angles : [a]f32)
            (image : *[n]f32)
            (projections: [p]f32)
            (iterations : i32) : [n]f32 =
-           SIRT angles rhozero deltarho numrhos image projections iterations
+           SIRT angles rhozero deltarho image projections iterations
