@@ -38,9 +38,9 @@ let SIRT [n][p][a](angles : [a]f32)
   let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_flat) 1.0f32))
 
   -- hack to always do this!
-  let imageT =  if (size < 10000)
-                then flatten <| transpose <| copy (unflatten size size image)
-                else (replicate n 1.0f32)
+  -- let imageT =  if (size < 10000)
+  --               then flatten <| transpose <| copy (unflatten size size image)
+  --               else (replicate n 1.0f32)
 
       let res = loop (image) = (image) for iter < iterations do
            --(image with [0:n] = map(\v -> f32.min 1.0 v)(map(\v -> f32.max 0.0 v)(map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image))))))))
@@ -55,7 +55,7 @@ let SIRT [n][p][a](angles : [a]f32)
   --               then flatten <| transpose <| unflatten size size res_flat
   --               else (replicate n 1.0f32)
 
-  in res_steep --imageUT
+  in res --imageUT
 
 let main  [n][p][a](angles : [a]f32)
            (rhozero : f32)
