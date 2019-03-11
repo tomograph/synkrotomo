@@ -28,7 +28,7 @@ let SIRT [n][p][a](angles : [a]f32)
   let halfsize = size/2
   let numrhos = p/a
   let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
-  let (flat_proj, steep_proj) = fix_projections projections is_flat
+  let (steep_proj, flat_proj) = fix_projections projections is_flat
 
   --let rowsums_steep = fp lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
   --let rowsums_flat = fp lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
