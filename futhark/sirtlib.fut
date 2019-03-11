@@ -65,7 +65,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
     ) angles
     let flat_steep = partition(\(c,s,_,_) -> is_flat c s ) cossin
     -- transpose flat lines to make them steep
-    in (map (\(cos,sin,lflat,_)-> (sin, -cos, lflat)) flat_steep.1, map(\(cos,sin,_,lsteep)-> (-cos,sin,lsteep)) flat_steep.2)
+    in (map (\(cos,sin,lflat,_)-> (-sin, cos, lflat)) flat_steep.1, map(\(cos,sin,_,lsteep)-> (cos,-sin,lsteep)) flat_steep.2)
 
     let intersect_steep (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
          let k = (ext.1 - ent.1)/(ext.2 - ent.2)
