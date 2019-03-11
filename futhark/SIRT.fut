@@ -43,20 +43,12 @@ let SIRT [n][p][a](angles : [a]f32)
                 else (replicate n 1.0f32)
 
   let res_steep = loop (image) = (copy image) for iter < iterations do
-    let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
-    let fp_diff = map2 (-) proj_steep fp_steep
-    let fp_weighted = map2 (*) inverserowsums fp_diff
-    let bp_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
-    let bp_weighted = map2 (*) inversecolumnsums bp_steep
-    in image with [0:n] = map2 (+) image bp_weighted
+     (image with [0:n] = (map2 (+) image (map2 (*) colsums_steep (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_steep (map2 (-) proj_steep (fp lines.2 rhozero deltarho numrhos halfsize image)))))))
+  in res_steep
 
   let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
-    let fp_flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
-    let fp_diff = map2 (-) proj_flat fp_flat
-    let fp_weighted = map2 (*) inverserowsums fp_diff
-    let bp_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
-    let bp_weighted = map2 (*) inversecolumnsums bp_flat
-    in imageT with [0:n] = map2 (+) imageT bp_weighted
+     (image with [0:n] = (map2 (+) image (map2 (*) colsums_flat (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_flat (map2 (-) proj_flat (fp lines.1 rhozero deltarho numrhos halfsize image)))))))
+  in res_flat
 
   let imageUT = if (size < 10000)
                 then flatten <| transpose <| unflatten size size res_flat
