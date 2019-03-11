@@ -96,7 +96,7 @@ def main(argv):
     tomo_lib.savebackprojection("bp.png",bpresult, size)
     tomo_lib.savebackprojection("phantom.png",phantom, size)
     print(len(theta_rad))
-    print(singram.shape)
+    print(sinogram.shape)
     print(numrhos)
     print(rhozero)
     print(deltarho)
