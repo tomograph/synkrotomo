@@ -11,10 +11,10 @@
 import "sirtlib"
 open sirtlib
 
-let safe_inverse(value: f32) : f32 =
+let safe_inverse (value: f32) : f32 =
      if value == 0.0 then 0.0 else 1/value
 
-let inverse [](values: []f32) : []f32 =
+let inverse (values: []f32) : []f32 =
      map(\v -> safe_inverse v) values
 
 let SIRT [n][p][a](angles : [a]f32)
