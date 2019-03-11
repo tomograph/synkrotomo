@@ -95,7 +95,7 @@ type point  = ( f32, f32 )
                     ) (iota numrhos)
            ) lines
 
-     let forwardprojection (steep_lines: []f32) (flat_lines: []f32) (projection_indexes: []i32) (rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
+     let forwardprojection (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (projection_indexes: []i32) (rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
            let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
            let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
            in postprocess_fp projection_indexes fp_steep fp_flat
@@ -149,7 +149,7 @@ type point  = ( f32, f32 )
                          )((-halfsize)...(halfsize-1))
                     )((-halfsize)...(halfsize-1))
 
-     let backprojection (steep_projections: []f32) (flat_projections: []f32) (is_flat: []bool) (steep_lines: []f32) (flat_lines: []f32) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
+     let backprojection (steep_projections: []f32) (flat_projections: []f32) (is_flat: []bool) (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
            let (steep_projections, flat_projections) = fix_projections fp_weighted is_flat
            let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
            let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
