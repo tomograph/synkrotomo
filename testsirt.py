@@ -7,6 +7,7 @@ import dataprint_lib
 import sys
 import astra
 import scipy
+import math
 
 def astra_BP(projgeom, sinogram, volgeom):
     # Create projection data
