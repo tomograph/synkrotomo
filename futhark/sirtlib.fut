@@ -157,5 +157,5 @@ type point  = ( f32, f32 )
            let bp_flatT =  if (size < 10000)
                         then flatten <| transpose <| unflatten size size bp_flat
                         else (replicate (size**2) 1.0f32)
-           let bp = map2 (+) bp_steep bp_flatT
+           in map2 (+) bp_steep bp_flatT
 }
