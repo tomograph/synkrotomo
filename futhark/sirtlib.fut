@@ -48,7 +48,7 @@ type point  = ( f32, f32 )
      let lines = (map(\(cos,sin,_,lsteep,_,_)-> (cos,-sin,lsteep)) flat_steep.2, map (\(cos,sin,lflat,_,_,_)-> (-sin, cos, lflat)) flat_steep.1)
      let angle_indexes = (map (\(_,_,_,_,_,i)-> i) flat_steep.2) ++ (map (\(_,_,_,_,_,i)-> i) flat_steep.1)
      let projection_indexes = flatten <| map(\i -> map(\r-> i*numrhos + r)(iota numrhos))angle_indexes
-     in (lines.2, lines.1, is_flat, projection_indexes)
+     in (lines.1, lines.2, is_flat, projection_indexes)
 
      let intersect_steep (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
           let k = (ext.1 - ent.1)/(ext.2 - ent.2)
