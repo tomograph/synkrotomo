@@ -106,6 +106,7 @@ def main(argv):
     sirtresult = sirt.main(theta_rad, rhozero, deltarho, emptyimage, sinogram.flatten().astype(np.float32), 200).get()
     tomo_lib.savebackprojection("sirt.png",sirtresult, size)
 
+    num_angles = math.ceil(size*math.pi/4)
     theta_rad = np.linspace(-np.pi/4, np.pi/4,  num_angles,False)
     sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
     proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
