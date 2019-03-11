@@ -46,7 +46,7 @@ let SIRT [n][p][a](angles : [a]f32)
       let fp_diff_steep = map2 (-) steep_proj fp_steep
       let fp_diff_flat = map2 (-) flat_proj fp_flat
       let fp_weighted_steep = map2 (*) rowsums_steep fp_diff_steep
-      let fp_weighted_flat = map2 (*) rowsums_steep fp_diff_flat
+      let fp_weighted_flat = map2 (*) rowsums_flat fp_diff_flat
       let bp = backprojection fp_weighted_steep fp_weighted_flat steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize
       let bp_weighted = map2 (*) inversecolumnsums bp
       in image with [0:n] = map2 (+) image bp_weighted
