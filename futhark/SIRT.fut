@@ -45,7 +45,7 @@ let SIRT [n][p][a](angles : [a]f32)
   let res_steep = loop (image) = (image) for iter < iterations do
      let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
      let bp_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp_steep
-     in image with [0:n] = map2 (+) image bp_weighted
+     in image with [0:n] = map2 (+) image bp_steep
 
   -- let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
   --   let fp_flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
