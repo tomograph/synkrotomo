@@ -42,9 +42,10 @@ let SIRT [n][p][a](angles : [a]f32)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
 
-  let res_steep = loop (image) = image for iter < iterations do
-     (image with [0:n] = (map2 (+) image (map2 (*) colsums_steep (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_steep (map2 (-) proj_steep (fp lines.2 rhozero deltarho numrhos halfsize image)))))))
-  in res_steep
+      let res = loop (image) = (image) for iter < iterations do
+           --(image with [0:n] = map(\v -> f32.min 1.0 v)(map(\v -> f32.max 0.0 v)(map2 (+) image (map2 (*) inversecolumnsums (back_projection angles rhozero deltarho size (map2 (*) inverserowsums (map2 (-) projections (forward_projection angles rhos halfsize image))))))))
+           (image with [0:n] = (map2 (+) image (map2 (*) colsums_steep (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_steep (map2 (-) proj_steep (fp lines.2 rhozero deltarho numrhos halfsize image)))))))
+      in res
 
   -- let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
   --    (imageT with [0:n] = (map2 (+) imageT (map2 (*) colsums_flat (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_flat (map2 (-) proj_flat (fp lines.1 rhozero deltarho numrhos halfsize imageT)))))))
