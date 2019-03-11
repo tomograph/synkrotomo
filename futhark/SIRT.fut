@@ -42,8 +42,8 @@ let SIRT [n][p][a](angles : [a]f32)
 
   let inverserowsums = inverse rowsums
 
-  let colsums_steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize (replicate (length proj_steep) 1.0f32)
-  let colsums_flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize  (replicate (length proj_flat) 1.0f32)
+  let colsums_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_steep) 1.0f32)
+  let colsums_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize  (replicate (length proj_flat) 1.0f32)
   let colsums_flatT =  if (size < 10000)
                then flatten <| transpose <| unflatten size size colsums_flat
                else (replicate (size**2) 1.0f32)
@@ -62,8 +62,8 @@ let SIRT [n][p][a](angles : [a]f32)
       let fp_diff = map2 (-) projections fp
       let fp_weighted = map2 (*) inverserowsums fp_diff
       let (flat_proj, steep_proj) = fix_projections fp_weighted angles r
-      let bp_steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize steep_proj
-      let bp_flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize flat_proj
+      let bp_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize steep_proj
+      let bp_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize flat_proj
       --untranspose in flat case
       let flatT =  if (size < 10000)
                    then flatten <| transpose <| unflatten size size flat
