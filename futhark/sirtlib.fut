@@ -24,7 +24,7 @@ let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point
 
 
    -- divides data into flat and steep parts
-  let fix_projections [a] (proj:[]f32) (angles:[a]f32) (numrhos:i32) :([]f32,[]f32) =
+  let fix_projections [] (proj:[]f32) (angles:[]f32) (numrhos:i32) :([]f32,[]f32) =
     let flats = flatten <| map (\angle ->
       let cos= f32.cos(angle)
       let sin = f32.sin(angle)
