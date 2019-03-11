@@ -95,7 +95,7 @@ type point  = ( f32, f32 )
                     ) (iota numrhos)
            ) lines
 
-     let forwardprojection (steep_lines: []f32) (flat_lines: []f32) (projection_indexes: i32[])(rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
+     let forwardprojection (steep_lines: []f32) (flat_lines: []f32) (projection_indexes: []i32) (rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
            let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
            let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
            in postprocess_fp projection_indexes fp_steep fp_flat
