@@ -1,0 +1,106 @@
+old fp
+Compiling ./futhark/forwardprojection.fut...
+Results for ./futhark/forwardprojection.fut:
+dataset ../data/fpinputf32rad64:        86.30μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad128:      194.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad256:     1116.30μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad512:     8565.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/fpinputf32rad1024:   60404.90μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/fpinputf32rad2048:  816495.60μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4096: 7772730.80μs (avg. of 10 runs; RSD: 0.01)
+
+new fp
+Compiling ./futhark/forwardprojection_best.fut...
+Results for ./futhark/forwardprojection_best.fut:
+dataset ../data/fpinputf32rad64:       203.70μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad128:      306.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad256:     1218.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:     6807.00μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad1024:   50411.90μs (avg. of 10 runs; RSD: 0.06)
+dataset ../data/fpinputf32rad2048: 1251508.00μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad4096: 7686815.30μs (avg. of 10 runs; RSD: 0.01)
+
+old bp
+Compiling ./futhark/backprojection.fut...
+Results for ./futhark/backprojection.fut:
+dataset ../data/bpinputf32rad64:       234.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad128:      496.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad256:     2964.80μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad512:    18390.60μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/bpinputf32rad1024:  118184.00μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/bpinputf32rad2048:  933419.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 8116572.20μs (avg. of 10 runs; RSD: 0.05)
+
+new bp
+Compiling ./futhark/backprojection_test.fut...
+Results for ./futhark/backprojection_test.fut:
+dataset ../data/bpinputf32rad64:       245.30μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/bpinputf32rad128:      375.00μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad256:     1459.00μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad512:     8053.40μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/bpinputf32rad1024:   50402.00μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/bpinputf32rad2048:  381928.10μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/bpinputf32rad4096: 3093096.10μs (avg. of 10 runs; RSD: 0.01)
+
+old sirt
+Compiling ./futhark/SIRT.fut...
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:     43146.70μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/sirtinputf32rad128:   100045.30μs (avg. of 10 runs; RSD: 0.08)
+dataset ../data/sirtinputf32rad256:   615383.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  4743719.30μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/sirtinputf32rad1024: 39534787.50μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048: 372533753.70μs (avg. of 10 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad4096: 3276519205.40μs (avg. of 10 runs; RSD: 0.01)
+
+new sirt
+Compiling ./futhark/SIRT_test.fut...
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:   ./futhark/SIRT_test.fut failed with error code 1 and output:
+././futhark/SIRT_test: Error at ./futhark/SIRT_test.fut:52:1-57:55 -> ./futhark/SIRT_test.fut:57:11-55 -> ./futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape
+
+dataset ../data/sirtinputf32rad128:    67826.50μs (avg. of 10 runs; RSD: 0.10)
+dataset ../data/sirtinputf32rad256:  ./futhark/SIRT_test.fut failed with error code 1 and output:
+././futhark/SIRT_test: Error at ./futhark/SIRT_test.fut:52:1-57:55 -> ./futhark/SIRT_test.fut:57:11-55 -> ./futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape
+
+dataset ../data/sirtinputf32rad512:  ./futhark/SIRT_test.fut failed with error code 1 and output:
+././futhark/SIRT_test: Error at ./futhark/SIRT_test.fut:52:1-57:55 -> ./futhark/SIRT_test.fut:57:11-55 -> ./futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape
+
+dataset ../data/sirtinputf32rad1024: ./futhark/SIRT_test.fut failed with error code 1 and output:
+././futhark/SIRT_test: Error at ./futhark/SIRT_test.fut:52:1-57:55 -> ./futhark/SIRT_test.fut:57:11-55 -> ./futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape
+
+dataset ../data/sirtinputf32rad2048: ./futhark/SIRT_test.fut failed with error code 1 and output:
+././futhark/SIRT_test: Error at ./futhark/SIRT_test.fut:52:1-57:55 -> ./futhark/SIRT_test.fut:57:11-55 -> ./futhark/SIRT_test.fut:43:23-53:
+function arguments of wrong shape
+
+
+sirt3d
+Compiling ./futhark/SIRT3D.fut...
+Results for ./futhark/SIRT3D.fut:
+dataset ../data/sirt3Dinputf32rad64:    538625.60μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/sirt3Dinputf32rad128:  9082927.20μs (avg. of 10 runs; RSD: 0.04)
+dataset ../data/sirt3Dinputf32rad256:  ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:2928: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
+dataset ../data/sirt3Dinputf32rad512:  ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:2928: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
+dataset ../data/sirt3Dinputf32rad1024: ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: Negative allocation of -7636877312 bytes attempted for mem_19232 in space 'device'.
+
+dataset ../data/sirt3Dinputf32rad2048: ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: ./futhark/SIRT3D.c:2928: OpenCL call
+  opencl_alloc(&ctx->opencl, size, desc, &block->mem)
+failed with error code -5 (Out of resources)
+
+dataset ../data/sirt3Dinputf32rad4096: ./futhark/SIRT3D.fut failed with error code 1 and output:
+././futhark/SIRT3D: Negative allocation of -7913603072 bytes attempted for mem_19232 in space 'device'.
+

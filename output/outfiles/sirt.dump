@@ -1,0 +1,2308 @@
+Using platform: NVIDIA CUDA
+Using device: GeForce GTX TITAN X
+Lockstep width: 32
+Default group size: 256
+Default number of groups: 256
+Created kernel map_14760.
+Created kernel map_14931.
+Created kernel map_14951.
+Created kernel map_14983.
+Created kernel map_15119.
+Created kernel map_15296.
+Created kernel map_15316.
+Created kernel map_15349.
+Allocated 3220 bytes for arr->mem in space 'device' (now allocated: 3220 bytes) (new peak).
+Allocated 2896 bytes for arr->mem in space 'device' (now allocated: 6116 bytes) (new peak).
+Allocated 1048576 bytes for arr->mem in space 'device' (now allocated: 1054692 bytes) (new peak).
+Allocated 2331280 bytes for arr->mem in space 'device' (now allocated: 3385972 bytes) (new peak).
+Allocated 3220 bytes for mem_15523 in space 'device' (now allocated: 3389192 bytes) (new peak).
+Allocated 3220 bytes for mem_15526 in space 'device' (now allocated: 3392412 bytes) (new peak).
+Allocated 805 bytes for mem_15528 in space 'device' (now allocated: 3393217 bytes) (new peak).
+Allocated 3220 bytes for mem_15531 in space 'device' (now allocated: 3396437 bytes) (new peak).
+Allocated 3220 bytes for mem_15534 in space 'device' (now allocated: 3399657 bytes) (new peak).
+Allocated 3220 bytes for mem_15537 in space 'device' (now allocated: 3402877 bytes) (new peak).
+Allocated 3220 bytes for mem_15540 in space 'device' (now allocated: 3406097 bytes) (new peak).
+Launching map_14931 with global work size [1024] and local work size [256].
+kernel map_14931 runtime: 35us
+Allocated 2331280 bytes for mem_15544 in space 'device' (now allocated: 5737377 bytes) (new peak).
+Launching map_14760 with global work size [582912] and local work size [256].
+kernel map_14760 runtime: 9102us
+Unreferencing block mem_15523 (allocated as mem_15523) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5734157 bytes)
+Unreferencing block mem_15526 (allocated as mem_15526) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5730937 bytes)
+Unreferencing block mem_15528 (allocated as mem_15528) in space 'device': 0 references remaining.
+805 bytes freed (now allocated: 5730132 bytes)
+Unreferencing block mem_15531 (allocated as mem_15531) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5726912 bytes)
+Unreferencing block mem_15534 (allocated as mem_15534) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5723692 bytes)
+Unreferencing block mem_15537 (allocated as mem_15537) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5720472 bytes)
+Unreferencing block mem_15540 (allocated as mem_15540) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 5717252 bytes)
+Allocated 2331280 bytes for mem_15547 in space 'device' (now allocated: 8048532 bytes) (new peak).
+Launching map_14951 with global work size [582912] and local work size [256].
+kernel map_14951 runtime: 33us
+Unreferencing block mem_15544 (allocated as mem_15544) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 5717252 bytes)
+Allocated 1048576 bytes for mem_15550 in space 'device' (now allocated: 6765828 bytes).
+Launching map_14983 with global work size [262144] and local work size [256].
+kernel map_14983 runtime: 31976us
+Allocated 3220 bytes for mem_15553 in space 'device' (now allocated: 6769048 bytes).
+Allocated 3220 bytes for mem_15556 in space 'device' (now allocated: 6772268 bytes).
+Allocated 805 bytes for mem_15558 in space 'device' (now allocated: 6773073 bytes).
+Allocated 3220 bytes for mem_15561 in space 'device' (now allocated: 6776293 bytes).
+Allocated 3220 bytes for mem_15564 in space 'device' (now allocated: 6779513 bytes).
+Allocated 3220 bytes for mem_15567 in space 'device' (now allocated: 6782733 bytes).
+Allocated 3220 bytes for mem_15570 in space 'device' (now allocated: 6785953 bytes).
+Launching map_15296 with global work size [1024] and local work size [256].
+kernel map_15296 runtime: 20us
+Allocated 2331280 bytes for mem_15576 in space 'device' (now allocated: 9117233 bytes) (new peak).
+Allocated 2331280 bytes for mem_15579 in space 'device' (now allocated: 11448513 bytes) (new peak).
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 14465us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 12497089 bytes) (new peak).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 34717us
+Unreferencing block image_mem_tmp_15610 (allocated as arr->mem) in space 'device': 1 references remaining.
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 14628us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes) (new peak).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 35436us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 14532us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 35449us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 14561us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 33616us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 13101us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 31365us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 13073us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 31330us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 13098us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 31343us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 13078us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 30059us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12089us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29400us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12112us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29260us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12119us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 28881us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12158us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 52us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29320us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12133us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 53us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29338us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12153us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29239us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12080us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29335us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12185us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29376us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12124us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29302us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12174us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29299us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12097us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29258us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12159us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29387us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12137us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 55us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29336us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12102us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29369us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12141us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29249us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12108us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29245us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12158us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29374us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12145us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 28941us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12143us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29347us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12174us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29334us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12092us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29320us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12138us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 28942us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12113us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29335us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12168us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29352us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12103us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29358us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12167us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29333us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12124us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29359us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12154us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29386us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12150us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29357us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12151us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29271us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12143us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29349us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12160us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29364us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12108us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29398us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12157us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29359us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12132us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29379us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12129us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29404us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12160us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29291us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12130us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29432us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12135us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29380us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12146us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29401us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12108us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29338us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12220us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29330us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12109us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29347us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12116us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29391us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12105us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29286us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12157us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29364us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12093us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29315us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12170us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29350us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12150us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29271us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12122us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29345us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12160us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29358us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12214us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29423us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12105us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29352us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12142us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29361us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12090us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29359us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12189us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29375us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12113us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29337us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12125us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29346us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12162us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29351us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12194us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29389us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12160us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29389us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12164us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29343us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12195us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29420us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12176us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29349us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12124us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29335us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12167us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 53us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29368us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12102us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29305us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12196us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29460us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12161us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29289us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12168us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29344us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12102us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29307us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12137us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29419us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12144us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29348us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12153us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29370us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12163us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29311us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12162us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29400us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12129us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29367us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12131us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 56us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 28873us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12086us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29350us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12205us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29351us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12155us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29331us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12216us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29406us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12114us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29289us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12150us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29375us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12140us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29362us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12155us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29402us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12107us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29386us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12168us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29313us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12144us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29372us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12181us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29367us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12140us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 52us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29339us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12131us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29370us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12157us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29372us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12176us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29379us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12103us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29441us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12124us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29337us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12140us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29416us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12102us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29302us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12130us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29296us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12197us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 28903us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12155us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29361us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12158us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29366us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12091us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29366us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12172us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29375us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12123us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29373us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12151us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29384us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12121us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29402us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12142us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29400us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12157us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 53us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29357us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12170us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29370us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12122us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29354us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12167us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29378us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12178us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29339us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12105us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29347us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12121us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29361us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12152us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29920us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12183us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29458us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12157us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29337us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12149us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29390us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12123us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29339us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12090us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29382us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12133us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29340us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12111us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29478us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12146us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29385us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12148us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29450us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12208us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29362us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12096us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29396us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12127us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29353us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12166us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 53us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29361us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12119us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29368us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12166us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29392us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12199us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29351us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12135us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29391us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12116us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 30010us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12141us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29369us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12139us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29398us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12116us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29364us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12135us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29347us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12156us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29369us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12132us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29339us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12165us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 52us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29369us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12150us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29061us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12094us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29353us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12192us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29378us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12091us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29400us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12139us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29376us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12124us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29847us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12321us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29753us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12260us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29756us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12320us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29747us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12256us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29753us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12336us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29766us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12310us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29843us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12276us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29747us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12245us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29715us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12281us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 51us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29815us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12310us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29748us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12282us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29715us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12263us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29752us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12287us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29444us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12290us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29755us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12356us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29740us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12285us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29847us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12317us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29720us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12287us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29745us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12267us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29688us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12280us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29787us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12304us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29836us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12273us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29841us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12272us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29751us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12291us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29699us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12306us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 30360us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12257us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29846us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12321us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29817us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12252us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29762us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12334us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29754us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12257us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29760us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12310us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29763us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12308us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29764us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12302us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29757us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12281us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29772us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12325us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29756us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12286us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29725us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12277us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 49us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29762us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12276us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29723us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12334us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 55us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29781us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12328us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29755us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12274us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29322us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12311us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 47us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29751us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12288us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 50us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29457us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12293us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29754us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Launching map_15119 with global work size [582912] and local work size [256].
+kernel map_15119 runtime: 12300us
+Launching map_15316 with global work size [582912] and local work size [256].
+kernel map_15316 runtime: 48us
+Allocated 1048576 bytes for mem_15582 in space 'device' (now allocated: 13545665 bytes).
+Launching map_15349 with global work size [262144] and local work size [256].
+kernel map_15349 runtime: 29840us
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 12497089 bytes)
+Unreferencing block image_mem_tmp_15610 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block mem_15582 (allocated as mem_15582) in space 'device': 1 references remaining.
+Unreferencing block mem_15547 (allocated as mem_15547) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 10165809 bytes)
+Unreferencing block mem_15550 (allocated as mem_15550) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 9117233 bytes)
+Unreferencing block mem_15553 (allocated as mem_15553) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9114013 bytes)
+Unreferencing block mem_15556 (allocated as mem_15556) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9110793 bytes)
+Unreferencing block mem_15558 (allocated as mem_15558) in space 'device': 0 references remaining.
+805 bytes freed (now allocated: 9109988 bytes)
+Unreferencing block mem_15561 (allocated as mem_15561) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9106768 bytes)
+Unreferencing block mem_15564 (allocated as mem_15564) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9103548 bytes)
+Unreferencing block mem_15567 (allocated as mem_15567) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9100328 bytes)
+Unreferencing block mem_15570 (allocated as mem_15570) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 9097108 bytes)
+Unreferencing block mem_15576 (allocated as mem_15576) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 6765828 bytes)
+Unreferencing block mem_15579 (allocated as mem_15579) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 4434548 bytes)
+Unreferencing block image_mem_15572 (allocated as mem_15582) in space 'device': 3 references remaining.
+Unreferencing block res_mem_15584 (allocated as mem_15582) in space 'device': 2 references remaining.
+Unreferencing block out_mem_15593 (allocated as mem_15582) in space 'device': 1 references remaining.
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 4431328 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+2896 bytes freed (now allocated: 4428432 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 3379856 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 1048576 bytes)
+Unreferencing block arr->mem (allocated as mem_15582) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 0 bytes)
+Peak memory usage for space 'device': 13545665 bytes.
+Peak memory usage for space 'local': 0 bytes.
+Peak memory usage for default space: 0 bytes.
+Kernel map_14760 executed      1 times, with average runtime:   9102us	and total runtime:   9102us
+Kernel map_14931 executed      1 times, with average runtime:     35us	and total runtime:     35us
+Kernel map_14951 executed      1 times, with average runtime:     33us	and total runtime:     33us
+Kernel map_14983 executed      1 times, with average runtime:  31976us	and total runtime:  31976us
+Kernel map_15119 executed    200 times, with average runtime:  12243us	and total runtime: 2448606us
+Kernel map_15296 executed      1 times, with average runtime:     20us	and total runtime:     20us
+Kernel map_15316 executed    200 times, with average runtime:     48us	and total runtime:   9718us
+Kernel map_15349 executed    200 times, with average runtime:  29585us	and total runtime: 5917029us
+Ran 605 kernels with cumulative runtime: 8416519us

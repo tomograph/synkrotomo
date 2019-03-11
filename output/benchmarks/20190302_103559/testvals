@@ -1,0 +1,4 @@
+
+testing SIRT - using preprocess2 and the better backprojection
+Compiling ./futhark/SIRT_test.fut...
+Results for ./futhark/SIRT_test.fut:

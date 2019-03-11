@@ -1,4 +1,4 @@
-from futhark import forwardprojection
+from futhark import forwardprojection_best
 import numpy as np
 import tomo_lib
 import sys
@@ -11,12 +11,12 @@ def main(argv):
     #Rescales to [0,1]
     phantom = tomo_lib.rescale(phantom.flatten().astype(np.float32))
 
-    forward = forwardprojection.forwardprojection()
+    forward = forwardprojection_best.forwardprojection()
     fpresult = forward.main(theta_rad.astype(np.float32), rays.astype(np.float32), phantom).get()
-    tomo_lib.savesinogram("//output//samples//futhark_fp.png",fpresult, len(rays), len(theta_rad))
+    tomo_lib.savesinogram("futhark_fp.png",fpresult, len(rays), len(theta_rad))
 
     #savebackprojection essentially just saves size x size image from data
-    tomo_lib.savebackprojection("//output//samples//futhark_bp_phantom.png",phantom, size)
+    tomo_lib.savebackprojection("futhark_bp_phantom.png",phantom, size)
 
 if __name__ == '__main__':
     main(sys.argv)

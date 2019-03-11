@@ -1,0 +1,72 @@
+regular SIRT
+Compiling ./futhark/SIRT.fut...
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:     64686.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   164218.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1154307.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  9785794.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78532300.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048: 759964087.00μs (avg. of 1 runs; RSD: 0.00)
+
+regular SIRT - Incremental flattening
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:     56320.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   234806.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1156298.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  10005821.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78403970.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048: 760048328.00μs (avg. of 1 runs; RSD: 0.00)
+
+regular SIRT - prettyfied
+Compiling ./futhark/SIRT_pretty.fut...
+Results for ./futhark/SIRT_pretty.fut:
+dataset ../data/sirtinputf32rad64:     70073.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   169566.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1156880.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  10013896.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78563743.00μs (avg. of 1 runs; RSD: 0.00)
+
+regular SIRT - prettyfied and Incremental flattening
+Results for ./futhark/SIRT_pretty.fut:
+dataset ../data/sirtinputf32rad64:     62418.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   234772.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:  1156596.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  9991222.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 78433931.00μs (avg. of 1 runs; RSD: 0.00)
+
+met SIRT
+Compiling ./futhark/SIRT_met.fut...
+Results for ./futhark/SIRT_met.fut:
+dataset ../data/sirtinputf32rad64:     55258.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   133463.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   802927.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  7384981.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 57898958.00μs (avg. of 1 runs; RSD: 0.00)
+
+met SIRT - Incremental flattening
+Results for ./futhark/SIRT_met.fut:
+dataset ../data/sirtinputf32rad64:     67196.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   237545.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   804958.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  7383507.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 57906652.00μs (avg. of 1 runs; RSD: 0.00)
+
+split backprojection SIRT
+Compiling ./futhark/SIRT_test.fut...
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:     46572.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   116894.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   648911.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  5915229.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 46405825.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048: 502850531.00μs (avg. of 1 runs; RSD: 0.00)
+
+split backprojection SIRT - prettyfied and Incremental flattening
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:     71919.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:   256310.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:   651974.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:  5886779.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024: 46415259.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048: 503499179.00μs (avg. of 1 runs; RSD: 0.00)
+

@@ -6,12 +6,26 @@ dist/*
 #####################
 futhark/lib/*
 
+# Data            #
+###################
+data/
+/sd/*
+*.out
+/preproc/*
+
 # Compiled source #
 ###################
 *.c
 *.h
 futhark/*.py
-data/
 futhark/backprojection
 futhark/backprojection_test
-/sd/*
+futhark/SIRT
+futhark/SIRT_test
+futhark/forwardprojection_test
+futhark/forwardprojection
+futhark/sanityCheck
+futhark/mse
+futhark/diff
+futhark/forwardprojection_test2
+futhark/forwardprojection_best

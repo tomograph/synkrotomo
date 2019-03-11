@@ -1,23 +1,29 @@
 -- ==
 -- input@../data/fpinputf32rad64
--- output@../sd/sanity-fpinputf32rad64
 -- input@../data/fpinputf32rad128
--- output@../sd/sanity-fpinputf32rad128
 -- input@../data/fpinputf32rad256
--- output@../sd/sanity-fpinputf32rad256
 -- input@../data/fpinputf32rad512
--- output@../sd/sanity-fpinputf32rad512
 -- input@../data/fpinputf32rad1024
--- output@../sd/sanity-fpinputf32rad1024
 -- input@../data/fpinputf32rad2048
--- output@../sd/sanity-fpinputf32rad2048
 
-import "projection_lib"
-open Projection
 
-let main  [n](angles : []f32)
-          (rhos : []f32)
-          (image : *[n]f32): []f32 =
-          let size = t32(f32.sqrt(r32(n)))
-          let halfsize = size/2
-          in forward_projection angles rhos halfsize image
+import "sirtlib"
+open sirtlib
+
+let main  [n][a] (angles : *[a]f32)
+          (rhozero : f32)
+          (deltarho : f32)
+          (numrhos : i32)
+          (image : *[n]f32) =
+  let size = t32(f32.sqrt(r32(n)))
+  let halfsize = size/2
+
+  let lines = preprocess angles
+  -- hack to always do this!
+  let imageT =  if (size < 10000)
+                then flatten <| transpose <| copy (unflatten size size image)
+                else (replicate n 1.0f32)
+
+  let steep = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
+  let flat = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
+  in postprocess_fp angles flat steep numrhos
