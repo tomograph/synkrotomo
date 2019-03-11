@@ -153,6 +153,7 @@ type point  = ( f32, f32 )
            let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
            let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
            --untranspose in flat case
+           let size = halfsize*2
            let bp_flatT =  if (size < 10000)
                         then flatten <| transpose <| unflatten size size bp_flat
                         else (replicate (size**2) 1.0f32)
