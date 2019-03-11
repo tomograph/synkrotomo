@@ -72,18 +72,18 @@ let SIRT [n][p][a](angles : [a]f32)
   --     in image with [0:n] = map2 (+) image bp_weighted
 
   let res_steep = loop (image) = (image) for iter < iterations do
-     let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
+     let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
      let fp_diff = map2 (-) steep_proj fp_steep
      let fp_weighted = map2 (*) rowsums_steep fp_diff
-     let bp_steep = bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
+     let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
      let bp_weighted = map2 (*) colsums_steep bp_steep
      in image with [0:n] = map2 (+) image bp_weighted
   --
   let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
-     let fp_flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
+     let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
      let fp_diff = map2 (-) flat_proj fp_flat
      let fp_weighted = map2 (*) rowsums_flat fp_diff
-     let bp_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
+     let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
      let bp_weighted = map2 (*) colsums_flat bp_flat
      in imageT with [0:n] = map2 (+) imageT bp_weighted
 
