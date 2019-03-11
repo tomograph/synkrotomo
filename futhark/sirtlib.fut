@@ -28,7 +28,7 @@ type point  = ( f32, f32 )
           in (steep, flat)
 
      -- reasembles forwardprojection to match input parameter
-     let postprocess_fp [p][f][s](projection_indexes: [p]f32) (val_steep: [f]f32) (val_flat: [s]f32): [p]f32 =
+     let postprocess_fp [p][f][s](projection_indexes: [p]i32) (val_steep: [f]f32) (val_flat: [s]f32): [p]f32 =
           scatter (replicate (f+s) 0.0) projection_indexes (val_steep ++ val_flat)
 
      -- divides in flat and steep and transposes lines
