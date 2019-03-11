@@ -19,7 +19,7 @@ let main  [p][a](angles : [a]f32)
           let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
           let halfsize = size/2
           let numrhos = p/a
-          let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
+          let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
 
 	     let (flat_proj, steep_proj) = fix_projections projections is_flat
           let steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_proj

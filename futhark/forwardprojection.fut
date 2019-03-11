@@ -18,7 +18,7 @@ let main  [n][a] (angles : *[a]f32)
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
 
-  let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
+  let (steep_lines, flat_lines, _, projection_indexes) = preprocess angles numrhos
   -- hack to always do this!
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
