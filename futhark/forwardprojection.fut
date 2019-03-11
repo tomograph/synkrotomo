@@ -18,12 +18,12 @@ let main  [n][a] (angles : *[a]f32)
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
 
-  let lines = preprocess angles
+  let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
   -- hack to always do this!
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
 
-  let steep = fp lines.2 rhozero deltarho numrhos halfsize image
-  let flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
-  in postprocess_fp angles flat steep numrhos
+  let steep = fp steep_lines rhozero deltarho numrhos halfsize image
+  let flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
+  in postprocess_fp projection_indexes steep flat

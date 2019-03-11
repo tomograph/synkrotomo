@@ -18,11 +18,12 @@ let main  [p][a](angles : [a]f32)
           (projections: [p]f32): []f32 =
           let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
           let halfsize = size/2
-          let lines = preprocess angles
-          let r = p/a
-	     let (flat_proj, steep_proj) = fix_projections projections angles r
-          let steep = bp lines.2 rhozero deltarho rhosprpixel r halfsize steep_proj
-          let flat = bp lines.1 rhozero deltarho rhosprpixel r halfsize flat_proj
+          let numrhos = p/a
+          let (steep_lines, flat_lines, is_flat, projection_indexes) = preprocess angles numrhos
+
+	     let (flat_proj, steep_proj) = fix_projections projections is_flat
+          let steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_proj
+          let flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_proj
           --untranspose in flat case
           let flatT =  if (size < 10000)
                        then flatten <| transpose <| unflatten size size flat
