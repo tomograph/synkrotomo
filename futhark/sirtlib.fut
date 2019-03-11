@@ -48,10 +48,9 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
   let flat_steep = partition(\(c,s,_) -> is_flat c s ) ordering
   let (_,_,flat_angle_indexes) = unzip3 flat_steep.1
   let (_,_,steep_angle_indexes) = unzip3 flat_steep.2
-  let flat_indexes = flatten <| map(\a -> map(\r -> a*numrhos+r)(iota numrhos))flat_angle_indexes
-  let steep_indexes = flatten <| map(\a -> map(\r -> a*numrhos+r)(iota numrhos))steep_angle_indexes
-  let result_empty = replicate (f+s) 0.0
-  let result_flat = scatter result_empty flat_indexes val_flat
+  let flat_indexes = flatten <| map(\i -> map(\r -> i*numrhos+r)(iota numrhos))flat_angle_indexes
+  let steep_indexes = flatten <| map(\i -> map(\r -> i*numrhos+r)(iota numrhos))steep_angle_indexes
+  let result_flat = scatter (replicate (a*numrhos) 0.0) flat_indexes val_flat
   in scatter result_flat steep_indexes val_steep
 
  -- divides in flat and steep and transposes lines
