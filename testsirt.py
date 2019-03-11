@@ -113,11 +113,7 @@ def main(argv):
     proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
     astra_sirt_steep = astra_reconstruction(proj_geom, sinogram, vol_geom)
 
-    theta_rad = np.linspace(np.pi/4, 3*np.pi/4,  num_angles,False)
-    sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
-    proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
-    astra_sirt_flat = astra_reconstruction(proj_geom, sinogram, vol_geom)
-    astra_sirt = astra_sirt_steep.flatten() + astra_sirt_flat.flatten()
+    astra_sirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
     tomo_lib.savebackprojection("astra_sirt.png",astra_sirt, size)
 if __name__ == '__main__':
     main(sys.argv)
