@@ -149,7 +149,7 @@ type point  = ( f32, f32 )
                          )((-halfsize)...(halfsize-1))
                     )((-halfsize)...(halfsize-1))
 
-     let backprojection (steep_projections: []f32) (flat_projections: []f32) (is_flat: []bool) (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
+     let backprojection (steep_projections: []f32) (flat_projections: []f32) (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
            let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
            let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
            --untranspose in flat case

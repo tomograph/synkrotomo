@@ -22,4 +22,4 @@ let main  [p][a](angles : [a]f32)
           let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
 
 	     let (steep_proj, flat_proj) = fix_projections projections is_flat
-          in backprojection steep_proj flat_proj is_flat steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize
+          in backprojection steep_proj flat_proj steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize

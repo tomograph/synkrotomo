@@ -33,7 +33,7 @@ let SIRT [n][p][a](angles : [a]f32)
   let rowsums_steep = inverse (fp steep_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32))
   let rowsums_flat = inverse (fp flat_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32))
 
-  let inversecolumnsums = inverse (backprojection (replicate (length steep_proj) 1.0f32) (replicate (length flat_proj) 1.0f32) is_flat steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize)
+  let inversecolumnsums = inverse (backprojection (replicate (length steep_proj) 1.0f32) (replicate (length flat_proj) 1.0f32) steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize)
 
   -- hack to always do this!
   let imageT =  if (size < 10000)
