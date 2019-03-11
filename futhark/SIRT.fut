@@ -20,27 +20,27 @@ let inverse (values: []f32) : []f32 =
 let SIRT [n][p][a](angles : [a]f32)
   (rhozero : f32)
   (deltarho: f32)
-  (numrhos: i32)
   (image : *[n]f32)
   (projections: [p]f32)
   (iterations : i32) : [n]f32 =
   let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
+  let numrhos = p/a
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
 
   let (proj_flat, proj_steep) = fix_projections projections angles numrhos
   let lines = preprocess angles
 
- -- let rowsums_steep = fp lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
- -- let rowsums_flat = fp lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
+  let rowsums_steep = fp lines.2 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
+  --let rowsums_flat = fp lines.1 rhozero deltarho numrhos halfsize (replicate n 1.0f32)
 
-  let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_steep) 1.0f32))
+  --let colsums_steep = inverse (bp lines.2 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_steep) 1.0f32))
   --let colsums_flat = inverse (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (replicate (length proj_flat) 1.0f32))
 
   -- hack to always do this!
-  --let imageT =  if (size < 10000)
---                then flatten <| transpose <| copy (unflatten size size image)
---                else (replicate n 1.0f32)
+  let imageT =  if (size < 10000)
+                then flatten <| transpose <| copy (unflatten size size image)
+                else (replicate n 1.0f32)
 
   let res_steep = loop (image) = (image) for iter < iterations do
      let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
