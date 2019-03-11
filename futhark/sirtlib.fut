@@ -85,7 +85,7 @@ let postprocess_fp [a][f][s](angles: [a]f32) (val_flat: [f]f32) (val_steep: [s]f
          reduce (+) 0.0f32 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
 
     let forwardprojection [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32): []f32 =
-      flatten(
+      in flatten(
         (map((\(cos, sin, lbase)->
           let rho = rhozero + r32(r)*deltarho
           in (map(\r ->
