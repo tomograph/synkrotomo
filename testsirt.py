@@ -117,7 +117,7 @@ def main(argv):
     sinogram = tomo_lib.get_sinogram(phantom.reshape(size,size), rays,theta_rad)
     proj_geom =astra.create_proj_geom('parallel', deltarho, numrhos, theta_rad)
     astra_sirt_flat = astra_reconstruction(proj_geom, sinogram, vol_geom)
-    astra_sirt = astra_sirt_steep.flatten() + astra_sirt_steep.flatten()
+    astra_sirt = astra_sirt_steep.flatten() + astra_sirt_flat.flatten()
     tomo_lib.savebackprojection("astra_sirt.png",astra_sirt, size)
 if __name__ == '__main__':
     main(sys.argv)
