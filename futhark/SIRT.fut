@@ -55,7 +55,7 @@ let SIRT [n][p][a](angles : [a]f32)
   --               then flatten <| transpose <| unflatten size size res_flat
   --               else (replicate n 1.0f32)
 
-  in map2 (+) res_steep --imageUT
+  in res_steep --imageUT
 
 let main  [n][p][a](angles : [a]f32)
            (rhozero : f32)
