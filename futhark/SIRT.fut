@@ -24,7 +24,7 @@ let SIRT [n][p][a](angles : [a]f32)
   (projections: [p]f32)
   (iterations : i32) : [n]f32 =
   let rhosprpixel = t32(f32.ceil(f32.sqrt(2)/deltarho))
-  let numrhos = p//a
+  let numrhos = p//a-1
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
 
