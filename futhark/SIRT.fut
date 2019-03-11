@@ -56,7 +56,7 @@ let SIRT [n][p][a](angles : [a]f32)
     let fp_weighted = map2 (*) rowsums_flat fp_diff
     let bp_flat = bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize fp_weighted
     let bp_weighted = map2 (*) colsums_flat bp_flat
-    in imageT with [0:n] = map2 (+) imageT bp
+    in imageT with [0:n] = map2 (+) imageT bp_weighted
 
   let imageUT = if (size < 10000)
                 then flatten <| transpose <| unflatten size size res_flat
