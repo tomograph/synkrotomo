@@ -29,7 +29,7 @@ let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point
       let cos= f32.cos(angle)
       let sin = f32.sin(angle)
       let flat = is_flat cos sin
-      in replicate numrhos flat
+      in (replicate numrhos flat)
       ) angles
     let zipped = zip proj flats
     let parts = partition(\(_,f) -> f ) zipped
