@@ -56,7 +56,7 @@ let SIRT [n][p](angles : []f32)
     in imageT with [0:n] = map2 (+) imageT bp_weighted
 
   let imageUT = if (size < 10000)
-                then flatten <| transpose <| unflatten size size (reverse flat)
+                then flatten <| transpose <| unflatten size size (reverse res_flat)
                 else (replicate n 1.0f32)
 
   in map2 (+) (reverse res_steep) imageUT
