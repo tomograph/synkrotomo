@@ -104,7 +104,7 @@ def main(argv):
 
     sirt = SIRT.SIRT()
     sirtresult = sirt.main(theta_rad, rhozero, deltarho, numrhos, emptyimage, sinogram.flatten().astype(np.float32), 200).get()
-    tomo_lib.savebackprojection("output//sirt.png",sirtresult, size)
+    tomo_lib.savebackprojection("sirt.png",sirtresult, size)
     astra_sirt = astra_reconstruction(proj_geom, sinogram, vol_geom)
     tomo_lib.savebackprojection("astra_sirt.png",astra_sirt, size)
 if __name__ == '__main__':
