@@ -21,7 +21,7 @@ let main  [p][a](angles : [a]f32)
           let numrhos = p/a
           let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
 
-	     let (flat_proj, steep_proj) = fix_projections projections is_flat
+	     let (steep_proj, flat_proj) = fix_projections projections is_flat
           let steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_proj
           let flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_proj
           --untranspose in flat case
