@@ -54,9 +54,6 @@ let SIRT [n][p][a](angles : [a]f32)
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
-  let length_5 = replicate 5 1.5708f32
-  let length_8 = replicate 8 2.5708f32
-  let sum = map2 (+) length_8 length_5
 
   let res = loop (image) = (image) for iter < iterations do
       let fp_steep = fp lines.2 rhozero deltarho numrhos halfsize image
@@ -72,7 +69,7 @@ let SIRT [n][p][a](angles : [a]f32)
                    then flatten <| transpose <| unflatten size size bp_flat
                    else (replicate (size**2) 1.0f32)
       let bp = map2 (+) bp_steep bp_flatT
-      let bp_weighted = map2(*) inversecolumnsums bp
+      let bp_weighted = map2 (*) inversecolumnsums bp
       in image with [0:n] = map2 (+) image bp_weighted
 
   -- let res_steep = loop (image) = (image) for iter < iterations do
