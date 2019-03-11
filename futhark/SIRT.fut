@@ -47,7 +47,7 @@ let SIRT [n][p][a](angles : [a]f32)
   in res_steep
 
   let res_flat = loop (imageT) = (copy imageT) for iter < iterations do
-     (image with [0:n] = (map2 (+) image (map2 (*) colsums_flat (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_flat (map2 (-) proj_flat (fp lines.1 rhozero deltarho numrhos halfsize image)))))))
+     (imageT with [0:n] = (map2 (+) image (map2 (*) colsums_flat (bp lines.1 rhozero deltarho rhosprpixel numrhos halfsize (map2 (*) rowsums_flat (map2 (-) proj_flat (fp lines.1 rhozero deltarho numrhos halfsize imageT)))))))
   in res_flat
 
   let imageUT = if (size < 10000)
