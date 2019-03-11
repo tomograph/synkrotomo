@@ -3,6 +3,9 @@
 module sirtlib = {
 type point  = ( f32, f32 )
 
+let is_flat (cos: f32) (sin: f32): bool =
+  f32.abs(sin) >= f32.abs(cos)
+
 -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
 let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
      let flat = is_flat cost sint
@@ -10,9 +13,8 @@ let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point
      let point2 = if flat then (maxval, find_y maxval ray cost sint) else (find_x maxval ray cost sint, maxval)
 
      in (point1, point2)
-     
-  let is_flat (cos: f32) (sin: f32): bool =
-    f32.abs(sin) >= f32.abs(cos)
+
+
 
    -- divides data into flat and steep parts
   let fix_projections [a] (proj:[]f32) (angles:[a]f32) (numrhos:i32) :([]f32,[]f32) =
