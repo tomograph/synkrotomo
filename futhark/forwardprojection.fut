@@ -24,6 +24,6 @@ let main  [n][a] (angles : *[a]f32)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
 
-  let steep = forwardprojection lines.2 rhozero deltarho numrhos halfsize image
-  let flat = forwardprojection lines.1 rhozero deltarho numrhos halfsize imageT
+  let steep = fp lines.2 rhozero deltarho numrhos halfsize image
+  let flat = fp lines.1 rhozero deltarho numrhos halfsize imageT
   in postprocess_fp angles flat steep numrhos
