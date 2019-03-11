@@ -11,8 +11,11 @@
 import "sirtlib"
 open sirtlib
 
-let inverse [n](values: [n]f32) : [n]f32 =
-     map(\v -> if v == 0.0 then 0.0 else 1/v) values
+let safe_inverse(value: f32) : f32 =
+     if value == 0.0 then 0.0 else 1/value
+
+let inverse [](values: []f32) : []f32 =
+     map(\v -> safe_inverse v) values
 
 let SIRT [n][p][a](angles : [a]f32)
   (rhozero : f32)
