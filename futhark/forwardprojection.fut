@@ -79,7 +79,7 @@ module fplib = {
     let halfsize = size/2
     let rhos = map(\i -> rhozero + (r32(i))*deltarho)(iota numrhos)
     in flatten <| map(\ang->
-        let sin = f32.sin(ang)
+        let sin = -f32.sin(ang)
         let cos = f32.cos(ang)
         in (map(\r -> forward_projection_value sin cos r halfsize img) rhos)
       ) angles

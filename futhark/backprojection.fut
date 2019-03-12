@@ -21,7 +21,7 @@ module bplib = {
             in (cos, sin, lcot,ltan, i))
        (iota(a))
        let parts = partition(\(c,s,_,_,_) -> is_flat c s  )cossin
-       in ((map(\(cos, sin, lcot,_, i)-> (cos,sin,lcot,i))parts.1),(map(\(cos, sin, _,ltan, i)-> (cos,sin,ltan,i))parts.2))
+       in ((map(\(cos, sin, lcot,_, i)-> (cos,-sin,lcot,i))parts.1),(map(\(cos, sin, _,ltan, i)-> (cos,-sin,ltan,i))parts.2))
 
   let bp_steep [p] (lines: ([](f32,f32,f32,i32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32) (projections: [p]f32): []f32 =
        let fact = f32.sqrt(2.0f32)/2.0f32
