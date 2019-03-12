@@ -3,14 +3,20 @@
 module sirtlib = {
 type point  = ( f32, f32 )
 
-     let is_flat (cos: f32) (sin: f32): bool =
+      let is_flat (cos: f32) (sin: f32): bool =
           f32.abs(sin) >= f32.abs(cos)
 
-     let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+      let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           (ray-x*cost)/sint
 
-     let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
+      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
           (ray-y*sint)/cost
+
+      let safe_inverse (value: f32) : f32 =
+           if value == 0.0 then 0.0 else 1/value
+
+      let inverse (values: []f32) : []f32 =
+           map(\v -> safe_inverse v) values
 
      -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
      let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
@@ -50,56 +56,6 @@ type point  = ( f32, f32 )
      let projection_indexes = flatten <| map(\i -> map(\r-> i*numrhos + r)(iota numrhos))angle_indexes
      in (lines.1, lines.2, is_flat, projection_indexes)
 
-     let intersect_steep (i: i32) (ext: point) (ent: point) (Nhalf: i32): ((f32,i32,i32),(f32,i32,i32)) =
-          let k = (ext.1 - ent.1)/(ext.2 - ent.2)
-          let xmin = k*(r32(i) - ent.2) + ent.1 + (r32(Nhalf))
-          let xplus = k*(r32(i) + 1 - ent.2) + ent.1 + (r32(Nhalf))
-          let Xpixmin = t32(f32.floor(xmin))
-          let Xpixplus = t32(f32.floor(xplus))
-          let baselength = f32.sqrt(1+k*k)
-          let Xpixmax = i32.max Xpixmin Xpixplus
-          let xdiff = xplus - xmin
-          -- if both equal then l is baselength and we only want one l
-          let xminfact = if Xpixmin == Xpixplus then 1 else (r32(Xpixmax) - xmin)/xdiff
-          let xplusfact = if Xpixmin == Xpixplus then 0 else (xplus - r32(Xpixmax))/xdiff
-          let lxmin = xminfact*baselength
-          let lxplus = xplusfact*baselength
-          let y = i+Nhalf
-          in ((lxmin, Xpixmin, y), (lxplus, Xpixplus, y))
-
-     let calculate_product [n](sin: f32)
-              (cos: f32)
-              (rho: f32)
-              (i: i32)
-              (halfsize: i32)
-              (vct: [n]f32) : f32 =
-          let (ent,ext) = entryexitPoint sin cos rho (r32(halfsize))
-          let ((lmin,xmin,ymin),(lplus,xplus,yplus)) = intersect_steep i ext ent halfsize
-          let size = halfsize*2
-          let pixmin = xmin+ymin*size
-          let pixplus = xplus+yplus*size
-          let min = if xmin >= 0 && xmin < size && ymin >=0 && ymin < size then (unsafe lmin*vct[pixmin]) else 0.0f32
-          let plus = if  xplus >= 0 && xplus < size && yplus >=0 && yplus < size then (unsafe lplus*vct[pixplus]) else 0.0f32
-          in (min+plus)
-
-     -- calculate one value in the forward projection vector
-     let forward_projection_value (sin: f32) (cos: f32) (rho: f32) (halfsize: i32) (img: []f32): f32 =
-          reduce (+) 0.0f32 <| map(\i -> calculate_product sin cos rho i halfsize img)((-halfsize)...(halfsize-1))
-
-     let fp [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32): []f32 =
-          flatten <| map(\(cos, sin, _)->
-               let k = sin/cos
-               in map(\r ->
-                    let rho = rhozero + r32(r)*deltarho
-                    in forward_projection_value sin cos rho halfsize img
-                    ) (iota numrhos)
-           ) lines
-
-     let forwardprojection (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (projection_indexes: []i32) (rhozero: f32) (deltarho: f32) (numrhos: i32) (halfsize: i32) (image: []f32) (imageT: []f32) : []f32 =
-           let fp_steep = fp steep_lines rhozero deltarho numrhos halfsize image
-           let fp_flat = fp flat_lines rhozero deltarho numrhos halfsize imageT
-           in postprocess_fp projection_indexes fp_steep fp_flat
-
      let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
           -- is zero if both values are below minimum else the positive difference between minus and yplus
           let b = f32.max (plus-mini) 0.0f32
@@ -112,50 +68,4 @@ type point  = ( f32, f32 )
           let fact = f32.min u 1
           in fact
 
-
-
-     -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
-     let bp [p] [l] (lines: [l](f32, f32, f32))
-               (rhozero: f32)
-               (deltarho: f32)
-               (rhosprpixel: i32)
-               (numrhos: i32)
-               (halfsize: i32)
-               (projections: [p]f32) : []f32 =
-          let fact = f32.sqrt(2.0f32)/2.0f32
-          in flatten <| map(\irow ->
-                         map(\icolumn ->
-                              let xmin = r32(icolumn)
-                              let ymin = r32(irow)
-                              in reduce (+) 0.0f32 <| map(\ln ->
-                                   let (cost, sint, lbase) = unsafe lines[ln]
-                                   let tant = sint/cost
-                                   let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
-                                   let rho = cost*p.1+sint*p.2
-                                   let s = f32.ceil((rho-rhozero)/deltarho)
-                                   let xbase = ymin*tant
-                                   in reduce (+) 0.0f32 <| map(\i ->
-                                        let sprime = s+(r32(i))
-                                        let r = sprime*deltarho+rhozero
-                                        let x_bot = (r/cost)-xbase
-                                        let x_top = x_bot-tant
-                                        let maxx = f32.max x_bot x_top
-                                        let minx = f32.min x_bot x_top
-                                        let l = (intersect_fact maxx minx xmin (xmin+1.0))*(lbase)
-                                        let projectionidx = ln*numrhos+(t32(sprime))
-                                        in l*(unsafe projections[projectionidx])
-                                   )(iota rhosprpixel)
-                              ) (iota l)
-                         )((-halfsize)...(halfsize-1))
-                    )((-halfsize)...(halfsize-1))
-
-     let backprojection (steep_projections: []f32) (flat_projections: []f32) (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
-           let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
-           let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
-           --untranspose in flat case
-           let size = halfsize*2
-           let bp_flatT =  if (size < 10000)
-                        then flatten <| transpose <| unflatten size size bp_flat
-                        else (replicate (size**2) 1.0f32)
-           in map2 (+) bp_steep bp_flatT
 }
