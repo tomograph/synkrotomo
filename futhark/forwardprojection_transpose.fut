@@ -43,8 +43,8 @@ module fpTlib = {
   -- calculate one value in the forward projection vector
   let forward_projection_value (tant: f32) (baselength: f32) (rhoadjust: f32) (halfsize: i32) (img: []f32): f32 =
        reduce (+) 0.0f32 <| map(\ymin ->
-               let x_bot = rhoadjust-r32(ymin)*tant
-               let x_top = x_bot-tant
+               let x_bot = rhoadjust-r32(ymin)*tant + (r32(halfsize))
+               let x_top = x_bot-tant + (r32(halfsize))
                 in calculate_product x_bot x_top ymin baselength halfsize img
               )((-halfsize)...(halfsize-1))
 
