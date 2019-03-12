@@ -1,8 +1,6 @@
 -- ==
 -- input@data/bpinputf32rad64
--- output@data/bpoutputf32rad
 -- input@data/bpinputf32rad128
--- output@data/bpoutputf32rad128
 -- input@data/bpinputf32rad256
 -- input@data/bpinputf32rad512
 -- input@data/bpinputf32rad1024

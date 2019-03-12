@@ -1,8 +1,6 @@
 -- ==
 -- input@data/sirtinputf32rad64
--- output@data/sirtoutputf32rad
 -- input@data/sirtinputf32rad128
--- output@data/sirtoutputf32rad128
 -- input@data/sirtinputf32rad256
 -- input@data/sirtinputf32rad512
 -- input@data/sirtinputf32rad1024
