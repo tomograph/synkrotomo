@@ -1,9 +1,10 @@
 lib:
 	futhark pyopencl --library ./futhark/SIRT.fut
-	# futhark pyopencl --library ./futhark/SIRT3D.fut
 	futhark pyopencl --library ./futhark/backprojection.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
-	# futhark pyopencl --library ./futhark/forwardprojection_best.fut
+	futhark pyopencl --library ./futhark/SIRT_transpose.fut
+	futhark pyopencl --library ./futhark/backprojection_transpose.fut
+	futhark pyopencl --library ./futhark/forwardprojection_transpose.fut
 
 libc:
 	futhark c --library ./futhark/SIRT.fut
