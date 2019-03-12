@@ -8,9 +8,10 @@ futhark/lib/*
 
 # Data            #
 ###################
-data/
+data/*
 /sd/*
 /preproc/*
+*.gz
 
 # Compiled source #
 ###################
