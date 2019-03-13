@@ -1,0 +1,124 @@
+Using platform: Intel Gen OCL Driver
+Using device: Intel(R) HD Graphics Kabylake ULT GT2
+Lockstep width: 1
+Default group size: 256
+Default number of groups: 256
+Created kernel map_9391.
+Created kernel map_9401.
+Created kernel map_9424.
+Created kernel map_9526.
+Created kernel map_9555.
+Created kernel map_9657.
+Created kernel scan1_9285.
+Created kernel scan2_9351.
+Allocated 3220 bytes for arr->mem in space 'device' (now allocated: 3220 bytes) (new peak).
+Allocated 2896 bytes for arr->mem in space 'device' (now allocated: 6116 bytes) (new peak).
+Allocated 1048576 bytes for arr->mem in space 'device' (now allocated: 1054692 bytes) (new peak).
+Allocated 3220 bytes for mem_9701 in space 'device' (now allocated: 1057912 bytes) (new peak).
+Allocated 3220 bytes for mem_9704 in space 'device' (now allocated: 1061132 bytes) (new peak).
+Allocated 3220 bytes for mem_9707 in space 'device' (now allocated: 1064352 bytes) (new peak).
+Allocated 3220 bytes for mem_9710 in space 'device' (now allocated: 1067572 bytes) (new peak).
+Allocated 3220 bytes for mem_9713 in space 'device' (now allocated: 1070792 bytes) (new peak).
+Allocated 3220 bytes for mem_9716 in space 'device' (now allocated: 1074012 bytes) (new peak).
+Allocated 3220 bytes for mem_9719 in space 'device' (now allocated: 1077232 bytes) (new peak).
+Allocated 16 bytes for mem_9728 in space 'device' (now allocated: 1077248 bytes) (new peak).
+Allocated 16 bytes for mem_9731 in space 'device' (now allocated: 1077264 bytes) (new peak).
+Launching scan1_9285 with global work size [1024] and local work size [256].
+kernel scan1_9285 runtime: 858us
+Allocated 16 bytes for mem_9740 in space 'device' (now allocated: 1077280 bytes) (new peak).
+Allocated 16 bytes for mem_9743 in space 'device' (now allocated: 1077296 bytes) (new peak).
+Launching scan2_9351 with global work size [4] and local work size [4].
+kernel scan2_9351 runtime: 392us
+Unreferencing block mem_9728 (allocated as mem_9728) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 1077280 bytes)
+Unreferencing block mem_9731 (allocated as mem_9731) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 1077264 bytes)
+Allocated 3220 bytes for mem_9746 in space 'device' (now allocated: 1080484 bytes) (new peak).
+Allocated 3220 bytes for mem_9749 in space 'device' (now allocated: 1083704 bytes) (new peak).
+Launching map_9391 with global work size [1024] and local work size [256].
+kernel map_9391 runtime: 219us
+Unreferencing block mem_9701 (allocated as mem_9701) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1080484 bytes)
+Unreferencing block mem_9704 (allocated as mem_9704) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1077264 bytes)
+Unreferencing block mem_9740 (allocated as mem_9740) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 1077248 bytes)
+Unreferencing block mem_9743 (allocated as mem_9743) in space 'device': 0 references remaining.
+16 bytes freed (now allocated: 1077232 bytes)
+Allocated 3220 bytes for mem_9752 in space 'device' (now allocated: 1080452 bytes).
+Allocated 3220 bytes for mem_9755 in space 'device' (now allocated: 1083672 bytes).
+Allocated 3220 bytes for mem_9758 in space 'device' (now allocated: 1086892 bytes) (new peak).
+Allocated 3220 bytes for mem_9761 in space 'device' (now allocated: 1090112 bytes) (new peak).
+Launching map_9401 with global work size [1024] and local work size [256].
+kernel map_9401 runtime: 286us
+Unreferencing block mem_9707 (allocated as mem_9707) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1086892 bytes)
+Unreferencing block mem_9710 (allocated as mem_9710) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1083672 bytes)
+Unreferencing block mem_9713 (allocated as mem_9713) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1080452 bytes)
+Unreferencing block mem_9716 (allocated as mem_9716) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1077232 bytes)
+Unreferencing block mem_9719 (allocated as mem_9719) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1074012 bytes)
+Unreferencing block mem_9746 (allocated as mem_9746) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1070792 bytes)
+Unreferencing block mem_9749 (allocated as mem_9749) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 1067572 bytes)
+Allocated 1612 bytes for mem_9764 in space 'device' (now allocated: 1069184 bytes).
+Allocated 1612 bytes for mem_9767 in space 'device' (now allocated: 1070796 bytes).
+Launching map_9526 with global work size [512] and local work size [256].
+kernel map_9526 runtime: 255us
+Allocated 1167088 bytes for mem_9771 in space 'device' (now allocated: 2237884 bytes) (new peak).
+Launching map_9424 with global work size [291840] and local work size [256].
+kernel map_9424 runtime: 146176us
+Unreferencing block mem_9761 (allocated as mem_9761) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 2234664 bytes)
+Unreferencing block mem_9764 (allocated as mem_9764) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 2233052 bytes)
+Unreferencing block mem_9767 (allocated as mem_9767) in space 'device': 0 references remaining.
+1612 bytes freed (now allocated: 2231440 bytes)
+Allocated 1608 bytes for mem_9774 in space 'device' (now allocated: 2233048 bytes).
+Allocated 1608 bytes for mem_9777 in space 'device' (now allocated: 2234656 bytes).
+Launching map_9657 with global work size [512] and local work size [256].
+kernel map_9657 runtime: 204us
+Unreferencing block mem_9752 (allocated as mem_9752) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 2231436 bytes)
+Unreferencing block mem_9755 (allocated as mem_9755) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 2228216 bytes)
+Allocated 1164192 bytes for mem_9781 in space 'device' (now allocated: 3392408 bytes) (new peak).
+Launching map_9555 with global work size [291072] and local work size [256].
+kernel map_9555 runtime: 74199us
+Unreferencing block mem_9758 (allocated as mem_9758) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3389188 bytes)
+Unreferencing block mem_9774 (allocated as mem_9774) in space 'device': 0 references remaining.
+1608 bytes freed (now allocated: 3387580 bytes)
+Unreferencing block mem_9777 (allocated as mem_9777) in space 'device': 0 references remaining.
+1608 bytes freed (now allocated: 3385972 bytes)
+Allocated 2331280 bytes for mem_9784 in space 'device' (now allocated: 5717252 bytes) (new peak).
+Unreferencing block mem_9771 (allocated as mem_9771) in space 'device': 0 references remaining.
+1167088 bytes freed (now allocated: 4550164 bytes)
+Unreferencing block mem_9781 (allocated as mem_9781) in space 'device': 0 references remaining.
+1164192 bytes freed (now allocated: 3385972 bytes)
+Unreferencing block mem_9784 (allocated as mem_9784) in space 'device': 2 references remaining.
+Unreferencing block out_mem_9793 (allocated as mem_9784) in space 'device': 1 references remaining.
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+3220 bytes freed (now allocated: 3382752 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+2896 bytes freed (now allocated: 3379856 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+1048576 bytes freed (now allocated: 2331280 bytes)
+Unreferencing block arr->mem (allocated as mem_9784) in space 'device': 0 references remaining.
+2331280 bytes freed (now allocated: 0 bytes)
+Peak memory usage for space 'device': 5717252 bytes.
+Peak memory usage for space 'local': 0 bytes.
+Peak memory usage for default space: 0 bytes.
+Kernel map_9391   executed      1 times, with average runtime:    219us	and total runtime:    219us
+Kernel map_9401   executed      1 times, with average runtime:    286us	and total runtime:    286us
+Kernel map_9424   executed      1 times, with average runtime: 146176us	and total runtime: 146176us
+Kernel map_9526   executed      1 times, with average runtime:    255us	and total runtime:    255us
+Kernel map_9555   executed      1 times, with average runtime:  74199us	and total runtime:  74199us
+Kernel map_9657   executed      1 times, with average runtime:    204us	and total runtime:    204us
+Kernel scan1_9285 executed      1 times, with average runtime:    858us	and total runtime:    858us
+Kernel scan2_9351 executed      1 times, with average runtime:    392us	and total runtime:    392us
+Ran 8 kernels with cumulative runtime: 222589us

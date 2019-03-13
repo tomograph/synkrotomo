@@ -1,0 +1,1 @@
+futhark dev --gpu to check for sequentialization

@@ -1,0 +1,25 @@
+(base) [crj405@gpu02-diku-image runscripts]$ cat slurm-798187.out
+a00621.science.domain
+1
+regular fp
+Compiling ./futhark/forwardprojection.fut...
+Results for ./futhark/forwardprojection.fut:
+dataset ../data/fpinputf32rad64:           97.60μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad128:         264.70μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad256:       1 834.10μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:      13 936.50μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/fpinputf32rad1024:    101 141.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad2048:  1 494 109.40μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad4096: 10 050 293.90μs (avg. of 10 runs; RSD: 0.03)
+
+best fp
+Compiling ./futhark/forwardprojection_best.fut...
+Results for ./futhark/forwardprojection_best.fut:
+dataset ../data/fpinputf32rad64:          174.70μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad128:         333.70μs (avg. of 10 runs; RSD: 0.03)
+dataset ../data/fpinputf32rad256:       1 702.50μs (avg. of 10 runs; RSD: 0.01)
+dataset ../data/fpinputf32rad512:      10 964.20μs (avg. of 10 runs; RSD: 0.05)
+dataset ../data/fpinputf32rad1024:     76 066.70μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad2048:  1 863 423.10μs (avg. of 10 runs; RSD: 0.02)
+dataset ../data/fpinputf32rad4096:  8 623 478.90μs (avg. of 10 runs; RSD: 0.01)
+done

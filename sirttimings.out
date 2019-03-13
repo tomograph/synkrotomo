@@ -1,0 +1,25 @@
+0
+regular SIRT
+Compiling ./futhark/SIRT.fut...
+Results for ./futhark/SIRT.fut:
+dataset ../data/sirtinputf32rad64:          47 278.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:        113 942.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:        634 608.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:      4 574 889.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024:    41 347 529.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048:   413 846 628.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad4096: 3 600 621 892.00μs (avg. of 1 runs; RSD: 0.00)
+optimized SIRT
+Compiling ./futhark/SIRT_test.fut...
+Results for ./futhark/SIRT_test.fut:
+dataset ../data/sirtinputf32rad64:          34 109.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad128:         77 521.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad256:        407 274.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad512:      2 448 170.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad1024:    23 768 401.00μs (avg. of 1 runs; RSD: 0.00)
+dataset ../data/sirtinputf32rad2048:   367 264 934.00μs (avg. of 1 runs; RSD: 0.00)
+Internal compiler error (unhandled IO exception).
+Please report this at https://github.com/diku-dk/futhark/issues
+./futhark/../data/sirtinputf32rad4049: openBinaryFile: does not exist (No such file or directory)
+done
+(base) [crj405@gpu02-diku-image runscripts]$
