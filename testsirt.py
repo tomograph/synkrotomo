@@ -1,6 +1,6 @@
 from futhark import SIRT
 from futhark import backprojection
-from futhark import forwardprojection
+from futhark import forwardprojection_transpose_L
 import numpy as np
 import tomo_lib
 import dataprint_lib
@@ -88,7 +88,7 @@ def main(argv):
     vol_geom = astra.create_vol_geom(size,)
     astra_bp = astra_BP(proj_geom, sinogram, vol_geom)
     scipy.misc.toimage(astra_bp).save('astra_bp.png')
-    fp = forwardprojection.forwardprojection()
+    fp = forwardprojection_transpose_L.forwardprojection_transpose_L()
     fpresult = fp.main(theta_rad.astype(np.float32), rhozero, deltarho, numrhos, phantom.flatten().astype(np.float32)).get()
     tomo_lib.savesinogram("fp.png",fpresult, numrhos, len(theta_rad))
     tomo_lib.savesinogram("astra_fp.png", sinogram.flatten(), numrhos, len(theta_rad))

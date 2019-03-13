@@ -29,7 +29,7 @@ module fpTlib = {
           in reduce (+) 0.0f32 <| map(\i ->
             let ih = i+halfsize
 
-            let xmin = base-r32(i)*tant + (r32(halfsize))
+            let xmin = base-r32(i)*k + (r32(halfsize))
             let xplus = xmin-k + (r32(halfsize))
 
             let Xpixmin = t32(f32.floor(xmin))
