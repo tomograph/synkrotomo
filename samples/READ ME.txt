@@ -1,2 +1,0 @@
-The run this to verify SIRT reconstructs. Needs ASTRA installed to work.
-Requires installing synkrotomo using setup.py sdist, then install to work. 

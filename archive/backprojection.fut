@@ -1,4 +1,24 @@
 -- ==
+-- input@data/bpinputf32rad10
+-- input@data/bpinputf32rad15
+-- input@data/bpinputf32rad20
+-- input@data/bpinputf32rad25
+-- input@data/bpinputf32rad30
+-- input@data/bpinputf32rad35
+-- input@data/bpinputf32rad40
+-- input@data/bpinputf32rad45
+-- input@data/bpinputf32rad50
+-- input@data/bpinputf32rad55
+-- input@data/bpinputf32rad60
+-- input@data/bpinputf32rad65
+-- input@data/bpinputf32rad70
+-- input@data/bpinputf32rad75
+-- input@data/bpinputf32rad80
+-- input@data/bpinputf32rad85
+-- input@data/bpinputf32rad90
+-- input@data/bpinputf32rad95
+
+
 -- input@data/bpinputf32rad64
 -- input@data/bpinputf32rad128
 -- input@data/bpinputf32rad256
