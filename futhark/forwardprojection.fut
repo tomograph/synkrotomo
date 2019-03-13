@@ -1,4 +1,24 @@
 -- ==
+-- input@data/fpsparseinputf32rad10
+-- input@data/fpsparseinputf32rad15
+-- input@data/fpsparseinputf32rad20
+-- input@data/fpsparseinputf32rad25
+-- input@data/fpsparseinputf32rad30
+-- input@data/fpsparseinputf32rad35
+-- input@data/fpsparseinputf32rad40
+-- input@data/fpsparseinputf32rad45
+-- input@data/fpsparseinputf32rad50
+-- input@data/fpsparseinputf32rad55
+-- input@data/fpsparseinputf32rad60
+-- input@data/fpsparseinputf32rad65
+-- input@data/fpsparseinputf32rad70
+-- input@data/fpsparseinputf32rad75
+-- input@data/fpsparseinputf32rad80
+-- input@data/fpsparseinputf32rad85
+-- input@data/fpsparseinputf32rad90
+-- input@data/fpsparseinputf32rad95
+
+
 -- input@data/fpinputf32rad64
 -- input@data/fpinputf32rad128
 -- input@data/fpinputf32rad256
