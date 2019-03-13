@@ -1,9 +1,0 @@
-testing fp - first, to compare, scatter, no function calls
-Compiling ./futhark/forwardprojection_test.fut...
-Results for ./futhark/forwardprojection_test.fut:
-dataset ../data/fpinputf32rad128:      263.50μs (avg. of 10 runs; RSD: 0.01)
-dataset ../data/fpinputf32rad256:     1203.10μs (avg. of 10 runs; RSD: 0.01)
-dataset ../data/fpinputf32rad512:    11469.80μs (avg. of 10 runs; RSD: 0.25)
-dataset ../data/fpinputf32rad1024:   57774.90μs (avg. of 10 runs; RSD: 0.03)
-dataset ../data/fpinputf32rad2048: 1156793.30μs (avg. of 10 runs; RSD: 0.02)
-dataset ../data/fpinputf32rad4096: 7556624.80μs (avg. of 10 runs; RSD: 0.01)

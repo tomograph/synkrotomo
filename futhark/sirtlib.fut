@@ -6,24 +6,11 @@ type point  = ( f32, f32 )
       let is_flat (cos: f32) (sin: f32): bool =
           f32.abs(sin) >= f32.abs(cos)
 
-      let find_y (x : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          (ray-x*cost)/sint
-
-      let find_x (y : f32) (ray: f32) (cost: f32) (sint: f32): f32 =
-          (ray-y*sint)/cost
-
       let safe_inverse (value: f32) : f32 =
            if value == 0.0 then 0.0 else 1/value
 
       let inverse (values: []f32) : []f32 =
            map(\v -> safe_inverse v) values
-
-     -- gets entry and exit point in no particular order. might later consider corners and vertical lines on grid edge
-     let entryexitPoint (sint : f32) (cost : f32) (ray : f32) (maxval : f32) : (point,point) =
-          let flat = is_flat cost sint
-          let point1 = if flat then ((-1.0*maxval), find_y (-1.0*maxval) ray cost sint) else (find_x (-1.0*maxval) ray cost sint, (-1.0*maxval))
-          let point2 = if flat then (maxval, find_y maxval ray cost sint) else (find_x maxval ray cost sint, maxval)
-          in (point1, point2)
 
      -- divides data into flat and steep parts
      let fix_projections [p](proj:[p]f32) (is_flat:[p]bool):([]f32,[]f32) =
@@ -55,17 +42,4 @@ type point  = ( f32, f32 )
      let angle_indexes = (map (\(_,_,_,_,_,i)-> i) flat_steep.2) ++ (map (\(_,_,_,_,_,i)-> i) flat_steep.1)
      let projection_indexes = flatten <| map(\i -> map(\r-> i*numrhos + r)(iota numrhos))angle_indexes
      in (lines.1, lines.2, is_flat, projection_indexes)
-
-     let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
-          -- is zero if both values are below minimum else the positive difference between minus and yplus
-          let b = f32.max (plus-mini) 0.0f32
-          -- is zero if both values are above maximum else the positive difference between minus and yplus
-          let a = f32.max (maxi-minus) 0.0f32
-          -- let l = distance left right
-          let d = plus-minus
-          let minab = f32.min a b
-          let u = if minab == 0.0f32 then 0.0f32 else minab/d
-          let fact = f32.min u 1
-          in fact
-
 }

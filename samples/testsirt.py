@@ -1,6 +1,6 @@
 from futhark import SIRT
 from futhark import backprojection
-from futhark import forwardprojection_transpose_L
+from futhark import forwardprojection
 import numpy as np
 import tomo_lib
 import dataprint_lib
