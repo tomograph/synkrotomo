@@ -5,9 +5,9 @@
 -- input@data/sirtinputf32rad512
 -- input@data/sirtinputf32rad1024
 
-import "forwardprojection_transpose"
+import "forwardprojection"
 open fpTlib
-import "backprojection_transpose"
+import "backprojection"
 open bpTlib
 
 let SIRT [n][p][a](angles : [a]f32)
