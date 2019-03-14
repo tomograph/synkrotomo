@@ -1,4 +1,19 @@
 -- ==
+-- input@data/bpinputf32rad64
+-- input@data/bpinputf32rad128
+-- input@data/bpinputf32rad256
+-- input@data/bpinputf32rad512
+-- input@data/bpinputf32rad1024
+-- input@data/bpinputf32rad1500
+-- input@data/bpinputf32rad2000
+-- input@data/bpinputf32rad2048
+-- input@data/bpinputf32rad2500
+-- input@data/bpinputf32rad3000
+-- input@data/bpinputf32rad3500
+-- input@data/bpinputf32rad4000
+-- input@data/bpinputf32rad4096
+
+
 -- input@data/bpsparseinputf32rad10
 -- input@data/bpsparseinputf32rad15
 -- input@data/bpsparseinputf32rad20
@@ -18,20 +33,6 @@
 -- input@data/bpsparseinputf32rad90
 -- input@data/bpsparseinputf32rad95
 
-
--- input@data/bpinputf32rad64
--- input@data/bpinputf32rad128
--- input@data/bpinputf32rad256
--- input@data/bpinputf32rad512
--- input@data/bpinputf32rad1024
--- input@data/bpinputf32rad1500
--- input@data/bpinputf32rad2000
--- input@data/bpinputf32rad2048
--- input@data/bpinputf32rad2500
--- input@data/bpinputf32rad3000
--- input@data/bpinputf32rad3500
--- input@data/bpinputf32rad4000
--- input@data/bpinputf32rad4096
 
 import "sirtlib"
 open sirtlib
