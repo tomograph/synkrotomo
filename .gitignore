@@ -12,6 +12,7 @@ data/*
 /sd/*
 /preproc/*
 *.gz
+*.out
 
 # Compiled source #
 ###################
