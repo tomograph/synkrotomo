@@ -1,4 +1,6 @@
 -- ==
+-- input@data/bpsparseinputf32rad1
+-- input@data/bpsparseinputf32rad5
 -- input@data/bpsparseinputf32rad10
 -- input@data/bpsparseinputf32rad15
 -- input@data/bpsparseinputf32rad20

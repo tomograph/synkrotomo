@@ -1,4 +1,6 @@
 -- ==
+-- input@data/fpsparseinputf32rad1
+-- input@data/fpsparseinputf32rad5
 -- input@data/fpsparseinputf32rad10
 -- input@data/fpsparseinputf32rad15
 -- input@data/fpsparseinputf32rad20
