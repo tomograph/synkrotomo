@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-import scipy.misc
+import tomopy
 import re
 
 def string_to_array(str):
