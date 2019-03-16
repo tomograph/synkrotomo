@@ -2,6 +2,7 @@ import sys
 import numpy as np
 import tomopy
 import re
+import matplotlib.pyplot as plt
 
 def string_to_array(str):
     #remove leading and trailing brackets
@@ -15,5 +16,5 @@ def string_to_array(str):
 data = string_to_array(sys.stdin.read())
 size = int(np.sqrt(len(data)))
 reshaped = data.reshape((size,size))
-recon = tomopy.circ_mask(reshaped, axis=0, ratio=0.95)
-plt.imsave("sirt.png", recon[0, :,:], cmap='Greys_r')
+#recon = tomopy.circ_mask(reshaped, axis=0, ratio=0.95)
+plt.imsave("sirt.png", reshaped, cmap='Greys_r')
