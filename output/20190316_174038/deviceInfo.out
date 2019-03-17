@@ -36,7 +36,7 @@ Device 0: "TITAN Xp"
   Device supports Compute Preemption:            Yes
   Supports Cooperative Kernel Launch:            Yes
   Supports MultiDevice Co-op Kernel Launch:      Yes
-  Device PCI Domain ID / Bus ID / location ID:   0 / 131 / 0
+  Device PCI Domain ID / Bus ID / location ID:   0 / 3 / 0
   Compute Mode:
      < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
 

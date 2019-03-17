@@ -1,9 +1,5 @@
 -- ==
--- input@data/sirtinputf32rad64
--- input@data/sirtinputf32rad128
--- input@data/sirtinputf32rad256
--- input@data/sirtinputf32rad512
--- input@data/sirtinputf32rad1024
+-- input@data/tooth.in
 
 import "forwardprojection"
 open fpTlib
