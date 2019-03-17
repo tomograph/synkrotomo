@@ -13,8 +13,8 @@ type point  = ( f32, f32 )
            map(\v -> safe_inverse v) values
 
      -- divides data into flat and steep parts
-     let fix_projections [p](proj:[p]f32) (is_flat:[p]bool):([]f32,[]f32) =
-          let zipped = zip proj is_flat
+     let fix_projections [p](proj:[p]f32) (proj_division:[p]bool):([]f32,[]f32) =
+          let zipped = zip proj proj_division
           let parts = partition(\(_,f) -> f ) zipped
           let (flat, _) = unzip parts.1
           let (steep, _) = unzip parts.2
@@ -35,11 +35,11 @@ type point  = ( f32, f32 )
           let flat = is_flat cos sin
           in (cos, sin, lflat, lsteep, flat, i)
      ) (iota a)
-     let is_flat = flatten <| map(\(_,_,_,_,f,_) -> (replicate numrhos f))cossin
+     let proj_division = flatten <| map(\(_,_,_,_,f,_) -> (replicate numrhos f))cossin
      let flat_steep = partition(\(_,_,_,_,f,_) -> f ) cossin
     -- transpose flat lines to make them steep
      let lines = (map(\(cos,sin,_,lsteep,_,_)-> (cos,-sin,lsteep)) flat_steep.2, map (\(cos,sin,lflat,_,_,_)-> (-sin, cos, lflat)) flat_steep.1)
      let angle_indexes = (map (\(_,_,_,_,_,i)-> i) flat_steep.2) ++ (map (\(_,_,_,_,_,i)-> i) flat_steep.1)
      let projection_indexes = flatten <| map(\i -> map(\r-> i*numrhos + r)(iota numrhos))angle_indexes
-     in (lines.1, lines.2, is_flat, projection_indexes)
+     in (lines.1, lines.2, proj_division, projection_indexes)
 }
