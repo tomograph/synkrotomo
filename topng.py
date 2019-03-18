@@ -3,6 +3,7 @@ import numpy as np
 import tomopy
 import re
 import matplotlib.pyplot as plt
+import os
 
 def string_to_array(str):
     #remove leading and trailing brackets
