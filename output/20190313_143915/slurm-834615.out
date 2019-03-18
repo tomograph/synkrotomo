@@ -1,0 +1,67 @@
+oka00636.science.domain
+0
+4096;1772891.848499421
+2048;222332.11880084127
+1500;90310.97500119358
+2500;404474.32209621184
+1024;28687.442000955343
+3500;1108674.6662971564
+3000;707585.1957954001
+64;1256.1192968860269
+2000;210027.52549829893
+512;4660.7369964476675
+128;1295.9143030457199
+4000;1658065.307000652
+256;1663.0988044198602
+2500;1079130.186495604
+512;10604.522400535643
+2000;513330.2622998599
+4096;4385262.993199285
+4000;4089891.895995242
+3000;1735129.1841012426
+3500;2752739.2476971727
+64;1223.0127991642803
+256;2771.6734970454127
+1024;72045.5085975118
+128;1391.2097027059644
+1500;220168.85859775357
+2048;553967.388503952
+Results for /home/zgb585/synkrotomo/futhark/backprojection.fut:
+dataset data/bpinputf32rad64: 298.30μs (avg. of 10 runs; RSD: 0.02)
+dataset data/bpinputf32rad128: 975.80μs (avg. of 10 runs; RSD: 0.01)
+dataset data/bpinputf32rad256: 3476.40μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad512: 12417.30μs (avg. of 10 runs; RSD: 0.18)
+dataset data/bpinputf32rad1024: 68475.00μs (avg. of 10 runs; RSD: 0.04)
+dataset data/bpinputf32rad1500: 214438.40μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad2000: 502183.70μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad2048: 547815.60μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad2500: 984712.40μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad3000: 1700374.60μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad3500: 2707266.20μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad4000: 4042726.00μs (avg. of 10 runs; RSD: 0.00)
+dataset data/bpinputf32rad4096: 4339956.90μs (avg. of 10 runs; RSD: 0.00)
+Results for /home/zgb585/synkrotomo/futhark/forwardprojection.fut:
+dataset data/fpinputf32rad64: 217.40μs (avg. of 10 runs; RSD: 0.03)
+dataset data/fpinputf32rad128: 490.30μs (avg. of 10 runs; RSD: 0.02)
+dataset data/fpinputf32rad256: 2262.70μs (avg. of 10 runs; RSD: 0.01)
+dataset data/fpinputf32rad512: 8525.30μs (avg. of 10 runs; RSD: 0.32)
+dataset data/fpinputf32rad1024: 47712.80μs (avg. of 10 runs; RSD: 0.04)
+dataset data/fpinputf32rad1500: 170743.10μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad2000: 439852.70μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad2048: 466039.00μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad2500: 928901.50μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad3000: 1644753.20μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad3500: 2666330.80μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad4000: 3970251.80μs (avg. of 10 runs; RSD: 0.00)
+dataset data/fpinputf32rad4096: 4127855.00μs (avg. of 10 runs; RSD: 0.00)
+[dev 5d92af5] Results of test for automatic plot script
+ 6 files changed, 96 insertions(+)
+ create mode 100644 output/20190313_143915/Comparison of runtimes.png
+ create mode 100644 output/20190313_143915/astra_bp.csv
+ create mode 100644 output/20190313_143915/astra_fp.csv
+ create mode 100644 output/20190313_143915/deviceInfo.out
+ create mode 100644 output/20190313_143915/fut_bp.csv
+ create mode 100644 output/20190313_143915/fut_fp.csv
+To git@github.com:tomograph/synkrotomo.git
+   855fbe8..5d92af5  dev -> dev
+ok

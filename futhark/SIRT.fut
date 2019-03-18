@@ -1,9 +1,5 @@
 -- ==
--- input@data/sirtinputf32rad64
--- input@data/sirtinputf32rad128
--- input@data/sirtinputf32rad256
--- input@data/sirtinputf32rad512
--- input@data/sirtinputf32rad1024
+-- input@data/tooth.in
 
 import "forwardprojection"
 open fpTlib
@@ -20,8 +16,8 @@ let SIRT [n][p][a](angles : [a]f32)
   let size = t32(f32.sqrt(r32(n)))
   let halfsize = size/2
   let numrhos = p/a
-  let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
-  let (steep_proj, flat_proj) = fix_projections projections is_flat
+  let (steep_lines, flat_lines, proj_division, _) = preprocess angles numrhos
+  let (steep_proj, flat_proj) = fix_projections projections proj_division
 
   let rowsums_steep = inverse (fp steep_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32))
   let rowsums_flat = inverse (fp flat_lines rhozero deltarho numrhos halfsize (replicate n 1.0f32))

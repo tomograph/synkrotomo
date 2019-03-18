@@ -13,7 +13,6 @@
 -- input@data/fpinputf32rad4000
 -- input@data/fpinputf32rad4096
 
-
 import "sirtlib"
 open sirtlib
 
