@@ -20,7 +20,7 @@ def main(argv):
     reshaped = data.reshape((size,size))
     #recon = tomopy.circ_mask(reshaped, axis=0, ratio=0.95)
     path = argv[1]
-    plt.imsave(os.path.join(os.path.expanduser(path), "sirt.png"), cmap='Greys_r')
+    plt.imsave(os.path.join(os.path.expanduser(path), "sirt.png"), reshaped,  cmap='Greys_r')
 
 if __name__ == '__main__':
     main(sys.argv)
