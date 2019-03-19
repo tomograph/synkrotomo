@@ -47,7 +47,7 @@ module bpTlib = {
                       map(\icolumn ->
                            let xmin = r32(icolumn)
                            let ymin = r32(irow)
-                           in reduce (+) 0.0f32 <| map(\(cost, sint, lbase, idx) ->
+                           in reduce (+) 0.0f32 <| map(\((cost, sint, lbase), idx) ->
                                 let slope = -sint/cost
                                 let (x,y) = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
                                 let rho = cost*x+sint*y
