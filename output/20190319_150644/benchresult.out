@@ -1,0 +1,2 @@
+Results for /home/zgb585/synkrotomo/futhark/SIRT.fut:
+dataset data/tooth.in: 1260503.10μs (avg. of 10 runs; RSD: 0.00)
