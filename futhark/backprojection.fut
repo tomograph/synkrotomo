@@ -42,7 +42,7 @@ module bpTlib = {
             (numrhos: i32)
             (halfsize: i32)
             (projections: [p]f32) : []f32 =
-            let indexedlines = zip lines (iota lines)
+            let indexedlines = zip lines (iota l)
             in flatten <| map(\irow ->
                       map(\icolumn ->
                            let xmin = r32(icolumn)
