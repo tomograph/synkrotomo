@@ -22,7 +22,7 @@ open sirtlib
 module fpTlib = {
      let fp [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
       let size = halfsize*2
-      let pixindexcorrection = halfsize+halfsize*size
+      let pixindexcorrection = halfsize*(1+size)
       in flatten <| map (\(cos, sin, lintercept) ->
         -- determine slope in x = slope*y+intercept (in eq. rho = cos*x+sin*y divide by cos to get results)
         let slope = -sin/cos
