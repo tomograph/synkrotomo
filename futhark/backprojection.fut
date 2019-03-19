@@ -65,7 +65,7 @@ module bpTlib = {
                                      let projectionidx = idx*numrhos+(t32(sprime))
                                      in l*(unsafe projections[projectionidx])
                                 )(iota rhosprpixel)
-                           ) (iota indexedlines)
+                           ) indexedlines
                       )((-halfsize)...(halfsize-1))
                  )((-halfsize)...(halfsize-1))
 
