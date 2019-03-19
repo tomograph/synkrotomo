@@ -52,10 +52,10 @@ module fpTlib = {
             let pixbot = Xpixbot+i*size+pixindexcorrection
             let pixtop = Xpixtop+i*size+pixindexcorrection
 
-            let min = if bmin then (unsafe lxbot*img[pixbot]) else 0.0f32
-            let plus = if bplus then (unsafe lxtop*img[pixtop]) else 0.0f32
+            let bot = if xbotwithinbounds then (unsafe lxbot*img[pixbot]) else 0.0f32
+            let top = if xtopwithinbounds then (unsafe lxtop*img[pixtop]) else 0.0f32
 
-            in (min+plus)
+            in (bot+top)
           ) ((-halfsize)...(halfsize-1))
         ) (iota numrhos)
       ) lines
