@@ -22,15 +22,16 @@ module bpTlib = {
   let fact = f32.sqrt(2.0f32)/2.0f32
 
   let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
-       -- is zero if both values are below minimum else the positive difference between minus and yplus
-       let b = f32.max (plus-mini) 0.0f32
-       -- is zero if both values are above maximum else the positive difference between minus and yplus
-       let a = f32.max (maxi-minus) 0.0f32
+       -- is zero if both values are below minimum else the positive difference between plus and min val
+       let diff_inside_orlow = f32.max (plus-mini) 0.0f32
+       -- is zero if both values are above maximum else the positive difference between minus and plus
+       let diff_inside_orhigh = f32.max (maxi-minus) 0.0f32
        -- let l = distance left right
-       let d = plus-minus
-       let minab = f32.min a b
-       let u = if minab == 0.0f32 then 0.0f32 else minab/d
-       let fact = f32.min u 1
+       let diff = plus-minus
+       let diff_inside_orzero = f32.min diff_inside_orlow diff_inside_orhigh
+       let proportion =  if diff_inside_orzero == 0.0f32 then 0.0f32 else diff_inside_orzero/diff
+       -- never larger than 1 - needed for vertical lines
+       let fact = f32.min proportion 1.0f32
        in fact
 
   -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
@@ -41,29 +42,30 @@ module bpTlib = {
             (numrhos: i32)
             (halfsize: i32)
             (projections: [p]f32) : []f32 =
-            flatten <| map(\irow ->
+            let indexedlines = zip lines (iota l)
+            in flatten <| map(\irow ->
                       map(\icolumn ->
                            let xmin = r32(icolumn)
                            let ymin = r32(irow)
-                           in reduce (+) 0.0f32 <| map(\ln ->
-                                let (cost, sint, lbase) = unsafe lines[ln]
-                                let tant = sint/cost
-                                let p = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
-                                let rho = cost*p.1+sint*p.2
+                           in reduce (+) 0.0f32 <| map(\((cost, sint, lbase), idx) ->
+                                let slope = -sint/cost
+                                let (x,y) = (xmin+0.5f32-fact*cost, ymin+0.5f32-fact*sint)
+                                let rho = cost*x+sint*y
+                                -- rho = rhozero + s*deltarho - where s is integer.
                                 let s = f32.ceil((rho-rhozero)/deltarho)
-                                let xbase = ymin*tant
+                                let xbase = ymin*slope
                                 in reduce (+) 0.0f32 <| map(\i ->
                                      let sprime = s+(r32(i))
                                      let r = sprime*deltarho+rhozero
-                                     let x_bot = (r/cost)-xbase
-                                     let x_top = x_bot-tant
-                                     let maxx = f32.max x_bot x_top
-                                     let minx = f32.min x_bot x_top
+                                     let xbot = xbase+(r/cost)
+                                     let xtop = xbot+slope
+                                     let maxx = f32.max xbot xtop
+                                     let minx = f32.min xbot xtop
                                      let l = (intersect_fact maxx minx xmin (xmin+1.0))*(lbase)
-                                     let projectionidx = ln*numrhos+(t32(sprime))
+                                     let projectionidx = idx*numrhos+(t32(sprime))
                                      in l*(unsafe projections[projectionidx])
                                 )(iota rhosprpixel)
-                           ) (iota l)
+                           ) indexedlines
                       )((-halfsize)...(halfsize-1))
                  )((-halfsize)...(halfsize-1))
 

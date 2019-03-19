@@ -22,41 +22,40 @@ open sirtlib
 module fpTlib = {
      let fp [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
       let size = halfsize*2
-      in flatten <| map (\(cos, sin, lbase) ->
-        let k = sin/cos
+      let pixindexcorrection = halfsize*(1+size)
+      in flatten <| map (\(cost, sint, lbase) ->
+        -- determine slope in x = slope*y+intercept (in eq. rho = cost*x+sint*y divide by cost to get results)
+        let slope = -sint/cost
         in map (\r ->
           let rho = rhozero + r32(r)*deltarho
-          let base = rho/cos
+          let intercept = rho/cost
 
           in reduce (+) 0.0f32 <| map(\i ->
-            let ih = i+halfsize
+            let xbot = r32(i)*slope + intercept
+            let xtop = xbot+slope
 
-            let xmin = base-r32(i)*k + (r32(halfsize))
-            let xplus = xmin-k + (r32(halfsize))
+            let Xpixbot = t32(f32.floor(xbot))
+            let Xpixtop = t32(f32.floor(xtop))
 
-            let Xpixmin = t32(f32.floor(xmin))
-            let Xpixplus = t32(f32.floor(xplus))
+            let Xpixmax = r32(i32.max Xpixbot Xpixtop)
 
-            let Xpixmax = r32(i32.max Xpixmin Xpixplus)
+            let xdiff = xtop - xbot
 
-            let xdiff = xplus - xmin
+            let singlepixelcase = Xpixbot == Xpixtop
+            let xbotwithinbounds = Xpixbot >= -halfsize && Xpixbot < halfsize
+            let xtopwithinbounds = (!singlepixelcase) && Xpixtop >= -halfsize && Xpixtop < halfsize
 
-            let bounds = ih >= 0 && ih < size
-            let eq = Xpixmin == Xpixplus
-            let bmin = bounds && Xpixmin >= 0 && Xpixmin < size
-            let bplus = (!eq) && bounds && Xpixplus >= 0 && Xpixplus < size
+            let lxbotfac = ((Xpixmax - xbot)/xdiff)
+            let lxbot = if singlepixelcase then lbase else lxbotfac*lbase
+            let lxtop = ((xtop - Xpixmax)/xdiff)*lbase
 
-            let lxminfac = ((Xpixmax - xmin)/xdiff)
-            let lxmin = if eq then lbase else lxminfac*lbase
-            let lxplus = ((xplus - Xpixmax)/xdiff)*lbase
+            let pixbot = Xpixbot+i*size+pixindexcorrection
+            let pixtop = Xpixtop+i*size+pixindexcorrection
 
-            let pixmin = Xpixmin+ih*size
-            let pixplus = Xpixplus+ih*size
+            let bot = if xbotwithinbounds then (unsafe lxbot*img[pixbot]) else 0.0f32
+            let top = if xtopwithinbounds then (unsafe lxtop*img[pixtop]) else 0.0f32
 
-            let min = if bmin then (unsafe lxmin*img[pixmin]) else 0.0f32
-            let plus = if bplus then (unsafe lxplus*img[pixplus]) else 0.0f32
-
-            in (min+plus)
+            in (bot+top)
           ) ((-halfsize)...(halfsize-1))
         ) (iota numrhos)
       ) lines
@@ -80,7 +79,6 @@ let main  [n][a] (angles : *[a]f32)
   let halfsize = size/2
 
   let (steep_lines, flat_lines, _, projection_indexes) = preprocess angles numrhos
-  -- hack to always do this!
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
