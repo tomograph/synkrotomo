@@ -22,39 +22,38 @@ open sirtlib
 module fpTlib = {
      let fp [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
       let size = halfsize*2
-      in flatten <| map (\(cos, sin, lbase) ->
-        let k = sin/cos
+      let pixindexcorrection = halfsize+halfsize*size
+      in flatten <| map (\(cos, sin, lintercept) ->
+        -- determine slope in x = slope*y+intercept (in eq. rho = cos*x+sin*y divide by cos to get results)
+        let slope = -sin/cos
         in map (\r ->
           let rho = rhozero + r32(r)*deltarho
-          let base = rho/cos
+          let intercept = rho/cos
 
           in reduce (+) 0.0f32 <| map(\i ->
-            let ih = i+halfsize
+            let xlower = r32(i)*slope + intercept
+            let xupper = xlower+slope
 
-            let xmin = base-r32(i)*k + (r32(halfsize))
-            let xplus = xmin-k + (r32(halfsize))
+            let Xpixlower = t32(f32.floor(xlower))
+            let Xpixupper = t32(f32.floor(xupper))
 
-            let Xpixmin = t32(f32.floor(xmin))
-            let Xpixplus = t32(f32.floor(xplus))
+            let Xpixmax = r32(i32.max Xpixlower Xpixupper)
 
-            let Xpixmax = r32(i32.max Xpixmin Xpixplus)
+            let xdiff = xupper - xlower
 
-            let xdiff = xplus - xmin
+            let singlepixelcase = Xpixlower == Xpixupper
+            let xlowerwithinbounds = Xpixlower >= -halfsize && Xpixlower < halfsize
+            let xupperwithinbounds = (!singlepixelcase) && Xpixupper >= -halfsize && Xpixupper < halfsize
 
-            let bounds = ih >= 0 && ih < size
-            let eq = Xpixmin == Xpixplus
-            let bmin = bounds && Xpixmin >= 0 && Xpixmin < size
-            let bplus = (!eq) && bounds && Xpixplus >= 0 && Xpixplus < size
+            let lxlowerfac = ((Xpixmax - xlower)/xdiff)
+            let lxlower = if singlepixelcase then lbase else lxlowerfac*lbase
+            let lxupper = ((xupper - Xpixmax)/xdiff)*lbase
 
-            let lxminfac = ((Xpixmax - xmin)/xdiff)
-            let lxmin = if eq then lbase else lxminfac*lbase
-            let lxplus = ((xplus - Xpixmax)/xdiff)*lbase
+            let pixlower = Xpixlower+i*size+pixindexcorrection
+            let pixupper = Xpixupper+i*size+pixindexcorrection
 
-            let pixmin = Xpixmin+ih*size
-            let pixplus = Xpixplus+ih*size
-
-            let min = if bmin then (unsafe lxmin*img[pixmin]) else 0.0f32
-            let plus = if bplus then (unsafe lxplus*img[pixplus]) else 0.0f32
+            let min = if bmin then (unsafe lxlower*img[pixlower]) else 0.0f32
+            let plus = if bplus then (unsafe lxupper*img[pixupper]) else 0.0f32
 
             in (min+plus)
           ) ((-halfsize)...(halfsize-1))
@@ -80,7 +79,6 @@ let main  [n][a] (angles : *[a]f32)
   let halfsize = size/2
 
   let (steep_lines, flat_lines, _, projection_indexes) = preprocess angles numrhos
-  -- hack to always do this!
   let imageT =  if (size < 10000)
                 then flatten <| transpose <| copy (unflatten size size image)
                 else (replicate n 1.0f32)
