@@ -23,37 +23,37 @@ module fpTlib = {
      let fp [n] (lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (numrhos:i32) (halfsize: i32) (img: [n]f32) =
       let size = halfsize*2
       let pixindexcorrection = halfsize*(1+size)
-      in flatten <| map (\(cos, sin, lbase) ->
-        -- determine slope in x = slope*y+intercept (in eq. rho = cos*x+sin*y divide by cos to get results)
-        let slope = -sin/cos
+      in flatten <| map (\(cost, sint, lbase) ->
+        -- determine slope in x = slope*y+intercept (in eq. rho = cost*x+sint*y divide by cost to get results)
+        let slope = -sint/cost
         in map (\r ->
           let rho = rhozero + r32(r)*deltarho
-          let intercept = rho/cos
+          let intercept = rho/cost
 
           in reduce (+) 0.0f32 <| map(\i ->
-            let xlower = r32(i)*slope + intercept
-            let xupper = xlower+slope
+            let xbot = r32(i)*slope + intercept
+            let xtop = xbot+slope
 
-            let Xpixlower = t32(f32.floor(xlower))
-            let Xpixupper = t32(f32.floor(xupper))
+            let Xpixbot = t32(f32.floor(xbot))
+            let Xpixtop = t32(f32.floor(xtop))
 
-            let Xpixmax = r32(i32.max Xpixlower Xpixupper)
+            let Xpixmax = r32(i32.max Xpixbot Xpixtop)
 
-            let xdiff = xupper - xlower
+            let xdiff = xtop - xbot
 
-            let singlepixelcase = Xpixlower == Xpixupper
-            let xlowerwithinbounds = Xpixlower >= -halfsize && Xpixlower < halfsize
-            let xupperwithinbounds = (!singlepixelcase) && Xpixupper >= -halfsize && Xpixupper < halfsize
+            let singlepixelcase = Xpixbot == Xpixtop
+            let xbotwithinbounds = Xpixbot >= -halfsize && Xpixbot < halfsize
+            let xtopwithinbounds = (!singlepixelcase) && Xpixtop >= -halfsize && Xpixtop < halfsize
 
-            let lxlowerfac = ((Xpixmax - xlower)/xdiff)
-            let lxlower = if singlepixelcase then lbase else lxlowerfac*lbase
-            let lxupper = ((xupper - Xpixmax)/xdiff)*lbase
+            let lxbotfac = ((Xpixmax - xbot)/xdiff)
+            let lxbot = if singlepixelcase then lbase else lxbotfac*lbase
+            let lxtop = ((xtop - Xpixmax)/xdiff)*lbase
 
-            let pixlower = Xpixlower+i*size+pixindexcorrection
-            let pixupper = Xpixupper+i*size+pixindexcorrection
+            let pixbot = Xpixbot+i*size+pixindexcorrection
+            let pixtop = Xpixtop+i*size+pixindexcorrection
 
-            let min = if bmin then (unsafe lxlower*img[pixlower]) else 0.0f32
-            let plus = if bplus then (unsafe lxupper*img[pixupper]) else 0.0f32
+            let min = if bmin then (unsafe lxbot*img[pixbot]) else 0.0f32
+            let plus = if bplus then (unsafe lxtop*img[pixtop]) else 0.0f32
 
             in (min+plus)
           ) ((-halfsize)...(halfsize-1))
