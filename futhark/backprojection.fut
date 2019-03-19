@@ -30,9 +30,9 @@ module bpTlib = {
        let diff = plus-minus
        let diff_inside_orzero = f32.min diff_inside_orlow diff_inside_orhigh
        let proportion =  if diff_inside_orzero == 0.0f32 then 0.0f32 else diff_inside_orzero/diff
-       -- never larger than 1
+       -- never larger than 1 - needed for vertical lines
        let fact = f32.min proportion 1.0f32
-       --in fact
+       in fact
 
   -- only works when lines have slope > 1. To use for all lines use preprocess to transpose lines and image
   let bp [p] [l] (lines: [l](f32, f32, f32))
