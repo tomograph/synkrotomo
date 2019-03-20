@@ -1,6 +1,7 @@
 # Distribution    #
 ###################
 dist/*
+MANIFEST
 
 #futhark pkg library#
 #####################
