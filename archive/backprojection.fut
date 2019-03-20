@@ -13,8 +13,8 @@
 -- input@data/bpinputf32rad4000
 -- input@data/bpinputf32rad4096
 
-import "sirtlib"
-open sirtlib
+import "line_lib"
+open Lines
 
 module bplib = {
 
