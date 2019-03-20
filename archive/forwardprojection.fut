@@ -7,8 +7,8 @@
 -- input@../futhark/data/fpinputf32rad1500
 -- input@../futhark/data/fpinputf32rad2000
 -- input@../futhark/data/fpinputf32rad2048
--- input@../futhark/data/fpinputf32rad3000
 -- input@../futhark/data/fpinputf32rad2500
+-- input@../futhark/data/fpinputf32rad3000
 -- input@../futhark/data/fpinputf32rad3500
 -- input@../futhark/data/fpinputf32rad4000
 -- input@../futhark/data/fpinputf32rad4096
