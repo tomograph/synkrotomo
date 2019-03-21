@@ -7,8 +7,6 @@
 -- input@data/bpinputf32rad1500
 -- input@data/bpinputf32rad2000
 -- input@data/bpinputf32rad2048
-
-
 -- input@data/bpinputf32rad2500
 -- input@data/bpinputf32rad3000
 -- input@data/bpinputf32rad3500
