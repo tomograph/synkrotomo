@@ -10,6 +10,7 @@ futhark/lib/*
 # Data            #
 ###################
 data/*
+futhark/data/*
 /sd/*
 /preproc/*
 *.gz
