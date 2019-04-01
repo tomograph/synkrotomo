@@ -1,0 +1,5 @@
+
+
+- runtime for data transfer (host->device):	0.0025625228881835938
+- runtime for kernel execution:			0.3081376552581787
+- runtime for data transfer (device->host):	0.0653676986694336
