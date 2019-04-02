@@ -1,6 +1,0 @@
-Results for /home/mette/synkrotomo/futhark/SIRT.fut:
-dataset data/tooth.in: /home/mette/synkrotomo/futhark/SIRT.fut failed with error code 255 and output:
-/home/mette/synkrotomo/futhark/SIRT: SIRT.c:1785: OpenCL call
-  clGetPlatformIDs(0, NULL, &num_platforms)
-failed with error code -1001 (Unknown)
-
