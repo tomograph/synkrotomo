@@ -1,0 +1,170 @@
+iter 1
+
+
+tooth
+- runtime for data transfer (host->device):	0.0030243396759033203
+- runtime for kernel execution:			0.007678985595703125
+- runtime for data transfer (device->host):	0.001779317855834961
+
+
+sirtinputf32rad64
+- runtime for data transfer (host->device):	0.0007638931274414062
+- runtime for kernel execution:			0.004683017730712891
+- runtime for data transfer (device->host):	0.00011777877807617188
+
+
+sirtinputf32rad128
+- runtime for data transfer (host->device):	0.0009469985961914062
+- runtime for kernel execution:			0.038838863372802734
+- runtime for data transfer (device->host):	0.00018262863159179688
+
+
+sirtinputf32rad256
+- runtime for data transfer (host->device):	0.001260995864868164
+- runtime for kernel execution:			0.037439584732055664
+- runtime for data transfer (device->host):	0.00019478797912597656
+
+
+sirtinputf32rad512
+- runtime for data transfer (host->device):	0.0025453567504882812
+- runtime for kernel execution:			0.042751312255859375
+- runtime for data transfer (device->host):	0.00048232078552246094
+
+
+sirtinputf32rad1024
+- runtime for data transfer (host->device):	0.007724285125732422
+- runtime for kernel execution:			0.12056565284729004
+- runtime for data transfer (device->host):	0.0013034343719482422
+
+
+sirtinputf32rad1500
+- runtime for data transfer (host->device):	0.018167495727539062
+- runtime for kernel execution:			0.2848834991455078
+- runtime for data transfer (device->host):	0.002448558807373047
+
+
+sirtinputf32rad2000
+- runtime for data transfer (host->device):	0.026497602462768555
+- runtime for kernel execution:			0.6068713665008545
+- runtime for data transfer (device->host):	0.0042569637298583984
+
+
+sirtinputf32rad2048
+- runtime for data transfer (host->device):	0.034124135971069336
+- runtime for kernel execution:			0.6655163764953613
+- runtime for data transfer (device->host):	0.00441741943359375
+
+
+sirtinputf32rad2500
+- runtime for data transfer (host->device):	0.05014944076538086
+- runtime for kernel execution:			1.1051461696624756
+- runtime for data transfer (device->host):	0.00984048843383789
+
+
+sirtinputf32rad3000
+- runtime for data transfer (host->device):	0.06928110122680664
+- runtime for kernel execution:			1.9148366451263428
+- runtime for data transfer (device->host):	0.009140968322753906
+
+
+sirtinputf32rad3500
+- runtime for data transfer (host->device):	0.09349393844604492
+- runtime for kernel execution:			2.964329957962036
+- runtime for data transfer (device->host):	0.014212846755981445
+
+
+sirtinputf32rad4000
+- runtime for data transfer (host->device):	0.1238248348236084
+- runtime for kernel execution:			4.45462965965271
+- runtime for data transfer (device->host):	0.023687362670898438
+
+
+sirtinputf32rad4096
+- runtime for data transfer (host->device):	0.1386549472808838
+- runtime for kernel execution:			4.774627923965454
+- runtime for data transfer (device->host):	0.025423288345336914
+iter 200
+
+
+tooth
+- runtime for data transfer (host->device):	0.0018374919891357422
+- runtime for kernel execution:			0.3369255065917969
+- runtime for data transfer (device->host):	0.06406283378601074
+
+
+sirtinputf32rad64
+- runtime for data transfer (host->device):	0.0008037090301513672
+- runtime for kernel execution:			0.12145328521728516
+- runtime for data transfer (device->host):	9.489059448242188e-05
+
+
+sirtinputf32rad128
+- runtime for data transfer (host->device):	0.0008771419525146484
+- runtime for kernel execution:			0.15199732780456543
+- runtime for data transfer (device->host):	0.000148773193359375
+
+
+sirtinputf32rad256
+- runtime for data transfer (host->device):	0.0012536048889160156
+- runtime for kernel execution:			0.1748974323272705
+- runtime for data transfer (device->host):	0.0002300739288330078
+
+
+sirtinputf32rad512
+- runtime for data transfer (host->device):	0.002542257308959961
+- runtime for kernel execution:			1.0097901821136475
+- runtime for data transfer (device->host):	0.0004987716674804688
+
+
+sirtinputf32rad1024
+- runtime for data transfer (host->device):	0.007737159729003906
+- runtime for kernel execution:			7.4127984046936035
+- runtime for data transfer (device->host):	0.001283884048461914
+
+
+sirtinputf32rad1500
+- runtime for data transfer (host->device):	0.015515804290771484
+- runtime for kernel execution:			24.75913953781128
+- runtime for data transfer (device->host):	0.002888202667236328
+
+
+sirtinputf32rad2000
+- runtime for data transfer (host->device):	0.038233041763305664
+- runtime for kernel execution:			61.58902382850647
+- runtime for data transfer (device->host):	0.0044803619384765625
+
+
+sirtinputf32rad2048
+- runtime for data transfer (host->device):	0.02828359603881836
+- runtime for kernel execution:			66.24212050437927
+- runtime for data transfer (device->host):	0.0059299468994140625
+
+
+sirtinputf32rad2500
+- runtime for data transfer (host->device):	0.04319024085998535
+- runtime for kernel execution:			123.63049960136414
+- runtime for data transfer (device->host):	0.009627580642700195
+
+
+sirtinputf32rad3000
+- runtime for data transfer (host->device):	0.07853865623474121
+- runtime for kernel execution:			215.86702370643616
+- runtime for data transfer (device->host):	0.015294551849365234
+
+
+sirtinputf32rad3500
+- runtime for data transfer (host->device):	0.10089373588562012
+- runtime for kernel execution:			345.17439317703247
+- runtime for data transfer (device->host):	0.01997685432434082
+
+
+sirtinputf32rad4000
+- runtime for data transfer (host->device):	0.14242339134216309
+- runtime for kernel execution:			519.8644771575928
+- runtime for data transfer (device->host):	0.02529740333557129
+
+
+sirtinputf32rad4096
+- runtime for data transfer (host->device):	0.14994597434997559
+- runtime for kernel execution:			557.623827457428
+- runtime for data transfer (device->host):	0.02647256851196289
