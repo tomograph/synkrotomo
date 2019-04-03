@@ -73,7 +73,7 @@ def get_angles(size, degrees = False):
     num_angles = math.ceil(size*math.pi/2)
     if degrees:
         return np.linspace(0, 180, num_angles,False)
-    return np.linspace(-np.pi/4, 3*np.pi/4,  num_angles,False)
+    return np.linspace(0, np.pi,  num_angles,False)
 
 def get_rays(size):
     numrays = np.sqrt(2*(size**2))
