@@ -21,7 +21,7 @@ let main  [p][a](angles : [a]f32)
           (size: i32)
           (projections: [p]f32)
           (iterations : i32) : []f32 =
-          let r = p/a
+          let r = (p/size)/a
           in flatten(
                (unsafe map(\i ->
                     -- fix this copy (pass i to SIRT) and find out if futhark can optimize across loop
