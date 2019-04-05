@@ -103,19 +103,15 @@ def sirt(inname, outdir):
 
         # (3) copy data back from device to host
         # start = time.time()
-        finalimage = np.append(finalimage, result.get()) 
+        finalimage = np.append(finalimage, result.get())
         # end = time.time()
+
 
 def main(argv):
     indir = os.path.expanduser(argv[1])
     outdir = os.path.expanduser(argv[2])
 
-    print ("iter 1")
-    tooth(outdir, 1)
-    time_sirt(indir, outdir, 1)
-    print ("iter 200")
-    tooth(outdir, 200)
-    time_sirt(indir, outdir, 200)
+    sirt(indir, outdir)
 
 
 if __name__ == '__main__':
