@@ -72,79 +72,39 @@ def save_slice(file, slice):
     with open(file, "a") as f:
         f.write(slice)
 
-
-def tooth(outdir, iter):
-
-    root = os.path.expanduser("~/synkrotomo/futhark/data")
-
-    inname = os.path.join(root, "tooth.in")
-    theta, rhozero, deltarho, initialimg, sinogram, iterations = data_generator(inname)
+def sirt(inname, outdir):
+    theta, rhozero, deltarho, size, sinogram, iterations = data_generator(inname)
     print("\n")
-    print ("tooth")
+    print (inname)
     sirt = SIRT.SIRT()
-    # (1) copy data from host to device
-    start = time.time()
 
-    size = 640
+    # size = len(initialimg)**(1/3)
 
-    theta_gpu = pycl_array.to_device(sirt.queue, theta.astype(np.float32))
-    img_gpu = pycl_array.to_device(sirt.queue, initialimg.astype(np.float32))
-    sinogram_gpu = pycl_array.to_device(sirt.queue, sinogram.astype(np.float32))
-    end = time.time()
-    print("- runtime for data transfer (host->device):\t{}".format(end-start))
-
-    # (2) execute kernel
-    start = time.time()
-    result = sirt.main(theta_gpu, rhozero, deltarho, img_gpu, sinogram_gpu, iter)
-    end = time.time()
-    print("- runtime for kernel execution:\t\t\t{}".format(end-start))
-
-    outname = "sirt_pyopencl.png"
-    # (3) copy data back from device to host
-    start = time.time()
-    res = result.get()
-    end = time.time()
-    print("- runtime for data transfer (device->host):\t{}".format(end-start))
-
-    # reshaped = res.reshape((size,size))
-    # plt.imsave(os.path.join(outdir, outname), reshaped, cmap='Greys_r')
-
-def time_sirt(indir, outdir, iter):
-    sizessirt = [64,128,256,512,1024,1500,2000,2048,2500,3000,3500,4000,4096]
-    # ["sirtinputf32rad64", "sirtinputf32rad128", "sirtinputf32rad256", "sirtinputf32rad512", "sirtinputf32rad1024", "sirtinputf32rad1500", "sirtinputf32rad2000", "sirtinputf32rad2048", "sirtinputf32rad2500", "sirtinputf32rad3000", "sirtinputf32rad3500", "sirtinputf32rad4000", "sirtinputf32rad4096"]
-
-    for size in sizessirt:
-        name = "sirtinputf32rad" + str(size)
-        inname = os.path.join(indir, name)
-        theta, rhozero, deltarho, initialimg, sinogram, iterations = data_generator(inname)
-        print("\n")
-        print (name)
-        sirt = SIRT.SIRT()
-        
+    # ssq = size*size
+    # print (len(sinogram)**(1/3))
+    # numangs = len(theta)
+    # numrhos
+    finalimage = np.empty(dtype=np.float32)
+    for i in range(size):
         # (1) copy data from host to device
-        start = time.time()
-
-
+        # start = time.time()
         theta_gpu = pycl_array.to_device(sirt.queue, theta.astype(np.float32))
-        img_gpu = pycl_array.to_device(sirt.queue, initialimg.astype(np.float32))
-        sinogram_gpu = pycl_array.to_device(sirt.queue, sinogram.astype(np.float32))
-        end = time.time()
-        print("- runtime for data transfer (host->device):\t{}".format(end-start))
+        img_gpu = pycl_array.to_device(sirt.queue, np.zeros(size*size).flatten().astype(np.float32))
+        # img_gpu = pycl_array.to_device(sirt.queue, initialimg[i*ssq;(i+1)*ssq].astype(np.float32))
+        sinogram_gpu = pycl_array.to_device(sirt.queue, sinogram[i*r*a:(i+1)*r*a].astype(np.float32))
+        # end = time.time()
+        # print("- runtime for data transfer (host->device):\t{}".format(end-start))
 
         # (2) execute kernel
-        start = time.time()
+        # start = time.time()
         result = sirt.main(theta_gpu, rhozero, deltarho, img_gpu, sinogram_gpu, iter)
-        end = time.time()
-        print("- runtime for kernel execution:\t\t\t{}".format(end-start))
+        # end = time.time()
+        # print("- runtime for kernel execution:\t\t\t{}".format(end-start))
 
         # (3) copy data back from device to host
-        start = time.time()
-        res = result.get()
-        end = time.time()
-        # print("- runtime for data transfer (device->host):\t{}".format(end-start))
-
-        # reshaped = res.reshape((size,size))
-        # plt.imsave(os.path.join(outdir, outname), reshaped, cmap='Greys_r')
+        # start = time.time()
+        finalimage = np.append(finalimage, result.get()) 
+        # end = time.time()
 
 def main(argv):
     indir = os.path.expanduser(argv[1])
