@@ -1,0 +1,8 @@
+non overlapping 10
+- runtime for pysliced execution:			6.648130178451538
+non overlapping 20
+- runtime for pysliced execution:			13.283573865890503
+overlapping 10
+- runtime for pysliced overlapping execution:			6.146429777145386
+overlapping 20
+- runtime for pysliced overlapping execution:			12.170466184616089
