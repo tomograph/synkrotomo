@@ -1,0 +1,16 @@
+
+
+sirt3Dinputf32rad64
+- runtime for pysliced overlapping execution:			31.85854196548462
+
+
+sirt3Dinputf32rad128
+- runtime for pysliced overlapping execution:			59.383357763290405
+
+
+sirt3Dinputf32rad256
+- runtime for pysliced overlapping execution:			116.17939305305481
+
+
+sirt3Dinputf32rad512
+- runtime for pysliced overlapping execution:			706.2785518169403
