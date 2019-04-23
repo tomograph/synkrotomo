@@ -1,0 +1,169 @@
+timing 3d reconstructions
+sirtinputf32rad64
+
+nonoverlapping
+- runtime for data transfer (host->device):	0.0009195804595947266
+- runtime for kernel execution:			0.13177204132080078
+- runtime for data transfer (device->host):	0.00011467933654785156
+- runtime for data transfer (host->device):	0.0002727508544921875
+- runtime for kernel execution:			0.13244414329528809
+- runtime for data transfer (device->host):	8.654594421386719e-05
+- runtime for data transfer (host->device):	0.00027108192443847656
+- runtime for kernel execution:			0.1324775218963623
+- runtime for data transfer (device->host):	8.20159912109375e-05
+- runtime for data transfer (host->device):	0.0002624988555908203
+- runtime for kernel execution:			0.1300339698791504
+- runtime for data transfer (device->host):	8.20159912109375e-05
+- runtime for data transfer (host->device):	0.00025916099548339844
+- runtime for kernel execution:			0.13006258010864258
+- runtime for data transfer (device->host):	8.177757263183594e-05
+- runtime for data transfer (host->device):	0.0002651214599609375
+- runtime for kernel execution:			0.13047385215759277
+- runtime for data transfer (device->host):	8.153915405273438e-05
+- runtime for data transfer (host->device):	0.00026488304138183594
+- runtime for kernel execution:			0.13022923469543457
+- runtime for data transfer (device->host):	8.296966552734375e-05
+- runtime for data transfer (host->device):	0.0002655982971191406
+- runtime for kernel execution:			0.13165736198425293
+- runtime for data transfer (device->host):	8.273124694824219e-05
+- runtime for data transfer (host->device):	0.0002613067626953125
+- runtime for kernel execution:			0.13049864768981934
+- runtime for data transfer (device->host):	8.177757263183594e-05
+- runtime for data transfer (host->device):	0.00026297569274902344
+- runtime for kernel execution:			0.1302812099456787
+- runtime for data transfer (device->host):	8.082389831542969e-05
+no overlap, offset = 0.10422496795654297
+Exiting Main Thread
+- runtime for nonoverlapping:	15.328217029571533
+
+overlapping
+overlap, offset = 0.10422496795654297
+Exiting Main Thread
+- runtime for overlappingmulti:	9.84833550453186
+
+sirtinputf32rad128
+
+nonoverlapping
+- runtime for data transfer (host->device):	0.0008726119995117188
+- runtime for kernel execution:			0.13474535942077637
+- runtime for data transfer (device->host):	0.006646156311035156
+- runtime for data transfer (host->device):	0.0003612041473388672
+- runtime for kernel execution:			0.13625454902648926
+- runtime for data transfer (device->host):	0.0027883052825927734
+- runtime for data transfer (host->device):	0.0003421306610107422
+- runtime for kernel execution:			0.13275599479675293
+- runtime for data transfer (device->host):	0.0001513957977294922
+- runtime for data transfer (host->device):	0.0003466606140136719
+- runtime for kernel execution:			0.13338327407836914
+- runtime for data transfer (device->host):	0.00018596649169921875
+- runtime for data transfer (host->device):	0.0004215240478515625
+- runtime for kernel execution:			0.1386864185333252
+- runtime for data transfer (device->host):	0.00013113021850585938
+- runtime for data transfer (host->device):	0.0003466606140136719
+- runtime for kernel execution:			0.13129711151123047
+- runtime for data transfer (device->host):	0.00012803077697753906
+- runtime for data transfer (host->device):	0.0003275871276855469
+- runtime for kernel execution:			0.13124847412109375
+- runtime for data transfer (device->host):	0.0001266002655029297
+- runtime for data transfer (host->device):	0.0003304481506347656
+- runtime for kernel execution:			0.13131999969482422
+- runtime for data transfer (device->host):	0.0001304149627685547
+- runtime for data transfer (host->device):	0.00033926963806152344
+- runtime for kernel execution:			0.13121533393859863
+- runtime for data transfer (device->host):	0.00012683868408203125
+- runtime for data transfer (host->device):	0.00033402442932128906
+- runtime for kernel execution:			0.13146591186523438
+- runtime for data transfer (device->host):	0.00012159347534179688
+no overlap, offset = 0.1051727294921875
+Exiting Main Thread
+- runtime for nonoverlapping:	30.78479528427124
+
+overlapping
+overlap, offset = 0.1051727294921875
+Exiting Main Thread
+- runtime for overlappingmulti:	18.31216788291931
+
+sirtinputf32rad256
+
+nonoverlapping
+- runtime for data transfer (host->device):	0.00112152099609375
+- runtime for kernel execution:			0.6026268005371094
+- runtime for data transfer (device->host):	0.13948297500610352
+- runtime for data transfer (host->device):	0.0005676746368408203
+- runtime for kernel execution:			0.6006546020507812
+- runtime for data transfer (device->host):	0.13939261436462402
+- runtime for data transfer (host->device):	0.0007064342498779297
+- runtime for kernel execution:			0.600299596786499
+- runtime for data transfer (device->host):	0.1395549774169922
+- runtime for data transfer (host->device):	0.0006899833679199219
+- runtime for kernel execution:			0.6001555919647217
+- runtime for data transfer (device->host):	0.13951754570007324
+- runtime for data transfer (host->device):	0.0010898113250732422
+- runtime for kernel execution:			0.600271463394165
+- runtime for data transfer (device->host):	0.13938021659851074
+- runtime for data transfer (host->device):	0.0007159709930419922
+- runtime for kernel execution:			0.6000857353210449
+- runtime for data transfer (device->host):	0.13933944702148438
+- runtime for data transfer (host->device):	0.0007100105285644531
+- runtime for kernel execution:			0.6002838611602783
+- runtime for data transfer (device->host):	0.13957571983337402
+- runtime for data transfer (host->device):	0.00089263916015625
+- runtime for kernel execution:			0.6004259586334229
+- runtime for data transfer (device->host):	0.13957786560058594
+- runtime for data transfer (host->device):	0.0007777214050292969
+- runtime for kernel execution:			0.6001181602478027
+- runtime for data transfer (device->host):	0.13901877403259277
+- runtime for data transfer (host->device):	0.00107574462890625
+- runtime for kernel execution:			0.6005833148956299
+- runtime for data transfer (device->host):	0.13883423805236816
+no overlap, offset = 0.4804666519165039
+Exiting Main Thread
+- runtime for nonoverlapping:	312.06533312797546
+
+overlapping
+overlap, offset = 0.4804666519165039
+Exiting Main Thread
+- runtime for overlappingmulti:	190.59801530838013
+
+sirtinputf32rad512
+
+nonoverlapping
+- runtime for data transfer (host->device):	0.0018916130065917969
+- runtime for kernel execution:			4.433845520019531
+- runtime for data transfer (device->host):	1.034407138824463
+- runtime for data transfer (host->device):	0.0019118785858154297
+- runtime for kernel execution:			4.431077718734741
+- runtime for data transfer (device->host):	1.0342433452606201
+- runtime for data transfer (host->device):	0.0018336772918701172
+- runtime for kernel execution:			4.431199312210083
+- runtime for data transfer (device->host):	1.0344460010528564
+- runtime for data transfer (host->device):	0.0018379688262939453
+- runtime for kernel execution:			4.432039976119995
+- runtime for data transfer (device->host):	1.0345351696014404
+- runtime for data transfer (host->device):	0.001825571060180664
+- runtime for kernel execution:			4.432022333145142
+- runtime for data transfer (device->host):	1.0348329544067383
+- runtime for data transfer (host->device):	0.0019521713256835938
+- runtime for kernel execution:			4.431912899017334
+- runtime for data transfer (device->host):	1.0346081256866455
+- runtime for data transfer (host->device):	0.0018608570098876953
+- runtime for kernel execution:			4.4312286376953125
+- runtime for data transfer (device->host):	1.0346908569335938
+- runtime for data transfer (host->device):	0.0032858848571777344
+- runtime for kernel execution:			4.433317422866821
+- runtime for data transfer (device->host):	1.0345163345336914
+- runtime for data transfer (host->device):	0.0028243064880371094
+- runtime for kernel execution:			4.431663751602173
+- runtime for data transfer (device->host):	1.0342521667480469
+- runtime for data transfer (host->device):	0.0021448135375976562
+- runtime for kernel execution:			4.4310901165008545
+- runtime for data transfer (device->host):	1.034146785736084
+no overlap, offset = 3.5448720932006834
+Exiting Main Thread
+- runtime for nonoverlapping:	4625.7275857925415
+
+overlapping
+overlap, offset = 3.5448720932006834
+Exiting Main Thread
+- runtime for overlappingmulti:	2875.70104432106
+
