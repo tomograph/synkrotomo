@@ -1,0 +1,37 @@
+timing 3d reconstructions
+sirtinputf32rad64
+overlapping multi gpu
+multipgu, offset = 0.09823741912841796
+- runtime:	10.019492626190186
+
+overlapping single gpu
+single gpu, offset = 0.09823741912841796
+- runtime:	9.99702763557434
+
+sirtinputf32rad128
+overlapping multi gpu
+multipgu, offset = 0.10100650787353516
+- runtime:	18.237972497940063
+
+overlapping single gpu
+single gpu, offset = 0.10100650787353516
+- runtime:	18.18087887763977
+
+sirtinputf32rad256
+overlapping multi gpu
+multipgu, offset = 0.4787477493286133
+- runtime:	98.69398832321167
+
+overlapping single gpu
+single gpu, offset = 0.4787477493286133
+- runtime:	191.20027232170105
+
+sirtinputf32rad512
+overlapping multi gpu
+multipgu, offset = 3.5442598342895506
+- runtime:	1460.5772683620453
+
+overlapping single gpu
+single gpu, offset = 3.5442598342895506
+- runtime:	2882.5114874839783
+
