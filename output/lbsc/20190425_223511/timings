@@ -1,0 +1,24 @@
+
+size 64 began at Thu Apr 25 22:35:15 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	12.886693716049194
+
+size 128 began at Thu Apr 25 22:35:28 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	21.030884981155396
+
+size 256 began at Thu Apr 25 22:35:49 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	43.70099878311157
+
+size 512 began at Thu Apr 25 22:36:34 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	530.7590711116791
+
+size 1024 began at Thu Apr 25 22:45:33 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	8002.066937208176
+
+size 1500 began at Fri Apr 26 01:00:47 2019
+Exiting Main Thread
+- runtime for overlappingmulti:	39539.35752439499
