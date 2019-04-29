@@ -31,3 +31,4 @@ futhark/mse
 futhark/diff
 futhark/forwardprojection_test2
 futhark/forwardprojection_best
+futhark/poc
