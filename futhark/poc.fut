@@ -3,7 +3,7 @@ let main [n] (inarr1:[n]f32) (iters:i32)  =
     let test = scatter (replicate n 0.0f32) (rotate (7) (iota n)) inarr1
     -- let test1 = scatter (replicate n 0.0f32) (rotate (7) (iota n)) test
     -- let test2 = scatter (replicate n 0.0f32) (rotate (7) (iota n)) test1
-    in scan (+) 0.0f32  test
+    in map (\i -> i+1)  test
     -- in scan (+) 0.0f32 <| map (\i -> f32.sqrt(i*7)) test
   in res
   -- let test4 = scatter (replicate (length test3) 0.0f32) (rotate (7) (iota n)) test3
