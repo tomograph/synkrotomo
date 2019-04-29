@@ -1,6 +1,6 @@
 lib:
 	futhark pyopencl --library ./futhark/SIRT.fut
-	futhark pyopencl --library ./futhark/sum.fut
+	futhark pyopencl --library ./futhark/poc.fut
 	futhark pyopencl --library ./futhark/SIRT3Dtest.fut
 	futhark pyopencl --library ./futhark/backprojection.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
