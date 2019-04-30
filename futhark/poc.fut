@@ -1,6 +1,9 @@
 let main [n] (inarr1:[n]f32) (iters:i32)  =
   let res = loop (inarr1) = (inarr1) for i < iters do
-    scatter (replicate n 0.0f32) (rotate (7) (iota n)) inarr1
+    -- scatter (replicate n 0.0f32) (rotate (7) (iota n)) inarr1
+    map (\i -> i+1) inarr1
+
+
     -- let test1 = scatter (replicate n 0.0f32) (rotate (7) (iota n)) test
     -- let test2 = scatter (replicate n 0.0f32) (rotate (7) (iota n)) test1
     -- in map (\i -> i+1)  test
