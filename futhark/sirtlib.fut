@@ -1,7 +1,7 @@
 
 
 module sirtlib = {
-type point  = ( f32, f32 )
+      type point  = ( f32, f32 )
 
       let is_flat (cos: f32) (sin: f32): bool =
           f32.abs(sin) >= f32.abs(cos)

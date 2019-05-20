@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "ssh-diku-apl.science.ku.dk",
+  "port": "22",
+  "target": "synkrotomo",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "zgb585",
+  "password": "nSEvBInDR5th",
+  "watch": [],
+  "transport": "scp"
+}

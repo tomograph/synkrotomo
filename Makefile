@@ -2,6 +2,7 @@ lib:
 	futhark pyopencl --library ./futhark/SIRT.fut
 	futhark pyopencl --library ./futhark/backprojection.fut
 	futhark pyopencl --library ./futhark/forwardprojection.fut
+	futhark pyopencl --library ./futhark/forwardprojection_cb.fut
 
 libc:
 	futhark c --library ./futhark/SIRT.fut
