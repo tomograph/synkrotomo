@@ -1,3 +1,14 @@
+-- ==
+-- compiled input {
+--  [0.0f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.03100960116f32, 2.03100960116f32, 2.03100960116f32, 2.03100960116f32] }
+
 module fplib = {
      type pointXYZ  = ( f32, f32, f32 )
 
@@ -22,8 +33,8 @@ module fplib = {
           let norm_x = f32.abs(source.1-detector.1)
           let norm_y = f32.abs(source.2-detector.2)
           let norm_z = f32.abs(source.3-detector.3)
-          let bswap_xy = norm_y < norm_x && norm_y < norm_z --y smallest
-          let bswap_xz = norm_z < norm_x && norm_z < norm_y --z smallest
+          let bswap_xy = norm_y < norm_x && norm_y <= norm_z --y smallest
+          let bswap_xz = norm_z < norm_x && norm_z <= norm_y --z smallest
           -- otherwise x is smallest - great!
           in (bswap_xy, bswap_xz)
 
@@ -32,27 +43,32 @@ module fplib = {
                let angle = angles[angle_index]
                let cos = f32.cos(angle)
                let sin = f32.sin(angle)
+               -- source location
                let source =  (-origin_source_dist*cos, -origin_source_dist*sin, 0.0f32)
+               -- points where rays hit detector
                let detector_points = find_detector_points sin cos origin_detector_dist detector_size
                in map(\(detector_point, detector_index)->
+                    -- determine if x, y or z diff is smallest
                     let (bswap_xy, bswap_xz) = get_partitioning_bools source detector_point
                     in (source, detector_point, bswap_xy, bswap_xz, (detector_index+detector_size*detector_size*angle_index))
                )detector_points
           ) (iota a)
+          -- partiition into y smallest, z smallest, x smallest -CHECK this!
           let parts = partition2 (\(_,_,bswap_xy,_,_) -> bswap_xy) (\(_,_,_,bswap_xz,_) -> bswap_xz) source_detector
-          --let parts = partition2(\(_,_,bswap_xy,bswap_xz,_,_) -> bswap_xy bswap_xz)source_detector
+          -- transpose the lines
           let transpose_xy = map(\(source,detector,_,_,_)->((swap_xy source), (swap_xy detector)))parts.1
           let transpose_xz = map(\(source,detector,_,_,_)->((swap_xz source), (swap_xz detector)))parts.2
           let transpose_no = map(\(source,detector,_,_,_)->(source,detector))parts.3
+          -- save original indexes and transposition state
           let (_,_,bswap_xy,bswap_xz,projection_indexes) = unzip5 (parts.3 ++ parts.1 ++ parts.2)
           in (transpose_no, transpose_xy, transpose_xz, (zip bswap_xy bswap_xz), projection_indexes)
 
 
-     let transpose_xy [n](volume: [n][n][n]f32): [n][n][n]f32 =
+     let transpose_xz [n](volume: [n][n][n]f32): [n][n][n]f32 =
           map(\i-> transpose volume[0:n,0:n,i])(iota n)
 
-     let transpose_xz [n](volume: [n][n][n]f32): [n][n][n]f32 =
-          map(\i-> transpose volume[0:n,i,0:n])(iota n)
+     let transpose_xy [n](volume: [n][n][n]f32): [n][n][n]f32 =
+          map(\i-> transpose volume[i,0:n,0:n])(iota n)
 
      let fix_projections [p](proj:[p]f32) (bswap_xy_xz:[p](bool,bool)):([]f32,[]f32,[]f32) =
           let (bswap_xy, bswap_xz) = unzip bswap_xy_xz
@@ -83,8 +99,8 @@ module fplib = {
      let pixel_index (x: i32) (y: f32) (z: f32) (N: i32): i32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
           let i = x+halfsize
-          let j = t32(f32.floor(y))+halfsize
-          let k = t32(f32.floor(z))+halfsize
+          let j = halfsize-t32(f32.floor(y))-1
+          let k = halfsize-t32(f32.floor(z))-1
           in i + j*N + k*N*N
 
      -- using right handed coordinate system
@@ -114,7 +130,8 @@ module fplib = {
 
           let r_one = r_z*botbot*pixbotbot+(r_y-r_z)*bottop*pixbottop+(1-r_y)*toptop*pixtoptop
           let r_two = r_y*botbot*pixbotbot+(r_z-r_y)*topbot*pixtopbot+(1-r_z)*toptop*pixtoptop
-          in botbot*pixbotbot+pixbottop*bottop+pixtopbot*topbot+pixtoptop*toptop--if r_y > r_z then r_one*lbase else r_two*lbase
+          --in if r_y > r_z then r_one*lbase else r_two*lbase
+          in lbase
 
      let fp (points: [](pointXYZ, pointXYZ)) (N: i32) (volume: []f32): []f32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
