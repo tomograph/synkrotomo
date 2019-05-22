@@ -32,7 +32,7 @@ module fplib = {
      let get_partitioning_bools (source: pointXYZ) (detector: pointXYZ): bool =
           let norm_x = f32.abs(source.1-detector.1)
           let norm_y = f32.abs(source.2-detector.2)
-          let bswap_xy = norm_y < norm_x --&& norm_y <= norm_z --y smallest
+          let bswap_xy = norm_y > norm_x --&& norm_y <= norm_z --y smallest
           in bswap_xy
 
      let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_size: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
@@ -99,15 +99,15 @@ module fplib = {
 
      -- using right handed coordinate system
      let get_value (i: i32) (p1: pointXYZ) (p2: pointXYZ) (origin_source_dist: f32) (origin_detector_dist: f32) (N: i32) (volume: []f32) : f32 =
-          let slope_y = (p2.1-p1.1)/(p2.2-p1.2)
-          let intercept_y = p1.1 - slope_y*p1.2
+          let slope_y = (p2.2-p1.2)/(p2.1-p1.1)
+          let intercept_y = p1.1*slope_y+p1.2
           let dist_source_detector = origin_source_dist + origin_detector_dist
           let slope_z = (p2.3-p1.3)/dist_source_detector
           let intercept_z = slope_y * origin_source_dist
           let lbase = f32.sqrt(1.0f32+slope_y**2.0f32+slope_z**2.0f32)
-          let xbot_y = r32(i)*slope_y + intercept_y
+          let xbot_y = r32(i)*slope_y - intercept_y
           let xtop_y = xbot_y+slope_y
-          let xbot_z = r32(i)*slope_z + intercept_z
+          let xbot_z = r32(i)*slope_z - intercept_z
           let xtop_z = xbot_z+slope_z
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
           let (r_y, bounds_bot_y, bounds_top_y) = intersection_ratio xbot_y xtop_y halfsize
