@@ -1,0 +1,20 @@
+New version moderate flattening
+Compiling futhark/SIRT.fut...
+Results for futhark/SIRT.fut:
+dataset data/sirtinputf32rad64:     24343.90μs (avg. of 10 runs; RSD: 0.01)
+dataset data/sirtinputf32rad128:    37164.20μs (avg. of 10 runs; RSD: 0.16)
+dataset data/sirtinputf32rad256:   137672.00μs (avg. of 10 runs; RSD: 0.03)
+dataset data/sirtinputf32rad512:   940665.30μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad1024: 7191868.60μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad2048: 60019084.80μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad4096: futhark/SIRT.fut failed with error code -9 and output:
+
+Old version moderate flattening
+Compiling archive/SIRT.fut...
+Results for archive/SIRT.fut:
+dataset ../futhark/data/sirtinputf32rad64:     23009.00μs (avg. of 10 runs; RSD: 0.14)
+dataset ../futhark/data/sirtinputf32rad128:    41192.80μs (avg. of 10 runs; RSD: 0.16)
+dataset ../futhark/data/sirtinputf32rad256:   188188.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad512:  1408424.40μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad1024: New version incremental flattening
+Old version incremental flattening
