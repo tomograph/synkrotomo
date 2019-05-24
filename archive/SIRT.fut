@@ -1,9 +1,11 @@
 -- ==
--- input@data/sirtinputf32rad64
--- input@data/sirtinputf32rad128
--- input@data/sirtinputf32rad256
--- input@data/sirtinputf32rad512
--- input@data/sirtinputf32rad1024
+-- input@../futhark/data/sirtinputf32rad64
+-- input@../futhark/data/sirtinputf32rad128
+-- input@../futhark/data/sirtinputf32rad256
+-- input@../futhark/data/sirtinputf32rad512
+-- input@../futhark/data/sirtinputf32rad1024
+-- input@../futhark/data/sirtinputf32rad2048
+-- input@../futhark/data/sirtinputf32rad4096
 
 import "backprojection"
 open bplib

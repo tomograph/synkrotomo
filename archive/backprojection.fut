@@ -18,6 +18,20 @@ open Lines
 
 module bplib = {
 
+
+  let intersect_fact (plus: f32) (minus: f32) (mini: f32) (maxi: f32): f32=
+       -- is zero if both values are below minimum else the positive difference between plus and min val
+       let diff_inside_orlow = f32.max (plus-mini) 0.0f32
+       -- is zero if both values are above maximum else the positive difference between minus and plus
+       let diff_inside_orhigh = f32.max (maxi-minus) 0.0f32
+       -- let l = distance left right
+       let diff = plus-minus
+       let diff_inside_orzero = f32.min diff_inside_orlow diff_inside_orhigh
+       let proportion =  if diff_inside_orzero == 0.0f32 then 0.0f32 else diff_inside_orzero/diff
+       -- never larger than 1 - needed for vertical lines
+       let fact = f32.min proportion 1.0f32
+       in fact
+
   let preprocess_2 [a](angles: [a]f32): ([](f32,f32,f32,i32),[](f32,f32,f32,i32)) =
        let cossin = map(\i -> let angle = angles[i]
             let cos= f32.cos(angle)
