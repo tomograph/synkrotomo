@@ -1,0 +1,20 @@
+New version moderate flattening
+Compiling futhark/SIRT.fut...
+Results for futhark/SIRT.fut:
+dataset data/sirtinputf32rad64:     21902.80μs (avg. of 10 runs; RSD: 0.16)
+dataset data/sirtinputf32rad128:    36963.30μs (avg. of 10 runs; RSD: 0.16)
+dataset data/sirtinputf32rad256:   136046.40μs (avg. of 10 runs; RSD: 0.02)
+dataset data/sirtinputf32rad512:   932671.30μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad1024: 7147417.40μs (avg. of 10 runs; RSD: 0.01)
+dataset data/sirtinputf32rad2048: 60081379.40μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad4096: 492982013.20μs (avg. of 10 runs; RSD: 0.00)
+Old version moderate flattening
+Compiling archive/SIRT.fut...
+Results for archive/SIRT.fut:
+dataset ../futhark/data/sirtinputf32rad64:     21938.30μs (avg. of 10 runs; RSD: 0.16)
+dataset ../futhark/data/sirtinputf32rad128:    39000.80μs (avg. of 10 runs; RSD: 0.15)
+dataset ../futhark/data/sirtinputf32rad256:   187765.20μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad512:  1405775.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad1024: 11165018.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad2048: 116688724.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../futhark/data/sirtinputf32rad4096: 2085166600.40μs (avg. of 10 runs; RSD: 0.04)
