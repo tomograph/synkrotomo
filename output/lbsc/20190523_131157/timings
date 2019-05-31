@@ -1,0 +1,4 @@
+[<pyopencl.Platform 'NVIDIA CUDA' at 0x55ce91463760>]
+[<pyopencl.Device 'GeForce GTX 1080' on 'NVIDIA CUDA' at 0x55ce91465810>, <pyopencl.Device 'GeForce GTX TITAN X' on 'NVIDIA CUDA' at 0x55ce914466b0>, <pyopencl.Device 'GeForce GTX TITAN X' on 'NVIDIA CUDA' at 0x55ce9145e500>]
+
+size 2048 began at Thu May 23 13:12:09 2019

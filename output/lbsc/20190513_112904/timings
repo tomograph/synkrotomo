@@ -1,0 +1,4 @@
+[<pyopencl.Platform 'NVIDIA CUDA' at 0x558592935370>]
+[<pyopencl.Device 'TITAN X (Pascal)' on 'NVIDIA CUDA' at 0x558592934a70>, <pyopencl.Device 'TITAN X (Pascal)' on 'NVIDIA CUDA' at 0x558592932e90>]
+
+size 4096 began at Mon May 13 11:29:10 2019
