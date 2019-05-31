@@ -1,0 +1,64 @@
+
+
+sirtinputf32rad64
+- runtime for data transfer (host->device):	0.0008978843688964844
+- runtime for kernel execution:			0.12136483192443848
+- runtime for data transfer (device->host):	0.0001373291015625
+
+
+sirtinputf32rad128
+- runtime for data transfer (host->device):	0.0012166500091552734
+- runtime for kernel execution:			0.14401865005493164
+- runtime for data transfer (device->host):	0.0002567768096923828
+
+
+sirtinputf32rad256
+- runtime for data transfer (host->device):	0.002516031265258789
+- runtime for kernel execution:			0.20960283279418945
+- runtime for data transfer (device->host):	0.0005731582641601562
+
+
+sirtinputf32rad512
+- runtime for data transfer (host->device):	0.0028111934661865234
+- runtime for kernel execution:			1.0014934539794922
+- runtime for data transfer (device->host):	0.0006465911865234375
+
+
+sirtinputf32rad1024
+- runtime for data transfer (host->device):	0.009588003158569336
+- runtime for kernel execution:			7.553625583648682
+- runtime for data transfer (device->host):	0.003648042678833008
+
+
+sirtinputf32rad1500
+- runtime for data transfer (host->device):	0.02035212516784668
+- runtime for kernel execution:			25.140788078308105
+- runtime for data transfer (device->host):	0.0036301612854003906
+
+
+sirtinputf32rad2000
+- runtime for data transfer (host->device):	0.03515768051147461
+- runtime for kernel execution:			62.752702951431274
+- runtime for data transfer (device->host):	0.00977015495300293
+
+
+sirtinputf32rad2048
+- runtime for data transfer (host->device):	0.03685283660888672
+- runtime for kernel execution:			67.39446568489075
+- runtime for data transfer (device->host):	0.009127616882324219
+
+
+sirtinputf32rad2500
+- runtime for data transfer (host->device):	0.0620572566986084
+- runtime for kernel execution:			149.44525980949402
+- runtime for data transfer (device->host):	0.017343759536743164
+
+
+sirtinputf32rad3000
+- runtime for data transfer (host->device):	0.0886683464050293
+- runtime for kernel execution:			243.80514550209045
+- runtime for data transfer (device->host):	0.014373302459716797
+
+
+sirtinputf32rad3500
+- runtime for data transfer (host->device):	0.09332418441772461

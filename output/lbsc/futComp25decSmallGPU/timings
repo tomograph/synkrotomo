@@ -1,0 +1,7 @@
+25 dec version incremental flattening
+Results for /home/crj405/archive/synkrotomo-25dec/futhark/SIRT.fut:
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad64:    176828.20μs (avg. of 10 runs; RSD: 0.01)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad128:   819412.60μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad256:  2775713.90μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad512:  18364108.10μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad1024: 

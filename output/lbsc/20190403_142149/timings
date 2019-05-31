@@ -1,0 +1,30 @@
+iter 1
+iter 200
+
+
+sirtinputf32rad64
+- runtime for data transfer (host->device):	0.0014727115631103516
+- runtime for kernel execution:			0.10896968841552734
+- runtime for data transfer (device->host):	0.00015306472778320312
+
+
+sirtinputf32rad128
+- runtime for data transfer (host->device):	0.0010097026824951172
+- runtime for kernel execution:			0.14198970794677734
+- runtime for data transfer (device->host):	0.00015878677368164062
+
+
+sirtinputf32rad256
+- runtime for data transfer (host->device):	0.0012860298156738281
+- runtime for kernel execution:			0.2145228385925293
+- runtime for data transfer (device->host):	0.00026416778564453125
+
+
+sirtinputf32rad512
+- runtime for data transfer (host->device):	0.002685546875
+- runtime for kernel execution:			0.9923183917999268
+- runtime for data transfer (device->host):	0.0005319118499755859
+
+
+sirtinputf32rad1024
+- runtime for data transfer (host->device):	0.008231401443481445

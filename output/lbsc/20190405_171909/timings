@@ -1,0 +1,7 @@
+genfut
+- runtime for futhark execution:			0.30109286308288574
+
+
+pyslice
+- runtime for pysliced execution:			5.219851732254028
+diff = 14344753.48366677
