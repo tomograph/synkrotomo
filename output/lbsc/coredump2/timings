@@ -1,1 +1,2336 @@
-/var/spool/slurmd/job912146/slurm_script: line 25: ./SIRT: Permission denied
+Using platform: NVIDIA CUDA
+Using device: GeForce GTX 1080
+Lockstep width: 32
+Default group size: 256
+Default number of groups: 256
+Created kernel map_19911.
+Created kernel map_19921.
+Created kernel map_19952.
+Created kernel map_20123.
+Created kernel map_20144.
+Created kernel map_20176.
+Created kernel map_20426.
+Created kernel map_20603.
+Created kernel map_20624.
+Created kernel map_20657.
+Created kernel scan1_19846.
+Created kernel scan2_19882.
+Allocated 25736 bytes for arr->mem in space 'device' (now allocated: 25736 bytes) (new peak).
+Allocated 67108864 bytes for arr->mem in space 'device' (now allocated: 67134600 bytes) (new peak).
+Allocated 149088648 bytes for arr->mem in space 'device' (now allocated: 216223248 bytes) (new peak).
+Allocated 23172 bytes for mem_20946 in space 'device' (now allocated: 216246420 bytes) (new peak).
+Allocated 92 bytes for mem_20952 in space 'device' (now allocated: 216246512 bytes) (new peak).
+Launching scan1_19846 with global work size [5888] and local work size [256].
+kernel scan1_19846 runtime: 65us
+Allocated 92 bytes for mem_20958 in space 'device' (now allocated: 216246604 bytes) (new peak).
+Launching scan2_19882 with global work size [23] and local work size [23].
+kernel scan2_19882 runtime: 27us
+Unreferencing block mem_20952 (allocated as mem_20952) in space 'device': 0 references remaining.
+92 bytes freed (now allocated: 216246512 bytes)
+Allocated 23172 bytes for mem_20961 in space 'device' (now allocated: 216269684 bytes) (new peak).
+Launching map_19911 with global work size [5888] and local work size [256].
+kernel map_19911 runtime: 29us
+Unreferencing block mem_20946 (allocated as mem_20946) in space 'device': 0 references remaining.
+23172 bytes freed (now allocated: 216246512 bytes)
+Unreferencing block mem_20958 (allocated as mem_20958) in space 'device': 0 references remaining.
+92 bytes freed (now allocated: 216246420 bytes)
+Allocated 23172 bytes for mem_20964 in space 'device' (now allocated: 216269592 bytes).
+Launching map_19921 with global work size [5888] and local work size [256].
+kernel map_19921 runtime: 27us
+Unreferencing block mem_20961 (allocated as mem_20961) in space 'device': 0 references remaining.
+23172 bytes freed (now allocated: 216246420 bytes)
+Allocated 25736 bytes for mem_20967 in space 'device' (now allocated: 216272156 bytes) (new peak).
+Allocated 25736 bytes for mem_20970 in space 'device' (now allocated: 216297892 bytes) (new peak).
+Allocated 6434 bytes for mem_20972 in space 'device' (now allocated: 216304326 bytes) (new peak).
+Allocated 25736 bytes for mem_20975 in space 'device' (now allocated: 216330062 bytes) (new peak).
+Allocated 25736 bytes for mem_20978 in space 'device' (now allocated: 216355798 bytes) (new peak).
+Allocated 25736 bytes for mem_20981 in space 'device' (now allocated: 216381534 bytes) (new peak).
+Allocated 25736 bytes for mem_20984 in space 'device' (now allocated: 216407270 bytes) (new peak).
+Launching map_20123 with global work size [6656] and local work size [256].
+kernel map_20123 runtime: 31us
+Allocated 149088648 bytes for mem_20988 in space 'device' (now allocated: 365495918 bytes) (new peak).
+Launching map_19952 with global work size [37272320] and local work size [256].
+kernel map_19952 runtime: 2543449us
+Unreferencing block mem_20967 (allocated as mem_20967) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365470182 bytes)
+Unreferencing block mem_20970 (allocated as mem_20970) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365444446 bytes)
+Unreferencing block mem_20972 (allocated as mem_20972) in space 'device': 0 references remaining.
+6434 bytes freed (now allocated: 365438012 bytes)
+Unreferencing block mem_20975 (allocated as mem_20975) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365412276 bytes)
+Unreferencing block mem_20978 (allocated as mem_20978) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365386540 bytes)
+Unreferencing block mem_20981 (allocated as mem_20981) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365360804 bytes)
+Unreferencing block mem_20984 (allocated as mem_20984) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 365335068 bytes)
+Allocated 149088648 bytes for mem_20991 in space 'device' (now allocated: 514423716 bytes) (new peak).
+Launching map_20144 with global work size [37272320] and local work size [256].
+kernel map_20144 runtime: 1176us
+Unreferencing block mem_20988 (allocated as mem_20988) in space 'device': 0 references remaining.
+149088648 bytes freed (now allocated: 365335068 bytes)
+Allocated 67108864 bytes for mem_20994 in space 'device' (now allocated: 432443932 bytes).
+Launching map_20176 with global work size [16777216] and local work size [256].
+kernel map_20176 runtime: 25400370us
+Allocated 25736 bytes for mem_20997 in space 'device' (now allocated: 432469668 bytes).
+Allocated 25736 bytes for mem_21000 in space 'device' (now allocated: 432495404 bytes).
+Allocated 6434 bytes for mem_21002 in space 'device' (now allocated: 432501838 bytes).
+Allocated 25736 bytes for mem_21005 in space 'device' (now allocated: 432527574 bytes).
+Allocated 25736 bytes for mem_21008 in space 'device' (now allocated: 432553310 bytes).
+Allocated 25736 bytes for mem_21011 in space 'device' (now allocated: 432579046 bytes).
+Allocated 25736 bytes for mem_21014 in space 'device' (now allocated: 432604782 bytes).
+Launching map_20603 with global work size [6656] and local work size [256].
+kernel map_20603 runtime: 57us
+Allocated 149088648 bytes for mem_21020 in space 'device' (now allocated: 581693430 bytes) (new peak).
+Allocated 149088648 bytes for mem_21023 in space 'device' (now allocated: 730782078 bytes) (new peak).
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2876983us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2347us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 797890942 bytes) (new peak).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27097676us
+Unreferencing block image_mem_tmp_21088 (allocated as arr->mem) in space 'device': 1 references remaining.
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2917642us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2311us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes) (new peak).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27323605us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2918364us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2318us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27409162us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2932120us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2325us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27496981us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2932396us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2318us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27515977us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951704us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2327us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27688334us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951888us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27662521us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951891us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2310us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27670609us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951959us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686845us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951957us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678314us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951978us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674834us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951784us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674191us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951696us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674498us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2969039us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27862591us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975720us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27866166us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975702us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27859938us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976285us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27873583us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976560us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2313us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27882634us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976225us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2315us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27878936us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976733us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2332us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27867434us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975975us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877276us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975793us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877028us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976580us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877598us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976198us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877576us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976324us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27886614us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975946us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27866169us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975511us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27875972us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976163us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27864567us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976297us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27864568us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976565us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2310us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27872743us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976354us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27870946us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976517us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2324us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27869769us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975997us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27864363us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976504us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2326us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27878979us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976205us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27873607us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2977072us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27881150us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976073us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877350us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976071us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27867242us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975428us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27880655us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975675us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27879638us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976461us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877903us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976160us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27879251us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975997us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27879193us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976243us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27892059us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976567us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27880854us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976443us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27880349us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976823us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27884588us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976984us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27880801us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975954us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27883803us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975540us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877596us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2975698us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27871720us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976399us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27876727us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976360us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27873287us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976442us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27865444us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976058us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27880578us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976448us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27877008us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2976011us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27848544us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951984us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676441us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952153us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686365us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952061us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677497us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952178us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674019us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951994us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676164us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952051us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679610us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952093us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676658us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952131us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27691500us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952065us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679452us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952049us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27685126us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951905us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27684063us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952020us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27687671us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952056us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2319us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27673762us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952026us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679426us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952127us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2324us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674785us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952203us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2328us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675394us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952099us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680611us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952020us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27685483us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952076us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679814us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951943us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672581us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952377us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27669554us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952052us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680174us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952214us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671006us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952127us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683201us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951931us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680623us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951937us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678763us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952372us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686254us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952008us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672188us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952103us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672883us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952060us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2321us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672159us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951980us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27669768us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951975us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27664808us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952237us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27673332us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952147us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27660800us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952104us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27691652us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951960us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678616us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951903us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675685us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952231us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27689338us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952114us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27665758us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952105us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27666064us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952059us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27685491us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952029us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672195us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952139us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679934us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952056us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27669804us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951977us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27684131us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951955us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671216us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951985us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672307us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951799us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27692711us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951684us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676761us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952006us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677900us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952026us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679006us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951812us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676956us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952047us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2316us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675700us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951867us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27681581us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951971us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677858us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952162us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679271us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952006us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676487us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951882us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27664746us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951938us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671513us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951859us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2302us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27664330us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952052us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2321us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683699us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951829us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2321us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27666298us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951827us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2323us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686341us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952028us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2321us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677621us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952059us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2323us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677799us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952038us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27668010us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951996us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27685096us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952023us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27656726us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952014us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680254us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952064us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678171us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952077us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679468us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951799us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675677us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952156us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27684385us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952081us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676741us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952002us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672273us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952149us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671544us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952095us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675611us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952077us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678950us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951968us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27662416us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952064us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677527us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952040us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678511us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951886us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672751us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951841us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27682733us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952098us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27660550us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951986us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2302us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680727us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951981us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683389us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951986us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2311us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27662596us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952049us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27668720us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951970us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27689058us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951983us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27681116us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952134us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2308us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674825us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952093us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27669118us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951854us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679005us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952084us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27681845us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952111us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674209us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952040us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27668949us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952054us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676676us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952048us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2312us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672278us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952045us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683485us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951945us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27692008us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952017us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679131us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952230us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677217us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952012us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671989us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952257us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27681624us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952188us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676817us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952107us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2312us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27654999us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952459us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27680196us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951975us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678316us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952177us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27689192us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952189us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27682488us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952088us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2322us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27679354us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952122us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2323us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674342us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951995us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2323us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27668738us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951994us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671605us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952094us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27682230us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951874us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27691772us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952326us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2311us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27670404us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951944us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27662944us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951970us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674914us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952100us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675660us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951859us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672761us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952042us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27681410us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952242us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2309us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671025us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952430us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27670576us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952261us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27682552us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952187us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27675949us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952076us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27669077us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952147us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27670215us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952026us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686423us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951877us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674179us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952112us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672746us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952202us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27688948us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952389us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2304us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27673327us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951875us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27674056us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2951807us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27671330us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952045us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27676278us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952061us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27672863us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952194us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2310us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27685081us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952113us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2307us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27686641us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952204us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683079us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952005us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2305us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27678117us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952204us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2303us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27677642us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Launching map_20426 with global work size [37272320] and local work size [256].
+kernel map_20426 runtime: 2952091us
+Launching map_20624 with global work size [37272320] and local work size [256].
+kernel map_20624 runtime: 2306us
+Allocated 67108864 bytes for mem_21026 in space 'device' (now allocated: 864999806 bytes).
+Launching map_20657 with global work size [16777216] and local work size [256].
+kernel map_20657 runtime: 27683503us
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 797890942 bytes)
+Unreferencing block image_mem_tmp_21088 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block mem_21026 (allocated as mem_21026) in space 'device': 1 references remaining.
+Unreferencing block mem_20964 (allocated as mem_20964) in space 'device': 0 references remaining.
+23172 bytes freed (now allocated: 797867770 bytes)
+Unreferencing block mem_20991 (allocated as mem_20991) in space 'device': 0 references remaining.
+149088648 bytes freed (now allocated: 648779122 bytes)
+Unreferencing block mem_20994 (allocated as mem_20994) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 581670258 bytes)
+Unreferencing block mem_20997 (allocated as mem_20997) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581644522 bytes)
+Unreferencing block mem_21000 (allocated as mem_21000) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581618786 bytes)
+Unreferencing block mem_21002 (allocated as mem_21002) in space 'device': 0 references remaining.
+6434 bytes freed (now allocated: 581612352 bytes)
+Unreferencing block mem_21005 (allocated as mem_21005) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581586616 bytes)
+Unreferencing block mem_21008 (allocated as mem_21008) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581560880 bytes)
+Unreferencing block mem_21011 (allocated as mem_21011) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581535144 bytes)
+Unreferencing block mem_21014 (allocated as mem_21014) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 581509408 bytes)
+Unreferencing block mem_21020 (allocated as mem_21020) in space 'device': 0 references remaining.
+149088648 bytes freed (now allocated: 432420760 bytes)
+Unreferencing block mem_21023 (allocated as mem_21023) in space 'device': 0 references remaining.
+149088648 bytes freed (now allocated: 283332112 bytes)
+Unreferencing block image_mem_21016 (allocated as mem_21026) in space 'device': 3 references remaining.
+Unreferencing block res_mem_21028 (allocated as mem_21026) in space 'device': 2 references remaining.
+Unreferencing block out_mem_21041 (allocated as mem_21026) in space 'device': 1 references remaining.
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+25736 bytes freed (now allocated: 283306376 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 216197512 bytes)
+Unreferencing block arr->mem (allocated as arr->mem) in space 'device': 0 references remaining.
+149088648 bytes freed (now allocated: 67108864 bytes)
+Unreferencing block arr->mem (allocated as mem_21026) in space 'device': 0 references remaining.
+67108864 bytes freed (now allocated: 0 bytes)
+Peak memory usage for space 'device': 864999806 bytes.
+Peak memory usage for space 'local': 0 bytes.
+Peak memory usage for default space: 0 bytes.
+Kernel map_19911   executed      1 times, with average runtime:     29us	and total runtime:     29us
+Kernel map_19921   executed      1 times, with average runtime:     27us	and total runtime:     27us
+Kernel map_19952   executed      1 times, with average runtime: 2543449us	and total runtime: 2543449us
+Kernel map_20123   executed      1 times, with average runtime:     31us	and total runtime:     31us
+Kernel map_20144   executed      1 times, with average runtime:   1176us	and total runtime:   1176us
+Kernel map_20176   executed      1 times, with average runtime: 25400370us	and total runtime: 25400370us
+Kernel map_20426   executed    200 times, with average runtime: 2956410us	and total runtime: 591282085us
+Kernel map_20603   executed      1 times, with average runtime:     57us	and total runtime:     57us
+Kernel map_20624   executed    200 times, with average runtime:   2308us	and total runtime: 461607us
+Kernel map_20657   executed    200 times, with average runtime: 6237744us	and total runtime: 1247548860us
+Kernel scan1_19846 executed      1 times, with average runtime:     65us	and total runtime:     65us
+Kernel scan2_19882 executed      1 times, with average runtime:     27us	and total runtime:     27us
+Ran 609 kernels with cumulative runtime: 1867237783us
