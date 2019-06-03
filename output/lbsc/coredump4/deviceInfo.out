@@ -36,7 +36,7 @@ Device 0: "GeForce GTX TITAN X"
   Device supports Compute Preemption:            No
   Supports Cooperative Kernel Launch:            No
   Supports MultiDevice Co-op Kernel Launch:      No
-  Device PCI Domain ID / Bus ID / location ID:   0 / 2 / 0
+  Device PCI Domain ID / Bus ID / location ID:   0 / 132 / 0
   Compute Mode:
      < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
 
