@@ -1,0 +1,8 @@
+Compiling SIRT.fut...
+Results for SIRT.fut:
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad64:     74514.20μs (avg. of 10 runs; RSD: 0.09)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad128:   173307.40μs (avg. of 10 runs; RSD: 0.09)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad256:  1201804.00μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad512:  8418482.30μs (avg. of 10 runs; RSD: 0.03)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad1024: 77479698.40μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad2048: 639706423.90μs (avg. of 10 runs; RSD: 0.01)
