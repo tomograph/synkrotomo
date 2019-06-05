@@ -1,8 +1,8 @@
 Compiling SIRT.fut...
 Results for SIRT.fut:
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad64:     74514.20μs (avg. of 10 runs; RSD: 0.09)
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad128:   173307.40μs (avg. of 10 runs; RSD: 0.09)
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad256:  1201804.00μs (avg. of 10 runs; RSD: 0.00)
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad512:  8418482.30μs (avg. of 10 runs; RSD: 0.03)
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad1024: 77479698.40μs (avg. of 10 runs; RSD: 0.00)
-dataset ../../../synkrotomo/futhark/data/sirtinputf32rad2048: 639706423.90μs (avg. of 10 runs; RSD: 0.01)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad64:     71882.20μs (avg. of 10 runs; RSD: 0.09)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad128:   160740.80μs (avg. of 10 runs; RSD: 0.05)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad256:  1148904.80μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad512:  7479345.50μs (avg. of 10 runs; RSD: 0.02)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad1024: 69117787.30μs (avg. of 10 runs; RSD: 0.00)
+dataset ../../../synkrotomo/futhark/data/sirtinputf32rad2048: 579060227.50μs (avg. of 10 runs; RSD: 0.04)

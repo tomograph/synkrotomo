@@ -1,0 +1,9 @@
+Compiling SIRT.fut...
+Results for SIRT.fut:
+dataset data/sirtinputf32rad64:     33513.80μs (avg. of 10 runs; RSD: 0.06)
+dataset data/sirtinputf32rad128:    77716.20μs (avg. of 10 runs; RSD: 0.05)
+dataset data/sirtinputf32rad256:   488009.10μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad512:  3868276.30μs (avg. of 10 runs; RSD: 0.06)
+dataset data/sirtinputf32rad1024: 33937988.20μs (avg. of 10 runs; RSD: 0.01)
+dataset data/sirtinputf32rad2048: 271430458.80μs (avg. of 10 runs; RSD: 0.00)
+dataset data/sirtinputf32rad4096: 2165425553.90μs (avg. of 10 runs; RSD: 0.00)
