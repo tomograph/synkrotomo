@@ -1,11 +1,24 @@
 -- ==
--- input@data/sirtinputf32rad64
--- input@data/sirtinputf32rad128
--- input@data/sirtinputf32rad256
--- input@data/sirtinputf32rad512
--- input@data/sirtinputf32rad1024
--- input@data/sirtinputf32rad2048
--- input@data/sirtinputf32rad4096
+--input@../data/sparse/sirtinputf32rad1
+--input@../data/sparse/sirtinputf32rad5
+--input@../data/sparse/sirtinputf32rad10
+--input@../data/sparse/sirtinputf32rad15
+--input@../data/sparse/sirtinputf32rad20
+--input@../data/sparse/sirtinputf32rad25
+--input@../data/sparse/sirtinputf32rad30
+--input@../data/sparse/sirtinputf32rad35
+--input@../data/sparse/sirtinputf32rad40
+--input@../data/sparse/sirtinputf32rad45
+--input@../data/sparse/sirtinputf32rad50
+--input@../data/sparse/sirtinputf32rad55
+--input@../data/sparse/sirtinputf32rad60
+--input@../data/sparse/sirtinputf32rad65
+--input@../data/sparse/sirtinputf32rad70
+--input@../data/sparse/sirtinputf32rad75
+--input@../data/sparse/sirtinputf32rad80
+--input@../data/sparse/sirtinputf32rad85
+--input@../data/sparse/sirtinputf32rad90
+--input@../data/sparse/sirtinputf32rad95
 
 import "forwardprojection"
 open fpTlib
