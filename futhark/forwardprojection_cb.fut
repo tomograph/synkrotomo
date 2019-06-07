@@ -8,6 +8,70 @@
 -- 2
 -- }
 -- output { [2.03100960116f32, 2.03100960116f32, 2.03100960116f32, 2.03100960116f32] }
+-- compiled input {
+--  [3.14159265359f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.03100960116f32, 2.03100960116f32, 2.03100960116f32, 2.03100960116f32] }
+-- compiled input {
+--  [1.57079632679f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.03100960116f32, 2.03100960116f32, 2.03100960116f32, 2.03100960116f32] }
+-- compiled input {
+--  [4.71238898038f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.03100960116f32, 2.03100960116f32, 2.03100960116f32, 2.03100960116f32] }
+-- compiled input {
+--  [0.78539816339f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.40206112814f32, 2.40206112814f32, 2.40206112814f32, 2.40206112814f32] }
+-- compiled input {
+--  [2.35619449019f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.40206112814f32, 2.40206112814f32, 2.40206112814f32, 2.40206112814f32] }
+-- compiled input {
+--  [3.92699081699f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.40206112814f32, 2.40206112814f32, 2.40206112814f32, 2.40206112814f32] }
+-- compiled input {
+--  [5.49778714378f32]
+--  2.0f32
+--  2.0f32
+--  [1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32,1.0f32]
+-- 2
+-- 2
+-- }
+-- output { [2.40206112814f32, 2.40206112814f32, 2.40206112814f32, 2.40206112814f32] }
+
 
 module fplib = {
      type pointXYZ  = ( f32, f32, f32 )
@@ -26,13 +90,13 @@ module fplib = {
      let swap_xy (point: pointXYZ) : pointXYZ =
           (point.2,point.1,point.3)
 
-     -- let swap_xz (point: pointXYZ) : pointXYZ =
-     --      (point.3,point.2,point.1)
-
      let get_partitioning_bools (source: pointXYZ) (detector: pointXYZ): bool =
+          -- difference in x values
           let norm_x = f32.abs(source.1-detector.1)
+          -- different in y values
           let norm_y = f32.abs(source.2-detector.2)
-          let bswap_xy = norm_y > norm_x --&& norm_y <= norm_z --y smallest
+          -- if diff in y less than diff in x then line is flat
+          let bswap_xy = norm_y < norm_x
           in bswap_xy
 
      let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_size: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
@@ -74,7 +138,6 @@ module fplib = {
           in (no, xy)
 
      let postprocess_fp [p][x][y](projection_indexes: [p]i32) (val_no: [x]f32) (val_xy: [y]f32): [p]f32 =
-          --val_no ++ (replicate y 0.0f32) ++ (replicate z 0.0f32)
           scatter (replicate (x+y) 0.0f32) projection_indexes (val_no ++ val_xy)
 
      let false_to_zero (b1: bool) (b2: bool): f32 =
@@ -85,59 +148,70 @@ module fplib = {
           let Xpixtop = t32(f32.floor(xtop))
           let pixmax = r32(i32.max Xpixbot Xpixtop)
           let diff = xtop-xbot
+          -- in case of single voxel situation this could be -1... check for 2d case too
           let ratio = (pixmax - xbot)/diff
           let xbotwithinbounds = Xpixbot >= -halfsize && Xpixbot < halfsize
           let xtopwithinbounds = Xpixtop >= -halfsize && Xpixtop < halfsize
           in (ratio, xbotwithinbounds, xtopwithinbounds)
 
-     let pixel_index (x: i32) (y: f32) (z: f32) (N: i32): i32 =
+     let pixel_index (x: f32) (y: i32) (z: f32) (N: i32): i32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
-          let i = x+halfsize
-          let j = halfsize-t32(f32.floor(y))-1
-          let k = halfsize-t32(f32.floor(z))-1
+          let i = t32(f32.floor(x))+halfsize
+          let j = halfsize-1-y
+          let k = halfsize-1-t32(f32.floor(z))
           in i + j*N + k*N*N
 
      -- using right handed coordinate system
-     let get_value (i: i32) (p1: pointXYZ) (p2: pointXYZ) (origin_source_dist: f32) (origin_detector_dist: f32) (N: i32) (volume: []f32) : f32 =
-          let slope_y = (p2.2-p1.2)/(p2.1-p1.1)
-          let intercept_y = p1.1*slope_y+p1.2
-          let dist_source_detector = origin_source_dist + origin_detector_dist
-          let slope_z = (p2.3-p1.3)/dist_source_detector
-          let intercept_z = slope_y * origin_source_dist
+     let get_value (i: i32) (p1: pointXYZ) (p2: pointXYZ) (N: i32) (volume: []f32) : f32 =
+          -- increase in x pr. y
+          let slope_y = (p2.1-p1.1)/(p2.2-p1.2)
+          -- increase in z value pr. 1 unit y
+          let slope_z = (p2.3-p1.3)*f32.sqrt(1+slope_y**2.0f32)/f32.sqrt((p2.1-p1.1)**2.0f32+(p2.2-p1.2)**2.0f32)
+          -- intercept of line x = slope_y*y+intercept_y
+          let intercept_y = p1.1-slope_y*p1.2
+          -- we now have dy = 1, dx = slope_y, dz = slope_z
+          -- intercept of line z = slope_z*l*y+intercept_z
+          let intercept_z = p1.3-slope_z*p1.2
+          -- the z-value when y = i
+          let zminus = r32(i) * slope_z+intercept_z
+          -- the z-value when y = i+1
+          let zplus = zminus + slope_z
+          -- the x value when y = i
+          let xminus = slope_y * r32(i) + intercept_y
+          -- the x-value when y = i+1
+          let xplus = xminus + slope_y
+          let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
+          -- determine ratios and whether each intersection is within bounds
+          let (r_x, bounds_bot_x, bounds_top_x) = intersection_ratio xminus xplus halfsize
+          let (r_z, bounds_bot_z, bounds_top_z) = intersection_ratio xminus xplus halfsize
+
+          -- determine length of line through a voxel if it only passes through this one voxel.<
           let lbase = f32.sqrt(1.0f32+slope_y**2.0f32+slope_z**2.0f32)
-          let xbot_y = r32(i)*slope_y - intercept_y
-          let xtop_y = xbot_y+slope_y
-          let xbot_z = r32(i)*slope_z - intercept_z
-          let xtop_z = xbot_z+slope_z
+
+          -- get pixel values (seem correct)
+          let pixbotbot = unsafe volume[i32.min (pixel_index xminus i zminus N) (N**3-1)]
+          let pixbottop = unsafe volume[i32.min (pixel_index xminus i zplus N) (N**3-1)]
+          let pixtopbot = unsafe volume[i32.min (pixel_index xplus i zminus N) (N**3-1)]
+          let pixtoptop = unsafe volume[i32.min (pixel_index xplus i zplus N) (N**3-1)]
+
+          -- make values outside bounds be zero
+          let botbot = false_to_zero bounds_bot_x bounds_bot_z
+          let bottop = false_to_zero bounds_bot_x bounds_top_z
+          let topbot = false_to_zero bounds_top_x bounds_bot_z
+          let toptop = false_to_zero bounds_top_x bounds_top_z
+
+          let r_one = r_z*botbot*pixbotbot+(r_x-r_z)*bottop*pixbottop+(1-r_x)*toptop*pixtoptop
+          let r_two = r_x*botbot*pixbotbot+(r_z-r_x)*topbot*pixtopbot+(1-r_z)*toptop*pixtoptop
+          in if r_x > r_z then r_one*lbase else r_two*lbase
+
+     let fp (points: [](pointXYZ, pointXYZ)) (N: i32) (volume: []f32): []f32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
-          let (r_y, bounds_bot_y, bounds_top_y) = intersection_ratio xbot_y xtop_y halfsize
-          let (r_z, bounds_bot_z, bounds_top_z) = intersection_ratio xbot_z xtop_z halfsize
-
-          let pixbotbot = unsafe volume[i32.min (pixel_index i xbot_y xbot_z N) (N**3-1)]
-          let pixbottop = unsafe volume[i32.min (pixel_index i xbot_y xtop_z N) (N**3-1)]
-          let pixtopbot = unsafe volume[i32.min (pixel_index i xtop_y xbot_z N) (N**3-1)]
-          let pixtoptop = unsafe volume[i32.min (pixel_index i xtop_y xtop_z N) (N**3-1)]
-
-          let botbot = false_to_zero bounds_bot_y bounds_bot_z
-          let bottop = false_to_zero bounds_bot_y bounds_top_z
-          let topbot = false_to_zero bounds_top_y bounds_bot_z
-          let toptop = false_to_zero bounds_top_y bounds_top_z
-
-          let r_one = r_z*botbot*pixbotbot+(r_y-r_z)*bottop*pixbottop+(1-r_y)*toptop*pixtoptop
-          let r_two = r_y*botbot*pixbotbot+(r_z-r_y)*topbot*pixtopbot+(1-r_z)*toptop*pixtoptop
-          in if r_y > r_z then r_one*lbase else r_two*lbase
-          --in lbase
-
-     let fp (points: [](pointXYZ, pointXYZ)) (origin_source_dist: f32) (origin_detector_dist: f32) (N: i32) (volume: []f32): []f32 =
-          let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
+          -- ent, ext points seem correct.
           in map(\(ent, ext)->
                          reduce (+) 0.0f32 <| map(\(i) ->
-                              get_value i ent ext origin_source_dist origin_detector_dist N volume
+                              get_value i ent ext N volume
                          )((-halfsize)...(halfsize-1))
                     )points
-
-
-
 }
 
 open fplib
@@ -154,8 +228,7 @@ let main  [n][a] (angles : *[a]f32)
                         then flatten_3d <| transpose_xy <| copy (unflatten_3d N N N volume)
                         else (replicate n 1.0f32)
 
-          -- now run forward porjection on x_small, y_small - but transpose xy, z_small but transpose xz.
-          let fpxsmall = fp x_small origin_source_dist origin_detector_dist N volume
-          let fpysmall = fp y_small origin_source_dist origin_detector_dist N imageTxy
+          let fpxsmall = fp x_small N volume
+          let fpysmall = fp y_small N imageTxy
 
           in postprocess_fp projection_indexes fpxsmall fpysmall
