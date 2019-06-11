@@ -76,14 +76,14 @@
 module fplib = {
      type pointXYZ  = ( f32, f32, f32 )
 
-     let find_detector_points (cos: f32) (sin: f32) (origin_detector_dist: f32) (detector_size: i32): [](pointXYZ, i32) =
-          let halfsize = (r32(detector_size-1))/2.0f32
-          let z_vals = reverse <| map(\i -> -halfsize+(r32(i)))(iota detector_size)
+     let find_detector_points (cos: f32) (sin: f32) (initial_points: [](f32,f32)) (detector_size: i32): [](pointXYZ, i32) =
+          let (x,zy) = unzip initial_points
           in flatten <| map(\col ->
-             let detector_x = replicate detector_size (origin_detector_dist*cos + (r32(col)-halfsize)*sin)
-             let detector_y = replicate detector_size (origin_detector_dist*sin - (r32(col)-halfsize)*cos)
+             let (x,y) = unsafe initial_points[col]
+             let detector_x = replicate detector_size (cos*x-sin*y)
+             let detector_y = replicate detector_size (sin*x+cos*y)
              let indexes = map(\row -> col+row*detector_size)(iota detector_size)
-             let points = zip3 detector_x detector_y z_vals
+             let points = zip3 detector_x detector_y zy
              in zip points indexes
           )(iota detector_size)
 
@@ -100,14 +100,18 @@ module fplib = {
           in ysmall
 
      let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_size: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
+          let halfsize = (r32(detector_size-1))/2.0f32
+          let x_vals = replicate detector_size origin_detector_dist
+          let zy_vals = map(\row -> halfsize-(r32(row)))(iota detector_size)
+          let xy_points = zip x_vals zy_vals
           let source_detector = flatten <| map(\angle_index ->
                let angle = angles[angle_index]
-               let cos = f32.sin(angle)
-               let sin = f32.cos(angle)
+               let sin = f32.sin(angle)
+               let cos = f32.cos(angle)
                -- source location
                let source =  (-origin_source_dist*cos, -origin_source_dist*sin, 0.0f32)
                -- points where rays hit detector
-               let detector_points = find_detector_points cos sin origin_detector_dist detector_size
+               let detector_points = find_detector_points cos sin xy_points detector_size
                in map(\(detector_point, detector_index)->
                     -- determine if x, y or z diff is smallest
                     let ysmall = get_partitioning_bools source detector_point
@@ -127,8 +131,8 @@ module fplib = {
      -- let transpose_xz [n](volume: [n][n][n]f32): [n][n][n]f32 =
      --      map(\i-> transpose volume[0:n,0:n,i])(iota n)
 
-     let transpose_xy [n](volume: [n][n][n]f32): [n][n][n]f32 =
-          map(\i-> transpose volume[i,0:n,0:n])(iota n)
+     -- let transpose_xy [n](volume: [n][n][n]f32): [n][n][n]f32 =
+     --      map(\i-> transpose volume[i,0:n,0:n])(iota n)
 
      -- let transpose_yz [n](volume: [n][n][n]f32): [n][n][n]f32 =
      --      map(\i-> transpose volume[0:n,i,0:n])(iota n)
@@ -160,8 +164,8 @@ module fplib = {
 
      let pixel_index (x: i32) (y: i32) (z: i32) (N: i32): i32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
-          let i = x+halfsize
-          let j = halfsize-1-y
+          let i = halfsize-1-y
+          let j = x+halfsize
           let k = halfsize-1-z
           in i + j*N + k*N*N
 
@@ -170,7 +174,8 @@ module fplib = {
           -- increase in y pr. x
           let slope_x = (p2.2-p1.2)/(p2.1-p1.1)
           -- increase in z value pr. 1 unit y
-          let slope_z = (p2.3-p1.3)*f32.sqrt(1+slope_x**2.0f32)/f32.sqrt((p2.1-p1.1)**2.0f32+(p2.2-p1.2)**2.0f32)
+          let slope_z_tmp = (p2.3-p1.3)*f32.sqrt(1+slope_x**2.0f32)/f32.sqrt((p2.1-p1.1)**2.0f32+(p2.2-p1.2)**2.0f32)
+          let slope_z = if p2.1<p1.1 then -slope_z_tmp else slope_z_tmp
           -- intercept of line y = slope_x*x+intercept_x
           let intercept_x = p1.2-slope_x*p1.1
           -- we now have dx = 1, dy = slope_x, dz = slope_z
@@ -219,16 +224,13 @@ module fplib = {
                else r_two
           in lbase*intersectsum
 
-          -- let r_one = botbot*pixbotbot+bottop*pixbottop+toptop*pixtoptop
-          -- let r_two = botbot*pixbotbot+topbot*pixtopbot+toptop*pixtoptop
-          -- in if r_y > r_z then r_one else r_two
-
      -- using right handed coordinate system
      let get_value (i: i32) (p1: pointXYZ) (p2: pointXYZ) (N: i32) (volume: []f32) : f32 =
           -- increase in x pr. y
           let slope_y = (p2.1-p1.1)/(p2.2-p1.2)
           -- increase in z value pr. 1 unit y
-          let slope_z = (p2.3-p1.3)*f32.sqrt(1+slope_y**2.0f32)/f32.sqrt((p2.1-p1.1)**2.0f32+(p2.2-p1.2)**2.0f32)
+          let slope_z_tmp = (p2.3-p1.3)*f32.sqrt(1+slope_y**2.0f32)/f32.sqrt((p2.1-p1.1)**2.0f32+(p2.2-p1.2)**2.0f32)
+          let slope_z = if p2.2<p1.2 then -slope_z_tmp else slope_z_tmp
           -- intercept of line x = slope_y*y+intercept_y
           let intercept_y = p1.1-slope_y*p1.2
           -- we now have dy = 1, dx = slope_y, dz = slope_z
@@ -276,14 +278,6 @@ module fplib = {
                else if r_x > r_z then r_one
                else r_two
           in lbase*intersectsum
-
-
-          -- let r_one = r_z*botbot*pixbotbot+(r_x-r_z)*bottop*pixbottop+(1-r_x)*toptop*pixtoptop
-          -- let r_two = r_x*botbot*pixbotbot+(r_z-r_x)*topbot*pixtopbot+(1-r_z)*toptop*pixtoptop
-          -- in if r_x > r_z then r_one*lbase else r_two*lbase
-          -- let r_one = botbot*pixbotbot+bottop*pixbottop+toptop*pixtoptop
-          -- let r_two = botbot*pixbotbot+topbot*pixtopbot+toptop*pixtoptop
-          -- in if r_x > r_z then r_one else r_two
 
      let fp (points: [](pointXYZ, pointXYZ)) (N: i32) (volume: []f32): []f32 =
           let halfsize = (t32(f32.floor(r32(N)/2.0f32)))
