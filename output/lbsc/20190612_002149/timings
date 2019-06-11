@@ -1,0 +1,27 @@
+[<pyopencl.Platform 'NVIDIA CUDA' at 0x55b8e7c2c3d0>]
+[<pyopencl.Device 'TITAN Xp' on 'NVIDIA CUDA' at 0x55b8e7cc26c0>, <pyopencl.Device 'TITAN Xp' on 'NVIDIA CUDA' at 0x55b8e7c95030>, <pyopencl.Device 'TITAN Xp' on 'NVIDIA CUDA' at 0x55b8e7bf4430>, <pyopencl.Device 'TITAN X (Pascal)' on 'NVIDIA CUDA' at 0x55b8e7e16a80>]
+
+size 3500 began at Wed Jun 12 00:21:54 2019
+device 1 has finished slice 3
+device 0 has finished slice 0
+device 2 has finished slice 1
+device 3 has finished slice 2
+device 1 has finished slice 6
+device 0 has finished slice 7
+device 2 has finished slice 5
+device 3 has finished slice 4
+device 1 has finished slice 8
+device 0 has finished slice 9
+device 2 has finished slice 10
+device 3 has finished slice 11
+device 1 has finished slice 12
+device 0 has finished slice 13
+device 2 has finished slice 14
+device 3 has finished slice 15
+device 2 has finished slice 18
+device 0 has finished slice 17
+device 1 has finished slice 16
+device 1 has finished slice 20
+device 2 has finished slice 22
+device 0 has finished slice 21
+device 3 has finished slice 19
