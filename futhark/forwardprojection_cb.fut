@@ -102,12 +102,12 @@ module fplib = {
           let ysmall = norm_y < norm_x
           in ysmall
 
-     let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_row_count: i32) (detector_col_count: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
+     let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_row_count: i32) (detector_col_count: i32) (detector_z_offset: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
           let halfwidth = (r32(detector_col_count-1))/2.0f32
           let halfheight = (r32(detector_row_count-1))/2.0f32
           let x_vals = replicate detector_col_count origin_detector_dist
           let y_vals = map(\row -> halfwidth-(r32(row)))(iota detector_col_count)
-          let z_vals = map(\row -> halfheight-(r32(row)))(iota detector_row_count)
+          let z_vals = map(\row -> halfheight-(r32(row))+(r32(detector_z_offset)))(iota detector_row_count)
           let xyz_points = zip3 x_vals y_vals z_vals
           let source_detector = flatten <| map(\angle_index ->
                let angle = angles[angle_index]
@@ -241,7 +241,7 @@ let main  [n][a] (angles : *[a]f32)
           (detector_col_count: i32)
           (detector_z_offset: i32)
           (N : i32): []f32 =
-          let (y_small, x_small, _, projection_indexes) = preprocess angles origin_source_dist origin_detector_dist detector_row_count detector_col_count
+          let (y_small, x_small, _, projection_indexes) = preprocess angles origin_source_dist origin_detector_dist detector_row_count detector_col_count detector_z_offset
 
           let imageTxy =  if (N < 10000)
                         then flatten_3d <| transpose_xy <|copy (unflatten_3d N N N volume)
