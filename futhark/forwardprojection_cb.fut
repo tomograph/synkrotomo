@@ -160,17 +160,17 @@ module fplib = {
           let topwithinbounds = pixtop >= min && pixtop < max
           in (ratio, botwithinbounds, topwithinbounds, singlepix)
 
-     let pixel_index (x: i32) (y: i32) (z: i32) (Z: i32) (R: i32) (C: i32): (i32, i32, i32, bool) =
+     let pixel_index (x: i32) (y: i32) (z: i32) (Z: i32) (R: i32) (C: i32) (z_offset: i32): (i32, i32, i32, bool) =
           let halfZ = (t32(f32.floor(r32(Z)/2.0f32)))
           let halfR = (t32(f32.floor(r32(R)/2.0f32)))
           let halfC = (t32(f32.floor(r32(C)/2.0f32)))
           let i = halfR-1-y
           let j = x+halfC
-          let k = halfZ-1-z
+          let k = halfZ-1-z-z_offset
           let inbounds = i >= 0 && i < R && j >= 0 && j < C && k >= 0 && k < Z
           in (k,j,i,inbounds)
 
-     let get_value [z][r][c](i: i32) (p1: pointXYZ) (p2: pointXYZ) (volume: [z][r][c]f32) : f32 =
+     let get_value [z][r][c](i: i32) (p1: pointXYZ) (p2: pointXYZ) (volume: [z][r][c]f32) (volume_offset) : f32 =
           -- increase in x pr. y
           let slope_y = (p2.1-p1.1)/(p2.2-p1.2)
           -- increase in z value pr. 1 unit y
@@ -199,10 +199,10 @@ module fplib = {
           let lbase = f32.sqrt(1.0f32+slope_y**2.0f32+slope_z**2.0f32)
 
           -- get pixel values (seem correct)
-          let idxbotbot = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zminus))) z r c
-          let idxbottop = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zplus))) z r c
-          let idxtopbot = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zminus))) z r c
-          let idxtoptop = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zplus))) z r c
+          let idxbotbot = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zminus))) z r c volume_offset
+          let idxbottop = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zplus))) z r c volume_offset
+          let idxtopbot = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zminus))) z r c volume_offset
+          let idxtoptop = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zplus))) z r c volume_offset
           let pixbotbot = if idxbotbot.4 then unsafe volume[idxbotbot.1,idxbotbot.2,idxbotbot.3] else 0.0
           let pixbottop = if idxbottop.4 && ((single_x && !single_z) || r_x > r_z) then unsafe volume[idxbottop.1,idxbottop.2,idxbottop.3] else 0.0
           let pixtopbot = if idxtopbot.4 && ((single_z && !single_x) || r_x < r_z) then unsafe volume[idxtopbot.1,idxtopbot.2,idxtopbot.3] else 0.0
@@ -229,12 +229,12 @@ module fplib = {
                else r_two
           in lbase*intersectsum
 
-     let fp [r](points: [](pointXYZ, pointXYZ)) (volume: [][r][]f32): []f32 =
+     let fp [r](points: [](pointXYZ, pointXYZ)) (volume: [][r][]f32) (volume_offset: i32): []f32 =
           let halfsize = (t32(f32.floor(r32(r)/2.0f32)))
           -- ent, ext points seem correct.
           in map(\(ent, ext)->
                          reduce (+) 0.0f32 <| map(\(i) ->
-                              get_value i ent ext volume
+                              get_value i ent ext volume volume_offset
                          )((-halfsize)...(halfsize-1))
                     )points
 }
@@ -245,6 +245,7 @@ let main  [z][r][c][a] (angles : *[a]f32)
           (origin_source_dist: f32)
           (origin_detector_dist: f32)
           (volume : *[z][r][c]f32)
+          (volume_offset: i32)
           (detector_row_count: i32)
           (detector_col_count: i32)
           (detector_z_offset: i32): []f32 =
@@ -255,7 +256,7 @@ let main  [z][r][c][a] (angles : *[a]f32)
                         then transpose_xy <| copy volume
                         else unflatten_3d z r c <|(replicate (z*r*c) 1.0f32)
 
-          let fpxsmall = fp x_small volume
-          let fpysmall = fp y_small imageTxy
+          let fpxsmall = fp x_small volume volume_offset
+          let fpysmall = fp y_small imageTxy volume_offset
           -- it seems projection indexes might be wrong!
           in postprocess_fp projection_indexes fpysmall fpxsmall
