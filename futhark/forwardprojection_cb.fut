@@ -102,12 +102,11 @@ module fplib = {
           let ysmall = norm_y < norm_x
           in ysmall
 
-     let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_row_count: i32) (detector_col_count: i32) (detector_z_offset: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
+     let preprocess [a](angles: [a]f32) (origin_source_dist: f32) (origin_detector_dist: f32) (detector_row_count: i32) (detector_col_count: i32) (detector_top: i32): ([](pointXYZ, pointXYZ), [](pointXYZ, pointXYZ), []bool, []i32)=
           let halfwidth = (r32(detector_col_count-1))/2.0f32
-          let halfheight = (r32(detector_row_count-1))/2.0f32
           let x_vals = replicate detector_col_count origin_detector_dist
           let y_vals = map(\row -> halfwidth-(r32(row)))(iota detector_col_count)
-          let z_vals = map(\row -> halfheight-(r32(row))+(r32(detector_z_offset)))(iota detector_row_count)
+          let z_vals = map(\row -> (r32(detector_top))-0.5-(r32(row)))(iota detector_row_count)
           let xyz_points = zip3 x_vals y_vals z_vals
           let source_detector = flatten <| map(\angle_index ->
                let angle = angles[angle_index]
@@ -160,17 +159,16 @@ module fplib = {
           let topwithinbounds = pixtop >= min && pixtop < max
           in (ratio, botwithinbounds, topwithinbounds, singlepix)
 
-     let pixel_index (x: i32) (y: i32) (z: i32) (Z: i32) (R: i32) (C: i32) (z_offset: i32): (i32, i32, i32, bool) =
-          let halfZ = (t32(f32.floor(r32(Z)/2.0f32)))
+     let pixel_index (x: i32) (y: i32) (z: i32) (Z: i32) (R: i32) (C: i32) (z_top: i32): (i32, i32, i32, bool) =
           let halfR = (t32(f32.floor(r32(R)/2.0f32)))
           let halfC = (t32(f32.floor(r32(C)/2.0f32)))
           let i = halfR-1-y
           let j = x+halfC
-          let k = halfZ-1-z-z_offset
+          let k = z_top-1-z
           let inbounds = i >= 0 && i < R && j >= 0 && j < C && k >= 0 && k < Z
           in (k,j,i,inbounds)
 
-     let get_value [z][r][c](i: i32) (p1: pointXYZ) (p2: pointXYZ) (volume: [z][r][c]f32) (volume_offset) : f32 =
+     let get_value [z][r][c](i: i32) (p1: pointXYZ) (p2: pointXYZ) (volume: [z][r][c]f32) (z_top) : f32 =
           -- increase in x pr. y
           let slope_y = (p2.1-p1.1)/(p2.2-p1.2)
           -- increase in z value pr. 1 unit y
@@ -190,19 +188,18 @@ module fplib = {
           -- the x-value when y = i+1
           let xplus = xminus + slope_y
           let halfx = (t32(f32.floor(r32(c)/2.0f32)))
-          let halfz = (t32(f32.floor(r32(z)/2.0f32)))
           -- determine ratios and whether each intersection is within bounds
           let (r_x, bounds_bot_x, bounds_top_x, single_x) = intersection_ratio xminus xplus (-halfx) halfx
-          let (r_z, bounds_bot_z, bounds_top_z, single_z) = intersection_ratio zminus zplus (-halfz) halfz
+          let (r_z, bounds_bot_z, bounds_top_z, single_z) = intersection_ratio zminus zplus (z_top-z) z_top
 
           -- determine length of line through a voxel if it only passes through this one voxel.<
           let lbase = f32.sqrt(1.0f32+slope_y**2.0f32+slope_z**2.0f32)
 
           -- get pixel values (seem correct)
-          let idxbotbot = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zminus))) z r c volume_offset
-          let idxbottop = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zplus))) z r c volume_offset
-          let idxtopbot = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zminus))) z r c volume_offset
-          let idxtoptop = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zplus))) z r c volume_offset
+          let idxbotbot = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zminus))) z r c z_top
+          let idxbottop = pixel_index (t32(f32.floor(xminus))) i (t32(f32.floor(zplus))) z r c z_top
+          let idxtopbot = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zminus))) z r c z_top
+          let idxtoptop = pixel_index (t32(f32.floor(xplus))) i (t32(f32.floor(zplus))) z r c z_top
           let pixbotbot = if idxbotbot.4 then unsafe volume[idxbotbot.1,idxbotbot.2,idxbotbot.3] else 0.0
           let pixbottop = if idxbottop.4 && ((single_x && !single_z) || r_x > r_z) then unsafe volume[idxbottop.1,idxbottop.2,idxbottop.3] else 0.0
           let pixtopbot = if idxtopbot.4 && ((single_z && !single_x) || r_x < r_z) then unsafe volume[idxtopbot.1,idxtopbot.2,idxtopbot.3] else 0.0
@@ -245,18 +242,18 @@ let main  [z][r][c][a] (angles : *[a]f32)
           (origin_source_dist: f32)
           (origin_detector_dist: f32)
           (volume : *[z][r][c]f32)
-          (volume_offset: i32)
+          (volume_top: i32)
           (detector_row_count: i32)
           (detector_col_count: i32)
-          (detector_z_offset: i32): []f32 =
+          (detector_top: i32): []f32 =
           --preprocessing is only dependent on detector and geometry and could be done outside in python or separate call
-          let (y_small, x_small, _, projection_indexes) = preprocess angles origin_source_dist origin_detector_dist detector_row_count detector_col_count detector_z_offset
+          let (y_small, x_small, _, projection_indexes) = preprocess angles origin_source_dist origin_detector_dist detector_row_count detector_col_count detector_top
 
           let imageTxy =  if (r < 10000)
                         then transpose_xy <| copy volume
                         else unflatten_3d z r c <|(replicate (z*r*c) 1.0f32)
 
-          let fpxsmall = fp x_small volume volume_offset
-          let fpysmall = fp y_small imageTxy volume_offset
+          let fpxsmall = fp x_small volume volume_top
+          let fpysmall = fp y_small imageTxy volume_top
           -- it seems projection indexes might be wrong!
           in postprocess_fp projection_indexes fpysmall fpxsmall
