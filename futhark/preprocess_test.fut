@@ -36,4 +36,4 @@ let main  (angles: []f32)
            let (source_ysmall_x, source_ysmall_y, source_ysmall_z) = unzip3 source_ysmall
            let (detector_xsmall_x, detector_xsmall_y, detector_xsmall_z) = unzip3 detector_xsmall
            let (detector_ysmall_x, detector_ysmall_y, detector_ysmall_z) = unzip3 detector_ysmall
-           in (detector_ysmall_y, detector_ysmall_x, detector_ysmall_z,projection_indexes,source_xsmall_x, source_xsmall_y, source_xsmall_z,detector_xsmall_x, detector_xsmall_y, detector_xsmall_z)
+           in (detector_ysmall_x,detector_ysmall_y , detector_ysmall_z,projection_indexes,source_xsmall_x, source_xsmall_y, source_xsmall_z,detector_xsmall_x, detector_xsmall_y, detector_xsmall_z)

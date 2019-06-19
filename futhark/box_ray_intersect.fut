@@ -26,9 +26,9 @@ let get_voxel (lower_left: vec3.vector) : voxel =
      let d1 = lower_left.x
      let d2 = lower_left.y
      let d3 = lower_left.z
-     let xyface = {n=n1,d=d1}
-     let yzface = {n=n2,d=d2}
-     let xzface = {n=n3,d=d3}
+     let xyface = {n=n3,d=d3}
+     let yzface = {n=n1,d=d1}
+     let xzface = {n=n2,d=d2}
      in {xy=xyface, yz=yzface, xz=xzface}
 
 let scalar (dist: f32) (source: vec3.vector) (normal: vec3.vector) (ray_dir: vec3.vector) =
@@ -71,16 +71,16 @@ let get_extreme_scalars (v: voxel) (ray_dir: vec3.vector) (source: vec3.vector) 
      let yz_right = scalar (v.yz.d+1) source (vec3.scale (-1.0f32) v.yz.n) ray_dir
      let xz_front = scalar v.xz.d source v.xz.n ray_dir
      let xz_behind = scalar (v.xz.d+1) source (vec3.scale (-1.0f32) v.xz.n) ray_dir
-     --in (xy_bot, xy_top, yz_left, yz_right, xz_front, xz_behind)
+     -- in ((xy_bot.1/xy_bot.2), (xy_top.1/xy_top.2), (yz_left.1/yz_left.2), (yz_right.1/yz_right.2), (xz_front.1/xz_front.2), (xz_behind.1/xz_behind.2))
      let mp = min_pos_six xy_bot xy_top yz_left yz_right xz_front xz_behind
      let mn = max_neg_six xy_bot xy_top yz_left yz_right xz_front xz_behind
      in (mn,mp)
 --
-let box_ray_intersect (ray_source: vec3.vector) (ray_dest: vec3.vector) (lower_left: vec3.vector) =
+let box_ray_intersect (ray_source: vec3.vector) (ray_dest: vec3.vector) (lower_left: vec3.vector) : f32 =
      let ray_direction =  ray_dest vec3.- ray_source
      let v = get_voxel(lower_left)
      let (tin,tout) = get_extreme_scalars v ray_direction ray_source
-     let t = (f32.max ((f32.max tout 0.0f32) - (f32.max tin 0.0f32))  0.0f32)
+     let t = tout-tin
      let tr = vec3.scale t ray_direction
      in vec3.norm tr
 
