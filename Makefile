@@ -1,9 +1,9 @@
 lib:
-	futhark pyopencl --library ./futhark/SIRT.fut
-	futhark pyopencl --library ./futhark/poc.fut
-	futhark pyopencl --library ./futhark/SIRT3Dtest.fut
-	futhark pyopencl --library ./futhark/backprojection.fut
-	futhark pyopencl --library ./futhark/forwardprojection.fut
+	~/.local/bin/futhark pyopencl --library ./futhark/SIRT.fut
+	~/.local/bin/futhark pyopencl --library ./futhark/poc.fut
+	~/.local/bin/futhark pyopencl --library ./futhark/SIRT3Dtest.fut
+	~/.local/bin/futhark pyopencl --library ./futhark/backprojection.fut
+	~/.local/bin/futhark pyopencl --library ./futhark/forwardprojection.fut
 
 libc:
 	futhark c --library ./futhark/SIRT.fut
