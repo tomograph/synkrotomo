@@ -16,8 +16,8 @@ type point  = ( f32, f32 )
      let fix_projections [p](proj:[p]f32) (proj_division:[p]bool):([]f32,[]f32) =
           let zipped = zip proj proj_division
           let parts = partition(\(_,f) -> f ) zipped
-          let (flat, _) = unzip parts.1
-          let (steep, _) = unzip parts.2
+          let (flat, _) = unzip parts.0
+          let (steep, _) = unzip parts.1
           in (steep, flat)
 
      -- reasembles forwardprojection to match input parameter
@@ -38,8 +38,8 @@ type point  = ( f32, f32 )
      let proj_division = flatten <| map(\(_,_,_,_,f,_) -> (replicate numrhos f))cossin
      let flat_steep = partition(\(_,_,_,_,f,_) -> f ) cossin
     -- transpose flat lines to make them steep
-     let lines = (map(\(cos,sin,_,lsteep,_,_)-> (cos,-sin,lsteep)) flat_steep.2, map (\(cos,sin,lflat,_,_,_)-> (-sin, cos, lflat)) flat_steep.1)
-     let angle_indexes = (map (\(_,_,_,_,_,i)-> i) flat_steep.2) ++ (map (\(_,_,_,_,_,i)-> i) flat_steep.1)
+     let lines = (map(\(cos,sin,_,lsteep,_,_)-> (cos,-sin,lsteep)) flat_steep.1, map (\(cos,sin,lflat,_,_,_)-> (-sin, cos, lflat)) flat_steep.0)
+     let angle_indexes = (map (\(_,_,_,_,_,i)-> i) flat_steep.1) ++ (map (\(_,_,_,_,_,i)-> i) flat_steep.0)
      let projection_indexes = flatten <| map(\i -> map(\r-> i*numrhos + r)(iota numrhos))angle_indexes
-     in (lines.1, lines.2, proj_division, projection_indexes)
+     in (lines.0, lines.1, proj_division, projection_indexes)
 }
