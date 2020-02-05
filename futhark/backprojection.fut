@@ -41,6 +41,7 @@ module bpTlib = {
             (halfsize: i32)
             (projections: [p]f32) : []f32 =
             let indexedlines = zip lines (iota l)
+            let indices = (-halfsize)...(halfsize-1)
             in flatten <| map(\irow ->
                       map(\icolumn ->
                            let xmin = r32(icolumn)
@@ -64,17 +65,20 @@ module bpTlib = {
                                      in l*(unsafe projections[projectionidx])
                                 )(iota rhosprpixel)
                            ) indexedlines
-                      )((-halfsize)...(halfsize-1))
-                 )((-halfsize)...(halfsize-1))
+                      ) indices
+                 ) indices
 
   let backprojection (steep_projections: []f32) (flat_projections: []f32) (steep_lines: ([](f32, f32, f32))) (flat_lines: ([](f32, f32, f32))) (rhozero: f32) (deltarho: f32) (rhosprpixel: i32) (numrhos: i32) (halfsize: i32): []f32 =
-        let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
-        let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
-        --untranspose in flat case
         let size = halfsize*2
+        let size_pow_2 = size**2
+        let bp_steep = bp steep_lines rhozero deltarho rhosprpixel numrhos halfsize steep_projections
+                          :> [size_pow_2]f32
+        let bp_flat = bp flat_lines rhozero deltarho rhosprpixel numrhos halfsize flat_projections
+                          :> [size_pow_2]f32
+        --untranspose in flat case
         let bp_flatT =  if (size < 10000)
-                     then flatten <| transpose <| unflatten size size bp_flat
-                     else (replicate (size**2) 1.0f32)
+                     then unflatten size size bp_flat |> transpose |> flatten :> [size_pow_2]f32
+                     else replicate size_pow_2 1.0f32
         in map2 (+) bp_steep bp_flatT
 }
 open bpTlib
@@ -89,5 +93,5 @@ let main  [p][a](angles : [a]f32)
           let numrhos = p/a
           let (steep_lines, flat_lines, is_flat, _) = preprocess angles numrhos
 
-	        let (steep_proj, flat_proj) = fix_projections projections is_flat
+	        let (steep_proj, flat_proj) = fix_projections projections (is_flat :> [p]bool)
           in backprojection steep_proj flat_proj steep_lines flat_lines rhozero deltarho rhosprpixel numrhos halfsize
