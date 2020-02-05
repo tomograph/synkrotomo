@@ -9,7 +9,7 @@ type point  = ( f32, f32 )
       let safe_inverse (value: f32) : f32 =
            if value == 0.0 then 0.0 else 1/value
 
-      let inverse (values: []f32) : []f32 =
+      let inverse [n] (values: [n]f32) : [n]f32 =
            map(\v -> safe_inverse v) values
 
      -- divides data into flat and steep parts
@@ -22,7 +22,7 @@ type point  = ( f32, f32 )
 
      -- reasembles forwardprojection to match input parameter
      let postprocess_fp [p][f][s](projection_indexes: [p]i32) (val_steep: [f]f32) (val_flat: [s]f32): [p]f32 =
-          scatter (replicate (f+s) 0.0f32) projection_indexes (val_steep ++ val_flat)
+          scatter (replicate p 0.0f32) projection_indexes (val_steep ++ val_flat :> [p]f32)
 
      -- divides in flat and steep and transposes lines
      let preprocess [a](angles: [a]f32) (numrhos: i32): ([](f32, f32, f32), [](f32, f32, f32), []bool, []i32) =
